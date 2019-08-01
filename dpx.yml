@@ -6,6 +6,7 @@ services:
      - ./dpx.env
     environment:
       - _JAVA_OPTIONS=-Dlogging.level.com.catalogic.dpx.rest.commons.DBConn=DEBUG -Dauth.server.public.key.file.path=/key/catalogic.pub
+      - DPX_MASTER_SSPRODIR=/opt/DPX
       - DPX_MAX_CONNECTIONS_PER_USER=6
       - SPRING_DATASOURCE_URL=jdbc:postgresql://sql-db:5432/postgres
       - SPRING_DATASOURCE_USERNAME=postgres
