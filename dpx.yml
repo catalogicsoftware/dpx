@@ -136,6 +136,8 @@ services:
         - zuul_routes_auth_url=http://auth:8081/
         - zuul_routes_plugin_mgr_url=http://vplugin-mgr:8082/
         - zuul_routes_config_ui_url=http://config-ui:8088/
+        - zuul_routes_discovery_url=http://discovery:8090/
+        - zuul_routes_report_url=http://report:8091/
         - SOCKET_TIMEOUT_MILLIS=120000
         - START_DATE=${START_DATE}
     deploy:
@@ -158,6 +160,31 @@ services:
       driver: "fluentd"
       options:
         tag: dpx-apigateway
+  discovery:
+    image: catalogicsoftware/discovery:${TAG_DISCOVERY}
+    env_file:
+     - ./dpx.env
+    deploy:
+      replicas: 1
+    ports:
+      - "8090:8090"
+    volumes:
+      - "./stack-logs:/app/logs"
+    networks:
+      - webnet
+  report:
+    image: catalogicsoftware/report:${TAG_REPORT}
+    env_file:
+     - ./dpx.env
+    deploy:
+      replicas: 1
+    ports:
+      - "8091:8091"
+    volumes:
+      - "./report-service-config.properties:/app/report-service-config.properties"
+      - "./stack-logs:/app/logs"
+    networks:
+      - webnet
   fluentd:
     image: fluent/fluentd:v1.4-1
     volumes:
