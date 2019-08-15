@@ -169,12 +169,13 @@ services:
 # -Rename service to "gateway"
 # -Change port to 80:8080
 # -Change port to 443:8443
-# -Add uppercase variants for env variables
-#  Need to also cover env definitions in file: dpx-apigateway.env (generated)
-#  Remove definition for server_port from the env file
-# -Eventually remove lower case variants for env variables
+# -Update service port numbers in route specifications
+# -Add uppercase variants for env variables [DONE]
+#  Need to also cover env definitions in file: dpx-apigateway.env (generated) [DONE]
+#  Remove definition for server_port from the env file [DONE]
+# -Eventually remove lower case variants for env variables [DONE]
 # -Change env for "app" to use "dpx"
-# -Add mount point /app/config for service config data (opt-apigateway)
+# -Add mount point /app/config for service config data (opt-apigateway) [DONE]
   apigateway:
     image: catalogicsoftware/dpx-apigateway:${TAG_APIGATEWAY}
     env_file:
@@ -186,20 +187,13 @@ services:
       - START_DATE=${START_DATE}
       - ZUUL_ROOT_PREFIX=/api
       - ZUUL_ROUTES_ADMIN_URL=http://admin:8092/
-#     - ZUUL_ROUTES_AUTH_URL=http://auth:8091/
+      - ZUUL_ROUTES_AUTH_URL=http://auth:8081/
       - ZUUL_ROUTES_CONFIG_UI_URL=http://config-ui:8088/
       - ZUUL_ROUTES_DISCOVERY_URL=http://discovery:8090/
       - ZUUL_ROUTES_APP_URL=http://rest:8080/
 #     - ZUUL_ROUTES_DPX_URL=http://dpx:8095/
       - ZUUL_ROUTES_PLUGIN_MGR_URL=http://vplugin-mgr:8082/
       - ZUUL_ROUTES_REPORT_URL=http://report:8094/
-# Following lines TO BE DELETED
-      - zuul_routes_app_url=http://rest:8080/
-      - zuul_routes_auth_url=http://auth:8081/
-      - zuul_routes_plugin_mgr_url=http://vplugin-mgr:8082/
-      - zuul_routes_config_ui_url=http://config-ui:8088/
-      - zuul_routes_discovery_url=http://discovery:8090/
-      - zuul_routes_report_url=http://report:8094/
     deploy:
       replicas: 2
       update_config:
@@ -213,9 +207,13 @@ services:
       - "443:443"
       - "80:8085"
     volumes:
+      - "./opt-apigateway:/app/config"
+      - "./stack-logs:/app/logs"
+# TODO: Remove following mount after service stabalizes
       - "./opt-apigateway:/opt"
     networks:
       -  webnet
+# TODO: Remove logging driver after service stabalizes
     logging:
       driver: "fluentd"
       options:
@@ -251,7 +249,7 @@ services:
     ports:
       - "8091:8091"
     volumes:
-      - "./report-service-config.properties:/app/report-service-config.properties"
+      - "./report-service-config.properties:/app/config/report-service-config.properties"
       - "./stack-logs:/app/logs"
     networks:
       - webnet

@@ -178,17 +178,11 @@ set.apigateway.nossl: dpx-apigateway-nossl.env
 	ln -sf $< dpx-apigateway.env
 dpx-apigateway-nossl.env:
 # KJM: Updates for normalization
-#	echo "server_port=8085" >> $@
 	echo "SERVER_SSL_ENABLED=false" > $@
 	echo "SERVER_SSL_KEY_STORE=" >> $@
 	echo "SERVER_SSL_KEY_STORE_PASSWORD=" >> $@
 	echo "SERVER_SSL_KEY_STORE_TYPE=" >> $@
 	echo "SERVER_SSL_KEY_ALIAS=" >> $@
-	echo "server_ssl_enabled=false" >> $@
-	echo "server_ssl_key_store=" >> $@
-	echo "server_ssl_key_store_password=" >> $@
-	echo "server_ssl_keyStoreType=" >> $@
-	echo "server_ssl_key_alias=" >> $@
 
 # selfsigned version config for the gateway
 .PHONY: set.apigateway.selfsigned
@@ -200,17 +194,11 @@ set.apigateway.selfsigned: dpx-apigateway-selfsigned.env
 	ln -sf $< dpx-apigateway.env
 dpx-apigateway-selfsigned.env: certs-selfsigned
 # KJM: Updates for normalization
-#	echo "server_port=443" >> $@
 	echo "SERVER_SSL_ENABLED=true" > $@
 	echo "SERVER_SSL_KEY_STORE=/opt/keystore.jks" >> $@
 	echo "SERVER_SSL_KEY_STORE_PASSWORD=$(SSL_CERT_PASS)" >> $@
 	echo "SERVER_SSL_KEY_STORE_TYPE=JKS" >> $@
 	echo "SERVER_SSL_KEY_ALIAS=selfsigned" >> $@
-	echo "server_ssl_enabled=true" >> $@
-	echo "server_ssl_key_store=/opt/keystore.jks" >> $@
-	echo "server_ssl_key_store_password=$(SSL_CERT_PASS)" >> $@
-	echo "server_ssl_keyStoreType=JKS" >> $@
-	echo "server_ssl_key_alias=selfsigned" >> $@
 
 certs-selfsigned:
 	@echo '================ Inside selfsigned ============'
@@ -228,17 +216,11 @@ set.apigateway.letsencrypt: dpx-apigateway-letsecrypt.env
 	ln -sf $< dpx-apigateway.env
 dpx-apigateway-letsecrypt.env: certs-letsencrypt
 # KJM: Updates for normalization
-#	echo "server_port=443" >> $@
 	echo "SERVER_SSL_ENABLED=true" > $@
 	echo "SERVER_SSL_KEY_STORE=/opt/keystore.p12" >> $@
 	echo "SERVER_SSL_KEY_STORE_PASSWORD=$(SSL_CERT_PASS)" >> $@
 	echo "SERVER_SSL_KEY_STORE_TYPE=PKCS12" >> $@
 	echo "SERVER_SSL_KEY_ALIAS=tomcat" >> $@
-	echo "server_ssl_enabled=true" >> $@
-	echo "server_ssl_key_store=/opt/keystore.p12" >> $@
-	echo "server_ssl_key_store_password=$(SSL_CERT_PASS)" >> $@
-	echo "server_ssl_keyStoreType=PKCS12" >> $@
-	echo "server_ssl_key_alias=tomcat" >> $@
 
 certs-letsencrypt:
 	@echo '============ Inside lets-encrypt =========='
