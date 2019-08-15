@@ -2,6 +2,6 @@ export TAG_REST=latest
 export TAG_VPLUGIN_MGR=latest
 export TAG_AUTH=latest
 export TAG_UI=latest
-export TAG_APIGATEWAY=0.0.12
+export TAG_APIGATEWAY=0.0.13
 export TAG_DISCOVERY=latest
 export TAG_REPORT=latest

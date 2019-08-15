@@ -23,8 +23,8 @@ services:
 
 # DPX core REST API service
 # TODO: 
-# -Rename service to "dpx"
-# -Change port to 8095:8095
+# -Rename service to "dpxcore"
+# -Change port to 8095:8095 [DONE]
   rest:
     image: catalogicsoftware/dpx-rest:${TAG_REST}
     env_file:
@@ -42,7 +42,7 @@ services:
       update_config:
         failure_action: rollback
     ports:
-      - "8080:8080"
+      - "8095:8095"
     volumes:
       - "./opt-apigateway:/key"
       - "./opt-apigateway:/opt"
@@ -79,6 +79,7 @@ services:
         tag: dpx-sql-db
 
 # DPX vSphere plug-in manager service
+# Change dpxcore URL port from 8080 to 8095 [DONE]
   vplugin-mgr:
     image: catalogicsoftware/dpx-vplugin-mgr:${TAG_VPLUGIN_MGR}
     env_file:
@@ -86,7 +87,7 @@ services:
       - ./dpx-vplugin-mgr.env
     environment:
       - AUTH_SERVER_URL=http://auth:8081
-      - SVC_SERVER_URL=http://rest:8080
+      - SVC_SERVER_URL=http://rest:8095
       - S3_BUCKET_FOLDER_NAME=released
       - START_DATE=${START_DATE}
     deploy:
@@ -185,13 +186,19 @@ services:
       - HTTP_PORT=8080
       - SOCKET_TIMEOUT_MILLIS=120000
       - START_DATE=${START_DATE}
-      - ZUUL_ROOT_PREFIX=/api
-      - ZUUL_ROUTES_ADMIN_URL=http://admin:8092/
+      - ROUTE_ROOT_PREFIX=/api
+      - ROUTE_URL_AUTH=http://auth:8081/
+      - ROUTE_URL_CONFIG_UI=http://config-ui:8088/
+      - ROUTE_URL_DISCOVERY=http://discovery:8090/
+      - ROUTE_URL_DPXCORE=http://dpx:8095/
+      - ROUTE_URL_APP=http://rest:8095/
+      - ROUTE_URL_PLUGIN_MGR=http://vplugin-mgr:8082/
+      - ROUTE_URL_REPORT=http://report:8094/
+# TODO: Remove these when new gateway service is stable
       - ZUUL_ROUTES_AUTH_URL=http://auth:8081/
       - ZUUL_ROUTES_CONFIG_UI_URL=http://config-ui:8088/
       - ZUUL_ROUTES_DISCOVERY_URL=http://discovery:8090/
-      - ZUUL_ROUTES_APP_URL=http://rest:8080/
-#     - ZUUL_ROUTES_DPX_URL=http://dpx:8095/
+      - ZUUL_ROUTES_APP_URL=http://rest:8095/
       - ZUUL_ROUTES_PLUGIN_MGR_URL=http://vplugin-mgr:8082/
       - ZUUL_ROUTES_REPORT_URL=http://report:8094/
     deploy:
