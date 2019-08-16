@@ -180,6 +180,7 @@ services:
   gateway:
     image: catalogicsoftware/dpx-apigateway:${TAG_APIGATEWAY}
     env_file:
+      - ./dpx.env
       - ./dpx-apigateway.env
     environment:
       - MS_PORT=8443

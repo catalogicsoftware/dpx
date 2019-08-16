@@ -195,7 +195,7 @@ set.apigateway.selfsigned: dpx-apigateway-selfsigned.env
 dpx-apigateway-selfsigned.env: certs-selfsigned
 # KJM: Updates for normalization
 	echo "SERVER_SSL_ENABLED=true" > $@
-	echo "SERVER_SSL_KEY_STORE=/opt/keystore.jks" >> $@
+	echo "SERVER_SSL_KEY_STORE=config/keystore.jks" >> $@
 	echo "SERVER_SSL_KEY_STORE_PASSWORD=$(SSL_CERT_PASS)" >> $@
 	echo "SERVER_SSL_KEY_STORE_TYPE=JKS" >> $@
 	echo "SERVER_SSL_KEY_ALIAS=selfsigned" >> $@
@@ -217,7 +217,7 @@ set.apigateway.letsencrypt: dpx-apigateway-letsecrypt.env
 dpx-apigateway-letsecrypt.env: certs-letsencrypt
 # KJM: Updates for normalization
 	echo "SERVER_SSL_ENABLED=true" > $@
-	echo "SERVER_SSL_KEY_STORE=/opt/keystore.p12" >> $@
+	echo "SERVER_SSL_KEY_STORE=config/keystore.p12" >> $@
 	echo "SERVER_SSL_KEY_STORE_PASSWORD=$(SSL_CERT_PASS)" >> $@
 	echo "SERVER_SSL_KEY_STORE_TYPE=PKCS12" >> $@
 	echo "SERVER_SSL_KEY_ALIAS=tomcat" >> $@
