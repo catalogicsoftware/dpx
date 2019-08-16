@@ -167,7 +167,7 @@ services:
 
 # DPX gateway service
 # TODO: 
-# -Rename service to "gateway"
+# -Rename service to "gateway" [DONE]
 # -Change port to 80:8080
 # -Change port to 443:8443
 # -Update service port numbers in route specifications
@@ -177,7 +177,7 @@ services:
 # -Eventually remove lower case variants for env variables [DONE]
 # -Change env for "app" to use "dpx"
 # -Add mount point /app/config for service config data (opt-apigateway) [DONE]
-  apigateway:
+  gateway:
     image: catalogicsoftware/dpx-apigateway:${TAG_APIGATEWAY}
     env_file:
       - ./dpx-apigateway.env
@@ -190,8 +190,9 @@ services:
       - ROUTE_URL_AUTH=http://auth:8081/
       - ROUTE_URL_CONFIG_UI=http://config-ui:8088/
       - ROUTE_URL_DISCOVERY=http://discovery:8090/
-      - ROUTE_URL_DPXCORE=http://dpx:8095/
+      - ROUTE_URL_DPXCORE=http://dpxcore:8095/
       - ROUTE_URL_APP=http://rest:8095/
+      - ROUTE_URL_GATEWAY=http://gateway:8443/
       - ROUTE_URL_PLUGIN_MGR=http://vplugin-mgr:8082/
       - ROUTE_URL_REPORT=http://report:8094/
 # TODO: Remove these when new gateway service is stable
@@ -211,8 +212,8 @@ services:
       timeout: 5s
       retries: 3
     ports:
-      - "443:443"
-      - "80:8085"
+      - "443:8443"
+      - "80:8080"
     volumes:
       - "./opt-apigateway:/app/config"
       - "./stack-logs:/app/logs"
@@ -220,11 +221,6 @@ services:
       - "./opt-apigateway:/opt"
     networks:
       -  webnet
-# TODO: Remove logging driver after service stabalizes
-    logging:
-      driver: "fluentd"
-      options:
-        tag: dpx-apigateway
 
 # DPX discovery service
   discovery:
