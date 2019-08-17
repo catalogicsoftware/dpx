@@ -188,12 +188,13 @@ services:
       - SOCKET_TIMEOUT_MILLIS=120000
       - START_DATE=${START_DATE}
       - ROUTE_ROOT_PREFIX=/api
+      - ROUTE_URL_ADMIN=http://admin:8092/
       - ROUTE_URL_AUTH=http://auth:8081/
       - ROUTE_URL_CONFIG_UI=http://config-ui:8088/
       - ROUTE_URL_DISCOVERY=http://discovery:8090/
       - ROUTE_URL_DPXCORE=http://dpxcore:8095/
       - ROUTE_URL_APP=http://rest:8095/
-      - ROUTE_URL_GATEWAY=http://gateway:8443/
+      - ROUTE_URL_GATEWAY=http://gateway:8080/
       - ROUTE_URL_PLUGIN_MGR=http://vplugin-mgr:8082/
       - ROUTE_URL_REPORT=http://report:8094/
 # TODO: Remove these when new gateway service is stable
@@ -208,7 +209,7 @@ services:
       update_config:
         failure_action: rollback
     healthcheck:
-      test: wget -qO- http://localhost:8085/ || exit 1
+      test: wget -qO- http://localhost:8080/ || exit 1
       interval: 30s
       timeout: 5s
       retries: 3
@@ -219,7 +220,7 @@ services:
       - "./opt-apigateway:/app/config"
       - "./stack-logs:/app/logs"
 # TODO: Remove following mount after service stabalizes
-      - "./opt-apigateway:/opt"
+#     - "./opt-apigateway:/opt"
     networks:
       -  webnet
 
@@ -228,6 +229,8 @@ services:
     image: catalogicsoftware/discovery:${TAG_DISCOVERY}
     env_file:
       - ./dpx.env
+    environment:
+      - RS_PORT=8090
     deploy:
       replicas: 1
     ports:
