@@ -92,10 +92,10 @@ distclean: clean
 	rm -rf keys opt-auth opt-apigateway stack-logs dpx-apigateway*.env dpx-vplugin-mgr*.env certs-selfsigned certs-letsencrypt api_key catalogic-dpx-ms.id certbot plugins rest-db
 
 # update docker services
-update: remove-old-images
+update: remove-old-images dpx-apigateway.env
 	. ./dpx-container-tags && export FLUENTD_CONFIG_DIGEST=$(shell date -r ./config/fluent.conf +%s) && export START_DATE=$(shell date --iso-8601=seconds) && $(DOCKER) stack deploy --prune -c dpx.yml dpx --with-registry-auth
 
-force-update: remove-old-images
+force-update: remove-old-images dpx-apigateway.env
 	$(DOCKER) stack rm dpx
 	./stack-wait.sh
 	git pull
@@ -109,7 +109,6 @@ dpx.env: api_key
 	echo "DPX_MASTER_HOST=$(THIS_HOST)" > $@
 	echo "DOCKER_HOST_IP=$(THIS_HOST)" >> $@
 	echo "DPX_INTERNAL_SECRET_KEY=$(shell cat api_key)" >> $@
-	echo "RS_HOSTNAME=$(THIS_HOST)" >> $@
 	echo "SVC_HOST=$(THIS_HOST)" >> $@
 
 # this command keeps only 3 most recent versions for each docker image
@@ -181,7 +180,12 @@ set.apigateway.nossl: dpx-apigateway-nossl.env
 	ln -sf $< dpx-apigateway.env
 dpx-apigateway-nossl.env:
 # KJM: Updates for normalization
-	echo "SERVER_SSL_ENABLED=false" > $@
+	echo "SSL_ENABLED=false" > $@
+	echo "KEY_STORE=" >> $@
+	echo "KEY_STORE_PASSWORD=" >> $@
+	echo "KEY_STORE_TYPE=" >> $@
+	echo "KEY_ALIAS=" >> $@
+	echo "SERVER_SSL_ENABLED=false" >> $@
 	echo "SERVER_SSL_KEY_STORE=" >> $@
 	echo "SERVER_SSL_KEY_STORE_PASSWORD=" >> $@
 	echo "SERVER_SSL_KEY_STORE_TYPE=" >> $@
@@ -197,7 +201,12 @@ set.apigateway.selfsigned: dpx-apigateway-selfsigned.env
 	ln -sf $< dpx-apigateway.env
 dpx-apigateway-selfsigned.env: certs-selfsigned
 # KJM: Updates for normalization
-	echo "SERVER_SSL_ENABLED=true" > $@
+	echo "SSL_ENABLED=true" > $@
+	echo "KEY_STORE=config/keystore.jks" >> $@
+	echo "KEY_STORE_PASSWORD=$(SSL_CERT_PASS)" >> $@
+	echo "KEY_STORE_TYPE=JKS" >> $@
+	echo "KEY_ALIAS=selfsigned" >> $@
+	echo "SERVER_SSL_ENABLED=true" >> $@
 	echo "SERVER_SSL_KEY_STORE=config/keystore.jks" >> $@
 	echo "SERVER_SSL_KEY_STORE_PASSWORD=$(SSL_CERT_PASS)" >> $@
 	echo "SERVER_SSL_KEY_STORE_TYPE=JKS" >> $@
@@ -219,7 +228,12 @@ set.apigateway.letsencrypt: dpx-apigateway-letsecrypt.env
 	ln -sf $< dpx-apigateway.env
 dpx-apigateway-letsecrypt.env: certs-letsencrypt
 # KJM: Updates for normalization
-	echo "SERVER_SSL_ENABLED=true" > $@
+	echo "SSL_ENABLED=true" > $@
+	echo "KEY_STORE=config/keystore.p12" >> $@
+	echo "KEY_STORE_PASSWORD=$(SSL_CERT_PASS)" >> $@
+	echo "KEY_STORE_TYPE=PKCS12" >> $@
+	echo "KEY_ALIAS=tomcat" >> $@
+	echo "SERVER_SSL_ENABLED=true" >> $@
 	echo "SERVER_SSL_KEY_STORE=config/keystore.p12" >> $@
 	echo "SERVER_SSL_KEY_STORE_PASSWORD=$(SSL_CERT_PASS)" >> $@
 	echo "SERVER_SSL_KEY_STORE_TYPE=PKCS12" >> $@

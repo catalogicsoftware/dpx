@@ -183,6 +183,7 @@ services:
       - ./dpx.env
       - ./dpx-apigateway.env
     environment:
+      - RS_HOSTNAME=discovery
       - MS_PORT=8443
       - HTTP_PORT=8080
       - SOCKET_TIMEOUT_MILLIS=120000
@@ -249,6 +250,7 @@ services:
     env_file:
       - ./dpx.env
     environment:
+      - RS_HOSTNAME=discovery
       - MS_PORT=8094
       - CONFIG_PATH=config
     deploy:
