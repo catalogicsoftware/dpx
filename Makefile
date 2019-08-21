@@ -105,9 +105,12 @@ force-update: remove-old-images
 # dpx.env contains env vars shared across various containers
 #
 dpx.env: api_key
+# KJM: Update to add env definitions required for microservices
 	echo "DPX_MASTER_HOST=$(THIS_HOST)" > $@
 	echo "DOCKER_HOST_IP=$(THIS_HOST)" >> $@
 	echo "DPX_INTERNAL_SECRET_KEY=$(shell cat api_key)" >> $@
+	echo "RS_HOSTNAME=$(THIS_HOST)" >> $@
+	echo "SVC_HOST=$(THIS_HOST)" >> $@
 
 # this command keeps only 3 most recent versions for each docker image
 remove-old-images: 
