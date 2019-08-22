@@ -258,7 +258,8 @@ services:
     ports:
       - "8094:8094"
     volumes:
-      - "./report-service-config.properties:/app/config/report-service-config.properties"
+      - "./config:/app/config"
+      - "./data:/app/data"
       - "./stack-logs:/app/logs"
     networks:
       - webnet
