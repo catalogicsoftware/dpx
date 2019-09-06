@@ -25,8 +25,9 @@ services:
 # TODO: 
 # -Rename service to "dpxcore"
 # -Change port to 8095:8095 [DONE]
+# -Change Tag to TAG_DPXCORE [DONE]
   rest:
-    image: catalogicsoftware/dpx-rest:${TAG_REST}
+    image: catalogicsoftware/dpx-rest:${TAG_DPXCORE}
     env_file:
       - ./dpx.env
     environment:
@@ -79,7 +80,10 @@ services:
         tag: dpx-sql-db
 
 # DPX vSphere plug-in manager service
-# Change dpxcore URL port from 8080 to 8095 [DONE]
+# TODO: 
+# -Change SVC_SERVER_URL to DPXCORE_SERVER_URL
+# -Change DPXCORE URL host from rest to dpxcore
+# -Change DPXCORE URL port from 8080 to 8095 [DONE]
   vplugin-mgr:
     image: catalogicsoftware/dpx-vplugin-mgr:${TAG_VPLUGIN_MGR}
     env_file:
@@ -143,8 +147,10 @@ services:
         tag: dpx-auth
 
 # DPX vSphere plug-in configuration UI service
+# TODO: 
+# -Change Tag to TAG_CONFIGUI [DONE]
   config-ui:
-    image: catalogicsoftware/dpx-ui:${TAG_UI}
+    image: catalogicsoftware/dpx-ui:${TAG_CONFIGUI}
     environment:
       - START_DATE=${START_DATE}
     deploy:
@@ -165,11 +171,28 @@ services:
       options:
         tag: dpx-config-ui
 
+# DPX application main UI service
+# TODO: 
+# -Consider changing port to 8096:8096
+  dpxui:
+    image: catalogicsoftware/dpx-webui:${TAG_DPXUI}
+    deploy:
+      replicas: 1
+    ports:
+      - "8096:80"
+    networks:
+      - webnet
+    logging:
+      driver: "fluentd"
+      options:
+        tag: dpx-ui
+
 # DPX gateway service
 # TODO: 
 # -Rename service to "gateway" [DONE]
-# -Change port to 80:8080
-# -Change port to 443:8443
+# -Change port to 443:8443 [DONE]
+# -Change port to 80:8080 [DONE]
+# -Change Tag to TAG_GATEWAY [DONE]
 # -Update service port numbers in route specifications
 # -Add uppercase variants for env variables [DONE]
 #  Need to also cover env definitions in file: dpx-apigateway.env (generated) [DONE]
@@ -178,7 +201,7 @@ services:
 # -Change env for "app" to use "dpx"
 # -Add mount point /app/config for service config data (opt-apigateway) [DONE]
   gateway:
-    image: catalogicsoftware/dpx-apigateway:${TAG_APIGATEWAY}
+    image: catalogicsoftware/dpx-apigateway:${TAG_GATEWAY}
     env_file:
       - ./dpx.env
       - ./dpx-apigateway.env
@@ -188,13 +211,14 @@ services:
       - HTTP_PORT=8080
       - SOCKET_TIMEOUT_MILLIS=120000
       - START_DATE=${START_DATE}
-      - ROUTE_ROOT_PREFIX=/api
+      - ROUTE_ROOT_PREFIX=/
       - ROUTE_URL_ADMIN=http://admin:8092/
       - ROUTE_URL_AUTH=http://auth:8081/
       - ROUTE_URL_CONFIG_UI=http://config-ui:8088/
       - ROUTE_URL_DISCOVERY=http://discovery:8090/
       - ROUTE_URL_DPXCORE=http://dpxcore:8095/
       - ROUTE_URL_APP=http://rest:8095/
+      - ROUTE_URL_DPXUI=http://dpxui:80/
       - ROUTE_URL_GATEWAY=http://gateway:8080/
       - ROUTE_URL_PLUGIN_MGR=http://vplugin-mgr:8082/
       - ROUTE_URL_REPORT=http://report:8094/

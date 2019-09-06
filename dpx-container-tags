@@ -1,7 +1,8 @@
-export TAG_REST=latest
-export TAG_VPLUGIN_MGR=latest
 export TAG_AUTH=latest
-export TAG_UI=latest
-export TAG_APIGATEWAY=latest
+export TAG_CONFIGUI=latest
 export TAG_DISCOVERY=latest
+export TAG_DPXCORE=latest
+export TAG_DPXUI=latest
+export TAG_GATEWAY=latest
 export TAG_REPORT=latest
+export TAG_VPLUGIN_MGR=latest
