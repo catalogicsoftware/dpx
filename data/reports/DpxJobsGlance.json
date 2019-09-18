@@ -1,0 +1,10 @@
+{
+    "name" : "DPX Node Protection at a Glance",
+    "type" : "REPORT",
+    "comment" : "Report metadata",
+    "displayName" : "DPX Node Protection at a Glance",
+    "description" : "A Concise 7 Day Overview of DPX Node Protection Status",
+    "category" : "dpxcompliance",
+    "engine" : "BIRT",
+    "specFileName" : "DpxJobsAtAGlance.rptdesign"
+}

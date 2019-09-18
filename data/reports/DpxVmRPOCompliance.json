@@ -1,0 +1,10 @@
+{
+    "name" : "DPX VM RPO Compliance",
+    "type" : "REPORT",
+    "comment" : "Report metadata",
+    "displayName" : "DPX VM RPO Compliance",
+    "description" : "View RPO status of virtual machines that are protected by DPX",
+    "category" : "dpxcompliance",
+    "engine" : "BIRT",
+    "specFileName" : "DpxVmRPOCompliance.rptdesign"
+}

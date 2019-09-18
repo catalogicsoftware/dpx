@@ -1,0 +1,10 @@
+{
+    "name" : "DPX Backup Data Growth",
+    "type" : "REPORT",
+    "comment" : "Report metadata",
+    "displayName" : "DPX Backup Data Growth",
+    "description" : "Displays and Charts DPX Backup Total Data",
+    "category" : "dpxcompliance",
+    "engine" : "BIRT",
+    "specFileName" : "DpxBackupDataGrowth.rptdesign"
+}

@@ -1,0 +1,14 @@
+data/reports/DpxBackupDataGrowth.json
+data/reports/DpxBackupTrend.json
+data/reports/DpxJobDetails.json
+data/reports/DpxJobsGlance.json
+data/reports/DpxJobStatus.json
+data/reports/DpxLicense.json
+data/reports/DpxMedia.json
+data/reports/DpxNodeConfiguration.json
+data/reports/DpxNodeProtectionAtAGlance.json
+data/reports/DpxNodeRecoveryPoints.json
+data/reports/DpxRPOCompliance.json
+data/reports/DpxUnprotectedNodes.json
+data/reports/DpxVmRecoveryPoints.json
+data/reports/DpxVmRPOCompliance.json

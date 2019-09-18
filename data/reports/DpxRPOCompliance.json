@@ -1,0 +1,10 @@
+{
+    "name" : "DPX RPO Compliance",
+    "type" : "REPORT",
+    "comment" : "Report metadata",
+    "displayName" : "DPX RPO Compliance",
+    "description" : "View nodes and volumes that are protected using DPX Backup",
+    "category" : "dpxcompliance",
+    "engine" : "BIRT",
+    "specFileName" : "DpxRPOCompliance.rptdesign"
+}

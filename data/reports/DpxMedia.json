@@ -1,0 +1,10 @@
+{
+    "name" : "DPX Media",
+    "type" : "REPORT",
+    "comment" : "Report metadata",
+    "displayName" : "DPX Media",
+    "description" : "View DPX Media and related Media Pool, Media Status, Date Last Written, and Library data",
+    "category" : "dpxcompliance",
+    "engine" : "BIRT",
+    "specFileName" : "DpxMedia.rptdesign"
+}

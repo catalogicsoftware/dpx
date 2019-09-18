@@ -1,0 +1,10 @@
+{
+    "name" : "DPX Backup Trend",
+    "type" : "REPORT",
+    "comment" : "Report metadata",
+    "displayName" : "DPX Backup Trend",
+    "description" : "Displays and Charts DPX Client Node Backup Status",
+    "category" : "dpxcompliance",
+    "engine" : "BIRT",
+    "specFileName" : "DpxBackupTrend.rptdesign"
+}

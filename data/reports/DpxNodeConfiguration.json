@@ -1,0 +1,10 @@
+{
+    "name" : "DPX Node Configuration",
+    "type" : "REPORT",
+    "comment" : "Report metadata",
+    "displayName" : "DPX Node Configuration",
+    "description" : "Displays node names, OS versions, and product versions of DPX clients",
+    "category" : "dpxcompliance",
+    "engine" : "BIRT",
+    "specFileName" : "DpxNodeConfiguration.rptdesign"
+}

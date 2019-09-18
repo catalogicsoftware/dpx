@@ -1,0 +1,2949 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 4.3.1.v201309091055 Build &lt;4.3.1.v20130917-1035></property>
+    <simple-property-list name="includeResource">
+        <value>reports</value>
+    </simple-property-list>
+    <list-property name="includeScripts">
+        <property>ScaleBytes.js</property>
+        <property>Wraplines.js</property>
+        <property>json2.js</property>
+    </list-property>
+    <property name="units">in</property>
+    <method name="initialize"><![CDATA[importPackage(Packages.java.util.*);
+var Highlight=0;
+
+
+
+
+
+
+
+
+]]></method>
+    <method name="beforeFactory"><![CDATA[
+]]></method>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="layoutPreference">auto layout</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">96</property>
+    <list-property name="libraries">
+        <structure>
+            <property name="fileName">syncsort_library.rptlibrary</property>
+            <property name="namespace">syncsort_library</property>
+        </structure>
+    </list-property>
+    <list-property name="cssStyleSheets">
+        <structure>
+            <property name="fileName">syncsort.css</property>
+            <property name="useExternalCss">false</property>
+        </structure>
+    </list-property>
+    <parameters>
+        <scalar-parameter name="report_displayname" id="791">
+            <property name="hidden">true</property>
+            <text-property name="promptText">Protected Systems</text-property>
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant"></value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="report_category" id="792">
+            <property name="hidden">true</property>
+            <text-property name="helpText">Displays Recovery Points for DPX protected  Virtual Machines</text-property>
+            <text-property name="promptText">DPX Protection Compliance</text-property>
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant"></value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <cascading-parameter-group name="Master_Server" id="4280">
+            <property name="dataSet">MasterServerParam</property>
+            <property name="dataSetMode">multiple</property>
+            <parameters>
+                <scalar-parameter name="MasterServer" id="4281">
+                    <text-property name="promptText" key="DPxMasterServerNode"></text-property>
+                    <property name="valueType">dynamic</property>
+                    <property name="isRequired">true</property>
+                    <property name="dataSetName">MasterServerParam</property>
+                    <expression name="valueExpr">row["id"]</expression>
+                    <expression name="labelExpr">row["name"]</expression>
+                    <expression name="sortByColumn">dataSetRow["name"]</expression>
+                    <property name="sortDirection">asc</property>
+                    <property name="dataType">string</property>
+                    <simple-property-list name="defaultValue">
+                        <value type="constant">(All)</value>
+                    </simple-property-list>
+                    <property name="paramType">simple</property>
+                    <property name="controlType">list-box</property>
+                    <property name="fixedOrder">false</property>
+                    <structure name="format"/>
+                </scalar-parameter>
+                <scalar-parameter name="Node" id="4282">
+                    <text-property name="promptText" key="vCenterTitle"></text-property>
+                    <property name="valueType">dynamic</property>
+                    <property name="isRequired">true</property>
+                    <property name="dataSetName">dpxProviderSrcNodes</property>
+                    <expression name="valueExpr">row["name"]</expression>
+                    <expression name="labelExpr">row["name"]</expression>
+                    <property name="dataType">string</property>
+                    <simple-property-list name="defaultValue">
+                        <value type="constant">(All)</value>
+                    </simple-property-list>
+                    <property name="paramType">multi-value</property>
+                    <property name="controlType">list-box</property>
+                    <property name="fixedOrder">true</property>
+                    <structure name="format"/>
+                </scalar-parameter>
+            </parameters>
+        </cascading-parameter-group>
+        <scalar-parameter name="View" id="8138">
+            <property name="hidden">true</property>
+            <text-property name="promptText" key="View"></text-property>
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">ViewLatest</value>
+            </simple-property-list>
+            <list-property name="selectionList">
+                <structure>
+                    <property name="value">ViewLatest</property>
+                    <property name="label">View Latest</property>
+                    <property name="labelID">ViewLatest</property>
+                </structure>
+                <structure>
+                    <property name="value">ViewAll</property>
+                    <property name="label">View All</property>
+                    <property name="labelID">ViewAll</property>
+                </structure>
+            </list-property>
+            <property name="paramType">simple</property>
+            <property name="controlType">list-box</property>
+            <property name="mustMatch">true</property>
+            <property name="fixedOrder">true</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="ReportDays" id="8140">
+            <property name="hidden">true</property>
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">32760</value>
+            </simple-property-list>
+            <list-property name="selectionList">
+                <structure>
+                    <property name="value">7</property>
+                </structure>
+                <structure>
+                    <property name="value">30</property>
+                </structure>
+                <structure>
+                    <property name="value">60</property>
+                </structure>
+                <structure>
+                    <property name="value">90</property>
+                </structure>
+                <structure>
+                    <property name="value">180</property>
+                </structure>
+                <structure>
+                    <property name="value">365</property>
+                </structure>
+                <structure>
+                    <property name="value">1825</property>
+                </structure>
+                <structure>
+                    <property name="value">32760</property>
+                </structure>
+            </list-property>
+            <property name="paramType">simple</property>
+            <property name="controlType">list-box</property>
+            <property name="mustMatch">true</property>
+            <property name="fixedOrder">true</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="run_by" id="2598">
+            <property name="hidden">true</property>
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">DefaultUser</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <script-data-source name="ChartProtoScripted" id="2361"/>
+        <oda-data-source extensionID="com.syncsort.dp.xsb.reports.data.oda.rest" name="DPXprovider" id="3786">
+            <property name="Base URI">http://localhost:8082/api/dpx</property>
+            <property name="Auth URI">http://localhost:8082/api/endeavour/session</property>
+            <property name="Username">admin</property>
+            <encrypted-property name="Password" encryptionID="base64">Y2F0YWwwZ2lj</encrypted-property>
+        </oda-data-source>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="com.syncsort.dp.xsb.reports.data.oda.rest.dataSet" name="MasterServerParam" id="3788">
+            <list-property name="computedColumns">
+                <structure>
+                    <property name="name">count</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value">row["id"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">name</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">name</text-property>
+                    <text-property name="heading">name</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">hostAddress</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">hostAddress</text-property>
+                    <text-property name="heading">hostAddress</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">id</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">id</text-property>
+                    <text-property name="heading">id</text-property>
+                </structure>
+            </list-property>
+            <list-property name="filter">
+                <structure>
+                    <property name="operator">ne</property>
+                    <expression name="expr" type="javascript">row["name"]</expression>
+                    <simple-property-list name="value1">
+                        <value>""</value>
+                    </simple-property-list>
+                </structure>
+            </list-property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">Param1</property>
+                    <property name="nativeName">Param1</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                    <property name="position">1</property>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Param2</property>
+                    <property name="nativeName">Param2</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                    <property name="position">2</property>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Param3</property>
+                    <property name="nativeName">Param3</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                    <property name="position">3</property>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Param4</property>
+                    <property name="nativeName">Param4</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                    <property name="position">4</property>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Param5</property>
+                    <property name="nativeName">Param5</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                    <property name="position">5</property>
+                    <expression name="defaultValue" type="javascript">"(All)"</expression>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">Param6</property>
+                    <property name="nativeName">Param6</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                    <property name="position">6</property>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Param7</property>
+                    <property name="nativeName">Param7</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                    <property name="position">7</property>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Param8</property>
+                    <property name="nativeName">Param8</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                    <property name="position">8</property>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">hostAddress</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">count</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <method name="beforeOpen"><![CDATA[//beforeOpen
+msName = new Array();]]></method>
+            <method name="onFetch"><![CDATA[//onFetch()
+if (row["id"] != "(All)" ){
+   var key = row["id"];
+   var value = row["name"];
+   msName[key]=value 
+   }]]></method>
+            <property name="dataSource">DPXprovider</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">name</property>
+                    <property name="nativeName">name</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">hostAddress</property>
+                    <property name="nativeName">hostAddress</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">id</property>
+                    <property name="nativeName">id</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[{dpxs[*]}(name,hostAddress,id)]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <DataSetParameters>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name>Param1</design:name>
+            <design:position>1</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>1</design:nativeDataTypeCode>
+          <design:precision>-1</design:precision>
+          <design:scale>-1</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name>Param2</design:name>
+            <design:position>2</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>1</design:nativeDataTypeCode>
+          <design:precision>-1</design:precision>
+          <design:scale>-1</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name>Param3</design:name>
+            <design:position>3</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>1</design:nativeDataTypeCode>
+          <design:precision>-1</design:precision>
+          <design:scale>-1</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name>Param4</design:name>
+            <design:position>4</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>1</design:nativeDataTypeCode>
+          <design:precision>-1</design:precision>
+          <design:scale>-1</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name>Param5</design:name>
+            <design:position>5</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>1</design:nativeDataTypeCode>
+          <design:precision>-1</design:precision>
+          <design:scale>-1</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name>Param6</design:name>
+            <design:position>6</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>1</design:nativeDataTypeCode>
+          <design:precision>-1</design:precision>
+          <design:scale>-1</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name>Param7</design:name>
+            <design:position>7</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>1</design:nativeDataTypeCode>
+          <design:precision>-1</design:precision>
+          <design:scale>-1</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name>Param8</design:name>
+            <design:position>8</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>1</design:nativeDataTypeCode>
+          <design:precision>-1</design:precision>
+          <design:scale>-1</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+  </DataSetParameters>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="com.syncsort.dp.xsb.reports.data.oda.rest.dataSet" name="dpxProviderSrcNodes" id="3946">
+            <property name="nullsOrdering">nulls lowest</property>
+            <list-property name="computedColumns">
+                <structure>
+                    <property name="name">SortKey</property>
+                    <expression name="expression">row["name"].toUpperCase()</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">name</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">name</text-property>
+                    <text-property name="heading">name</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">dpxId</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">dpxId</text-property>
+                    <text-property name="heading">dpxId</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">nodeType</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">nodeType</text-property>
+                    <text-property name="heading">nodeType</text-property>
+                </structure>
+            </list-property>
+            <list-property name="filter">
+                <structure>
+                    <property name="operator">is-not-null</property>
+                    <expression name="expr" type="javascript">row["name"]</expression>
+                </structure>
+                <structure>
+                    <property name="operator">ne</property>
+                    <expression name="expr" type="javascript">row["name"]</expression>
+                    <simple-property-list name="value1">
+                        <value>""</value>
+                    </simple-property-list>
+                </structure>
+                <structure>
+                    <property name="operator">in</property>
+                    <expression name="expr" type="javascript">row["nodeType"]</expression>
+                    <simple-property-list name="value1">
+                        <value>"VMware"</value>
+                        <value>"(All)"</value>
+                    </simple-property-list>
+                </structure>
+            </list-property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">Param1</property>
+                    <property name="nativeName">Param1</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                    <property name="position">1</property>
+                    <expression name="defaultValue" type="javascript">var msId = params["MasterServer"].value&#13;
+"[{\"property\":\"regId\",\"op\":\"=\",\"value\":\""+msId+"\"},"+&#13;
+"{\"property\":\"resource\",\"op\":\"=\",\"value\":\"node\"}]"</expression>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">Param2</property>
+                    <property name="nativeName">Param2</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                    <property name="position">2</property>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Param3</property>
+                    <property name="nativeName">Param3</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                    <property name="position">3</property>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Param4</property>
+                    <property name="nativeName">Param4</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                    <property name="position">4</property>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Param5</property>
+                    <property name="nativeName">Param5</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                    <property name="position">5</property>
+                    <expression name="defaultValue" type="javascript">"(All)"</expression>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">Param6</property>
+                    <property name="nativeName">Param6</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                    <property name="position">6</property>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Param7</property>
+                    <property name="nativeName">Param7</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                    <property name="position">7</property>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Param8</property>
+                    <property name="nativeName">Param8</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                    <property name="position">8</property>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">dpxId</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">nodeType</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">SortKey</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">DPXprovider</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">name</property>
+                    <property name="nativeName">name</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">dpxId</property>
+                    <property name="nativeName">dpxId</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">nodeType</property>
+                    <property name="nativeName">nodeType</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[query{nodes[*]}(name,dpxId,nodeType)]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <DataSetParameters>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name>Param1</design:name>
+            <design:position>1</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>1</design:nativeDataTypeCode>
+          <design:precision>-1</design:precision>
+          <design:scale>-1</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name>Param2</design:name>
+            <design:position>2</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>1</design:nativeDataTypeCode>
+          <design:precision>-1</design:precision>
+          <design:scale>-1</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name>Param3</design:name>
+            <design:position>3</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>1</design:nativeDataTypeCode>
+          <design:precision>-1</design:precision>
+          <design:scale>-1</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name>Param4</design:name>
+            <design:position>4</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>1</design:nativeDataTypeCode>
+          <design:precision>-1</design:precision>
+          <design:scale>-1</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name>Param5</design:name>
+            <design:position>5</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>1</design:nativeDataTypeCode>
+          <design:precision>-1</design:precision>
+          <design:scale>-1</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name>Param6</design:name>
+            <design:position>6</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>1</design:nativeDataTypeCode>
+          <design:precision>-1</design:precision>
+          <design:scale>-1</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name>Param7</design:name>
+            <design:position>7</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>1</design:nativeDataTypeCode>
+          <design:precision>-1</design:precision>
+          <design:scale>-1</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name>Param8</design:name>
+            <design:position>8</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>1</design:nativeDataTypeCode>
+          <design:precision>-1</design:precision>
+          <design:scale>-1</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+  </DataSetParameters>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="com.syncsort.dp.xsb.reports.data.oda.rest.dataSet" name="DPXVmNodeRecoveryData" id="7686">
+            <list-property name="computedColumns">
+                <structure>
+                    <property name="name">MstSrvCount</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNTDISTINCT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value">row["dpxId"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr">row["dpxId"] != "(All)"</expression>
+                </structure>
+                <structure>
+                    <property name="name">BackupTime</property>
+                    <expression name="expression">new Date((parseFloat(row["jobId"])*1000)).toLocaleDateString()</expression>
+                    <property name="dataType">date</property>
+                </structure>
+                <structure>
+                    <property name="name">DEBUG</property>
+                    <expression name="expression">params["Node"].toString();</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">id</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">id</text-property>
+                    <text-property name="heading">id</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">name</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">name</text-property>
+                    <text-property name="heading">name</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">resourceType</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">resourceType</text-property>
+                    <text-property name="heading">resourceType</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">recoveryMode</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">recoveryMode</text-property>
+                    <text-property name="heading">recoveryMode</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">dpxId</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">dpxId</text-property>
+                    <text-property name="heading">dpxId</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">jobId</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">jobId</text-property>
+                    <text-property name="heading">jobId</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">taskId</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">taskId</text-property>
+                    <text-property name="heading">taskId</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">retpd</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">retpd</text-property>
+                    <text-property name="heading">retpd</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">jobName</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">jobName</text-property>
+                    <text-property name="heading">jobName</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">jobType</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">jobType</text-property>
+                    <text-property name="heading">jobType</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">jobTypeInt</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">jobTypeInt</text-property>
+                    <text-property name="heading">jobTypeInt</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">dataSize</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">dataSize</text-property>
+                    <text-property name="heading">dataSize</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">dataUnit</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">dataUnit</text-property>
+                    <text-property name="heading">dataUnit</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">srcNode</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">srcNode</text-property>
+                    <text-property name="heading">srcNode</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">srcVol</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">srcVol</text-property>
+                    <text-property name="heading">srcVol</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">srcVolSer</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">srcVolSer</text-property>
+                    <text-property name="heading">srcVolSer</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">vmNode</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">vmNode</text-property>
+                    <text-property name="heading">vmNode</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">dstNode</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">dstNode</text-property>
+                    <text-property name="heading">dstNode</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">dstVol</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">dstVol</text-property>
+                    <text-property name="heading">dstVol</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">recordCount</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">recordCount</text-property>
+                    <text-property name="heading">recordCount</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">numVolserPart</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">numVolserPart</text-property>
+                    <text-property name="heading">numVolserPart</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">volserPartList</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">volserPartList</text-property>
+                    <text-property name="heading">volserPartList</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">errorMessage</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">errorMessage</text-property>
+                    <text-property name="heading">errorMessage</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">vCenter</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">vCenter</text-property>
+                    <text-property name="heading">vCenter</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">requestStatus</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">requestStatus</text-property>
+                    <text-property name="heading">requestStatus</text-property>
+                </structure>
+            </list-property>
+            <list-property name="filter">
+                <structure>
+                    <property name="operator">match</property>
+                    <expression name="expr" type="javascript">var myvCenter = params["Node"].toString();&#13;
+if (row["errorMessage"].match(/.+/)) { //catch any error messages &#13;
+  "pass"&#13;
+  } &#13;
+  else if (row["vmNode"] != row["vCenter"] ){&#13;
+     if (myvCenter != "(All)"){&#13;
+        if (myvCenter.indexOf(row["vCenter"]) >= 0 )&#13;
+           "pass" &#13;
+            else "filter"&#13;
+     }&#13;
+   else "pass"&#13;
+  } &#13;
+else "filter"</expression>
+                    <simple-property-list name="value1">
+                        <value>/pass/</value>
+                    </simple-property-list>
+                </structure>
+            </list-property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">Param1</property>
+                    <property name="nativeName">Param1</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                    <property name="position">1</property>
+                    <expression name="defaultValue" type="javascript">// Virtual Machine Recovery Point Data Query Parameter 1 &#13;
+var queryStr = "";&#13;
+var sep = ",";&#13;
+var msId = params["MasterServer"].value;&#13;
+//var msId = "1001";// 1005 1003"; //DEBUG&#13;
+var msIdFilter = "{\"property\":\"regId\",\"op\":\"=\",\"value\":\""+msId+"\"}";&#13;
+&#13;
+var reportDays = params["ReportDays"].value;&#13;
+var reportDaysFilter = "{\"property\":\"reportDays\",\"op\":\"=\",\"value\":\""+reportDays+"\"}"&#13;
+&#13;
+var resource = "recovery";&#13;
+var resourceFilter =  "{\"property\":\"resource\", \"op\":\"=\",\"value\":\""+resource+"\"}"&#13;
+&#13;
+//jobType always BACKUP_VIRTUALIZATION for VM's&#13;
+var jobType = "BACKUP_VIRTUALIZATION"                        &#13;
+var JobTypeFilter = "{\"property\":\"jobType\",\"op\":\"=\",\"value\":\""+jobType+"\"}"&#13;
+   &#13;
+&#13;
+var SourceNodeFilter = "";  &#13;
+var SourceNode = params["Node"].toString();&#13;
+&#13;
+&#13;
+&#13;
+&#13;
+    if(SourceNode != "(All)"){&#13;
+        SourceNode=SourceNode.replace(/\(All\)\s/,"");  // remove "(All)" if exists in source node object  &#13;
+        SourceNodeFilter = "{\"property\":\"vCenter\",\"op\":\"=\",\"value\":\""+SourceNode.replace(/,/g," ")+"\"}"  &#13;
+        queryStr = "["+msIdFilter+sep+resourceFilter+sep+SourceNodeFilter+sep+JobTypeFilter&#13;
+        //to show all rec pts in this case remove instance Flag filter in the above  &#13;
+        }&#13;
+    else {&#13;
+       queryStr = "["+msIdFilter+sep+resourceFilter+sep+JobTypeFilter&#13;
+       }&#13;
+&#13;
+ if (params["View"].value == "ViewLatest"){&#13;
+     instanceFlag="LATEST"&#13;
+     instanceFlagFilter = "{\"property\":\"instanceFlag\",\"op\":\"=\",\"value\":\""+instanceFlag+"\"}"&#13;
+     queryStr = queryStr +sep+instanceFlagFilter; &#13;
+     }&#13;
+&#13;
+queryStr+sep+reportDaysFilter+"]"</expression>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">Param2</property>
+                    <property name="nativeName">Param2</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                    <property name="position">2</property>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Param3</property>
+                    <property name="nativeName">Param3</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                    <property name="position">3</property>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Param4</property>
+                    <property name="nativeName">Param4</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                    <property name="position">4</property>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Param5</property>
+                    <property name="nativeName">Param5</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                    <property name="position">5</property>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Param6</property>
+                    <property name="nativeName">Param6</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                    <property name="position">6</property>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Param7</property>
+                    <property name="nativeName">Param7</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                    <property name="position">7</property>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Param8</property>
+                    <property name="nativeName">Param8</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                    <property name="position">8</property>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">resourceType</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">recoveryMode</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">dpxId</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">jobId</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">taskId</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">retpd</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">jobName</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">jobType</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">jobTypeInt</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">dataSize</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">13</property>
+                        <property name="name">dataUnit</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">14</property>
+                        <property name="name">srcNode</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">15</property>
+                        <property name="name">srcVol</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">16</property>
+                        <property name="name">srcVolSer</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">17</property>
+                        <property name="name">vmNode</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">18</property>
+                        <property name="name">dstNode</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">19</property>
+                        <property name="name">dstVol</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">20</property>
+                        <property name="name">recordCount</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">21</property>
+                        <property name="name">numVolserPart</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">22</property>
+                        <property name="name">volserPartList</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">23</property>
+                        <property name="name">errorMessage</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">24</property>
+                        <property name="name">vCenter</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">25</property>
+                        <property name="name">requestStatus</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">26</property>
+                        <property name="name">MstSrvCount</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">27</property>
+                        <property name="name">BackupTime</property>
+                        <property name="dataType">date</property>
+                    </structure>
+                    <structure>
+                        <property name="position">28</property>
+                        <property name="name">DEBUG</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">DPXprovider</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">id</property>
+                    <property name="nativeName">id</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">name</property>
+                    <property name="nativeName">name</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">resourceType</property>
+                    <property name="nativeName">resourceType</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">recoveryMode</property>
+                    <property name="nativeName">recoveryMode</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">dpxId</property>
+                    <property name="nativeName">dpxId</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">jobId</property>
+                    <property name="nativeName">jobId</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">taskId</property>
+                    <property name="nativeName">taskId</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">retpd</property>
+                    <property name="nativeName">retpd</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">jobName</property>
+                    <property name="nativeName">jobName</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">jobType</property>
+                    <property name="nativeName">jobType</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">11</property>
+                    <property name="name">jobTypeInt</property>
+                    <property name="nativeName">jobTypeInt</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">12</property>
+                    <property name="name">dataSize</property>
+                    <property name="nativeName">dataSize</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">13</property>
+                    <property name="name">dataUnit</property>
+                    <property name="nativeName">dataUnit</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">14</property>
+                    <property name="name">srcNode</property>
+                    <property name="nativeName">srcNode</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">15</property>
+                    <property name="name">srcVol</property>
+                    <property name="nativeName">srcVol</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">16</property>
+                    <property name="name">srcVolSer</property>
+                    <property name="nativeName">srcVolSer</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">17</property>
+                    <property name="name">vmNode</property>
+                    <property name="nativeName">vmNode</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">18</property>
+                    <property name="name">dstNode</property>
+                    <property name="nativeName">dstNode</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">19</property>
+                    <property name="name">dstVol</property>
+                    <property name="nativeName">dstVol</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">20</property>
+                    <property name="name">recordCount</property>
+                    <property name="nativeName">recordCount</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">21</property>
+                    <property name="name">numVolserPart</property>
+                    <property name="nativeName">numVolserPart</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">22</property>
+                    <property name="name">volserPartList</property>
+                    <property name="nativeName">volserPartList</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">23</property>
+                    <property name="name">errorMessage</property>
+                    <property name="nativeName">errorMessage</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">24</property>
+                    <property name="name">vCenter</property>
+                    <property name="nativeName">vCenter</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">25</property>
+                    <property name="name">requestStatus</property>
+                    <property name="nativeName">requestStatus</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[query{results[*]}(id,name,resourceType,recoveryMode,dpxId,jobId,taskId,retpd,jobName,jobType,jobTypeInt,dataSize,dataUnit,srcNode,srcVol,srcVolSer,vmNode,dstNode,dstVol,recordCount,numVolserPart,volserPartList,errorMessage,vCenter,requestStatus)
+]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <DataSetParameters>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name>Param1</design:name>
+            <design:position>1</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>1</design:nativeDataTypeCode>
+          <design:precision>-1</design:precision>
+          <design:scale>-1</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name>Param2</design:name>
+            <design:position>2</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>1</design:nativeDataTypeCode>
+          <design:precision>-1</design:precision>
+          <design:scale>-1</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name>Param3</design:name>
+            <design:position>3</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>1</design:nativeDataTypeCode>
+          <design:precision>-1</design:precision>
+          <design:scale>-1</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name>Param4</design:name>
+            <design:position>4</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>1</design:nativeDataTypeCode>
+          <design:precision>-1</design:precision>
+          <design:scale>-1</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name>Param5</design:name>
+            <design:position>5</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>1</design:nativeDataTypeCode>
+          <design:precision>-1</design:precision>
+          <design:scale>-1</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name>Param6</design:name>
+            <design:position>6</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>1</design:nativeDataTypeCode>
+          <design:precision>-1</design:precision>
+          <design:scale>-1</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name>Param7</design:name>
+            <design:position>7</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>1</design:nativeDataTypeCode>
+          <design:precision>-1</design:precision>
+          <design:scale>-1</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name>Param8</design:name>
+            <design:position>8</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>1</design:nativeDataTypeCode>
+          <design:precision>-1</design:precision>
+          <design:scale>-1</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+  </DataSetParameters>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+    </data-sets>
+    <styles>
+        <style name="report" id="4">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">10pt</property>
+        </style>
+        <style name="crosstab-cell" id="5">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+        <style name="crosstab" id="6">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+        <style name="primaryReportTitle" id="867">
+            <property name="fontSize">2em</property>
+            <property name="color">#005596</property>
+            <property name="borderBottomColor">gray</property>
+            <property name="borderBottomStyle">none</property>
+            <property name="borderBottomWidth">3px</property>
+            <property name="borderLeftColor">gray</property>
+            <property name="borderLeftStyle">none</property>
+            <property name="borderLeftWidth">3px</property>
+            <property name="borderRightColor">gray</property>
+            <property name="borderRightStyle">none</property>
+            <property name="borderRightWidth">3px</property>
+            <property name="borderTopColor">gray</property>
+            <property name="borderTopStyle">none</property>
+            <property name="borderTopWidth">3px</property>
+            <property name="paddingTop">10px</property>
+            <property name="textAlign">left</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="syncsort_master_page" id="2369" extends="syncsort_library.syncsort_master_page">
+            <overridden-values>
+                <ref-entry baseId="56" name="company_logo" id="56"/>
+                <ref-entry baseId="58" name="NewGrid" id="58"/>
+                <ref-entry baseId="59" id="59"/>
+                <ref-entry baseId="60" id="60"/>
+                <ref-entry baseId="61" id="61"/>
+                <ref-entry baseId="62" id="62"/>
+                <ref-entry baseId="63" id="63"/>
+                <ref-entry baseId="64" name="NewAutoText" id="64"/>
+                <ref-entry baseId="65" id="65"/>
+                <ref-entry baseId="66" name="NewText" id="66"/>
+                <ref-entry baseId="67" id="67"/>
+                <ref-entry baseId="68" name="NewAutoText1" id="68"/>
+            </overridden-values>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <grid name="ReportTitleAndParameters" id="241">
+            <property name="marginTop">5pt</property>
+            <property name="canShrink">true</property>
+            <property name="width">100%</property>
+            <property name="dataSet">MasterServerParam</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">name</property>
+                    <text-property name="displayName">name</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">hostAddress</property>
+                    <text-property name="displayName">hostAddress</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["hostAddress"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">id</property>
+                    <text-property name="displayName">id</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["id"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">count</property>
+                    <text-property name="displayName">count</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["count"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+            </list-property>
+            <column id="242">
+                <property name="width">100%</property>
+            </column>
+            <row id="243">
+                <property name="textAlign">center</property>
+                <cell id="244">
+                    <text name="PrimaryReportTitle" id="251">
+                        <property name="style">primaryReportTitle</property>
+                        <property name="borderBottomWidth">3px</property>
+                        <structure name="toc"/>
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[<VALUE-OF>reportContext.getMessage("DPxVmRecoveryPointsRepTitle",reportContext.getLocale());</VALUE-OF>
+]]></text-property>
+                    </text>
+                    <text name="ReportPropertiesHeading" id="866">
+                        <property name="textAlign">left</property>
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[<div style="padding:7px 7px;background:#4389bc; color:white; font-weight:bold; font-size:1.2em;width:100%;"><VALUE-OF>reportContext.getMessage("ReportProperties", reportContext.getLocale());</VALUE-OF><div>]]></text-property>
+                    </text>
+                    <text name="ReportDetails" id="6876">
+                        <property name="paddingTop">10pt</property>
+                        <property name="textAlign">left</property>
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[<div style="padding:7px 7px;color:black; background:white;  font-weight:normal; font-size:1.0em;width:100%;">
+<dl>
+<dt> <b><VALUE-OF>reportContext.getMessage("ReportCreationDate", reportContext.getLocale());</VALUE-OF></b>
+		 <VALUE-OF> new Date().toLocaleString()  </VALUE-OF>  </dd> <br>
+		
+	<dt> <b><VALUE-OF>reportContext.getMessage("ReportGeneratedBy", reportContext.getLocale());</VALUE-OF></b>
+		 <VALUE-OF>params["run_by"].value  </VALUE-OF>  </dd> <br>
+		<br>
+	
+<br>
+<dt> <b><VALUE-OF>reportContext.getMessage("ReportParameters", reportContext.getLocale());</VALUE-OF></b> </dt>
+<!----------------------Bind outer grid to MasterServerParam or else the following script fails -------------> 
+ <dd> <b><VALUE-OF>reportContext.getMessage("DPxMasterServerNode", reportContext.getLocale());</VALUE-OF></b> 
+ <VALUE-OF> if (params["MasterServer"].value != "(All)") {
+  var map = reportContext.getPersistentGlobalVariable("map");
+  var key  = params["MasterServer"].value;
+  msName[key]
+  } 
+  else {params["MasterServer"].value} </VALUE-OF> </dd>
+
+ <!--------------------------------------------------Source node--------------------------------------------------------->
+ <dd>
+ <VALUE-OF format="HTML"> 
+   if(params["Node"].length > 1){
+   str1 = reportContext.getMessage("DPxMasterServerClientNodes", reportContext.getLocale());
+   str2 = params["Node"].toString().replace(/\(All\),/,"");
+   str2 = str2.replace(/,/g,", ")
+   }
+   else {
+   str1 = reportContext.getMessage("vCenter", reportContext.getLocale());
+   str2 = params["Node"].toString();
+   }
+   str1.bold()+" "+str2 
+ </VALUE-OF>
+</dd
+
+
+
+<dl>
+<div>]]></text-property>
+                    </text>
+                </cell>
+            </row>
+        </grid>
+        <grid name="ReportBody" id="3547">
+            <property name="borderBottomStyle">none</property>
+            <property name="borderLeftStyle">none</property>
+            <property name="borderRightStyle">none</property>
+            <property name="borderTopStyle">none</property>
+            <method name="onCreate"><![CDATA[ChartMaxDayCount=0;
+RecNum=0;
+MaxDays=0;
+]]></method>
+            <column id="3548"/>
+            <row id="3549">
+                <cell id="3550">
+                    <table name="RecoveryPoints" id="7690">
+                        <property name="borderBottomColor">#DDE7F2</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">2px</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                        <property name="width">100%</property>
+                        <property name="dataSet">DPXVmNodeRecoveryData</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">id</property>
+                                <text-property name="displayName">id</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["id"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">name</property>
+                                <text-property name="displayName">name</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["name"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">resourceType</property>
+                                <text-property name="displayName">resourceType</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["resourceType"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">recoveryMode</property>
+                                <text-property name="displayName">recoveryMode</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["recoveryMode"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">dpxId</property>
+                                <text-property name="displayName">dpxId</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["dpxId"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">jobId</property>
+                                <text-property name="displayName">jobId</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["jobId"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">taskId</property>
+                                <text-property name="displayName">taskId</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["taskId"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">retpd</property>
+                                <text-property name="displayName">retpd</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["retpd"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">jobName</property>
+                                <text-property name="displayName">jobName</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["jobName"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">jobType</property>
+                                <text-property name="displayName">jobType</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["jobType"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">jobTypeInt</property>
+                                <text-property name="displayName">jobTypeInt</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["jobTypeInt"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">dataSize</property>
+                                <text-property name="displayName">dataSize</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["dataSize"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">dataUnit</property>
+                                <text-property name="displayName">dataUnit</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["dataUnit"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">srcNode</property>
+                                <text-property name="displayName">srcNode</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["srcNode"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">srcVol</property>
+                                <text-property name="displayName">srcVol</text-property>
+                                <expression name="expression" type="javascript">//dynamic padding&#13;
+//if (dataSetRow["srcVol"].length > 13){ //13 is width of column heading&#13;
+// WrapLine(dataSetRow["srcVol"],30,2)&#13;
+//}&#13;
+//else dataSetRow["srcVol"]&#13;
+dataSetRow["srcVol"]</expression>
+                                <property name="dataType">string</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">srcVolSer</property>
+                                <text-property name="displayName">srcVolSer</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["srcVolSer"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">vmNode</property>
+                                <text-property name="displayName">vmNode</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["vmNode"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">dstNode</property>
+                                <text-property name="displayName">dstNode</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["dstNode"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">dstVol</property>
+                                <text-property name="displayName">dstVol</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["dstVol"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">recordCount</property>
+                                <text-property name="displayName">recordCount</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["recordCount"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">numVolserPart</property>
+                                <text-property name="displayName">numVolserPart</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["numVolserPart"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">volserPartList</property>
+                                <text-property name="displayName">volserPartList</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["volserPartList"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">MstSrvCount</property>
+                                <text-property name="displayName">MstSrvCount</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["MstSrvCount"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                            <structure>
+                                <property name="name">jobTypeStr</property>
+                                <expression name="expression" type="javascript">switch (dataSetRow["jobType"]) {&#13;
+ //FILE BACKUP TYPES&#13;
+ case "BACKUP_FILE":&#13;
+ "File"&#13;
+ break;&#13;
+&#13;
+  case "BACKUP_BASE":&#13;
+ "File"&#13;
+ break;&#13;
+&#13;
+  case "BACKUP_INCR":&#13;
+ "File"&#13;
+ break;&#13;
+&#13;
+  case "BACKUP_DIFR":&#13;
+ "File"&#13;
+ break;&#13;
+ &#13;
+   case "BACKUP_CATALOG":&#13;
+ "Catalog"&#13;
+ break;&#13;
+ &#13;
+    case "BACKUP_OBEX":&#13;
+ "Oracle"&#13;
+ break;&#13;
+ &#13;
+ &#13;
+ &#13;
+ //IMAGE&#13;
+  case "BACKUP_IMAGE":&#13;
+ "Image"&#13;
+ break;&#13;
+ //NDMP&#13;
+  case "BACKUP_NDMP":&#13;
+ "NDMP"&#13;
+ break;&#13;
+&#13;
+  case "BACKUP_ADS":&#13;
+ "NDMP"&#13;
+ break;&#13;
+ &#13;
+   case "BACKUP_NDMP":&#13;
+ "NDMP"&#13;
+ break;&#13;
+ &#13;
+   case "BACKUP_ADS_INCR":&#13;
+ "NDMP"&#13;
+ break;&#13;
+&#13;
+   case "BACKUP_ADS_DIFR":&#13;
+ "NDMP"&#13;
+ break;&#13;
+&#13;
+ &#13;
+  case "BACKUP_BLOCK":&#13;
+ "Block"&#13;
+ break;&#13;
+ &#13;
+ //SNAPVAULT &#13;
+  case "BACKUP_SNAPVAULT":&#13;
+ "Block"&#13;
+ break;&#13;
+ &#13;
+   case "BACKUP_SNAPVAULT_INCR":&#13;
+ "Block"&#13;
+ break;&#13;
+ &#13;
+   case "BACKUP_VIRTUALIZATION":&#13;
+  "Virtualization"&#13;
+ break;&#13;
+ &#13;
+ //VIRTUALIZATION&#13;
+    case "BACKUP_VIRTUALIZATION_INCR":&#13;
+  "Virtualization"&#13;
+ break;&#13;
+  &#13;
+ //UNHANDLED &#13;
+default:&#13;
+dataSetRow["jobType"];&#13;
+}</expression>
+                                <property name="dataType">string</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">BackupDate</property>
+                                <expression name="expression" type="javascript">if (dataSetRow["jobId"].length > 0){&#13;
+var myBackupDate = parseFloat(dataSetRow["jobId"]*1000);&#13;
+new Date(myBackupDate).toLocaleDateString()&#13;
+} &#13;
+else 0</expression>
+                                <property name="dataType">string</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">RecPtsByJob</property>
+                                <property name="dataType">integer</property>
+                                <property name="aggregateFunction">COUNT</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["jobName"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">retpd2Date</property>
+                                <expression name="expression" type="javascript">// DPXretpd2Date.js&#13;
+ var myJobId=dataSetRow["jobId"]&#13;
+ var myExp=dataSetRow["retpd"]*86400&#13;
+ new Date((parseFloat(myJobId)+myExp)*1000).toLocaleDateString()</expression>
+                                <property name="dataType">string</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">LatestBackup</property>
+                                <property name="dataType">float</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>vCenterGroup</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">MAX</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["jobId"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">LatestBackupDate</property>
+                                <expression name="expression" type="javascript">new Date((parseFloat(row["LatestBackup"])*1000)).toLocaleDateString()</expression>
+                                <property name="dataType">string</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Highlight</property>
+                                <property name="dataType">integer</property>
+                                <property name="aggregateFunction">RUNNINGCOUNT</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["srcVol"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">JobnameCount</property>
+                                <property name="dataType">integer</property>
+                                <property name="aggregateFunction">RUNNINGCOUNT</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["jobName"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Recovery Resources</property>
+                                <expression name="expression" type="javascript">switch (row["jobTypeStr"]) {&#13;
+&#13;
+ case "File":&#13;
+  var myStr = row["volserPartList"]&#13;
+  myStr = myStr.replace(/[,\[,\{,\],\},\"]/g,"");&#13;
+  myStr = myStr.replace(/partition/g,",partition");&#13;
+  myStr = myStr.replace(/,partitionSize:\d+/g,"");&#13;
+  myStr = myStr.replace(/(\d)+volser/g,"$1&lt;br>volser");&#13;
+  myStr&#13;
+ break;&#13;
+&#13;
+ case "Oracle":&#13;
+  var myStr = row["volserPartList"]&#13;
+  myStr = myStr.replace(/[,\[,\{,\],\},\"]/g,"");&#13;
+  myStr = myStr.replace(/partition/g,",partition");&#13;
+  myStr = myStr.replace(/,partitionSize:\d+/g,"");&#13;
+  myStr = myStr.replace(/(\d)+volser/g,"$1&lt;br>volser");&#13;
+  myStr&#13;
+ break;&#13;
+ &#13;
+  case "Catalog":&#13;
+  var myStr = row["volserPartList"]&#13;
+  myStr = myStr.replace(/[,\[,\{,\],\},\"]/g,"");&#13;
+  myStr = myStr.replace(/partition/g,",partition");&#13;
+  myStr = myStr.replace(/,partitionSize:\d+/g,"");&#13;
+  myStr = myStr.replace(/(\d)+volser/g,"$1&lt;br>volser");&#13;
+  myStr&#13;
+ break;&#13;
+ &#13;
+  case "Image":&#13;
+  var myStr = row["volserPartList"]&#13;
+  myStr = myStr.replace(/[,\[,\{,\],\},\"]/g,"");&#13;
+  myStr = myStr.replace(/partition/g,",partition");&#13;
+  myStr = myStr.replace(/,partitionSize:\d+/g,"");&#13;
+  myStr = myStr.replace(/(\d)+volser/g,"$1&lt;br>volser");&#13;
+  myStr&#13;
+ break;&#13;
+&#13;
+  case "NDMP":&#13;
+  var myStr = row["volserPartList"]&#13;
+  myStr = myStr.replace(/[,\[,\{,\],\},\"]/g,"");&#13;
+  myStr = myStr.replace(/partition/g,", partition");&#13;
+  myStr = myStr.replace(/, partitionSize:\d+/g,"");&#13;
+  myStr = myStr.replace(/(\d)+volser/g,"$1&lt;br>volser");&#13;
+  myStr&#13;
+ break;&#13;
+&#13;
+  case "Block":&#13;
+  var myStr = row["dstNode"]+": "+row["dstVol"]&#13;
+  myStr;&#13;
+ break;&#13;
+ &#13;
+  case "Virtualization":&#13;
+  var myStr = row["dstNode"]+": "+row["dstVol"];&#13;
+  myStr;&#13;
+  break;&#13;
+ &#13;
+ //UNHANDLED prints directly from api. &#13;
+default:&#13;
+var myStr = row["volserPartList"]&#13;
+myStr;&#13;
+}</expression>
+                                <property name="dataType">string</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">dpxIdGroupRowCount</property>
+                                <property name="dataType">integer</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>MasterServerGroup</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">COUNT</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["dpxId"]</expression>
+                                    </structure>
+                                </list-property>
+                                <expression name="filterExpr" type="javascript">parseFloat(dataSetRow["jobId"]) > 0;</expression>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">errorMessage</property>
+                                <text-property name="displayName">errorMessage</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["errorMessage"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">srcNodeOrVmNode</property>
+                                <expression name="expression" type="javascript">if (dataSetRow["vmNode"] == null) {&#13;
+   dataSetRow["srcNode"]&#13;
+   }&#13;
+   else dataSetRow["vmNode"]</expression>
+                                <property name="dataType">string</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">vCenter</property>
+                                <text-property name="displayName">vCenter</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["vCenter"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">requestStatus</property>
+                                <text-property name="displayName">requestStatus</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["requestStatus"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">DEBUG</property>
+                                <expression name="expression" type="javascript">"Hello:"+dataSetRow["MstSrvCount"]+":"+row["recordCount"]+":"</expression>
+                                <property name="dataType">string</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">LatestBackupTime</property>
+                                <expression name="expression" type="javascript">//LastBackupTime&#13;
+if (dataSetRow["jobId"].length > 0){&#13;
+var BackupTime = parseInt(dataSetRow["jobId"]*1000);&#13;
+var myDate=new Date(BackupTime)&#13;
+var myHours=myDate.getHours(); //localtime is displayed&#13;
+var myMinutes=myDate.getMinutes();&#13;
+if (myHours &lt; 10){&#13;
+   myHours = "0"+myHours&#13;
+   }&#13;
+  &#13;
+if (myMinutes &lt; 10){&#13;
+   myMinutes = "0"+myMinutes&#13;
+   }&#13;
+myDate.toLocaleDateString()+" "+myHours+":"+myMinutes&#13;
+//myDate.toLocaleString()+" "+myHours+":"+myMinutes&#13;
+} &#13;
+else 0</expression>
+                                <property name="dataType">string</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">MasterServerCount</property>
+                                <property name="dataType">integer</property>
+                                <property name="aggregateFunction">RUNNINGCOUNT</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["dpxId"]</expression>
+                                    </structure>
+                                </list-property>
+                                <expression name="filterExpr" type="javascript">dataSetRow["dpxId"] != "";</expression>
+                                <property name="allowExport">true</property>
+                            </structure>
+                        </list-property>
+                        <property name="pageBreakInterval">10000</property>
+                        <list-property name="filter">
+                            <structure>
+                                <property name="operator">is-not-null</property>
+                                <expression name="expr" type="javascript">row["srcNodeOrVmNode"]</expression>
+                                <property name="updateAggregation">true</property>
+                            </structure>
+                        </list-property>
+                        <column id="7814">
+                            <property name="width">1.5in</property>
+                        </column>
+                        <column id="8133">
+                            <property name="width">1.5in</property>
+                        </column>
+                        <column id="8040">
+                            <property name="width">2in</property>
+                        </column>
+                        <column id="7815">
+                            <property name="width">1.5in</property>
+                        </column>
+                        <column id="8081">
+                            <property name="width">1in</property>
+                        </column>
+                        <column id="7817">
+                            <property name="width">10%</property>
+                        </column>
+                        <column id="7818">
+                            <property name="width">10%</property>
+                        </column>
+                        <column id="7827">
+                            <property name="textAlign">left</property>
+                            <property name="whiteSpace">normal</property>
+                            <property name="width">1.75in</property>
+                        </column>
+                        <header>
+                            <row id="7691">
+                                <property name="backgroundColor">white</property>
+                                <property name="color">white</property>
+                                <property name="borderBottomStyle">none</property>
+                                <property name="borderLeftStyle">none</property>
+                                <property name="borderRightStyle">none</property>
+                                <property name="borderTopStyle">none</property>
+                                <list-property name="visibility">
+                                    <structure>
+                                        <property name="format">all</property>
+                                        <expression name="valueExpr" type="javascript">if (row["MstSrvCount"] == null) //api returns empty result &#13;
+false &#13;
+else if (row["MstSrvCount"] == 0) //no records contain dpxId&#13;
+false &#13;
+else if (Total.count() == 0) //table contains no records. &#13;
+false &#13;
+else true</expression>
+                                    </structure>
+                                </list-property>
+                                <cell id="7702">
+                                    <property name="colSpan">8</property>
+                                    <property name="rowSpan">1</property>
+                                    <property name="color">white</property>
+                                    <property name="borderBottomStyle">none</property>
+                                    <property name="borderLeftStyle">none</property>
+                                    <property name="borderRightStyle">none</property>
+                                    <property name="borderTopStyle">none</property>
+                                    <property name="paddingTop">0pt</property>
+                                    <property name="paddingLeft">0pt</property>
+                                    <property name="paddingBottom">0pt</property>
+                                    <property name="paddingRight">0pt</property>
+                                    <text-data name="Master Server Group header1" id="8100">
+                                        <property name="backgroundColor">#4389BC</property>
+                                        <property name="fontSize">1.2em</property>
+                                        <property name="fontWeight">bold</property>
+                                        <property name="color">white</property>
+                                        <property name="borderBottomStyle">none</property>
+                                        <property name="borderLeftStyle">none</property>
+                                        <property name="borderRightStyle">none</property>
+                                        <property name="borderTopStyle">none</property>
+                                        <property name="paddingTop">6pt</property>
+                                        <property name="paddingLeft">7px</property>
+                                        <property name="paddingBottom">6pt</property>
+                                        <method name="onCreate"><![CDATA[ ]]></method>
+                                        <expression name="valueExpr">var mskey=params["MasterServer"].value&#13;
+var thisSrcNode=params["Node"].toString();&#13;
+var thisMaster="";&#13;
+   if (thisMasterId=="(All)"){&#13;
+      thisMaster="(All)";&#13;
+      }&#13;
+       else thisMaster=msName[mskey]; &#13;
+&#13;
+var myLabel=reportContext.getMessage("DPxMasterServerNode", reportContext.getLocale()); &#13;
+var mySourceNode=reportContext.getMessage("DPxMasterServerClientNode", reportContext.getLocale()); &#13;
+&#13;
+if (params["Node"].value.length > 1){ //make plural &#13;
+   mySourceNode=reportContext.getMessage("DPxMasterServerClientNodes", reportContext.getLocale());  &#13;
+   }&#13;
+&#13;
+  if (thisSrcNode == "(All)"){ &#13;
+     myLabel+" "+thisMaster&#13;
+     }&#13;
+     else {&#13;
+      myLabel+" "+thisMaster+"        "+mySourceNode+" "+params["Node"].toString().replace(/,/g, ", ")  &#13;
+     }</expression>
+                                        <property name="contentType">auto</property>
+                                    </text-data>
+                                    <text-data name="NoDataErrorHandler" id="8111">
+                                        <property name="backgroundColor">white</property>
+                                        <property name="fontWeight">bold</property>
+                                        <property name="color">red</property>
+                                        <property name="borderBottomColor">#4389BC</property>
+                                        <property name="borderBottomStyle">solid</property>
+                                        <property name="borderBottomWidth">medium</property>
+                                        <property name="borderLeftStyle">none</property>
+                                        <property name="borderRightStyle">none</property>
+                                        <property name="borderTopStyle">none</property>
+                                        <property name="paddingTop">2pt</property>
+                                        <property name="paddingLeft">7pt</property>
+                                        <property name="paddingBottom">1pt</property>
+                                        <expression name="valueExpr">if ((row["errorMessage"] != null) &amp;&amp;(row["errorMessage"].search(/Dpx registration is not found/) >= 0)){&#13;
+    reportContext.getMessage("DPxError3", reportContext.getLocale());&#13;
+   }&#13;
+&#13;
+else if (row["dpxIdGroupRowCount"] == 0){ //DPxMTTable5=No backup instances were returned&#13;
+   reportContext.getMessage("DPxMTTable5", reportContext.getLocale());&#13;
+}</expression>
+                                        <property name="contentType">html</property>
+                                    </text-data>
+                                </cell>
+                            </row>
+                        </header>
+                        <group id="7832">
+                            <property name="groupName">MasterServerGroup</property>
+                            <expression name="keyExpr" type="javascript">row["dpxId"]</expression>
+                            <structure name="toc">
+                                <expression name="expressionValue" type="javascript">var map = reportContext.getPersistentGlobalVariable("map");&#13;
+var key  = row["dpxId"]&#13;
+map.get(key)</expression>
+                            </structure>
+                            <property name="hideDetail">false</property>
+                            <header>
+                                <row id="7902">
+                                    <property name="fontSize">1.2em</property>
+                                    <list-property name="visibility">
+                                        <structure>
+                                            <property name="format">all</property>
+                                            <expression name="valueExpr" type="javascript">if (row["MstSrvCount"] == 0){&#13;
+true&#13;
+}&#13;
+else false</expression>
+                                        </structure>
+                                    </list-property>
+                                    <cell id="7903">
+                                        <property name="colSpan">8</property>
+                                        <property name="rowSpan">1</property>
+                                        <property name="paddingTop">0.25in</property>
+                                        <text-data name="Master Server Group header" id="5839">
+                                            <property name="backgroundColor">#4389BC</property>
+                                            <property name="fontWeight">bold</property>
+                                            <property name="color">white</property>
+                                            <property name="borderBottomStyle">none</property>
+                                            <property name="borderLeftStyle">none</property>
+                                            <property name="borderRightStyle">none</property>
+                                            <property name="borderTopStyle">none</property>
+                                            <property name="paddingTop">6pt</property>
+                                            <property name="paddingLeft">7px</property>
+                                            <property name="paddingBottom">6pt</property>
+                                            <method name="onCreate"><![CDATA[ ]]></method>
+                                            <expression name="valueExpr">var mskey=row["dpxId"];&#13;
+//var thisSrcNode=params["Node"].value&#13;
+var thisSrcNode=params["Node"].toString();&#13;
+//thisSrcNode=thisSrcNode.toString();&#13;
+var thisMaster=msName[mskey]; &#13;
+var myLabel=reportContext.getMessage("DPxMasterServerNode", reportContext.getLocale()); &#13;
+//var RecPointsStr =  reportContext.getMessage("RecoveryPoints", reportContext.getLocale()); &#13;
+var mySourceNode=reportContext.getMessage("DPxMasterServerClientNode", reportContext.getLocale()); &#13;
+&#13;
+if (params["Node"].value.length > 1){ //make plural &#13;
+   mySourceNode=reportContext.getMessage("DPxMasterServerClientNodes", reportContext.getLocale());  &#13;
+   }&#13;
+&#13;
+  if (thisSrcNode == "(All)"){ &#13;
+     myLabel+" "+thisMaster&#13;
+     //RecPointsStr+"        "+myLabel+" "+thisMaster&#13;
+     }&#13;
+     else {&#13;
+      myLabel+" "+thisMaster+"        "+mySourceNode+" "+params["Node"].toString().replace(/,/g, ", ")  &#13;
+     }</expression>
+                                            <property name="contentType">auto</property>
+                                        </text-data>
+                                    </cell>
+                                </row>
+                                <row id="8097">
+                                    <method name="onCreate"><![CDATA[Highlight=0;
+]]></method>
+                                    <property name="backgroundColor">#D8E5F1</property>
+                                    <property name="borderBottomStyle">none</property>
+                                    <property name="borderLeftStyle">none</property>
+                                    <property name="borderRightStyle">none</property>
+                                    <property name="borderTopStyle">none</property>
+                                    <list-property name="visibility">
+                                        <structure>
+                                            <property name="format">all</property>
+                                            <expression name="valueExpr" type="javascript">if (row["MstSrvCount"] == 0){&#13;
+  true&#13;
+  }&#13;
+&#13;
+else if(row["dpxIdGroupRowCount"] > 0) { &#13;
+true&#13;
+}&#13;
+else false</expression>
+                                        </structure>
+                                    </list-property>
+                                    <cell id="8098">
+                                        <property name="colSpan">8</property>
+                                        <property name="rowSpan">1</property>
+                                        <property name="backgroundColor">white</property>
+                                        <property name="color">white</property>
+                                        <property name="borderBottomStyle">none</property>
+                                        <property name="borderLeftStyle">none</property>
+                                        <property name="borderRightStyle">none</property>
+                                        <property name="borderTopStyle">none</property>
+                                        <text-data id="7768">
+                                            <property name="backgroundColor">white</property>
+                                            <property name="fontWeight">bold</property>
+                                            <property name="color">red</property>
+                                            <property name="borderBottomStyle">none</property>
+                                            <property name="borderLeftStyle">none</property>
+                                            <property name="borderRightStyle">none</property>
+                                            <property name="borderTopStyle">none</property>
+                                            <property name="paddingTop">2pt</property>
+                                            <property name="paddingLeft">7pt</property>
+                                            <property name="paddingBottom">1.5pt</property>
+                                            <expression name="valueExpr">if (row["errorMessage"].search(/Failed to connect/) >= 0) { &#13;
+    reportContext.getMessage("DPxError2", reportContext.getLocale());&#13;
+      }&#13;
+&#13;
+else if (row["errorMessage"].search(/No results/) >= 0) { &#13;
+    reportContext.getMessage("DPxError1", reportContext.getLocale());&#13;
+      }&#13;
+&#13;
+else if (row["dpxIdGroupRowCount"] == 0){ //DPxMTTable5=No backup instances were returned&#13;
+    reportContext.getMessage("DPxMTTable5", reportContext.getLocale());&#13;
+}</expression>
+                                            <property name="contentType">html</property>
+                                        </text-data>
+                                    </cell>
+                                </row>
+                                <row id="7833">
+                                    <method name="onCreate"><![CDATA[Highlight=0;
+]]></method>
+                                    <property name="backgroundColor">#D8E5F1</property>
+                                    <list-property name="visibility">
+                                        <structure>
+                                            <property name="format">all</property>
+                                            <expression name="valueExpr" type="javascript">if(row["dpxIdGroupRowCount"] > 0) { &#13;
+false&#13;
+}&#13;
+else&#13;
+true</expression>
+                                        </structure>
+                                    </list-property>
+                                    <cell id="7836">
+                                        <property name="textAlign">center</property>
+                                        <property name="verticalAlign">middle</property>
+                                        <label id="8085">
+                                            <property name="fontWeight">bold</property>
+                                            <property name="color">#005596</property>
+                                            <property name="paddingTop">3pt</property>
+                                            <property name="paddingLeft">7pt</property>
+                                            <property name="paddingBottom">0pt</property>
+                                            <property name="paddingRight">0pt</property>
+                                            <property name="textAlign">left</property>
+                                            <text-property name="text" key="VMName">VmName</text-property>
+                                        </label>
+                                    </cell>
+                                    <cell id="8121">
+                                        <property name="textAlign">center</property>
+                                        <property name="verticalAlign">middle</property>
+                                        <label id="8134">
+                                            <property name="fontWeight">bold</property>
+                                            <property name="color">#005596</property>
+                                            <property name="paddingTop">3pt</property>
+                                            <property name="paddingLeft">1pt</property>
+                                            <property name="paddingBottom">0pt</property>
+                                            <property name="paddingRight">0pt</property>
+                                            <property name="textAlign">left</property>
+                                            <text-property name="text" key="vCenterTitle">vCenter</text-property>
+                                        </label>
+                                    </cell>
+                                    <cell id="8028">
+                                        <property name="verticalAlign">middle</property>
+                                        <label id="6085">
+                                            <property name="fontWeight">bold</property>
+                                            <property name="color">#005596</property>
+                                            <property name="paddingLeft">1pt</property>
+                                            <text-property name="text">vmPath</text-property>
+                                        </label>
+                                    </cell>
+                                    <cell id="7837">
+                                        <property name="verticalAlign">middle</property>
+                                        <label id="8087">
+                                            <property name="fontWeight">bold</property>
+                                            <property name="color">#005596</property>
+                                            <property name="paddingTop">3pt</property>
+                                            <property name="paddingLeft">7pt</property>
+                                            <property name="paddingRight">1pt</property>
+                                            <property name="textAlign">justify</property>
+                                            <text-property name="text" key="LatestBackup">LastBackup</text-property>
+                                        </label>
+                                    </cell>
+                                    <cell id="8068">
+                                        <property name="verticalAlign">middle</property>
+                                        <label id="8088">
+                                            <property name="fontWeight">bold</property>
+                                            <property name="color">#005596</property>
+                                            <property name="paddingTop">3pt</property>
+                                            <property name="paddingLeft">2pt</property>
+                                            <text-property name="text" key="JobName">JobName</text-property>
+                                        </label>
+                                    </cell>
+                                    <cell id="7839">
+                                        <property name="colSpan">2</property>
+                                        <property name="rowSpan">1</property>
+                                        <property name="verticalAlign">middle</property>
+                                        <label id="8094">
+                                            <property name="fontWeight">bold</property>
+                                            <property name="color">#005596</property>
+                                            <property name="paddingTop">3pt</property>
+                                            <property name="paddingLeft">1pt</property>
+                                            <property name="textAlign">left</property>
+                                            <text-property name="text" key="RequiredRecoveryResources">RequiredRecoveryResources</text-property>
+                                        </label>
+                                    </cell>
+                                    <cell id="7849">
+                                        <property name="verticalAlign">middle</property>
+                                        <label id="8093">
+                                            <property name="fontWeight">bold</property>
+                                            <property name="color">#005596</property>
+                                            <property name="paddingTop">3pt</property>
+                                            <property name="paddingBottom">3pt</property>
+                                            <property name="paddingRight">1pt</property>
+                                            <property name="textAlign">left</property>
+                                            <text-property name="text" key="ExpirationDate">ExpirationDate</text-property>
+                                        </label>
+                                    </cell>
+                                </row>
+                            </header>
+                            <footer>
+                                <row id="8159">
+                                    <property name="borderBottomColor">#4389BC</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">1px</property>
+                                    <cell id="8160"/>
+                                    <cell id="8161"/>
+                                    <cell id="8162"/>
+                                    <cell id="8163"/>
+                                    <cell id="8164"/>
+                                    <cell id="8165"/>
+                                    <cell id="8166"/>
+                                    <cell id="8167"/>
+                                </row>
+                            </footer>
+                        </group>
+                        <group id="7919">
+                            <property name="groupName">vCenterGroup</property>
+                            <expression name="keyExpr" type="javascript">row["vCenter"]</expression>
+                            <structure name="toc">
+                                <expression name="expressionValue" type="javascript">row["vCenter"]</expression>
+                            </structure>
+                            <property name="hideDetail">false</property>
+                            <list-property name="sort">
+                                <structure>
+                                    <expression name="key" type="javascript">row["jobId"]</expression>
+                                    <property name="direction">desc</property>
+                                    <property name="strength">-1</property>
+                                </structure>
+                            </list-property>
+                            <header>
+                                <row id="7920">
+                                    <property name="backgroundColor">#C4D4E6</property>
+                                    <property name="color">#C4D4E6</property>
+                                    <list-property name="visibility">
+                                        <structure>
+                                            <property name="format">all</property>
+                                            <expression name="valueExpr" type="javascript">true</expression>
+                                        </structure>
+                                    </list-property>
+                                    <cell id="7921">
+                                        <property name="colSpan">8</property>
+                                        <property name="rowSpan">1</property>
+                                        <text-data name="SrcNodeTableGroupHeader" id="7957">
+                                            <property name="fontWeight">bold</property>
+                                            <property name="color">#005596</property>
+                                            <property name="paddingTop">3pt</property>
+                                            <property name="paddingLeft">7pt</property>
+                                            <property name="paddingBottom">3pt</property>
+                                            <expression name="valueExpr">reportContext.getMessage("Node", reportContext.getLocale())+":   "+row["srcNode"]</expression>
+                                            <property name="contentType">html</property>
+                                        </text-data>
+                                    </cell>
+                                </row>
+                                <row id="8044">
+                                    <method name="onPrepare"><![CDATA[Highlight=0;]]></method>
+                                    <property name="backgroundColor">#D8E5F1</property>
+                                    <property name="color">#C4D4E6</property>
+                                    <property name="verticalAlign">middle</property>
+                                    <list-property name="visibility">
+                                        <structure>
+                                            <property name="format">all</property>
+                                            <expression name="valueExpr" type="javascript">true</expression>
+                                        </structure>
+                                    </list-property>
+                                    <cell id="8045">
+                                        <label id="8116">
+                                            <property name="fontWeight">bold</property>
+                                            <property name="color">#005596</property>
+                                            <property name="paddingTop">3pt</property>
+                                            <property name="paddingLeft">7pt</property>
+                                            <property name="paddingBottom">0pt</property>
+                                            <property name="paddingRight">0pt</property>
+                                            <property name="textAlign">left</property>
+                                            <text-property name="text" key="VMName">VmName</text-property>
+                                        </label>
+                                    </cell>
+                                    <cell id="8123"/>
+                                    <cell id="8046">
+                                        <label id="8136">
+                                            <property name="fontWeight">bold</property>
+                                            <property name="color">#005596</property>
+                                            <property name="paddingLeft">7pt</property>
+                                            <text-property name="text">vmPath</text-property>
+                                        </label>
+                                    </cell>
+                                    <cell id="8047">
+                                        <label id="8055">
+                                            <property name="fontWeight">bold</property>
+                                            <property name="color">#005596</property>
+                                            <property name="paddingLeft">1pt</property>
+                                            <property name="paddingRight">1pt</property>
+                                            <property name="textAlign">left</property>
+                                            <text-property name="text" key="LatestBackup">LastBackup</text-property>
+                                        </label>
+                                    </cell>
+                                    <cell id="8070">
+                                        <label id="8082">
+                                            <property name="fontWeight">bold</property>
+                                            <property name="color">#005596</property>
+                                            <property name="paddingLeft">7pt</property>
+                                            <text-property name="text" key="JobName">JobName</text-property>
+                                        </label>
+                                    </cell>
+                                    <cell id="8049">
+                                        <label id="8057">
+                                            <property name="fontWeight">bold</property>
+                                            <property name="color">#005596</property>
+                                            <text-property name="text" key="DestNode">dstNode</text-property>
+                                        </label>
+                                    </cell>
+                                    <cell id="8050">
+                                        <label id="8058">
+                                            <property name="fontWeight">bold</property>
+                                            <property name="color">#005596</property>
+                                            <text-property name="text" key="DestVolume">dstVol</text-property>
+                                        </label>
+                                    </cell>
+                                    <cell id="8052">
+                                        <label id="8060">
+                                            <property name="fontWeight">bold</property>
+                                            <property name="color">#005596</property>
+                                            <property name="textAlign">left</property>
+                                            <text-property name="text" key="ExpirationDate">ExpirationDate</text-property>
+                                        </label>
+                                    </cell>
+                                </row>
+                            </header>
+                        </group>
+                        <detail>
+                            <row id="7738">
+                                <property name="borderBottomStyle">none</property>
+                                <property name="borderLeftStyle">none</property>
+                                <property name="borderRightStyle">none</property>
+                                <property name="borderTopStyle">none</property>
+                                <list-property name="highlightRules">
+                                    <structure>
+                                        <property name="operator">eq</property>
+                                        <property name="backgroundColor">#ECF1F7</property>
+                                        <expression name="testExpr" type="javascript">row.__rownum%2</expression>
+                                        <simple-property-list name="value1">
+                                            <value type="javascript">0</value>
+                                        </simple-property-list>
+                                    </structure>
+                                </list-property>
+                                <list-property name="visibility">
+                                    <structure>
+                                        <property name="format">all</property>
+                                        <expression name="valueExpr" type="javascript">if(row["errorMessage"].length > 0){&#13;
+   true&#13;
+   }&#13;
+else {&#13;
+   false&#13;
+   }</expression>
+                                    </structure>
+                                </list-property>
+                                <cell id="7749">
+                                    <data id="8112">
+                                        <property name="color">black</property>
+                                        <property name="paddingTop">2pt</property>
+                                        <property name="paddingLeft">8pt</property>
+                                        <property name="paddingBottom">1.5pt</property>
+                                        <property name="resultSetColumn">vmNode</property>
+                                    </data>
+                                </cell>
+                                <cell id="8128">
+                                    <data id="8135">
+                                        <property name="resultSetColumn">vCenter</property>
+                                    </data>
+                                </cell>
+                                <cell id="8034">
+                                    <data id="8063">
+                                        <property name="paddingLeft">1pt</property>
+                                        <property name="paddingRight">1pt</property>
+                                        <method name="onCreate"><![CDATA[
+
+
+]]></method>
+                                        <property name="resultSetColumn">srcVol</property>
+                                    </data>
+                                </cell>
+                                <cell id="7751">
+                                    <property name="textAlign">left</property>
+                                    <data id="8064">
+                                        <property name="paddingLeft">1pt</property>
+                                        <property name="paddingRight">1pt</property>
+                                        <structure name="dateTimeFormat">
+                                            <property name="category">Medium Date</property>
+                                            <property name="pattern">Medium Date</property>
+                                        </structure>
+                                        <property name="resultSetColumn">LatestBackupTime</property>
+                                    </data>
+                                </cell>
+                                <cell id="8075">
+                                    <data id="8099">
+                                        <property name="resultSetColumn">jobName</property>
+                                    </data>
+                                </cell>
+                                <cell id="7755">
+                                    <property name="colSpan">2</property>
+                                    <property name="rowSpan">1</property>
+                                    <property name="textAlign">center</property>
+                                    <text-data id="8114">
+                                        <property name="paddingLeft">1pt</property>
+                                        <property name="textAlign">left</property>
+                                        <expression name="valueExpr">row["Recovery Resources"]</expression>
+                                        <property name="contentType">html</property>
+                                    </text-data>
+                                </cell>
+                                <cell id="7775">
+                                    <data id="7776">
+                                        <property name="paddingRight">15pt</property>
+                                        <property name="textAlign">left</property>
+                                        <property name="resultSetColumn">retpd2Date</property>
+                                    </data>
+                                </cell>
+                            </row>
+                        </detail>
+                    </table>
+                </cell>
+            </row>
+        </grid>
+    </body>
+</report>

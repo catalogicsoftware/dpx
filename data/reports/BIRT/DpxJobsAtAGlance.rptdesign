@@ -1,0 +1,3686 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 4.4.2.v201410272105 Build &lt;4.4.2.v20150217-1805></property>
+    <simple-property-list name="includeResource">
+        <value>reports</value>
+    </simple-property-list>
+    <list-property name="includeScripts">
+        <property>Wraplines.js</property>
+    </list-property>
+    <property name="units">in</property>
+    <method name="initialize"><![CDATA[gn = "#A1D490";
+rd = "#FF616B";
+orng = "orange";
+y  = "yellow";
+gy = "#AAAAAA";
+n  = "gray";
+wh = "#FFFFFF"
+ltgy = "#DCDCDC"
+
+]]></method>
+    <method name="beforeFactory"><![CDATA[
+
+ 
+   ]]></method>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="layoutPreference">auto layout</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">96</property>
+    <list-property name="libraries">
+        <structure>
+            <property name="fileName">syncsort_library.rptlibrary</property>
+            <property name="namespace">syncsort_library</property>
+        </structure>
+    </list-property>
+    <list-property name="cssStyleSheets">
+        <structure>
+            <property name="fileName">reports.css</property>
+            <property name="useExternalCss">false</property>
+        </structure>
+        <structure>
+            <property name="fileName">syncsort.css</property>
+            <property name="useExternalCss">false</property>
+        </structure>
+    </list-property>
+    <parameters>
+        <scalar-parameter name="report_displayname" id="791">
+            <property name="hidden">true</property>
+            <text-property name="helpText">View nodes and volumes that are protected using DPX Backup.</text-property>
+            <text-property name="promptText">Protected Systems</text-property>
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="report_category" id="792">
+            <property name="hidden">true</property>
+            <text-property name="helpText">Displays the protection status of volumes and qtrees using NetApp’s SnapMirror or SnapVault software</text-property>
+            <text-property name="promptText">Storage Protection</text-property>
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="MasterServer" id="8243">
+            <text-property name="displayName" key="DPxMasterServer">MasterServer</text-property>
+            <text-property name="promptText" key="DPxMasterServer"></text-property>
+            <property name="valueType">dynamic</property>
+            <property name="isRequired">true</property>
+            <property name="dataSetName">MasterServerParam</property>
+            <expression name="valueExpr" type="javascript">row["id"]</expression>
+            <expression name="labelExpr" type="javascript">row["name"]</expression>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">(All)</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">list-box</property>
+            <property name="mustMatch">true</property>
+            <property name="fixedOrder">true</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="ReportDays" id="6366">
+            <property name="hidden">true</property>
+            <text-property name="promptText" key="ReportInterval"></text-property>
+            <property name="valueType">static</property>
+            <property name="isRequired">true</property>
+            <property name="sortBy">value</property>
+            <property name="sortDirection">asc</property>
+            <property name="dataType">decimal</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">7</value>
+            </simple-property-list>
+            <list-property name="selectionList">
+                <structure>
+                    <property name="value">7</property>
+                    <property name="label">7 Days</property>
+                </structure>
+            </list-property>
+            <property name="paramType">simple</property>
+            <property name="controlType">list-box</property>
+            <property name="mustMatch">true</property>
+            <property name="fixedOrder">false</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="run_by" id="2598">
+            <property name="hidden">true</property>
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">DefaultUser</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="IncludeArchive" id="8444">
+            <text-property name="promptText">Show Archive Jobs</text-property>
+            <property name="valueType">static</property>
+            <property name="dataType">boolean</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">false</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">check-box</property>
+            <structure name="format"/>
+        </scalar-parameter>
+        <scalar-parameter name="IncludeMigration" id="8458">
+            <text-property name="promptText">Show Migration Jobs</text-property>
+            <property name="valueType">static</property>
+            <property name="dataType">boolean</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">False</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">check-box</property>
+            <structure name="format"/>
+        </scalar-parameter>
+        <scalar-parameter name="IncludeRestores" id="8445">
+            <text-property name="promptText" key="DPxShowRestoreJobs">Show Restore  Jobs</text-property>
+            <property name="valueType">static</property>
+            <property name="dataType">boolean</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">False</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">check-box</property>
+            <structure name="format"/>
+        </scalar-parameter>
+        <scalar-parameter name="IncludeVerification" id="8459">
+            <text-property name="promptText">Show Verification Jobs</text-property>
+            <property name="valueType">static</property>
+            <property name="dataType">boolean</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">False</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">check-box</property>
+            <structure name="format"/>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <script-data-source name="ScriptedArray" id="2356"/>
+        <oda-data-source extensionID="com.syncsort.dp.xsb.reports.data.oda.rest" name="DPXprovider" id="3786">
+            <property name="Base URI">http://localhost:8082/api/dpx</property>
+            <property name="Auth URI">http://localhost:8082/api/endeavour/session</property>
+            <property name="Username">admin</property>
+            <encrypted-property name="Password" encryptionID="base64">Y2F0YWwwZ2lj</encrypted-property>
+        </oda-data-source>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="com.syncsort.dp.xsb.reports.data.oda.rest.dataSet" name="MasterServerParam" id="3788">
+            <list-property name="computedColumns">
+                <structure>
+                    <property name="name">count</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value">row["id"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">name</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">name</text-property>
+                    <text-property name="heading">name</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">hostAddress</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">hostAddress</text-property>
+                    <text-property name="heading">hostAddress</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">id</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">id</text-property>
+                    <text-property name="heading">id</text-property>
+                </structure>
+            </list-property>
+            <list-property name="filter">
+                <structure>
+                    <property name="operator">ne</property>
+                    <expression name="expr" type="javascript">row["name"]</expression>
+                    <simple-property-list name="value1">
+                        <value>""</value>
+                    </simple-property-list>
+                </structure>
+            </list-property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">Param1</property>
+                    <property name="nativeName">Param1</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                    <property name="position">1</property>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Param2</property>
+                    <property name="nativeName">Param2</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                    <property name="position">2</property>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Param3</property>
+                    <property name="nativeName">Param3</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                    <property name="position">3</property>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Param4</property>
+                    <property name="nativeName">Param4</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                    <property name="position">4</property>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Param5</property>
+                    <property name="nativeName">Param5</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                    <property name="position">5</property>
+                    <expression name="defaultValue" type="javascript">"(All)"</expression>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">Param6</property>
+                    <property name="nativeName">Param6</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                    <property name="position">6</property>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Param7</property>
+                    <property name="nativeName">Param7</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                    <property name="position">7</property>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Param8</property>
+                    <property name="nativeName">Param8</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                    <property name="position">8</property>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">hostAddress</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">count</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <method name="beforeOpen"><![CDATA[//beforeOpen
+msName = new Array();]]></method>
+            <method name="onFetch"><![CDATA[//onFetch()
+if (row["id"] != "(All)" ){
+   var key = row["id"];
+   var value = row["name"];
+   msName[key]=value 
+   }]]></method>
+            <property name="dataSource">DPXprovider</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">name</property>
+                    <property name="nativeName">name</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">hostAddress</property>
+                    <property name="nativeName">hostAddress</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">id</property>
+                    <property name="nativeName">id</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[{dpxs[*]}(name,hostAddress,id)]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <DataSetParameters>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name>Param1</design:name>
+            <design:position>1</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>1</design:nativeDataTypeCode>
+          <design:precision>-1</design:precision>
+          <design:scale>-1</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name>Param2</design:name>
+            <design:position>2</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>1</design:nativeDataTypeCode>
+          <design:precision>-1</design:precision>
+          <design:scale>-1</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name>Param3</design:name>
+            <design:position>3</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>1</design:nativeDataTypeCode>
+          <design:precision>-1</design:precision>
+          <design:scale>-1</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name>Param4</design:name>
+            <design:position>4</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>1</design:nativeDataTypeCode>
+          <design:precision>-1</design:precision>
+          <design:scale>-1</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name>Param5</design:name>
+            <design:position>5</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>1</design:nativeDataTypeCode>
+          <design:precision>-1</design:precision>
+          <design:scale>-1</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name>Param6</design:name>
+            <design:position>6</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>1</design:nativeDataTypeCode>
+          <design:precision>-1</design:precision>
+          <design:scale>-1</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name>Param7</design:name>
+            <design:position>7</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>1</design:nativeDataTypeCode>
+          <design:precision>-1</design:precision>
+          <design:scale>-1</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name>Param8</design:name>
+            <design:position>8</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>1</design:nativeDataTypeCode>
+          <design:precision>-1</design:precision>
+          <design:scale>-1</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+  </DataSetParameters>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="com.syncsort.dp.xsb.reports.data.oda.rest.dataSet" name="dpxProviderJobDataSet" id="7988">
+            <list-property name="computedColumns">
+                <structure>
+                    <property name="name">msCount</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNTDISTINCT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value">row["dpxId"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr">row["dpxId"] != "n/a"</expression>
+                </structure>
+                <structure>
+                    <property name="name">exception Count</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value">1</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr">row["errorMessage"].length >0</expression>
+                </structure>
+                <structure>
+                    <property name="name">jobInstanceCount</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value">row["id"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr">row["name"] != "DAILY_SCHED"</expression>
+                </structure>
+                <structure>
+                    <property name="name">StatusPlusRC</property>
+                    <expression name="expression">if ((row["status"] == "COMPLETED") &amp;&amp;  (row["runRc"] == "0")) {&#13;
+                  "gn"            &#13;
+             }&#13;
+         else  if ((row["status"] == "COMPLETED") &amp;&amp;  (row["runRc"] == 1)){&#13;
+                 "rd" //CANCELLED&#13;
+          }   &#13;
+   &#13;
+          else  if ((row["status"] == "COMPLETED") &amp;&amp;  (row["runRc"] > 4)){&#13;
+                 "rd" &#13;
+             }&#13;
+            &#13;
+           else  if ((row["status"] == "COMPLETED") &amp;&amp;  (row["runRc"] == 4)){&#13;
+                 "y"&#13;
+             }&#13;
+&#13;
+&#13;
+          else  if (row["status"] == "ABORTED"){&#13;
+                 "rd" &#13;
+             }&#13;
+          else  if (row["status"] == "RUNNING"){&#13;
+             "gyR" &#13;
+             }&#13;
+            &#13;
+           else  if (row["status"] == "CANCELLING"){&#13;
+             "gyC"  //Cancelling&#13;
+            }&#13;
+            &#13;
+            &#13;
+            else  if ((row["status"] == "SUSPENDED") &amp;&amp;  (row["jobState"] == "USER")){&#13;
+             "gyS"  //Suspended&#13;
+            }&#13;
+            else  if ((row["status"] == "SUSPENDED") &amp;&amp;  (row["jobState"] == "USER HOLD")){&#13;
+             "gyH"  //Held&#13;
+            }            &#13;
+            else  if ((row["status"] == "NOT_RUN") &amp;&amp;  (row["jobState"] == "USER HOLD")){&#13;
+             "gyH"  //Held&#13;
+            }            &#13;
+
+            else  if ((row["status"] == "NOT_RUN") &amp;&amp;  (row["jobState"] == "USER")){&#13;
+             "gyW"  //Waiting&#13;
+            }  &#13;
+            &#13;
+             &#13;
+             &#13;
+             &#13;
+             else "gy"   //row["status"] remainder should be SUSPENDED, HELD, and NOT_RUN(WAITING)</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Filter</property>
+                    <expression name="expression">var myFilter = true;  &#13;
+&#13;
+if (row["jobType"].search(/RESTORE/) == 0 ){&#13;
+    myFilter = false;&#13;
+    if(params["IncludeRestores"].value){&#13;
+       myFilter = true;&#13;
+    }&#13;
+}&#13;
+&#13;
+if (row["name"].search(/^dp\d{10}/) == 0 ){&#13;
+    myFilter = false;&#13;
+    if (params["IncludeArchive"].value) {&#13;
+        myFilter = true;&#13;
+        }&#13;
+    }&#13;
+    &#13;
+ if (row["name"].search(/^odv\d{10}|^sdv\d{10}/) == 0) {&#13;
+     myFilter = false&#13;
+    if (params["IncludeVerification"].value)  {&#13;
+       myFilter = true&#13;
+       }&#13;
+    }   &#13;
+    &#13;
+ if (row["name"].search(/^am\d{10}/) == 0) {&#13;
+    myFilter = false&#13;
+    if (params["IncludeMigration"].value)  {&#13;
+       myFilter = true&#13;
+       }&#13;
+    }       &#13;
+    &#13;
+    &#13;
+    &#13;
+    &#13;
+    &#13;
+     myFilter</expression>
+                    <property name="dataType">boolean</property>
+                </structure>
+                <structure>
+                    <property name="name">StartDay</property>
+                    <expression name="expression">var rTime=row["runTime"]*1;&#13;
+var d = new Date(rTime);&#13;
+//d.getMonth()+"/"+d.getDate()+"/"+d.getFullYear();&#13;
+d.toDateString()</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">WaitingJobRunTime</property>
+                    <expression name="expression">if (row["StatusPlusRC"] =="gyW"){&#13;
+var rTime=row["runTime"]*1;&#13;
+var d = new Date(rTime);&#13;
+d.toLocaleTimeString()&#13;
+}&#13;
+else &#13;
+&#13;
+""</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">dpxId</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">dpxId</text-property>
+                    <text-property name="heading">dpxId</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">name</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">name</text-property>
+                    <text-property name="heading">name</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">id</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">id</text-property>
+                    <text-property name="heading">id</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">jobType</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">jobType</text-property>
+                    <text-property name="heading">jobType</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">runRc</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">runRc</text-property>
+                    <text-property name="heading">runRc</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">endTime</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">endTime</text-property>
+                    <text-property name="heading">endTime</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">runTime</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">runTime</text-property>
+                    <text-property name="heading">runTime</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">errorMessage</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">errorMessage</text-property>
+                    <text-property name="heading">errorMessage</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">status</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">status</text-property>
+                    <text-property name="heading">status</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">jobState</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">jobState</text-property>
+                    <text-property name="heading">jobState</text-property>
+                </structure>
+            </list-property>
+            <list-property name="filter">
+                <structure>
+                    <property name="operator">ne</property>
+                    <expression name="expr" type="javascript">row["name"]</expression>
+                    <simple-property-list name="value1">
+                        <value>"DAILY_SCHED"</value>
+                    </simple-property-list>
+                </structure>
+                <structure>
+                    <property name="operator">is-true</property>
+                    <expression name="expr" type="javascript">row["Filter"]</expression>
+                </structure>
+            </list-property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">Param1</property>
+                    <property name="nativeName">Param1</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                    <property name="position">1</property>
+                    <expression name="defaultValue" type="javascript">var msId = params["MasterServer"].value;&#13;
+var reportDays = params["ReportDays"].value;&#13;
+//reportDays = 2; //debug&#13;
+var resource = "job";&#13;
+var sep = ",";&#13;
+   msIdFilter = "{\"property\":\"regId\",\"op\":\"=\",\"value\":\""+msId+"\"}";&#13;
+&#13;
+var queryStr = "";&#13;
+queryStr += "[{\"property\":\"resource\", \"op\":\"=\",\"value\":\""+resource+"\"}"&#13;
+if (msId == "(All)") {&#13;
+   msId = "*"; &#13;
+   }  &#13;
+  queryStr += ",{\"property\":\"regId\",\"op\":\"=\",\"value\":\""+msId+"\"}"&#13;
+&#13;
+if  (reportDays > 0){&#13;
+var reportDaysFilter = ",{\"property\":\"reportDays\",\"op\":\"=\",\"value\":\""+reportDays+"\"}"&#13;
+queryStr += reportDaysFilter + "]"&#13;
+}</expression>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">Param2</property>
+                    <property name="nativeName">Param2</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                    <property name="position">2</property>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Param3</property>
+                    <property name="nativeName">Param3</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                    <property name="position">3</property>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Param4</property>
+                    <property name="nativeName">Param4</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                    <property name="position">4</property>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Param5</property>
+                    <property name="nativeName">Param5</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                    <property name="position">5</property>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Param6</property>
+                    <property name="nativeName">Param6</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                    <property name="position">6</property>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Param7</property>
+                    <property name="nativeName">Param7</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                    <property name="position">7</property>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Param8</property>
+                    <property name="nativeName">Param8</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                    <property name="position">8</property>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">dpxId</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">jobType</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">runRc</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">endTime</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">runTime</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">errorMessage</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">status</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">jobState</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">msCount</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">exception Count</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">13</property>
+                        <property name="name">jobInstanceCount</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">14</property>
+                        <property name="name">StatusPlusRC</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">15</property>
+                        <property name="name">Filter</property>
+                        <property name="dataType">boolean</property>
+                    </structure>
+                    <structure>
+                        <property name="position">16</property>
+                        <property name="name">StartDay</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">17</property>
+                        <property name="name">WaitingJobRunTime</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <method name="beforeOpen"><![CDATA[errors = new Array(); //this will hold error messages 
+ 
+
+]]></method>
+            <method name="onFetch"><![CDATA[//var errors = reportContext.getPersistentGlobalVariable("errors");
+
+  if (row["errorMessage"] != ""){
+     var myStr  = row["dpxId"]+":"+row["errorMessage"] 
+     errors.push(myStr);
+      }
+ 
+]]></method>
+            <property name="dataSource">DPXprovider</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">dpxId</property>
+                    <property name="nativeName">dpxId</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">name</property>
+                    <property name="nativeName">name</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">id</property>
+                    <property name="nativeName">id</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">jobType</property>
+                    <property name="nativeName">jobType</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">runRc</property>
+                    <property name="nativeName">runRc</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">endTime</property>
+                    <property name="nativeName">endTime</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">runTime</property>
+                    <property name="nativeName">runTime</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">errorMessage</property>
+                    <property name="nativeName">errorMessage</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">status</property>
+                    <property name="nativeName">status</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">jobState</property>
+                    <property name="nativeName">jobState</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[query{jobs[*]}(dpxId,name,id,jobType,runRc,endTime,runTime,errorMessage,status,jobState)]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <DataSetParameters>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name>Param1</design:name>
+            <design:position>1</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>1</design:nativeDataTypeCode>
+          <design:precision>-1</design:precision>
+          <design:scale>-1</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name>Param2</design:name>
+            <design:position>2</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>1</design:nativeDataTypeCode>
+          <design:precision>-1</design:precision>
+          <design:scale>-1</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name>Param3</design:name>
+            <design:position>3</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>1</design:nativeDataTypeCode>
+          <design:precision>-1</design:precision>
+          <design:scale>-1</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name>Param4</design:name>
+            <design:position>4</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>1</design:nativeDataTypeCode>
+          <design:precision>-1</design:precision>
+          <design:scale>-1</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name>Param5</design:name>
+            <design:position>5</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>1</design:nativeDataTypeCode>
+          <design:precision>-1</design:precision>
+          <design:scale>-1</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name>Param6</design:name>
+            <design:position>6</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>1</design:nativeDataTypeCode>
+          <design:precision>-1</design:precision>
+          <design:scale>-1</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name>Param7</design:name>
+            <design:position>7</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>1</design:nativeDataTypeCode>
+          <design:precision>-1</design:precision>
+          <design:scale>-1</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name>Param8</design:name>
+            <design:position>8</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>1</design:nativeDataTypeCode>
+          <design:precision>-1</design:precision>
+          <design:scale>-1</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+  </DataSetParameters>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <script-data-set name="jobTypesScripted" id="8215">
+            <list-property name="resultSetHints">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">jobType</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">DisplayText</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">jobType</property>
+                </structure>
+                <structure>
+                    <property name="columnName">DisplayText</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">jobType</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">DisplayText</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">ScriptedArray</property>
+            <method name="open"><![CDATA[colNums = ["jobType","jobTypeStr"];
+idx = 0;]]></method>
+            <method name="fetch"><![CDATA[  var myValues=["(All)","BACKUP_FILE","BACKUP_ADS","BACKUP_BLOCK","BACKUP_CATALOG","BACKUP_OBEX","CONDENSE"]
+  var myDisplayValues=["(All)","File","NDMP","Block","Catalog Backup","Oracle","Catalog Condense"]
+
+  if (idx < 7) {
+    row["jobType"] = myValues[idx];
+    row["DisplayText"] = myDisplayValues[idx];      
+        idx++;
+    return true;
+}else{
+    return false;
+}   ]]></method>
+        </script-data-set>
+        <script-data-set name="HelpLegend" id="8457">
+            <list-property name="resultSetHints">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">Icon</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">IconLink</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">Icon</property>
+                </structure>
+                <structure>
+                    <property name="columnName">IconLink</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">Icon</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">IconLink</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">ScriptedArray</property>
+            <method name="open"><![CDATA[idx = 0;
+Icons = new Array();
+Links = new Array();
+Icons = ["Succcess"]
+Links = ["<img src=\"/opt/virgo/repository/reports/images/completed.png\" width=\"15\" height=\"15\" align=\"left\">"]]]></method>
+            <method name="fetch"><![CDATA[  if (idx < 1) {
+    row["Icon"] = Icons[idx];
+    row["IconLink"] = Links[idx];      
+        idx++;
+    return true;
+}else{
+    return false;
+} 
+
+]]></method>
+        </script-data-set>
+    </data-sets>
+    <page-setup>
+        <simple-master-page name="syncsort_master_page" id="933" extends="syncsort_library.syncsort_master_page">
+            <property name="topMargin">0in</property>
+            <overridden-values>
+                <ref-entry baseId="56" name="company_logo" id="56"/>
+                <ref-entry baseId="58" name="NewGrid" id="58"/>
+                <ref-entry baseId="59" id="59"/>
+                <ref-entry baseId="60" id="60"/>
+                <ref-entry baseId="61" id="61"/>
+                <ref-entry baseId="62" id="62"/>
+                <ref-entry baseId="63" id="63"/>
+                <ref-entry baseId="64" name="NewAutoText" id="64"/>
+                <ref-entry baseId="65" id="65"/>
+                <ref-entry baseId="66" name="NewText" id="66"/>
+                <ref-entry baseId="67" id="67"/>
+                <ref-entry baseId="68" name="NewAutoText1" id="68"/>
+            </overridden-values>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <grid name="Title+ParamBox" id="373">
+            <column id="374"/>
+            <row id="8540">
+                <cell id="8541">
+                    <property name="paddingTop">3pt</property>
+                    <grid id="8542">
+                        <column id="8543">
+                            <property name="width">7.885416666666667in</property>
+                        </column>
+                        <column id="8544"/>
+                        <row id="8545">
+                            <cell id="8546">
+                                <text name="PrimaryReportTitle" id="251">
+                                    <property name="style">primaryReportTitle</property>
+                                    <property name="marginLeft">7pt</property>
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[<VALUE-OF>reportContext.getMessage("DPxBackupJobGlanceRepTitle",reportContext.getLocale()); </VALUE-OF>
+]]></text-property>
+                                </text>
+                                <text name="ReportParameters" id="928">
+                                    <property name="dataSet">MasterServerParam</property>
+                                    <list-property name="boundDataColumns">
+                                        <structure>
+                                            <property name="name">name</property>
+                                            <text-property name="displayName">name</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["name"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">hostAddress</property>
+                                            <text-property name="displayName">hostAddress</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["hostAddress"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">id</property>
+                                            <text-property name="displayName">id</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["id"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[<div style="padding:7px 7px;color:black; background:white;  font-weight:normal; font-size:1.0em;width:100%;">
+<dl>
+<dt> <b><VALUE-OF>reportContext.getMessage("ReportCreationDate", reportContext.getLocale());</VALUE-OF></b>
+		 <VALUE-OF> new Date().toLocaleString()  </VALUE-OF>  </dd> <br>
+		
+	<dt> <b><VALUE-OF>reportContext.getMessage("ReportGeneratedBy", reportContext.getLocale());</VALUE-OF></b>
+		 <VALUE-OF>params["run_by"].value  </VALUE-OF>  </dd> <br>
+		<br>
+	
+<br>
+<dt> <b><VALUE-OF>reportContext.getMessage("ReportParameters", reportContext.getLocale());</VALUE-OF></b> </dt>
+ <dd> <b><VALUE-OF>reportContext.getMessage("DPxMasterServerNode", reportContext.getLocale());</VALUE-OF></b> 
+
+ <VALUE-OF> if (params["MasterServer"].value != "(All)") {
+  var key  = params["MasterServer"].value;
+  msName[key];
+  } 
+  else {params["MasterServer"].value} </VALUE-OF> </dd>
+
+
+
+  <dd> <b><VALUE-OF>reportContext.getMessage("DPxShowArchiveJobs", reportContext.getLocale());</VALUE-OF></b>
+  <VALUE-OF> if (params["IncludeArchive"].value) {
+   "Yes";
+  } 
+  else {"No"} </VALUE-OF> </dd>
+
+  <dd> <b><VALUE-OF>reportContext.getMessage("DPxShowMigrationJobs", reportContext.getLocale());</VALUE-OF></b>
+  <VALUE-OF> if (params["IncludeMigration"].value) {
+   "Yes";
+  } 
+  else {"No"} </VALUE-OF> </dd>
+
+  <dd> <b><VALUE-OF>reportContext.getMessage("DPxShowRestoreJobs", reportContext.getLocale());</VALUE-OF></b>
+  <VALUE-OF> if (params["IncludeRestores"].value) {
+   "Yes";
+  } 
+  else {"No"} </VALUE-OF> </dd>
+
+  <dd> <b><VALUE-OF>reportContext.getMessage("DPxShowVerificationJobs", reportContext.getLocale());</VALUE-OF></b>
+  <VALUE-OF> if (params["IncludeVerification"].value) {
+   "Yes";
+  } 
+  else {"No"} </VALUE-OF> </dd>
+
+</dl>
+
+
+
+
+ ]]></text-property>
+                                </text>
+                                <text name="ReportProperties" id="845">
+                                    <property name="style">reportPropertiesContent</property>
+                                    <property name="paddingTop">1pt</property>
+                                    <property name="paddingBottom">1pt</property>
+                                    <list-property name="visibility">
+                                        <structure>
+                                            <property name="format">all</property>
+                                            <expression name="valueExpr" type="javascript">true</expression>
+                                        </structure>
+                                    </list-property>
+                                    <method name="onCreate"><![CDATA[this.getStyle().backgroundColor = "#4389bc"
+this.getStyle().fontSize = "1.2em"
+this.getStyle().paddingTop = "7px"
+this.getStyle().paddingBottom = "7px"
+this.getStyle().paddingLeft = "7px"
+this.getStyle().fontWeight = "bold"
+this.getStyle().color = "white"
+this.text = "Report Properties" ]]></method>
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[Report Properties]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="8547">
+                                <property name="textAlign">left</property>
+                                <text id="8456">
+                                    <property name="borderBottomStyle">none</property>
+                                    <property name="borderLeftStyle">none</property>
+                                    <property name="borderRightStyle">none</property>
+                                    <property name="borderTopStyle">none</property>
+                                    <property name="marginTop">20pt</property>
+                                    <property name="marginRight">7pt</property>
+                                    <property name="paddingLeft">7pt</property>
+                                    <property name="textAlign">left</property>
+                                    <property name="dataSet">HelpLegend</property>
+                                    <list-property name="visibility">
+                                        <structure>
+                                            <property name="format">doc</property>
+                                            <expression name="valueExpr" type="javascript">true</expression>
+                                        </structure>
+                                        <structure>
+                                            <property name="format">docx</property>
+                                            <expression name="valueExpr" type="javascript">true</expression>
+                                        </structure>
+                                        <structure>
+                                            <property name="format">odp</property>
+                                            <expression name="valueExpr" type="javascript">true</expression>
+                                        </structure>
+                                        <structure>
+                                            <property name="format">ods</property>
+                                            <expression name="valueExpr" type="javascript">true</expression>
+                                        </structure>
+                                        <structure>
+                                            <property name="format">odt</property>
+                                            <expression name="valueExpr" type="javascript">true</expression>
+                                        </structure>
+                                        <structure>
+                                            <property name="format">pdf</property>
+                                            <expression name="valueExpr" type="javascript">true</expression>
+                                        </structure>
+                                        <structure>
+                                            <property name="format">postscript</property>
+                                            <expression name="valueExpr" type="javascript">true</expression>
+                                        </structure>
+                                        <structure>
+                                            <property name="format">ppt</property>
+                                            <expression name="valueExpr" type="javascript">true</expression>
+                                        </structure>
+                                        <structure>
+                                            <property name="format">pptx</property>
+                                            <expression name="valueExpr" type="javascript">true</expression>
+                                        </structure>
+                                        <structure>
+                                            <property name="format">xls</property>
+                                            <expression name="valueExpr" type="javascript">true</expression>
+                                        </structure>
+                                        <structure>
+                                            <property name="format">xls_spudsoft</property>
+                                            <expression name="valueExpr" type="javascript">true</expression>
+                                        </structure>
+                                        <structure>
+                                            <property name="format">xlsx</property>
+                                            <expression name="valueExpr" type="javascript">true</expression>
+                                        </structure>
+                                    </list-property>
+                                    <list-property name="boundDataColumns">
+                                        <structure>
+                                            <property name="name">Icon</property>
+                                            <text-property name="displayName">Icon</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["Icon"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">IconLink</property>
+                                            <text-property name="displayName">IconLink</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["IconLink"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                    </list-property>
+                                    <method name="onCreate"><![CDATA[this.helpText = row ["IconLink"]+" ->  "+row["Icon"]]]></method>
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[<!DOCTYPE html>
+<html>
+<head>
+<style>
+text-align: right;
+table {
+    display: block
+    align: left
+    font: 15px arial, sans-serif;
+}
+</style>
+</head>
+<body>
+
+<div title = "Show or Hide Legend" data-toggle = "tooltip">
+<button style="width:150px;font-size:13pt;padding:2px; border:1px #23282C" id=myBtn title="Click to Hide Legend" onClick="toggleTable()">Legend</button>
+</div>
+
+<table title=" " id="myTable" style="display:none width:400px;">
+  <tr> 
+    <td style="padding: 3px 3px 3px 3px;"><img src="images/completed.png" width="15" height="15" align="left"></td>
+    <td>Job Completed Successfully </td>
+  </tr>
+  <tr>
+    <td><img src="images/failed.png" width="15" height="15" align="left"></td>
+    <td>Job Failed</td>
+  </tr>
+  <tr>
+    <td><img src="images/partial.png" width="15" height="15" align="left"></td>
+    <td>Job Partially Succeeded</td>
+  </tr>
+  <tr>
+    <td><img src="images/warning.png" width="15" height="15" align="left"></td>
+    <td>Warning, attention is required</td>
+  </tr>
+  <tr>
+    <td><img src="images/held.png" width="15" height="15" align="left"></td>
+    <td>Job is Held or Suspended</td>
+  </tr>
+
+  <tr>
+    <td>--</td>
+    <td>Job has no completed instances</td>
+  </tr> 
+</table>
+
+<script>
+function toggleTable()
+{
+     var elem=document.getElementById("myTable");
+     var hide = elem.style.display =="none";
+     if (hide) {
+         elem.style.display="table";
+         myBtn.title="Click to Hide";
+    } 
+    else {
+       elem.style.display="none";
+       myBtn.title="Click for Icon definitions";
+    }
+
+}
+
+</script>
+</body>
+</html>
+
+
+]]></text-property>
+                                </text>
+                            </cell>
+                        </row>
+                    </grid>
+                </cell>
+            </row>
+        </grid>
+        <grid name="Summary-Detail-Day" id="533">
+            <property name="dataSet">dpxProviderJobDataSet</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">dpxId</property>
+                    <text-property name="displayName">dpxId</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["dpxId"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">name</property>
+                    <text-property name="displayName">name</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">id</property>
+                    <text-property name="displayName">id</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["id"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">runRc</property>
+                    <text-property name="displayName">runRc</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["runRc"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">status</property>
+                    <text-property name="displayName">status</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["status"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">jobState</property>
+                    <text-property name="displayName">jobState</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["jobState"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">StatusPlusRC</property>
+                    <text-property name="displayName">StatusPlusRC</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["StatusPlusRC"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <column id="534"/>
+            <row id="8287">
+                <cell id="8288">
+                    <property name="textAlign">left</property>
+                    <table name="DPX Job Dashboard" id="8289">
+                        <property name="dataSet">dpxProviderJobDataSet</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">dpxId</property>
+                                <text-property name="displayName">dpxId</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["dpxId"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">name</property>
+                                <text-property name="displayName">name</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["name"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">id</property>
+                                <text-property name="displayName">id</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["id"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">jobType</property>
+                                <text-property name="displayName">jobType</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["jobType"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">runRc</property>
+                                <text-property name="displayName">runRc</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["runRc"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">status</property>
+                                <text-property name="displayName">status</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["status"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">jobState</property>
+                                <text-property name="displayName">jobState</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["jobState"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">StatusPlusRC</property>
+                                <text-property name="displayName">StatusPlusRC</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["StatusPlusRC"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">InstanceCountDay1</property>
+                                <property name="dataType">integer</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>GroupOnJobName</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">COUNT</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["name"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Day1Data</property>
+                                <expression name="expression" type="javascript">""</expression>
+                                <property name="dataType">string</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">endTime</property>
+                                <text-property name="displayName">endTime</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["endTime"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">runTime</property>
+                                <text-property name="displayName">runTime</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["runTime"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">errorMessage</property>
+                                <text-property name="displayName">errorMessage</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["errorMessage"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">msCount</property>
+                                <text-property name="displayName">msCount</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["msCount"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                            <structure>
+                                <property name="name">exception Count</property>
+                                <text-property name="displayName">exception Count</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["exception Count"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                            <structure>
+                                <property name="name">jobInstanceCount</property>
+                                <text-property name="displayName">jobInstanceCount</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["jobInstanceCount"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                            <structure>
+                                <property name="name">StartDay</property>
+                                <text-property name="displayName">StartDay</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["StartDay"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">WaitingJobRunTime</property>
+                                <text-property name="displayName">WaitingJobRunTime</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["WaitingJobRunTime"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">jobCountByMs</property>
+                                <property name="dataType">integer</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>GroupByMS</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">COUNTDISTINCT</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["name"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                        </list-property>
+                        <method name="onCreate"><![CDATA[HL=0; //for highlight ]]></method>
+                        <list-property name="sort">
+                            <structure>
+                                <expression name="key" type="javascript">row["name"].toUpperCase()</expression>
+                                <property name="direction">asc</property>
+                                <property name="strength">-1</property>
+                            </structure>
+                        </list-property>
+                        <column id="8333"/>
+                        <column id="8334">
+                            <property name="width">10%</property>
+                        </column>
+                        <column id="8335">
+                            <property name="width">10%</property>
+                        </column>
+                        <column id="8336">
+                            <property name="width">10%</property>
+                        </column>
+                        <column id="8337">
+                            <property name="width">10%</property>
+                        </column>
+                        <column id="8338">
+                            <property name="width">10%</property>
+                        </column>
+                        <column id="8339">
+                            <property name="width">10%</property>
+                        </column>
+                        <column id="8340">
+                            <property name="width">10%</property>
+                        </column>
+                        <header>
+                            <row id="8290">
+                                <cell id="8291">
+                                    <property name="colSpan">8</property>
+                                    <property name="rowSpan">1</property>
+                                    <property name="backgroundColor">white</property>
+                                    <property name="color">black</property>
+                                </cell>
+                            </row>
+                        </header>
+                        <group id="8342">
+                            <property name="groupName">GroupByMS</property>
+                            <expression name="keyExpr" type="javascript">row["dpxId"]</expression>
+                            <structure name="toc">
+                                <expression name="expressionValue" type="javascript">row["dpxId"]</expression>
+                            </structure>
+                            <property name="hideDetail">false</property>
+                            <list-property name="sort">
+                                <structure>
+                                    <expression name="key" type="javascript">row["name"].toUpperCase();</expression>
+                                    <property name="direction">asc</property>
+                                    <property name="strength">-1</property>
+                                </structure>
+                            </list-property>
+                            <header>
+                                <row id="8343">
+                                    <property name="style">TableHeaderFooter</property>
+                                    <cell id="8344">
+                                        <property name="colSpan">8</property>
+                                        <property name="rowSpan">1</property>
+                                        <text-data name="msIdGroupHeader1" id="8362">
+                                            <property name="style">TableHeaderFooter</property>
+                                            <property name="fontSize">0.9em</property>
+                                            <property name="fontWeight">bold</property>
+                                            <property name="color">white</property>
+                                            <property name="paddingTop">4pt</property>
+                                            <property name="paddingLeft">7px</property>
+                                            <property name="paddingBottom">4pt</property>
+                                            <property name="paddingRight">0pt</property>
+                                            <expression name="valueExpr">var key  = row["dpxId"];&#13;
+var myLabel=reportContext.getMessage("DPxMasterServerNode", reportContext.getLocale());&#13;
+myLabel+" "+ msName[key];</expression>
+                                            <property name="contentType">auto</property>
+                                        </text-data>
+                                    </cell>
+                                </row>
+                                <row id="8384">
+                                    <method name="onCreate"><![CDATA[monthNames = [
+  "Jan", "Feb", "Mar",
+  "Apr", "May", "June", "July",
+  "Aug", "Sept", "Oct",
+  "Nov", "Dec"
+];
+
+dayNames = [
+  "Sun", "Mon", "Tue", "Wed",
+  "Thu", "Fri", "Sat"
+];]]></method>
+                                    <property name="style">TableGroupHeaderFooter</property>
+                                    <cell id="8385">
+                                        <label id="8393">
+                                            <property name="paddingTop">4pt</property>
+                                            <property name="paddingLeft">10pt</property>
+                                            <property name="paddingBottom">4pt</property>
+                                            <text-property name="text" key="JobName">JobName</text-property>
+                                        </label>
+                                    </cell>
+                                    <cell id="8386">
+                                        <label id="8394">
+                                            <property name="paddingTop">1pt</property>
+                                            <property name="paddingLeft">1pt</property>
+                                            <method name="onCreate"><![CDATA[var d = new Date();
+day1 = d.toDateString()
+var monthIndex = d.getMonth()
+var day = d.getDate();
+var wday = d.getDay();
+this.text = " "+dayNames[wday] +"\n"+ monthNames[monthIndex] + ' ' + day
+]]></method>
+                                            <text-property name="text">Day 1</text-property>
+                                        </label>
+                                    </cell>
+                                    <cell id="8387">
+                                        <method name="onCreate"><![CDATA[var d = new Date(Date.now()-(86400000));
+this.text = d.toDateString();]]></method>
+                                        <label id="8395">
+                                            <property name="paddingTop">1pt</property>
+                                            <property name="paddingLeft">1pt</property>
+                                            <method name="onCreate"><![CDATA[var d = new Date(Date.now()-(86400000));
+day2 = d.toDateString()
+var monthIndex = d.getMonth()
+var day = d.getDate();
+var wday = d.getDay()
+this.text = " "+dayNames[wday] +"\n"+ monthNames[monthIndex] + ' ' + day]]></method>
+                                            <text-property name="text">Day 2</text-property>
+                                        </label>
+                                    </cell>
+                                    <cell id="8388">
+                                        <label id="8396">
+                                            <property name="paddingTop">1pt</property>
+                                            <property name="paddingLeft">1pt</property>
+                                            <method name="onCreate"><![CDATA[var d = new Date(Date.now()-(86400000*2));
+day3 = d.toDateString()
+var monthIndex = d.getMonth()
+var day = d.getDate();
+var wday = d.getDay()
+this.text = " "+dayNames[wday] +"\n"+ monthNames[monthIndex] + ' ' + day
+
+]]></method>
+                                            <text-property name="text">Day 3</text-property>
+                                        </label>
+                                    </cell>
+                                    <cell id="8389">
+                                        <label id="8397">
+                                            <property name="paddingTop">1pt</property>
+                                            <property name="paddingLeft">1pt</property>
+                                            <method name="onCreate"><![CDATA[
+var d = new Date(Date.now()-(86400000*3));
+day4 = d.toDateString()
+var monthIndex = d.getMonth()
+var day = d.getDate();
+var wday = d.getDay()
+this.text = " "+dayNames[wday] +"\n"+ monthNames[monthIndex] + ' ' + day
+]]></method>
+                                            <text-property name="text">Day 4</text-property>
+                                        </label>
+                                    </cell>
+                                    <cell id="8390">
+                                        <label id="8398">
+                                            <property name="paddingTop">1pt</property>
+                                            <property name="paddingLeft">1pt</property>
+                                            <method name="onCreate"><![CDATA[//var d = new Date(Date.now()-(86400000*4));
+//day5 = d.toDateString()
+//this.text = day5;
+
+var d = new Date(Date.now()-(86400000*4));
+day5 = d.toDateString()
+var monthIndex = d.getMonth()
+var day = d.getDate();
+var wday = d.getDay()
+this.text = " "+dayNames[wday] +"\n"+ monthNames[monthIndex] + ' ' + day]]></method>
+                                            <text-property name="text">Day 5</text-property>
+                                        </label>
+                                    </cell>
+                                    <cell id="8391">
+                                        <label id="8399">
+                                            <property name="paddingTop">1pt</property>
+                                            <property name="paddingLeft">1pt</property>
+                                            <method name="onCreate"><![CDATA[//var d = new Date(Date.now()-(86400000*5));
+//day6 = d.toDateString()
+//this.text = day6;
+
+var d = new Date(Date.now()-(86400000*5));
+day6 = d.toDateString()
+var monthIndex = d.getMonth()
+var day = d.getDate();
+var wday = d.getDay()
+this.text = " "+dayNames[wday] +"\n"+ monthNames[monthIndex] + ' ' + day
+]]></method>
+                                            <text-property name="text">Day 6</text-property>
+                                        </label>
+                                    </cell>
+                                    <cell id="8392">
+                                        <label id="8400">
+                                            <property name="paddingTop">1pt</property>
+                                            <property name="paddingLeft">1pt</property>
+                                            <property name="textAlign">left</property>
+                                            <method name="onCreate"><![CDATA[var d = new Date(Date.now()-(86400000*6));
+day7 = d.toDateString()
+var monthIndex = d.getMonth()
+var day = d.getDate();
+var wday = d.getDay()
+this.text = " "+dayNames[wday] +"\n"+ monthNames[monthIndex] + ' ' + day]]></method>
+                                            <text-property name="text">Day 7</text-property>
+                                        </label>
+                                    </cell>
+                                </row>
+                            </header>
+                            <footer>
+                                <row id="8352">
+                                    <list-property name="visibility">
+                                        <structure>
+                                            <property name="format">all</property>
+                                            <expression name="valueExpr" type="javascript">if (row["jobCountByMs"] > 0) {&#13;
+  true&#13;
+  }&#13;
+   else {&#13;
+      false&#13;
+      }</expression>
+                                        </structure>
+                                    </list-property>
+                                    <cell id="8353">
+                                        <property name="colSpan">8</property>
+                                        <property name="rowSpan">1</property>
+                                        <text name="NoJobInstanceData1" id="8548">
+                                            <property name="style">EmptyTableMessage</property>
+                                            <property name="color">black</property>
+                                            <property name="borderTopStyle">solid</property>
+                                            <property name="borderTopWidth">1px</property>
+                                            <property name="paddingTop">7pt</property>
+                                            <property name="paddingLeft">7pt</property>
+                                            <property name="paddingBottom">7pt</property>
+                                            <property name="contentType">html</property>
+                                            <text-property name="content"><![CDATA[<b>
+ <VALUE-OF format="HTML">reportContext.getMessage("DPxNoJobInstanceData", reportContext.getLocale());</VALUE-OF>
+</b>]]></text-property>
+                                        </text>
+                                    </cell>
+                                </row>
+                            </footer>
+                        </group>
+                        <group id="8363">
+                            <property name="groupName">GroupOnJobName</property>
+                            <expression name="keyExpr" type="javascript">row["name"]</expression>
+                            <structure name="toc">
+                                <expression name="expressionValue" type="javascript">row["name"]</expression>
+                            </structure>
+                            <property name="hideDetail">false</property>
+                            <list-property name="sort">
+                                <structure>
+                                    <expression name="key" type="javascript">row["name"].toUpperCase()</expression>
+                                    <property name="direction">asc</property>
+                                    <property name="strength">-1</property>
+                                </structure>
+                            </list-property>
+                            <header>
+                                <row id="8364">
+                                    <method name="onCreate"><![CDATA[numRuns = [0,0,0,0,0,0,0]; //holds numRuns for each day for each job
+numSucc  =  [0,0,0,0,0,0,0]; //holds num of Successful Runs for each day for each job
+numFail =  [0,0,0,0,0,0,0]; //holds num of Failed Runs for each day for each job
+numPart =  [0,0,0,0,0,0,0]; //holds num of Partially successful Runs for each day for each job
+numRunning = [0,0,0,0,0,0,0] ////holds num of job instances currently running for a job for each day
+numWaiting = [0,0,0,0,0,0,0] ////holds num of job instances currently waiting for a job for each day
+typeGy  =  ["n","n","n","n","n","n","n"] // Running, Suspended, or Held job instances 
+lastResult = ["n","n","n","n","n","n","n"]; //hold RC of last run for each day for each job
+nextRun=""; //time of next run of waiting job. Only valid for day1; 
+
+//the following arrays holds the  jobRC for eachRun for eachDay
+day1Data = new Array(); 
+day2Data = new Array();
+day3Data = new Array();
+day4Data = new Array();
+day5Data = new Array();
+day6Data = new Array();
+day7Data = new Array();]]></method>
+                                    <list-property name="visibility">
+                                        <structure>
+                                            <property name="format">all</property>
+                                            <expression name="valueExpr" type="javascript">true</expression>
+                                        </structure>
+                                    </list-property>
+                                    <cell id="8365">
+                                        <data id="8382">
+                                            <property name="resultSetColumn">name</property>
+                                        </data>
+                                    </cell>
+                                    <cell id="8366"/>
+                                    <cell id="8367"/>
+                                    <cell id="8368"/>
+                                    <cell id="8369"/>
+                                    <cell id="8370"/>
+                                    <cell id="8371"/>
+                                    <cell id="8372"/>
+                                </row>
+                            </header>
+                            <footer>
+                                <row id="8373">
+                                    <expression name="bookmark" type="javascript">row["name"]</expression>
+                                    <method name="onCreate"><![CDATA[myBg = "";
+var HighLight = "#F8F8F8";
+gn = "#A1D490";
+rd = "#FF616B";
+orng ="#FFC800";
+y  = "yellow";
+gy = "#AAAAAA";
+n  = "gray";
+wh = "#FFFFFF"
+ltgy = "#DCDCDC"
+
+]]></method>
+                                    <property name="style">TableDetail</property>
+                                    <property name="borderBottomStyle">none</property>
+                                    <property name="borderLeftStyle">none</property>
+                                    <property name="borderRightStyle">none</property>
+                                    <property name="borderTopStyle">none</property>
+                                    <list-property name="visibility">
+                                        <structure>
+                                            <property name="format">all</property>
+                                            <expression name="valueExpr" type="javascript">if (numRuns[0]+numRuns[1]+numRuns[2]+numRuns[3]+numRuns[4]+numRuns[5]+numRuns[6] > 0){&#13;
+ false &#13;
+    }&#13;
+else if (row["StatusPlusRC"].search("gy") >= 0 ){&#13;
+false &#13;
+}&#13;
+else true</expression>
+                                        </structure>
+                                    </list-property>
+                                    <cell id="8374">
+                                        <property name="borderBottomStyle">none</property>
+                                        <property name="borderLeftStyle">none</property>
+                                        <property name="borderRightStyle">none</property>
+                                        <property name="borderTopStyle">none</property>
+                                        <data id="8383">
+                                            <property name="color">black</property>
+                                            <property name="paddingTop">5pt</property>
+                                            <property name="paddingLeft">7pt</property>
+                                            <property name="paddingBottom">5pt</property>
+                                            <method name="onCreate"><![CDATA[this.helpText = "Job Type: "+row["jobType"]+"\n";]]></method>
+                                            <property name="resultSetColumn">name</property>
+                                        </data>
+                                    </cell>
+                                    <cell id="8375">
+                                        <method name="onCreate"><![CDATA[
+]]></method>
+                                        <property name="borderBottomStyle">none</property>
+                                        <property name="borderLeftStyle">none</property>
+                                        <property name="borderRightStyle">none</property>
+                                        <property name="borderTopStyle">none</property>
+                                        <property name="paddingTop">0pt</property>
+                                        <property name="paddingLeft">0pt</property>
+                                        <property name="paddingBottom">0pt</property>
+                                        <property name="paddingRight">0pt</property>
+                                        <text name="HTML Text Day21" id="8438">
+                                            <property name="color">black</property>
+                                            <property name="marginTop">0pt</property>
+                                            <property name="marginLeft">0pt</property>
+                                            <property name="marginBottom">0pt</property>
+                                            <property name="marginRight">0pt</property>
+                                            <property name="paddingTop">5pt</property>
+                                            <property name="paddingLeft">5pt</property>
+                                            <property name="paddingBottom">0pt</property>
+                                            <property name="paddingRight">5pt</property>
+                                            <property name="textAlign">left</property>
+                                            <method name="onCreate"><![CDATA[var myIdx=0;
+var myStr1 = "";
+var myStr2 = "";
+   
+  if (numRuns[myIdx] == 0){  //handle waiting held or suspended jobs here if no instances have completed.  
+    if (day1Data.length == 0){
+       if(numRunning[0]> 0){ myStr1 = "Job is Running" }              
+        else  myStr1 = "Not Run";
+       }
+    else if (day1Data[0]=="gyW") {myStr1 =  "Waiting to run at: "+nextRun}    
+    else if (day1Data[0]=="gyH") {myStr1 =  "Held by User";}
+    else if (day1Data[0]=="gyS") {myStr1 =  "Suspended";}
+    else if (day1Data[0]=="gyR") { 
+       //var rTime=row["runTime"]*1;
+       // var d = new Date(rTime);
+      if(numRunning[0]== 1) {
+        myStr1 = "Job is Running"
+        }
+      if(numRunning[0]> 1){
+        myStr1 = "Multiple Instances are running!"
+        } 
+       
+       // myStr1 +=  "\nRunning since " + d.toLocaleString()
+
+        }
+    else if (day1Data[0]=="gyC") { myStr1 =  "Cancelling";}
+  } 
+//////////////
+
+else { //numRuns[myIdx] > 0)
+var mySep = "";
+if (numRunning[myIdx] > 0) {
+ myStr1 += "Running Instances: "+numRunning[myIdx]; 
+ }
+
+  if (numWaiting[myIdx] > 0) {
+  if (myStr1.length>0){mySep = "\n";}
+  myStr1 += mySep+"Waiting Instances: "+ numWaiting[myIdx]+"\nNext run at: "+nextRun;
+ }
+
+if (numRuns[myIdx] >  0) {
+
+   switch(lastResult[myIdx]) {
+       case "gn":
+        myStr2 = "Latest Run: Success"
+        break;
+       case "rd":
+        myStr2 = "Latest Run: Failed"
+        break;
+       case "y":
+        myStr2 = "Latest Run: Partial"
+        break;    
+    
+       default:
+         myStr2;
+   }    
+  myStr2 += "\nTotal Completed Runs: "+numRuns[myIdx];
+  if (numRuns[myIdx] >  1) {
+     if (numSucc[myIdx] > 0){myStr2 += "\n"+"Successful Runs: "+numSucc[myIdx]}
+     if (numFail[myIdx] > 0){myStr2 += "\n"+"Failed Runs: "+numFail[myIdx]}
+     if (numPart[myIdx] > 0){myStr2 += "\n"+"Partial Runs: "+numPart[myIdx]}
+     }
+ } 
+}
+if (myStr2.length > 0) {this.helpText = myStr2+"\n"+myStr1}
+else {this.helpText = myStr1}
+
+]]></method>
+                                            <property name="contentType">html</property>
+                                            <text-property name="content"><![CDATA[<div style="background-color:
+ "FFFFFF";color:white;font-weight:normal; font-size:8pt; text-align: top; height:13px;">
+ 
+ <VALUE-OF format="HTML"> 
+ var myIdx = 0;
+ var myImg2 = "";
+ if (numRuns[myIdx] == 0){  //handle waiting held or suspended jobs here if no instances have completed.  
+    
+   
+   if (day1Data[myIdx]=="gyW") {
+    //myImg="<img src=\"pending.png\" width=\"15\" height=\"15\" align=\"left\">"
+    str = "--" //+=myImg suppress clock icon  for now
+   }
+    
+   else if (day1Data[myIdx]=="gyH") { //Held
+     myImg="<img src=\"images/held.png\" width=\"15\" height=\"15\" align=\"left\">"
+      str = myImg
+      }
+   
+   else if (day1Data[myIdx]=="gyS") { //Suspended
+   myImg="<img src=\"images/held.png\" width=\"15\" height=\"15\" align=\"left\">"
+   str = myImg
+   }
+   
+   else if (day1Data[myIdx]=="gyR") {
+    if(numRunning[0]> 1){
+        str="<img src=\"/opt/virgo/repository/reports/images/images/warning.png\" width=\"15\" height=\"15\" align=\"left\">"
+        }
+
+    else {
+       str="--"
+       }
+     }
+   
+   else if (day1Data[myIdx]=="gyC") {
+   myImg="<img src=\"images/stopped.png\" width=\"15\" height=\"15\" align=\"left\">"
+   str = myImg
+   }
+    
+   else if (day1Data.length == 0) {
+   str = "--";
+   }
+    
+   else str = "--"; 
+  } 
+
+
+
+
+else {   //handle COMPLETED jobs here 
+   if (lastResult[myIdx] == "gn"){
+    myImg="<img src=\"images/completed.png\" width=\"15\" height=\"15\" align=\"left\">"  
+   }
+   
+   if (lastResult[myIdx] == "rd"){
+    myImg="<img src=\"images/failed.png\" width=\"15\" height=\"15\" align=\"left\">"
+   }
+   
+   if (lastResult[myIdx] == "or"){
+    myImg="<img src=\"images/partial.png\" width=\"15\" height=\"15\" align=\"left\">"
+   }  
+   if (lastResult[myIdx] == "y"){
+    myImg="<img src=\"images/partial.png\" width=\"15\" height=\"15\" align=\"left\">"
+   } 
+   
+   if (numRunning[myIdx] > 1){
+      myImg +="<img src=\"images/warning.png\" width=\"15\" height=\"15\" align=\"left\">"
+    }
+       
+   if (numWaiting[myIdx] > 0 ){
+    //myImg+="<img src=\"pending.png\" width=\"15\" height=\"15\" align=\"left\">" //suppress clock icon  for now
+   }
+
+
+////////////////////////////////////////
+var x;
+var flag = false; 
+for (x in day1Data) { 
+  if (x > 0){
+     if (("rd gn y or".indexOf(day1Data[x]) >= 0)&amp;&amp;(day1Data[x-1] != day1Data[x])){ flag = true }
+  } 
+}
+if (flag) {
+ myImg = myImg  +="<img src=\"images/warning.png\" width=\"15\" height=\"15\" align=\"left\">" 
+ }      
+ 
+     str=myImg; 
+}
+str
+ </VALUE-OF>
+ <div>]]></text-property>
+                                        </text>
+                                    </cell>
+                                    <cell id="8376">
+                                        <property name="borderBottomStyle">none</property>
+                                        <property name="borderLeftStyle">none</property>
+                                        <property name="borderRightStyle">none</property>
+                                        <property name="borderTopStyle">none</property>
+                                        <property name="paddingTop">0pt</property>
+                                        <property name="paddingLeft">0pt</property>
+                                        <property name="paddingBottom">0pt</property>
+                                        <property name="paddingRight">0pt</property>
+                                        <text name="HTML Text Day2" id="8437">
+                                            <property name="color">black</property>
+                                            <property name="marginTop">0pt</property>
+                                            <property name="marginLeft">0pt</property>
+                                            <property name="marginBottom">0pt</property>
+                                            <property name="marginRight">0pt</property>
+                                            <property name="paddingTop">5pt</property>
+                                            <property name="paddingLeft">5pt</property>
+                                            <property name="paddingBottom">0pt</property>
+                                            <property name="paddingRight">5pt</property>
+                                            <method name="onCreate"><![CDATA[//day1Data.toString()
+var myIdx=1;
+var myStr1 = "";
+var myStr2 = "";
+   
+  if (numRuns[myIdx] == 0){  //handle waiting held or suspended jobs here if no instances have completed.  
+    if (day2Data.length == 0){myStr1 =  "Not Run"}
+    else if (day2Data[0]=="gyW") {myStr1 =  "Next run at: "+nextRun}    
+    else if (day2Data[0]=="gyH") {myStr1 =  "Held by User";}
+    else if (day2Data[0]=="gyS") {myStr1 =  "Suspended";}
+    else if (day2Data[0]=="gyR") { 
+       //var rTime=row["runTime"]*1;
+       // var d = new Date(rTime);
+        myStr1 = "Instances started on "+day2+" are still running"
+       // myStr1 +=  "\nRunning since " + d.toLocaleString()
+
+        }
+    else if (day2Data[0]=="gyC") { myStr1 =  "Cancelling";}
+  } 
+//////////////
+
+else { //numRuns[myIdx] > 0)
+
+ if (numRunning[myIdx] > 0) {
+ myStr1 += "Instances started on "+day2+" are still running" 
+ }
+
+  if (numWaiting[myIdx] > 0) {
+  myStr1 += "Waiting Instances: "+ numWaiting[myIdx]
+  myStr1 +=  "\nNext run at: "+nextRun; 
+ }
+
+if (numRuns[myIdx] >  0) {
+
+   switch(lastResult[myIdx]) {
+       case "gn":
+        myStr2 = "Latest Run: Success"
+        break;
+       case "rd":
+        myStr2 = "Latest Run: Failed"
+        break;
+       case "y":
+        myStr2 = "Latest Run: Partial"
+        break;    
+    
+       default:
+         myStr2;
+   }
+
+    myStr2 += "\nTotal Completed Runs: "+numRuns[myIdx];
+     if (numRuns[myIdx] >  1) {
+     if (numSucc[myIdx] > 0){myStr2 += "\n"+"Successful Runs: "+numSucc[myIdx]}
+     if (numFail[myIdx] > 0){myStr2 += "\n"+"Failed Runs: "+numFail[myIdx]}
+     if (numPart[myIdx] > 0){myStr2 += "\n"+"Partial Runs: "+numPart[myIdx]}
+     }
+ }
+}
+if (myStr2.length > 0) {this.helpText = myStr2+"\n"+myStr1}
+else {this.helpText = myStr1}]]></method>
+                                            <property name="contentType">html</property>
+                                            <text-property name="content"><![CDATA[<div style="background-color:
+ "FFFFFF";color:white;font-weight:normal; font-size:8pt; text-align: top; height:13px;">
+ 
+ <VALUE-OF format="HTML"> 
+ var myIdx = 1;
+ var myImg = "";
+ var str = "";
+ var flag = false;
+ //////////////////////////////
+ if (numRuns[myIdx] == 0){  //handle not run,suspended,hung,long running jobs here if no instances have completed. 
+ 
+ var myStr =   day2Data[0];
+ switch(myStr) {
+    case "gyW": //should only happen on day1  
+        str = "--" //myImg suppress clock icon  for now
+        break;  
+    case "gyH":
+    case "gyS":
+      myImg="<img src=\"images/held.png\" width=\"15\" height=\"15\" align=\"left\">"
+      //str = myImg;
+        break;        
+    case "gyR":
+        str = "";
+        flag = true; 
+        break; 
+      default:
+        str = "--"; //not run                       
+    }
+ if (numRunning[myIdx] > 0){
+ flag = true
+}     
+  } 
+
+///////////////////////////////////////////////////////////////////////////////
+
+else {   //handle COMPLETED jobs here numRuns[myIdx] > 0
+  var lastRes =  lastResult[myIdx]; 
+  
+   switch(lastRes) {
+    case "gn":
+        myImg="<img src=\"images/completed.png\" width=\"15\" height=\"15\" align=\"left\">"
+        //str=myImg;
+        break;
+    case "rd":
+        myImg="<img src=\"images/failed.png\" width=\"15\" height=\"15\" align=\"left\">"
+        //str=myImg;
+        break;
+    case "or":
+        myImg="<img src=\"images/partial.png\" width=\"15\" height=\"15\" align=\"left\">"
+       // str=myImg;
+        break;    
+    case "y":
+        myImg="<img src=\"images/partial.png\" width=\"15\" height=\"15\" align=\"left\">"
+      // str=myImg;
+        break;
+           
+}
+
+
+////////////////////////////////////////Show warn if mixed results or long or multiple running  job////////////////////////////////// 
+
+if (numRunning[myIdx] > 0){
+ flag = true
+}
+
+
+for (x in day2Data) { 
+  if (x > 0){
+     if (("rd gn y or".indexOf(day2Data[x]) >= 0)&amp;&amp;(day2Data[x-1] != day2Data[x])){ flag = true }
+  } 
+ }
+}
+if (flag) {
+  myImg = myImg+="<img src=\"images/warning.png\" width=\"15\" height=\"15\" align=\"left\">" 
+ }      
+ 
+     str += myImg; 
+
+str
+ </VALUE-OF>
+ <div>]]></text-property>
+                                        </text>
+                                    </cell>
+                                    <cell id="8377">
+                                        <property name="borderBottomStyle">none</property>
+                                        <property name="borderLeftStyle">none</property>
+                                        <property name="borderRightStyle">none</property>
+                                        <property name="borderTopStyle">none</property>
+                                        <property name="paddingTop">0pt</property>
+                                        <property name="paddingLeft">0pt</property>
+                                        <property name="paddingBottom">0pt</property>
+                                        <property name="paddingRight">0pt</property>
+                                        <text name="HTML Text Day3" id="8436">
+                                            <property name="color">black</property>
+                                            <property name="marginTop">0pt</property>
+                                            <property name="marginLeft">0pt</property>
+                                            <property name="marginBottom">0pt</property>
+                                            <property name="marginRight">0pt</property>
+                                            <property name="paddingTop">5pt</property>
+                                            <property name="paddingLeft">5pt</property>
+                                            <property name="paddingBottom">0pt</property>
+                                            <property name="paddingRight">5pt</property>
+                                            <method name="onCreate"><![CDATA[//day1Data.toString()
+var myIdx=2;
+var myStr1 = "";
+var myStr2 = "";
+   
+  if (numRuns[myIdx] == 0){  //handle waiting held or suspended jobs here if no instances have completed.  
+    if (day3Data.length == 0){myStr1 =  "Not Run"}
+    else if (day3Data[0]=="gyW") {myStr1 =  "Scheduled to run at: "+nextRun}    
+    else if (day3Data[0]=="gyH") {myStr1 =  "Held by User";}
+    else if (day3Data[0]=="gyS") {myStr1 =  "Suspended";}
+    else if (day3Data[0]=="gyR") { 
+       //var rTime=row["runTime"]*1;
+       // var d = new Date(rTime);
+        myStr1  = "Instances started on "+day3+" are still running"
+       // myStr1 +=  "\nRunning since " + d.toLocaleString()
+
+        }
+    else if (day3Data[0]=="gyC") { myStr1 =  "Cancelling";}
+  } 
+//////////////
+
+else { //numRuns[myIdx] > 0)
+
+ if (numRunning[myIdx] > 0) {
+ myStr1 += "Instances started on "+day3+" are still running" 
+ }
+
+  if (numWaiting[myIdx] > 0) {
+  myStr1 += "Waiting Instances: "+ numWaiting[myIdx]
+  myStr1 +=  "\nNext run at: "+nextRun; 
+ }
+
+if (numRuns[myIdx] >  0) {
+
+   switch(lastResult[myIdx]) {
+       case "gn":
+        myStr2 = "Latest Run: Success"
+        break;
+       case "rd":
+        myStr2 = "Latest Run: Failed"
+        break;
+       case "y":
+        myStr2 = "Latest Run: Partial"
+        break;    
+       case "gyS":
+        myStr2 = "Latest Run: Suspended"
+        break;
+       default:
+         myStr2;
+   }
+
+    myStr2 += "\nTotal Completed Runs: "+numRuns[myIdx];
+     if (numRuns[myIdx] >  1) {
+     if (numSucc[myIdx] > 0){myStr2 += "\n"+"Successful Runs: "+numSucc[myIdx]}
+     if (numFail[myIdx] > 0){myStr2 += "\n"+"Failed Runs: "+numFail[myIdx]}
+     if (numPart[myIdx] > 0){myStr2 += "\n"+"Partial Runs: "+numPart[myIdx]}
+     }
+ }
+}
+if (myStr2.length > 0) {this.helpText = myStr2+"\n"+myStr1}
+else {this.helpText = myStr1}]]></method>
+                                            <property name="contentType">html</property>
+                                            <text-property name="content"><![CDATA[<div style="background-color:
+ "FFFFFF";color:white;font-weight:normal; font-size:8pt; text-align: top; height:13px;">
+ 
+ <VALUE-OF format="HTML"> 
+ var myIdx = 2;
+ var myImg = "";
+ var str = "";
+ var flag = false;
+ //////////////////////////////
+ if (numRuns[myIdx] == 0){  //handle not run,suspended,hung,long running jobs here if no instances have completed. 
+ 
+ var myStr =   day3Data[0];
+ switch(myStr) {
+    case "gyW": //should only happen on day1  
+        str = "--" //myImg suppress clock icon  for now
+        break;  
+    case "gyH":
+    case "gyS":
+      myImg="<img src=\"images/held.png\" width=\"15\" height=\"15\" align=\"left\">"
+        break;        
+    case "gyR":
+        flag = true; 
+        break; 
+      default:
+        str = "--"; //not run                       
+    }
+ if (numRunning[myIdx] > 0){
+ flag = true
+}     
+  } 
+
+///////////////////////////////////////////////////////////////////////////////
+
+else {   //handle COMPLETED jobs here numRuns[myIdx] > 0
+  var lastRes =  lastResult[myIdx]; 
+   switch(lastRes) {
+    case "gn":
+        myImg="<img src=\"images/completed.png\" width=\"15\" height=\"15\" align=\"left\">"
+        //str=myImg;
+        break;
+    case "rd":
+        myImg="<img src=\"images/failed.png\" width=\"15\" height=\"15\" align=\"left\">"
+        //str=myImg;
+        break;
+    case "or":
+        myImg="<img src=\"images/partial.png\" width=\"15\" height=\"15\" align=\"left\">"
+       // str=myImg;
+        break;    
+    case "y":
+        myImg="<img src=\"images/partial.png\" width=\"15\" height=\"15\" align=\"left\">"
+      // str=myImg;
+        break;
+           
+}
+
+
+////////////////////////////////////////Show warn if mixed results or long or multiple running  job////////////////////////////////// 
+
+if (numRunning[myIdx] > 0){
+ flag = true
+}
+
+
+for (x in day3Data) { 
+  if (x > 0){
+     if (("rd gn y or".indexOf(day3Data[x]) >= 0)&amp;&amp;(day3Data[x-1] != day3Data[x])){ flag = true }
+  } 
+ }
+}
+if (flag) {
+  myImg = myImg+="<img src=\"images/warning.png\" width=\"15\" height=\"15\" align=\"left\">" 
+ }      
+ 
+     str += myImg; 
+
+str
+ </VALUE-OF>
+ <div>]]></text-property>
+                                        </text>
+                                    </cell>
+                                    <cell id="8378">
+                                        <property name="borderBottomStyle">none</property>
+                                        <property name="borderLeftStyle">none</property>
+                                        <property name="borderRightStyle">none</property>
+                                        <property name="borderTopStyle">none</property>
+                                        <property name="paddingTop">0pt</property>
+                                        <property name="paddingLeft">0pt</property>
+                                        <property name="paddingBottom">0pt</property>
+                                        <property name="paddingRight">0pt</property>
+                                        <text name="HTML Text Day4" id="8432">
+                                            <property name="color">black</property>
+                                            <property name="marginTop">0pt</property>
+                                            <property name="marginLeft">0pt</property>
+                                            <property name="marginBottom">0pt</property>
+                                            <property name="marginRight">0pt</property>
+                                            <property name="paddingTop">5pt</property>
+                                            <property name="paddingLeft">5pt</property>
+                                            <property name="paddingBottom">0pt</property>
+                                            <property name="paddingRight">5pt</property>
+                                            <method name="onCreate"><![CDATA[var myIdx = 3;
+var myStr1 = "";
+var myStr2 = "";
+   
+  if (numRuns[myIdx] == 0){  //handle waiting held or suspended jobs here if no instances have completed.  
+    if (day4Data.length == 0){myStr1 =  "Not Run"}
+    else if (day4Data[0]=="gyW") {myStr1 =  "Scheduled to run at: "+nextRun}    
+    else if (day4Data[0]=="gyH") {myStr1 =  "Held by User";}
+    else if (day4Data[0]=="gyS") {myStr1 =  "Suspended";}
+    else if (day4Data[0]=="gyR") { 
+       //var rTime=row["runTime"]*1;
+       // var d = new Date(rTime);
+        myStr1 = myStr1 = "Instances started on "+day4+" are still running"
+       // myStr1 +=  "\nRunning since " + d.toLocaleString()
+
+        }
+    else if (day4Data[0]=="gyC") { myStr1 =  "Cancelling";}
+  } 
+//////////////
+
+else { //numRuns[myIdx] > 0)
+
+ if (numRunning[myIdx] > 0) {
+ myStr1 += "Running Instances: "+numRunning[myIdx]; 
+ }
+
+  if (numWaiting[myIdx] > 0) {
+  myStr1 += "Instances started on "+day4+" are still running"
+  myStr1 +=  "\nNext run at: "+nextRun; 
+ }
+
+if (numRuns[myIdx] >  0) {
+
+   switch(lastResult[myIdx]) {
+       case "gn":
+        myStr2 = "Latest Run: Success"
+        break;
+       case "rd":
+        myStr2 = "Latest Run: Failed"
+        break;
+       case "y":
+        myStr2 = "Latest Run: Partial"
+        break;    
+    
+       default:
+         myStr2;
+   }
+
+    myStr2 += "\nTotal Completed Runs: "+numRuns[myIdx];
+     if (numRuns[myIdx] >  1) {
+     if (numSucc[myIdx] > 0){myStr2 += "\n"+"Successful Runs: "+numSucc[myIdx]}
+     if (numFail[myIdx] > 0){myStr2 += "\n"+"Failed Runs: "+numFail[myIdx]}
+     if (numPart[myIdx] > 0){myStr2 += "\n"+"Partial Runs: "+numPart[myIdx]}
+     }
+ }
+}
+if (myStr2.length > 0) {this.helpText = myStr2+"\n"+myStr1}
+else {this.helpText = myStr1}]]></method>
+                                            <property name="contentType">html</property>
+                                            <text-property name="content"><![CDATA[<div style="background-color:
+ "FFFFFF";color:white;font-weight:normal; font-size:8pt; text-align: top; height:13px;">
+ 
+ <VALUE-OF format="HTML"> 
+ var myIdx = 3;
+ var myImg = "";
+ var str = "";
+ var flag = false;
+ //////////////////////////////
+ if (numRuns[myIdx] == 0){  //handle not run,suspended,hung,long running jobs here if no instances have completed. 
+ 
+
+ var myStr =   day4Data[0]; 
+ switch(myStr) {
+    case "gyW": //should only happen on day1  
+        str = "--" //myImg suppress clock icon  for now
+        break;  
+    case "gyH":
+    case "gyS":
+      myImg="<img src=\"images/held.png\" width=\"15\" height=\"15\" align=\"left\">"
+        break;        
+    case "gyR":
+        flag = true; 
+        break; 
+      default:
+        str = "--"; //not run                       
+    }
+ if (numRunning[myIdx] > 0){
+ flag = true
+}     
+  } 
+
+///////////////////////////////////////////////////////////////////////////////
+
+else {   //handle COMPLETED jobs here numRuns[myIdx] > 0
+   var lastRes =  lastResult[myIdx];   
+   switch(lastRes) {
+    case "gn":
+        myImg="<img src=\"images/completed.png\" width=\"15\" height=\"15\" align=\"left\">"
+        //str=myImg;
+        break;
+    case "rd":
+        myImg="<img src=\"images/failed.png\" width=\"15\" height=\"15\" align=\"left\">"
+        //str=myImg;
+        break;
+    case "or":
+        myImg="<img src=\"images/partial.png\" width=\"15\" height=\"15\" align=\"left\">"
+       // str=myImg;
+        break;    
+    case "y":
+        myImg="<img src=\"images/partial.png\" width=\"15\" height=\"15\" align=\"left\">"
+      // str=myImg;
+        break;
+           
+}
+
+
+////////////////////////////////////////Show warn if mixed results or long or multiple running  job////////////////////////////////// 
+
+if (numRunning[myIdx] > 0){
+ flag = true
+}
+
+
+for (x in day4Data) { 
+  if (x > 0){
+     if (("rd gn y or".indexOf(day4Data[x]) >= 0)&amp;&amp;(day4Data[x-1] != day4Data[x])){ flag = true }
+  } 
+ }
+}
+if (flag) {
+  myImg = myImg+="<img src=\"images/warning.png\" width=\"15\" height=\"15\" align=\"left\">" 
+ }
+ 
+     str += myImg; 
+
+str
+ </VALUE-OF>
+ <div>]]></text-property>
+                                        </text>
+                                    </cell>
+                                    <cell id="8379">
+                                        <property name="borderBottomStyle">none</property>
+                                        <property name="borderLeftStyle">none</property>
+                                        <property name="borderRightStyle">none</property>
+                                        <property name="borderTopStyle">none</property>
+                                        <property name="paddingTop">0pt</property>
+                                        <property name="paddingLeft">0pt</property>
+                                        <property name="paddingBottom">0pt</property>
+                                        <property name="paddingRight">0pt</property>
+                                        <text name="HTML Text Day5" id="8433">
+                                            <property name="color">black</property>
+                                            <property name="marginLeft">0pt</property>
+                                            <property name="marginRight">0pt</property>
+                                            <property name="paddingTop">5pt</property>
+                                            <property name="paddingLeft">5pt</property>
+                                            <property name="paddingBottom">0pt</property>
+                                            <property name="paddingRight">5pt</property>
+                                            <method name="onCreate"><![CDATA[var myIdx = 4;
+var myStr1 = "";
+var myStr2 = "";
+   
+  if (numRuns[myIdx] == 0){  //handle waiting held or suspended jobs here if no instances have completed.  
+    if (day5Data.length == 0){myStr1 =  "Not Run"}
+    else if (day5Data[0]=="gyW") {myStr1 =  "Scheduled to run at: "+nextRun}    
+    else if (day5Data[0]=="gyH") {myStr1 =  "Held by User";}
+    else if (day5Data[0]=="gyS") {myStr1 =  "Suspended";}
+    else if (day5Data[0]=="gyR") { 
+       //var rTime=row["runTime"]*1;
+       // var d = new Date(rTime);
+        myStr1 = "Instances started on "+day5+" are still running"
+       // myStr1 +=  "\nRunning since " + d.toLocaleString()
+
+        }
+    else if (day5Data[0]=="gyC") { myStr1 =  "Cancelling";}
+  } 
+//////////////
+
+else { //numRuns[myIdx] > 0)
+
+ if (numRunning[myIdx] > 0) {
+ myStr1 += "Instances started on "+day5+" are still running" 
+ }
+
+  if (numWaiting[myIdx] > 0) {
+  myStr1 += "Waiting Instances: "+ numWaiting[myIdx]
+  myStr1 +=  "\nNext run at: "+nextRun; 
+ }
+
+if (numRuns[myIdx] >  0) {
+
+   switch(lastResult[myIdx]) {
+       case "gn":
+        myStr2 = "Latest Run: Success"
+        break;
+       case "rd":
+        myStr2 = "Latest Run: Failed"
+        break;
+       case "y":
+        myStr2 = "Latest Run: Partial"
+        break;    
+    
+       default:
+         myStr2;
+   }
+
+    myStr2 += "\nTotal Completed Runs: "+numRuns[myIdx];
+     if (numRuns[myIdx] >  1) {
+     if (numSucc[myIdx] > 0){myStr2 += "\n"+"Successful Runs: "+numSucc[myIdx]}
+     if (numFail[myIdx] > 0){myStr2 += "\n"+"Failed Runs: "+numFail[myIdx]}
+     if (numPart[myIdx] > 0){myStr2 += "\n"+"Partial Runs: "+numPart[myIdx]}
+     }
+ }
+}
+if (myStr2.length > 0) {this.helpText = myStr2+"\n"+myStr1}
+else {this.helpText = myStr1}]]></method>
+                                            <property name="contentType">html</property>
+                                            <text-property name="content"><![CDATA[<div style="background-color:
+ "FFFFFF";color:white;font-weight:normal; font-size:8pt; text-align: top; height:13px;">
+ 
+ <VALUE-OF format="HTML"> 
+ var myIdx = 4;
+ var myImg = "";
+ var str = "";
+ var flag = false;
+ //////////////////////////////
+ if (numRuns[myIdx] == 0){  //handle not run,suspended,hung,long running jobs here if no instances have completed. 
+ 
+ var myStr =   day5Data[0];
+ switch(myStr) {
+    case "gyW": //should only happen on day1  
+        str = "--" //myImg suppress clock icon  for now
+        break;  
+    case "gyH":
+    case "gyS":
+      myImg="<img src=\"images/held.png\" width=\"15\" height=\"15\" align=\"left\">"
+        break;        
+    case "gyR":
+        flag = true; 
+        break; 
+      default:
+        str = "--"; //not run                       
+    }
+ if (numRunning[myIdx] > 0){
+ flag = true
+}     
+  } 
+
+///////////////////////////////////////////////////////////////////////////////
+
+else {   //handle COMPLETED jobs here numRuns[myIdx] > 0
+  var lastRes =  lastResult[myIdx];  
+  
+   switch(lastRes) {
+    case "gn":
+        myImg="<img src=\"images/completed.png\" width=\"15\" height=\"15\" align=\"left\">"
+        //str=myImg;
+        break;
+    case "rd":
+        myImg="<img src=\"images/failed.png\" width=\"15\" height=\"15\" align=\"left\">"
+        //str=myImg;
+        break;
+    case "or":
+        myImg="<img src=\"images/partial.png\" width=\"15\" height=\"15\" align=\"left\">"
+       // str=myImg;
+        break;    
+    case "y":
+        myImg="<img src=\"images/partial.png\" width=\"15\" height=\"15\" align=\"left\">"
+      // str=myImg;
+        break;
+           
+}
+
+
+////////////////////////////////////////Show warn if mixed results or long or multiple running  job////////////////////////////////// 
+
+if (numRunning[myIdx] > 0){
+ flag = true
+}
+
+
+for (x in day5Data) { 
+  if (x > 0){
+     if (("rd gn y or".indexOf(day5Data[x]) >= 0)&amp;&amp;(day5Data[x-1] != day5Data[x])){ flag = true }
+  } 
+ }
+}
+if (flag) {
+  myImg = myImg+="<img src=\"images/warning.png\" width=\"15\" height=\"15\" align=\"left\">" 
+ }      
+ 
+     str += myImg; 
+
+str
+ </VALUE-OF>
+ <div>]]></text-property>
+                                        </text>
+                                    </cell>
+                                    <cell id="8380">
+                                        <property name="borderBottomStyle">none</property>
+                                        <property name="borderLeftStyle">none</property>
+                                        <property name="borderRightStyle">none</property>
+                                        <property name="borderTopStyle">none</property>
+                                        <property name="paddingTop">0pt</property>
+                                        <property name="paddingLeft">0pt</property>
+                                        <property name="paddingBottom">0pt</property>
+                                        <property name="paddingRight">0pt</property>
+                                        <text name="HTML Text Day6" id="8434">
+                                            <property name="color">black</property>
+                                            <property name="paddingTop">5pt</property>
+                                            <property name="paddingLeft">5pt</property>
+                                            <property name="paddingBottom">0pt</property>
+                                            <property name="paddingRight">5pt</property>
+                                            <method name="onCreate"><![CDATA[var myIdx = 5;
+var myStr1 = "";
+var myStr2 = "";
+   
+  if (numRuns[myIdx] == 0){  //handle waiting held or suspended jobs here if no instances have completed.  
+    if (day6Data.length == 0){myStr1 =  "Not Run"}
+    else if (day6Data[0]=="gyW") {myStr1 =  "Scheduled to run at: "+nextRun}    
+    else if (day6Data[0]=="gyH") {myStr1 =  "Held by User";}
+    else if (day6Data[0]=="gyS") {myStr1 =  "Suspended";}
+    else if (day6Data[0]=="gyR") { 
+       //var rTime=row["runTime"]*1;
+       // var d = new Date(rTime);
+        myStr1 = "Instances started on "+day6+" are still running"
+       // myStr1 +=  "\nRunning since " + d.toLocaleString()
+
+        }
+    else if (day6Data[0]=="gyC") { myStr1 =  "Cancelling";}
+  } 
+//////////////
+
+else { //numRuns[myIdx] > 0)
+
+ if (numRunning[myIdx] > 0) {
+ myStr1 += "Instances started on "+day6+" are still running" 
+ }
+
+  if (numWaiting[myIdx] > 0) {
+  myStr1 += "Waiting Instances: "+ numWaiting[myIdx]
+  myStr1 +=  "\nNext run at: "+nextRun; 
+ }
+
+if (numRuns[myIdx] >  0) {
+
+   switch(lastResult[myIdx]) {
+       case "gn":
+        myStr2 = "Latest Run: Success"
+        break;
+       case "rd":
+        myStr2 = "Latest Run: Failed"
+        break;
+       case "y":
+        myStr2 = "Latest Run: Partial"
+        break;    
+    
+       default:
+         myStr2;
+   }
+
+    myStr2 += "\nTotal Completed Runs: "+numRuns[myIdx];
+     if (numRuns[myIdx] >  1) {
+     if (numSucc[myIdx] > 0){myStr2 += "\n"+"Successful Runs: "+numSucc[myIdx]}
+     if (numFail[myIdx] > 0){myStr2 += "\n"+"Failed Runs: "+numFail[myIdx]}
+     if (numPart[myIdx] > 0){myStr2 += "\n"+"Partial Runs: "+numPart[myIdx]}
+     }
+ }
+}
+if (myStr2.length > 0) {this.helpText = myStr2+"\n"+myStr1+"\n"}
+else {this.helpText = myStr1}]]></method>
+                                            <property name="contentType">html</property>
+                                            <text-property name="content"><![CDATA[<div style="background-color:
+ "FFFFFF";color:white;font-weight:normal; font-size:8pt; text-align: top; height:13px;">
+ 
+ <VALUE-OF format="HTML"> 
+ var myIdx = 5;
+ var myImg = "";
+ var str = "";
+ var flag = false;
+ //////////////////////////////
+ if (numRuns[myIdx] == 0){  //handle not run,suspended,hung,long running jobs here if no instances have completed. 
+ 
+ var myStr =   day6Data[0];
+ switch(myStr) {
+    case "gyW": //should only happen on day1  
+        str = "--" //myImg suppress clock icon  for now
+        break;  
+    case "gyH":
+    case "gyS":
+      myImg="<img src=\"images/held.png\" width=\"15\" height=\"15\" align=\"left\">"
+         break;        
+    case "gyR":
+        flag = true; 
+        break; 
+      default:
+        str = "--"; //not run                       
+    }
+ if (numRunning[myIdx] > 0){
+ flag = true
+}     
+  } 
+
+///////////////////////////////////////////////////////////////////////////////
+
+else {   //handle COMPLETED jobs here numRuns[myIdx] > 0
+  var lastRes =  lastResult[myIdx];  
+  
+   switch(lastRes) {
+    case "gn":
+        myImg="<img src=\"images/completed.png\" width=\"15\" height=\"15\" align=\"left\">"
+        //str=myImg;
+        break;
+    case "rd":
+        myImg="<img src=\"images/failed.png\" width=\"15\" height=\"15\" align=\"left\">"
+        //str=myImg;
+        break;
+    case "or":
+        myImg="<img src=\"images/partial.png\" width=\"15\" height=\"15\" align=\"left\">"
+       // str=myImg;
+        break;    
+    case "y":
+        myImg="<img src=\"images/partial.png\" width=\"15\" height=\"15\" align=\"left\">"
+      // str=myImg;
+        break;
+           
+}
+
+
+////////////////////////////////////////Show warn if mixed results or long or multiple running  job////////////////////////////////// 
+
+if (numRunning[myIdx] > 0){
+ flag = true
+}
+
+
+for (x in day6Data) { 
+  if (x > 0){
+     if (("rd gn y or".indexOf(day6Data[x]) >= 0)&amp;&amp;(day6Data[x-1] != day6Data[x])){ flag = true }
+  } 
+ }
+}
+if (flag) {
+  myImg = myImg+="<img src=\"images/warning.png\" width=\"15\" height=\"15\" align=\"left\">" 
+ }      
+ 
+     str += myImg; 
+
+str
+ </VALUE-OF>
+ <div>]]></text-property>
+                                        </text>
+                                    </cell>
+                                    <cell id="8381">
+                                        <property name="borderBottomStyle">none</property>
+                                        <property name="borderLeftStyle">none</property>
+                                        <property name="borderRightStyle">none</property>
+                                        <property name="borderTopStyle">none</property>
+                                        <property name="paddingTop">0pt</property>
+                                        <property name="paddingLeft">0pt</property>
+                                        <property name="paddingBottom">0pt</property>
+                                        <property name="paddingRight">0pt</property>
+                                        <text name="HTML Text Day7" id="8435">
+                                            <property name="color">black</property>
+                                            <property name="paddingTop">5pt</property>
+                                            <property name="paddingLeft">5pt</property>
+                                            <property name="paddingBottom">0pt</property>
+                                            <property name="paddingRight">5pt</property>
+                                            <method name="onCreate"><![CDATA[var myIdx = 6;
+var myStr1 = "";
+var myStr2 = "";
+   
+  if (numRuns[myIdx] == 0){  //handle waiting held or suspended jobs here if no instances have completed.  
+    if (day7Data.length == 0){myStr1 =  "Not Run"}
+    else if (day7Data[0]=="gyW") {myStr1 =  "Scheduled to run at: "+nextRun}    
+    else if (day7Data[0]=="gyH") {myStr1 =  "Held by User";}
+    else if (day7Data[0]=="gyS") {myStr1 =  "Suspended";}
+    else if (day7Data[0]=="gyR") { 
+       //var rTime=row["runTime"]*1;
+       // var d = new Date(rTime);
+        myStr1 = "Instances started on "+day7+" are still running"
+       // myStr1 +=  "\nRunning since " + d.toLocaleString()
+
+        }
+    else if (day7Data[0]=="gyC") { myStr1 =  "Cancelling";}
+  } 
+//////////////
+
+else { //numRuns[myIdx] > 0)
+
+ if (numRunning[myIdx] > 0) {
+ myStr1 += "Instances started on "+day7+" are still running" 
+ }
+
+  if (numWaiting[myIdx] > 0) {
+  myStr1 += "Waiting Instances: "+ numWaiting[myIdx]
+  myStr1 +=  "\nNext run at: "+nextRun; 
+ }
+
+if (numRuns[myIdx] >  0) {
+
+   switch(lastResult[myIdx]) {
+       case "gn":
+        myStr2 = "Latest Run: Success"
+        break;
+       case "rd":
+        myStr2 = "Latest Run: Failed"
+        break;
+       case "y":
+        myStr2 = "Latest Run: Partial"
+        break;    
+    
+       default:
+         myStr2;
+   }
+
+    myStr2 += "\nTotal Completed Runs: "+numRuns[myIdx];
+     if (numRuns[myIdx] >  1) {
+     if (numSucc[myIdx] > 0){myStr2 += "\n"+"Successful Runs: "+numSucc[myIdx]}
+     if (numFail[myIdx] > 0){myStr2 += "\n"+"Failed Runs: "+numFail[myIdx]}
+     if (numPart[myIdx] > 0){myStr2 += "\n"+"Partial Runs: "+numPart[myIdx]}
+     }
+ }
+}
+if (myStr2.length > 0) {this.helpText = myStr2+"\n"+myStr1}
+else {this.helpText = myStr1}]]></method>
+                                            <property name="contentType">html</property>
+                                            <text-property name="content"><![CDATA[<div style="background-color:
+ "FFFFFF";color:white;font-weight:normal; font-size:8pt; text-align: top; height:13px;">
+ 
+ <VALUE-OF format="HTML"> 
+ var myIdx = 6;
+ var myImg = "";
+ var str = "";
+ var flag = false;
+ //////////////////////////////
+ if (numRuns[myIdx] == 0){  //handle not run,suspended,hung,long running jobs here if no instances have completed. 
+ 
+ var myStr =  day7Data[0];
+ switch(myStr) {
+    case "gyW": //should only happen on day1  
+        str = "--" //myImg suppress clock icon  for now
+        break;  
+    case "gyH":
+    case "gyS":
+      myImg="<img src=\"images/held.png\" width=\"15\" height=\"15\" align=\"left\">"
+        break;        
+    case "gyR":
+        flag = true; 
+        break; 
+      default:
+        str = "--"; //not run                       
+    }
+ if (numRunning[myIdx] > 0){
+ flag = true
+}     
+  } 
+
+///////////////////////////////////////////////////////////////////////////////
+
+else {   //handle COMPLETED jobs here numRuns[myIdx] > 0
+  var lastRes =  lastResult[myIdx];  
+  
+   switch(lastRes) {
+    case "gn":
+        myImg="<img src=\"images/completed.png\" width=\"15\" height=\"15\" align=\"left\">"
+        //str=myImg;
+        break;
+    case "rd":
+        myImg="<img src=\"images/failed.png\" width=\"15\" height=\"15\" align=\"left\">"
+        //str=myImg;
+        break;
+    case "or":
+        myImg="<img src=\"images/partial.png\" width=\"15\" height=\"15\" align=\"left\">"
+       // str=myImg;
+        break;    
+    case "y":
+        myImg="<img src=\"images/partial.png\" width=\"15\" height=\"15\" align=\"left\">"
+      // str=myImg;
+        break;
+           
+}
+
+
+////////////////////////////////////////Show warn if mixed results or long or multiple running  job////////////////////////////////// 
+
+if (numRunning[myIdx] > 0){
+ flag = true
+}
+
+
+for (x in day7Data) { 
+  if (x > 0){
+     if (("rd gn y or".indexOf(day7Data[x]) >= 0)&amp;&amp;(day7Data[x-1] != day7Data[x])){ flag = true }
+  } 
+ }
+}
+if (flag) {
+  myImg = myImg+="<img src=\"images/warning.png\" width=\"15\" height=\"15\" align=\"left\">" 
+ }      
+ 
+     str += myImg; 
+
+str
+ </VALUE-OF>
+ <div>]]></text-property>
+                                        </text>
+                                    </cell>
+                                </row>
+                            </footer>
+                        </group>
+                        <detail>
+                            <row id="8307">
+                                <method name="onCreate"><![CDATA[// day"idx" is set in column heading Label OnCreate
+// initial values
+// lastResult = ["n","n","n","n","n","n","n"];//holds status last run for each day for a job
+//numRuns = [0,0,0,0,0,0,0]; //holds numRuns for each day for a job
+//numSucc  =  [0,0,0,0,0,0,0]; //holds num of Successful Runs for each day for a job
+//numFail =  [0,0,0,0,0,0,0]; //holds num of Failed Runs for each day for each job
+//numPart =  [0,0,0,0,0,0,0]; //holds num of Partially successful Runs for each day for a job
+//numRunning = [0,0,0,0,0,0,0] ////holds num of job instances currently running for a job for each day
+//numWaiting = [0,0,0,0,0,0,0] ////holds num of job instances currently waiting for a job for each day
+   key = row["StartDay"];
+   value = row["StatusPlusRC"];
+  /////////////////////////////
+  function populateArrays(idx) {                             
+        if (value == "gn"){
+              numSucc[idx]++
+              numRuns[idx]++
+              };
+        if (value == "rd"){
+           numFail[idx]++
+           numRuns[idx]++
+           };
+              
+        if (value == "y"){
+           numPart[idx]++;
+           numRuns[idx]++
+          }
+        if (value == "gyW"){numWaiting[idx]++};
+        if (value == "GyR"){numRunning[idx]++};                             
+    } 
+
+
+///////////////////////////
+
+//value is "rd", "gr", "y" ,"gyW", "gyH", "gyS"  
+ 
+
+  switch(key) {
+    case day1:
+    day1Data.push(value);
+    populateArrays(0);
+   
+    if (row["status"] == "COMPLETED"){
+     lastResult[0] = value;
+    }   
+    else if (row["status"] == "ABORTED"){
+     lastResult[0] = value;
+    } 
+    else if (row["status"] == "NOT_RUN"){
+        if (numWaiting[0] == 1){
+         nextRun = row["WaitingJobRunTime"]
+        }
+    }
+
+    break;   
+    
+    case day2:
+     populateArrays(1);
+     day2Data.push(value);
+    if (row["status"] == "COMPLETED"){
+         lastResult[1] = value;
+     }
+    else if (row["status"] == "ABORTED"){
+     lastResult[1] = value;
+    } 
+    else if (row["status"] == "RUNNING"){
+        numRunning[1]++; //was started on this day
+        numRunning[0]++; //it is still running today  
+             } 
+        break;
+        
+        
+        
+    case day3:   
+      populateArrays(2);
+      day3Data.push(value);
+    if (row["status"] == "COMPLETED"){
+       lastResult[2] = value;
+      }
+    else if (row["status"] == "ABORTED"){
+     lastResult[2] = value;
+    } 
+    else if (row["status"] == "RUNNING"){
+        numRunning[2]++; //was started on this day
+        numRunning[0]++; //it is still running today  
+             } 
+        break;
+
+
+    case day4:
+      populateArrays(3);
+      day4Data.push(value);
+    if (row["status"] == "COMPLETED"){
+       lastResult[3] = value;
+      }
+    else if (row["status"] == "ABORTED"){
+       lastResult[3] = value;
+    }
+    else if (row["status"] == "RUNNING"){
+        numRunning[3]++; //was started on this day
+        numRunning[0]++; //it is still running today  
+             } 
+        break;
+
+    case day5:
+      populateArrays(4);
+      day5Data.push(value);
+    if (row["status"] == "COMPLETED"){
+       lastResult[4] = value;
+      }
+    else if (row["status"] == "ABORTED"){
+     lastResult[4] = value;
+    }
+    else if (row["status"] == "RUNNING"){
+        numRunning[4]++; //was started on this day
+        numRunning[0]++; //it is still running today  
+             } 
+        break;
+
+    case day6:
+      populateArrays(5);
+      day6Data.push(value);
+      
+   if (row["status"] == "COMPLETED"){
+     lastResult[5] = value;
+      }
+    else if (row["status"] == "ABORTED"){
+     lastResult[5] = value;
+    }
+    else if (row["status"] == "RUNNING"){
+        numRunning[5]++; //was started on this day
+        numRunning[0]++; //it is still running today  
+             } 
+        break;
+
+    case day7:
+    populateArrays(6);
+    day7Data.push(value);
+   if (row["status"] == "COMPLETED"){
+       lastResult[6] = value;
+        }
+    else if (row["status"] == "ABORTED"){
+     lastResult[6] = value;
+    }
+
+    else if (row["status"] == "RUNNING"){
+        numRunning[6]++; //was started on this day
+        numRunning[0]++; //it is still running today  
+             } 
+        break;
+  
+    
+    default:
+      if (row["status"] == "RUNNING"){
+        numRunning[0]++; 
+             }
+  }  
+
+]]></method>
+                                <list-property name="visibility">
+                                    <structure>
+                                        <property name="format">all</property>
+                                        <expression name="valueExpr" type="javascript">true</expression>
+                                    </structure>
+                                </list-property>
+                                <cell id="8308">
+                                    <data id="8309">
+                                        <property name="resultSetColumn">name</property>
+                                    </data>
+                                </cell>
+                                <cell id="8310">
+                                    <text-data name="Day1Data1" id="8441">
+                                        <property name="color">black</property>
+                                        <property name="borderBottomStyle">none</property>
+                                        <property name="borderLeftStyle">none</property>
+                                        <property name="borderRightStyle">none</property>
+                                        <property name="borderTopStyle">none</property>
+                                        <property name="marginLeft">0pt</property>
+                                        <property name="marginRight">0pt</property>
+                                        <property name="paddingLeft">1pt</property>
+                                        <property name="paddingRight">1pt</property>
+                                        <list-property name="visibility">
+                                            <structure>
+                                                <property name="format">all</property>
+                                                <expression name="valueExpr" type="javascript">if( row["StartDay"] == day1) false &#13;
+else true</expression>
+                                            </structure>
+                                        </list-property>
+                                        <expression name="valueExpr">numRuns[0]+", "&#13;
++lastResult[0]+","&#13;
++numWaiting[0]+",|   "&#13;
++numRunning[0]+", "&#13;
++day1Data.toString()</expression>
+                                        <property name="contentType">html</property>
+                                    </text-data>
+                                </cell>
+                                <cell id="8312">
+                                    <text-data name="Day2Data1" id="8443">
+                                        <property name="color">black</property>
+                                        <property name="paddingTop">0pt</property>
+                                        <property name="paddingLeft">0pt</property>
+                                        <property name="paddingBottom">0pt</property>
+                                        <property name="paddingRight">0pt</property>
+                                        <list-property name="visibility">
+                                            <structure>
+                                                <property name="format">all</property>
+                                                <expression name="valueExpr" type="javascript">if( row["StartDay"] == day2) false &#13;
+else true</expression>
+                                            </structure>
+                                        </list-property>
+                                        <expression name="valueExpr">numRuns[1]+", "&#13;
++lastResult[1]+", "&#13;
++day2Data.length</expression>
+                                        <property name="contentType">html</property>
+                                    </text-data>
+                                </cell>
+                                <cell id="8314">
+                                    <text-data name="Day3Data" id="8422">
+                                        <property name="color">black</property>
+                                        <property name="paddingTop">0pt</property>
+                                        <property name="paddingLeft">0pt</property>
+                                        <property name="paddingBottom">0pt</property>
+                                        <property name="paddingRight">0pt</property>
+                                        <list-property name="visibility">
+                                            <structure>
+                                                <property name="format">all</property>
+                                                <expression name="valueExpr" type="javascript">if( row["StartDay"] == day3) false &#13;
+else true</expression>
+                                            </structure>
+                                        </list-property>
+                                        <expression name="valueExpr">numRuns[2]+", "+lastResult[2]+", "+day3Data.length</expression>
+                                        <property name="contentType">html</property>
+                                    </text-data>
+                                </cell>
+                                <cell id="8316">
+                                    <text-data name="Day4Data" id="8423">
+                                        <property name="color">black</property>
+                                        <property name="paddingTop">0pt</property>
+                                        <property name="paddingLeft">0pt</property>
+                                        <property name="paddingBottom">0pt</property>
+                                        <property name="paddingRight">0pt</property>
+                                        <list-property name="visibility">
+                                            <structure>
+                                                <property name="format">all</property>
+                                                <expression name="valueExpr" type="javascript">if( row["StartDay"] == day4) false &#13;
+else true</expression>
+                                            </structure>
+                                        </list-property>
+                                        <expression name="valueExpr">numRuns[3]+", "+lastResult[3]+", "+day4Data.length</expression>
+                                        <property name="contentType">html</property>
+                                    </text-data>
+                                </cell>
+                                <cell id="8318">
+                                    <text-data name="Day5Data" id="8424">
+                                        <property name="color">black</property>
+                                        <property name="paddingTop">0pt</property>
+                                        <property name="paddingLeft">0pt</property>
+                                        <property name="paddingBottom">0pt</property>
+                                        <property name="paddingRight">0pt</property>
+                                        <list-property name="visibility">
+                                            <structure>
+                                                <property name="format">all</property>
+                                                <expression name="valueExpr" type="javascript">if( row["StartDay"] == day5) false &#13;
+else true</expression>
+                                            </structure>
+                                        </list-property>
+                                        <expression name="valueExpr">numRuns[4]+", "+lastResult[4]+", "+day5Data.length</expression>
+                                        <property name="contentType">html</property>
+                                    </text-data>
+                                </cell>
+                                <cell id="8320">
+                                    <text-data name="Day6Data" id="8425">
+                                        <property name="color">black</property>
+                                        <property name="paddingTop">0pt</property>
+                                        <property name="paddingLeft">0pt</property>
+                                        <property name="paddingBottom">0pt</property>
+                                        <property name="paddingRight">0pt</property>
+                                        <list-property name="visibility">
+                                            <structure>
+                                                <property name="format">all</property>
+                                                <expression name="valueExpr" type="javascript">if( row["StartDay"] == day6) false &#13;
+else true</expression>
+                                            </structure>
+                                        </list-property>
+                                        <expression name="valueExpr">numRuns[5]+", "+lastResult[5]+", "+day6Data.length</expression>
+                                        <property name="contentType">html</property>
+                                    </text-data>
+                                </cell>
+                                <cell id="8322">
+                                    <text-data name="Day7Data" id="8426">
+                                        <property name="color">black</property>
+                                        <property name="paddingTop">0pt</property>
+                                        <property name="paddingLeft">0pt</property>
+                                        <property name="paddingBottom">0pt</property>
+                                        <property name="paddingRight">0pt</property>
+                                        <list-property name="visibility">
+                                            <structure>
+                                                <property name="format">all</property>
+                                                <expression name="valueExpr" type="javascript">if( row["StartDay"] == day7) false &#13;
+else true</expression>
+                                            </structure>
+                                        </list-property>
+                                        <expression name="valueExpr">numRuns[6]+", "+lastResult[6]+", "+day7Data.length</expression>
+                                        <property name="contentType">html</property>
+                                    </text-data>
+                                </cell>
+                            </row>
+                        </detail>
+                        <footer>
+                            <row id="8446">
+                                <cell id="8447">
+                                    <text id="8455">
+                                        <property name="color">black</property>
+                                        <property name="contentType">html</property>
+                                        <text-property name="content"><![CDATA[<!-- Dummy tag to get parent nodes -->
+<div id="tableAnchor"></div>
+<script>	
+	// Get the table object itself
+	var firstcolor = "#F4F4F4"
+	var secondcolor = "#FFFFFF"			
+	var o = document.getElementById("tableAnchor");
+	while(o != null){
+		if (o.tagName == "TBODY")
+			break;
+		o = o.parentNode;
+	}
+	
+	// Add the mouseover event to each of the table rows
+	
+	for (var i = 1; i < o.children.length; i++) {
+		var ro = o.children[i];		           
+        if (i%2 == 0){
+        ro.bgColor = firstcolor;
+        }
+        ro.onmouseover = function(){highlight(this.id);};
+		ro.onmouseout = function(){unhighlight(this.id);};
+		}
+	
+	// Highlight function is called from mouseover events (see above)
+	// and also from chart mouseover events.
+	var g_previousHighlight = "";
+	function highlight(category) {
+		// Remove previous highlight (if any)
+		if (g_previousHighlight > "") {
+			var o = document.getElementById(g_previousHighlight);
+			o.style.backgroundColor="";
+		}	
+			
+		// Apply new highlight
+		var o = document.getElementById(category);		
+		o.style.backgroundColor="#DDDDDD"; //"#8080ff";
+		g_previousHighlight = category;		
+	}
+	
+	
+	function unhighlight(category) {
+		// Remove previous highlight (if any)
+		if (g_previousHighlight > "") {
+			var o = document.getElementById(g_previousHighlight);
+			o.style.backgroundColor="";						
+		}
+		
+		// Apply new highlight
+		var o = document.getElementById(category);		
+		o.style.backgroundColor="";
+		g_previousHighlight = category;		
+	}
+</script>]]></text-property>
+                                    </text>
+                                </cell>
+                                <cell id="8448"/>
+                                <cell id="8449"/>
+                                <cell id="8450"/>
+                                <cell id="8451"/>
+                                <cell id="8452"/>
+                                <cell id="8453"/>
+                                <cell id="8454"/>
+                            </row>
+                            <row id="8324">
+                                <cell id="8325">
+                                    <property name="colSpan">8</property>
+                                    <property name="rowSpan">1</property>
+                                    <text name="NoJobInstanceData" id="8258">
+                                        <property name="style">EmptyTableMessage</property>
+                                        <property name="color">black</property>
+                                        <property name="borderTopStyle">solid</property>
+                                        <property name="borderTopWidth">1px</property>
+                                        <property name="paddingTop">7pt</property>
+                                        <property name="paddingLeft">7pt</property>
+                                        <property name="paddingBottom">7pt</property>
+                                        <list-property name="visibility">
+                                            <structure>
+                                                <property name="format">all</property>
+                                                <expression name="valueExpr" type="javascript">if (row["jobInstanceCount"] > 1){&#13;
+true&#13;
+}&#13;
+else false</expression>
+                                            </structure>
+                                        </list-property>
+                                        <property name="contentType">html</property>
+                                        <text-property name="content"><![CDATA[<b>
+ <VALUE-OF format="HTML">reportContext.getMessage("DPxNoJobInstanceData", reportContext.getLocale());</VALUE-OF>
+</b>]]></text-property>
+                                    </text>
+                                </cell>
+                            </row>
+                        </footer>
+                    </table>
+                </cell>
+            </row>
+        </grid>
+    </body>
+</report>

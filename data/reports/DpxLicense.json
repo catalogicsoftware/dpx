@@ -1,0 +1,10 @@
+{
+    "name" : "DPX License",
+    "type" : "REPORT",
+    "comment" : "Report metadata",
+    "displayName" : "DPX License",
+    "description" : "Review DPX license information",
+    "category" : "dpxcompliance",
+    "engine" : "BIRT",
+    "specFileName" : "DpxLicense.rptdesign"
+}
