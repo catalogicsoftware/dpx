@@ -89,7 +89,7 @@ clean: stop
 	rm -rf auth_token cookies.txt out.json dpx.env dpx-apigateway.env dpx-vplugin-mgr.env
 
 distclean: clean
-	rm -rf keys opt-auth opt-apigateway stack-logs dpx-apigateway*.env dpx-vplugin-mgr*.env certs-selfsigned certs-letsencrypt api_key catalogic-dpx-ms.id certbot plugins rest-db
+	rm -rf keys opt-auth opt-apigateway opt-plugin-mgr stack-logs dpx-apigateway*.env dpx-vplugin-mgr*.env certs-selfsigned certs-letsencrypt api_key catalogic-dpx-ms.id certbot plugins rest-db
 
 # update docker services
 update: remove-old-images dpx-apigateway.env
@@ -263,7 +263,9 @@ DST_KEY_PASS = -destkeypass $(KEY_PASS)
 DST_STORE_PASS = -deststorepass $(KEY_PASS)
 DST_STORE_PASS2 = -passin pass:$(KEY_PASS)
 MY_STORE_PASS = -passout pass:$(KEY_PASS)
+PLUGIN_MGR_PASS = PluginManager123
 SSL_CERT_PASS = catalogic
+
 keys:
 	mkdir keys
 	cd keys; keytool -genkeypair -alias jwt -keyalg RSA -dname "CN=jwt, L=Brisbane, S=Brisbane, C=AU" $(SRC_KEY_PASS) -keystore catalogic.jks $(SRC_STORE_PASS)
@@ -271,7 +273,7 @@ keys:
 	cd keys; openssl pkcs12 -in catalogic.p12 -out catalogic.pem $(DST_STORE_PASS2) $(MY_STORE_PASS)
 	cd keys; openssl rsa -in catalogic.pem -pubout -out catalogic.pub $(DST_STORE_PASS2)
 
-opt: opt-auth opt-apigateway
+opt: opt-auth opt-apigateway opt-plugin-mgr
 
 opt-auth: keys
 	mkdir opt-auth
@@ -280,6 +282,14 @@ opt-auth: keys
 opt-apigateway: keys
 	mkdir -p opt-apigateway
 	grep -v '\-\-\-\-\-' keys/catalogic.pub > opt-apigateway/catalogic.pub
+
+opt-plugin-mgr:
+	mkdir -p opt-plugin-mgr
+	cd opt-plugin-mgr; keytool -genkeypair -alias plugin-mgr -keyalg RSA -dname "CN=jwt, L=Brisbane, S=Brisbane, C=AU" -keypass $(PLUGIN_MGR_PASS) -keystore plugin-mgr.p12 -storepass $(PLUGIN_MGR_PASS) -storetype PKCS12
+	cd opt-plugin-mgr; openssl pkcs12 -in plugin-mgr.p12 -out plugin-mgr.pem -passin pass:$(PLUGIN_MGR_PASS) -passout pass:$(PLUGIN_MGR_PASS)
+	cd opt-plugin-mgr; echo $(PLUGIN_MGR_PASS) > plugin_mgr_pass.txt
+	cd opt-plugin-mgr; openssl rsa -in plugin-mgr.pem -pubout -out plugin-mgr.pub -passin pass:$(PLUGIN_MGR_PASS)
+	cd opt-plugin-mgr; grep -v '\-\-\-\-\-' plugin-mgr.pub > temp && mv temp plugin-mgr.pub
 
 stack-logs:
 	mkdir stack-logs

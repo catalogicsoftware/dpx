@@ -38,6 +38,7 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://sql-db:5432/postgres
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=secret
+      - PLUGIN_MGR_PUBLIC_KEY_FILE_PATH=/opt/plugin-mgr.pub
     deploy:
       replicas: 2
       update_config:
@@ -47,6 +48,7 @@ services:
     volumes:
       - "./opt-apigateway:/key"
       - "./opt-apigateway:/opt"
+      - "./opt-plugin-mgr/plugin-mgr.pub:/opt/plugin-mgr.pub"
     networks:
       - "webnet"
     depends_on:
@@ -109,6 +111,7 @@ services:
       - "8082:8082"
     volumes:
       - "./plugins:/app/plugins"
+      - "./opt-plugin-mgr:/opt/plugin-mgr"
     networks:
       - webnet
     logging:
