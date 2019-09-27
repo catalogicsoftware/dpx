@@ -92,10 +92,10 @@ distclean: clean
 	rm -rf keys opt-auth opt-apigateway stack-logs dpx-apigateway*.env dpx-vplugin-mgr*.env certs-selfsigned certs-letsencrypt api_key catalogic-dpx-ms.id certbot plugins rest-db
 
 # update docker services
-update: remove-old-images dpx-apigateway.env
+update: remove-old-images opt dpx-apigateway.env
 	. ./dpx-container-tags && export FLUENTD_CONFIG_DIGEST=$(shell date -r ./config/fluent.conf +%s) && export START_DATE=$(shell date --iso-8601=seconds) && $(DOCKER) stack deploy --prune -c dpx.yml dpx --with-registry-auth
 
-force-update: remove-old-images dpx-apigateway.env
+force-update: remove-old-images opt dpx-apigateway.env
 	$(DOCKER) stack rm dpx
 	./stack-wait.sh
 	git pull
@@ -273,7 +273,17 @@ keys:
 
 opt: opt-auth opt-apigateway
 
+.PHONY: opt-auth
 opt-auth: keys
+# KJM Updates for normalization
+	cp keys/* config/auth
+	echo "KEY_STORE=config/catalogic.jks" > dpx-auth.env
+	echo "KEY_STORE_PASSWORD=$(KEY_PASS)" >> dpx-auth.env
+	echo "KEY_STORE_TYPE=JKS" >> dpx-auth.env
+	echo "KEY_ALIAS=jwt" >> dpx-auth.env
+	echo "KEY_FILE=config/catalogic.pub" >> dpx-auth.env
+# Following is deprecated - DELETE
+	rm -rf opt-auth
 	mkdir opt-auth
 	cp keys/catalogic.jks opt-auth
 	

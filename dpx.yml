@@ -90,7 +90,7 @@ services:
       - ./dpx.env
       - ./dpx-vplugin-mgr.env
     environment:
-      - AUTH_SERVER_URL=http://auth:8081
+      - AUTH_SERVER_URL=http://auth:8091
       - SVC_SERVER_URL=http://rest:8095
       - S3_BUCKET_FOLDER_NAME=released
       - START_DATE=${START_DATE}
@@ -123,22 +123,26 @@ services:
     image: catalogicsoftware/dpx-auth:${TAG_AUTH}
     env_file:
       - ./dpx.env
+      - ./dpx-auth.env
     environment:
+      - RS_HOSTNAME=discovery
       - MS_PORT=8091
+      - CONFIG_PATH=config
       - START_DATE=${START_DATE}
     deploy:
       replicas: 2
       update_config:
         failure_action: rollback
     healthcheck:
-#      test: wget -qO- http://localhost:8081/actuator/health | grep -q '"UP"' || exit 1
+#      test: wget -qO- http://localhost:8091/management/health | grep -q '"UP"' || exit 1
       interval: 30s
       timeout: 5s
       retries: 3
     ports:
-      - "8081:8081"
+      - "8091:8091"
     volumes:
-      - "./opt-auth/catalogic.jks:/opt/catalogic.jks"
+      - "./config/auth:/app/config"
+      - "./stack-logs:/app/logs"
     networks:
       - webnet
     logging:
@@ -213,7 +217,7 @@ services:
       - START_DATE=${START_DATE}
       - ROUTE_ROOT_PREFIX=/
       - ROUTE_URL_ADMIN=http://admin:8092/
-      - ROUTE_URL_AUTH=http://auth:8081/
+      - ROUTE_URL_AUTH=http://auth:8091/
       - ROUTE_URL_CONFIG_UI=http://config-ui:8088/
       - ROUTE_URL_DISCOVERY=http://discovery:8090/
       - ROUTE_URL_DPXCORE=http://dpxcore:8095/
@@ -223,7 +227,7 @@ services:
       - ROUTE_URL_PLUGIN_MGR=http://vplugin-mgr:8082/
       - ROUTE_URL_REPORT=http://report:8094/
 # TODO: Remove these when new gateway service is stable
-      - ZUUL_ROUTES_AUTH_URL=http://auth:8081/
+      - ZUUL_ROUTES_AUTH_URL=http://auth:8091/
       - ZUUL_ROUTES_CONFIG_UI_URL=http://config-ui:8088/
       - ZUUL_ROUTES_DISCOVERY_URL=http://discovery:8090/
       - ZUUL_ROUTES_APP_URL=http://rest:8095/
