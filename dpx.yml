@@ -292,6 +292,28 @@ services:
     networks:
       - webnet
 
+# DPX BIRT service
+# TODO: 
+  birt:
+    image: catalogicsoftware/birt:${TAG_BIRT}
+    env_file:
+      - ./dpx.env
+    environment:
+      - RS_HOSTNAME=discovery
+      - MS_PORT=8099
+      - CONFIG_PATH=config
+    deploy:
+      replicas: 1
+    ports:
+      - "8099:8099"
+    volumes:
+      - "./config/birt:/app/config"
+      - "./data:/app/data"
+      - "./stack-logs:/app/logs"
+      - "./stack-logs:/data/log/oda/"
+    networks:
+      - webnet
+
 # Docker logging driver
 # Note: 
 # Should only be used for services where native logging is not practical

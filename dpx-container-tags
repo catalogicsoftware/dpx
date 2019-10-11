@@ -5,4 +5,5 @@ export TAG_DPXCORE=latest
 export TAG_DPXUI=latest
 export TAG_GATEWAY=latest
 export TAG_REPORT=latest
+export TAG_BIRT=latest
 export TAG_VPLUGIN_MGR=latest
