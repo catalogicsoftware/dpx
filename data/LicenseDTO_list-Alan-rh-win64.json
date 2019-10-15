@@ -1,0 +1,1180 @@
+[
+  {
+      "links": {
+          "self": {
+              "rel": "self",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          },
+          "up": {
+              "rel": "up",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          }
+      },
+      "id": "LicenseExpirationDay",
+      "name": "LicenseExpirationDay",
+      "consumedCount": 0,
+      "licensedCount": 0,
+      "licensedCapacityGB": 0,
+      "consumedCapacityGB": 0,
+      "consumedPercent": 0,
+      "enterpriseHostInfo": "172.20.240.74",
+      "dpxId": "1002",
+      "licenseModel": "Component-based License Model",
+      "capacityCategoryorComponentFeature": null,
+      "licenseExpirationDay": 463,
+      "isLicenseViolation": false,
+      "isReportUsage": true,
+      "resourceType": "license",
+      "isEvaluationKey": "n/a",
+      "requestStatus": "success",
+      "errorMessage": null,
+      "recordCount": 0
+  },
+  {
+      "links": {
+          "self": {
+              "rel": "self",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          },
+          "up": {
+              "rel": "up",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          }
+      },
+      "id": "Encryption",
+      "name": "Encryption",
+      "consumedCount": 0,
+      "licensedCount": 0,
+      "licensedCapacityGB": 0,
+      "consumedCapacityGB": 0,
+      "consumedPercent": 0,
+      "enterpriseHostInfo": "172.20.240.74",
+      "dpxId": "1002",
+      "licenseModel": "Component-based License Model",
+      "capacityCategoryorComponentFeature": "Encryption",
+      "licenseExpirationDay": 0,
+      "isLicenseViolation": false,
+      "isReportUsage": true,
+      "resourceType": "license",
+      "isEvaluationKey": "true",
+      "requestStatus": "success",
+      "errorMessage": null,
+      "recordCount": 1
+  },
+  {
+      "links": {
+          "self": {
+              "rel": "self",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          },
+          "up": {
+              "rel": "up",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          }
+      },
+      "id": "Operating Systems",
+      "name": "Operating Systems",
+      "consumedCount": 3,
+      "licensedCount": 0,
+      "licensedCapacityGB": 0,
+      "consumedCapacityGB": 0,
+      "consumedPercent": 400,
+      "enterpriseHostInfo": "172.20.240.74",
+      "dpxId": "1002",
+      "licenseModel": "Component-based License Model",
+      "capacityCategoryorComponentFeature": "Operating Systems",
+      "licenseExpirationDay": 0,
+      "isLicenseViolation": false,
+      "isReportUsage": true,
+      "resourceType": "license",
+      "isEvaluationKey": "true",
+      "requestStatus": "success",
+      "errorMessage": null,
+      "recordCount": 2
+  },
+  {
+      "links": {
+          "self": {
+              "rel": "self",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          },
+          "up": {
+              "rel": "up",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          }
+      },
+      "id": "UNIX Nodes",
+      "name": "UNIX Nodes",
+      "consumedCount": 1,
+      "licensedCount": 0,
+      "licensedCapacityGB": 0,
+      "consumedCapacityGB": 0,
+      "consumedPercent": 200,
+      "enterpriseHostInfo": "172.20.240.74",
+      "dpxId": "1002",
+      "licenseModel": "Component-based License Model",
+      "capacityCategoryorComponentFeature": "UNIX Nodes",
+      "licenseExpirationDay": 0,
+      "isLicenseViolation": false,
+      "isReportUsage": true,
+      "resourceType": "license",
+      "isEvaluationKey": "true",
+      "requestStatus": "success",
+      "errorMessage": null,
+      "recordCount": 3
+  },
+  {
+      "links": {
+          "self": {
+              "rel": "self",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          },
+          "up": {
+              "rel": "up",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          }
+      },
+      "id": "Windows/Linux/Netware",
+      "name": "Windows/Linux/Netware",
+      "consumedCount": 19,
+      "licensedCount": 0,
+      "licensedCapacityGB": 0,
+      "consumedCapacityGB": 0,
+      "consumedPercent": 2000,
+      "enterpriseHostInfo": "172.20.240.74",
+      "dpxId": "1002",
+      "licenseModel": "Component-based License Model",
+      "capacityCategoryorComponentFeature": "Windows/Linux/Netware",
+      "licenseExpirationDay": 0,
+      "isLicenseViolation": false,
+      "isReportUsage": true,
+      "resourceType": "license",
+      "isEvaluationKey": "true",
+      "requestStatus": "success",
+      "errorMessage": null,
+      "recordCount": 4
+  },
+  {
+      "links": {
+          "self": {
+              "rel": "self",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          },
+          "up": {
+              "rel": "up",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          }
+      },
+      "id": "Advanced Client UNIX",
+      "name": "Advanced Client UNIX",
+      "consumedCount": 0,
+      "licensedCount": 0,
+      "licensedCapacityGB": 0,
+      "consumedCapacityGB": 0,
+      "consumedPercent": 0,
+      "enterpriseHostInfo": "172.20.240.74",
+      "dpxId": "1002",
+      "licenseModel": "Component-based License Model",
+      "capacityCategoryorComponentFeature": "Advanced Client UNIX",
+      "licenseExpirationDay": 0,
+      "isLicenseViolation": false,
+      "isReportUsage": true,
+      "resourceType": "license",
+      "isEvaluationKey": "true",
+      "requestStatus": "success",
+      "errorMessage": null,
+      "recordCount": 5
+  },
+  {
+      "links": {
+          "self": {
+              "rel": "self",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          },
+          "up": {
+              "rel": "up",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          }
+      },
+      "id": "Advanced Client WINDOWS/LINUX",
+      "name": "Advanced Client WINDOWS/LINUX",
+      "consumedCount": 2,
+      "licensedCount": 0,
+      "licensedCapacityGB": 0,
+      "consumedCapacityGB": 0,
+      "consumedPercent": 300,
+      "enterpriseHostInfo": "172.20.240.74",
+      "dpxId": "1002",
+      "licenseModel": "Component-based License Model",
+      "capacityCategoryorComponentFeature": "Advanced Client WINDOWS/LINUX",
+      "licenseExpirationDay": 0,
+      "isLicenseViolation": false,
+      "isReportUsage": true,
+      "resourceType": "license",
+      "isEvaluationKey": "true",
+      "requestStatus": "success",
+      "errorMessage": null,
+      "recordCount": 6
+  },
+  {
+      "links": {
+          "self": {
+              "rel": "self",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          },
+          "up": {
+              "rel": "up",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          }
+      },
+      "id": "Advanced Client VM",
+      "name": "Advanced Client VM",
+      "consumedCount": 7,
+      "licensedCount": 0,
+      "licensedCapacityGB": 0,
+      "consumedCapacityGB": 0,
+      "consumedPercent": 800,
+      "enterpriseHostInfo": "172.20.240.74",
+      "dpxId": "1002",
+      "licenseModel": "Component-based License Model",
+      "capacityCategoryorComponentFeature": "Advanced Client VM",
+      "licenseExpirationDay": 0,
+      "isLicenseViolation": false,
+      "isReportUsage": true,
+      "resourceType": "license",
+      "isEvaluationKey": "true",
+      "requestStatus": "success",
+      "errorMessage": null,
+      "recordCount": 7
+  },
+  {
+      "links": {
+          "self": {
+              "rel": "self",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          },
+          "up": {
+              "rel": "up",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          }
+      },
+      "id": "NDMP Nodes",
+      "name": "NDMP Nodes",
+      "consumedCount": 3,
+      "licensedCount": 0,
+      "licensedCapacityGB": 0,
+      "consumedCapacityGB": 0,
+      "consumedPercent": 400,
+      "enterpriseHostInfo": "172.20.240.74",
+      "dpxId": "1002",
+      "licenseModel": "Component-based License Model",
+      "capacityCategoryorComponentFeature": "NDMP Nodes",
+      "licenseExpirationDay": 0,
+      "isLicenseViolation": false,
+      "isReportUsage": true,
+      "resourceType": "license",
+      "isEvaluationKey": "true",
+      "requestStatus": "success",
+      "errorMessage": null,
+      "recordCount": 8
+  },
+  {
+      "links": {
+          "self": {
+              "rel": "self",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          },
+          "up": {
+              "rel": "up",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          }
+      },
+      "id": "Cluster Nodes",
+      "name": "Cluster Nodes",
+      "consumedCount": 2,
+      "licensedCount": 0,
+      "licensedCapacityGB": 0,
+      "consumedCapacityGB": 0,
+      "consumedPercent": 300,
+      "enterpriseHostInfo": "172.20.240.74",
+      "dpxId": "1002",
+      "licenseModel": "Component-based License Model",
+      "capacityCategoryorComponentFeature": "Cluster Nodes",
+      "licenseExpirationDay": 0,
+      "isLicenseViolation": false,
+      "isReportUsage": true,
+      "resourceType": "license",
+      "isEvaluationKey": "true",
+      "requestStatus": "success",
+      "errorMessage": null,
+      "recordCount": 9
+  },
+  {
+      "links": {
+          "self": {
+              "rel": "self",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          },
+          "up": {
+              "rel": "up",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          }
+      },
+      "id": "UNIX Device Servers",
+      "name": "UNIX Device Servers",
+      "consumedCount": 1,
+      "licensedCount": 0,
+      "licensedCapacityGB": 0,
+      "consumedCapacityGB": 0,
+      "consumedPercent": 200,
+      "enterpriseHostInfo": "172.20.240.74",
+      "dpxId": "1002",
+      "licenseModel": "Component-based License Model",
+      "capacityCategoryorComponentFeature": "UNIX Device Servers",
+      "licenseExpirationDay": 0,
+      "isLicenseViolation": false,
+      "isReportUsage": true,
+      "resourceType": "license",
+      "isEvaluationKey": "true",
+      "requestStatus": "success",
+      "errorMessage": null,
+      "recordCount": 10
+  },
+  {
+      "links": {
+          "self": {
+              "rel": "self",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          },
+          "up": {
+              "rel": "up",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          }
+      },
+      "id": "Non-UNIX Device Servers",
+      "name": "Non-UNIX Device Servers",
+      "consumedCount": 6,
+      "licensedCount": 0,
+      "licensedCapacityGB": 0,
+      "consumedCapacityGB": 0,
+      "consumedPercent": 700,
+      "enterpriseHostInfo": "172.20.240.74",
+      "dpxId": "1002",
+      "licenseModel": "Component-based License Model",
+      "capacityCategoryorComponentFeature": "Non-UNIX Device Servers",
+      "licenseExpirationDay": 0,
+      "isLicenseViolation": false,
+      "isReportUsage": true,
+      "resourceType": "license",
+      "isEvaluationKey": "true",
+      "requestStatus": "success",
+      "errorMessage": null,
+      "recordCount": 11
+  },
+  {
+      "links": {
+          "self": {
+              "rel": "self",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          },
+          "up": {
+              "rel": "up",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          }
+      },
+      "id": "SAN Devices",
+      "name": "SAN Devices",
+      "consumedCount": 11,
+      "licensedCount": 0,
+      "licensedCapacityGB": 0,
+      "consumedCapacityGB": 0,
+      "consumedPercent": 1200,
+      "enterpriseHostInfo": "172.20.240.74",
+      "dpxId": "1002",
+      "licenseModel": "Component-based License Model",
+      "capacityCategoryorComponentFeature": "SAN Devices",
+      "licenseExpirationDay": 0,
+      "isLicenseViolation": false,
+      "isReportUsage": true,
+      "resourceType": "license",
+      "isEvaluationKey": "true",
+      "requestStatus": "success",
+      "errorMessage": null,
+      "recordCount": 12
+  },
+  {
+      "links": {
+          "self": {
+              "rel": "self",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          },
+          "up": {
+              "rel": "up",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          }
+      },
+      "id": "Virtual Tape Library (TB)",
+      "name": "Virtual Tape Library (TB)",
+      "consumedCount": 0,
+      "licensedCount": 0,
+      "licensedCapacityGB": 0,
+      "consumedCapacityGB": 0,
+      "consumedPercent": 0,
+      "enterpriseHostInfo": "172.20.240.74",
+      "dpxId": "1002",
+      "licenseModel": "Component-based License Model",
+      "capacityCategoryorComponentFeature": "Virtual Tape Library (TB)",
+      "licenseExpirationDay": 0,
+      "isLicenseViolation": false,
+      "isReportUsage": true,
+      "resourceType": "license",
+      "isEvaluationKey": "true",
+      "requestStatus": "success",
+      "errorMessage": null,
+      "recordCount": 13
+  },
+  {
+      "links": {
+          "self": {
+              "rel": "self",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          },
+          "up": {
+              "rel": "up",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          }
+      },
+      "id": "Slots   1 -   10",
+      "name": "Slots   1 -   10",
+      "consumedCount": 0,
+      "licensedCount": 0,
+      "licensedCapacityGB": 0,
+      "consumedCapacityGB": 0,
+      "consumedPercent": 0,
+      "enterpriseHostInfo": "172.20.240.74",
+      "dpxId": "1002",
+      "licenseModel": "Component-based License Model",
+      "capacityCategoryorComponentFeature": "Slots   1 -   10",
+      "licenseExpirationDay": 0,
+      "isLicenseViolation": false,
+      "isReportUsage": true,
+      "resourceType": "license",
+      "isEvaluationKey": "true",
+      "requestStatus": "success",
+      "errorMessage": null,
+      "recordCount": 14
+  },
+  {
+      "links": {
+          "self": {
+              "rel": "self",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          },
+          "up": {
+              "rel": "up",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          }
+      },
+      "id": "Slots  11 -   25",
+      "name": "Slots  11 -   25",
+      "consumedCount": 2,
+      "licensedCount": 0,
+      "licensedCapacityGB": 0,
+      "consumedCapacityGB": 0,
+      "consumedPercent": 300,
+      "enterpriseHostInfo": "172.20.240.74",
+      "dpxId": "1002",
+      "licenseModel": "Component-based License Model",
+      "capacityCategoryorComponentFeature": "Slots  11 -   25",
+      "licenseExpirationDay": 0,
+      "isLicenseViolation": false,
+      "isReportUsage": true,
+      "resourceType": "license",
+      "isEvaluationKey": "true",
+      "requestStatus": "success",
+      "errorMessage": null,
+      "recordCount": 15
+  },
+  {
+      "links": {
+          "self": {
+              "rel": "self",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          },
+          "up": {
+              "rel": "up",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          }
+      },
+      "id": "Slots  26 -   50",
+      "name": "Slots  26 -   50",
+      "consumedCount": 0,
+      "licensedCount": 0,
+      "licensedCapacityGB": 0,
+      "consumedCapacityGB": 0,
+      "consumedPercent": 0,
+      "enterpriseHostInfo": "172.20.240.74",
+      "dpxId": "1002",
+      "licenseModel": "Component-based License Model",
+      "capacityCategoryorComponentFeature": "Slots  26 -   50",
+      "licenseExpirationDay": 0,
+      "isLicenseViolation": false,
+      "isReportUsage": true,
+      "resourceType": "license",
+      "isEvaluationKey": "true",
+      "requestStatus": "success",
+      "errorMessage": null,
+      "recordCount": 16
+  },
+  {
+      "links": {
+          "self": {
+              "rel": "self",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          },
+          "up": {
+              "rel": "up",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          }
+      },
+      "id": "Slots  51 -  100",
+      "name": "Slots  51 -  100",
+      "consumedCount": 0,
+      "licensedCount": 0,
+      "licensedCapacityGB": 0,
+      "consumedCapacityGB": 0,
+      "consumedPercent": 0,
+      "enterpriseHostInfo": "172.20.240.74",
+      "dpxId": "1002",
+      "licenseModel": "Component-based License Model",
+      "capacityCategoryorComponentFeature": "Slots  51 -  100",
+      "licenseExpirationDay": 0,
+      "isLicenseViolation": false,
+      "isReportUsage": true,
+      "resourceType": "license",
+      "isEvaluationKey": "true",
+      "requestStatus": "success",
+      "errorMessage": null,
+      "recordCount": 17
+  },
+  {
+      "links": {
+          "self": {
+              "rel": "self",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          },
+          "up": {
+              "rel": "up",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          }
+      },
+      "id": "Slots 101 -  175",
+      "name": "Slots 101 -  175",
+      "consumedCount": 0,
+      "licensedCount": 0,
+      "licensedCapacityGB": 0,
+      "consumedCapacityGB": 0,
+      "consumedPercent": 0,
+      "enterpriseHostInfo": "172.20.240.74",
+      "dpxId": "1002",
+      "licenseModel": "Component-based License Model",
+      "capacityCategoryorComponentFeature": "Slots 101 -  175",
+      "licenseExpirationDay": 0,
+      "isLicenseViolation": false,
+      "isReportUsage": true,
+      "resourceType": "license",
+      "isEvaluationKey": "true",
+      "requestStatus": "success",
+      "errorMessage": null,
+      "recordCount": 18
+  },
+  {
+      "links": {
+          "self": {
+              "rel": "self",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          },
+          "up": {
+              "rel": "up",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          }
+      },
+      "id": "Slots 176 -  250",
+      "name": "Slots 176 -  250",
+      "consumedCount": 0,
+      "licensedCount": 0,
+      "licensedCapacityGB": 0,
+      "consumedCapacityGB": 0,
+      "consumedPercent": 0,
+      "enterpriseHostInfo": "172.20.240.74",
+      "dpxId": "1002",
+      "licenseModel": "Component-based License Model",
+      "capacityCategoryorComponentFeature": "Slots 176 -  250",
+      "licenseExpirationDay": 0,
+      "isLicenseViolation": false,
+      "isReportUsage": true,
+      "resourceType": "license",
+      "isEvaluationKey": "true",
+      "requestStatus": "success",
+      "errorMessage": null,
+      "recordCount": 19
+  },
+  {
+      "links": {
+          "self": {
+              "rel": "self",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          },
+          "up": {
+              "rel": "up",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          }
+      },
+      "id": "Slots 251 -  500",
+      "name": "Slots 251 -  500",
+      "consumedCount": 0,
+      "licensedCount": 0,
+      "licensedCapacityGB": 0,
+      "consumedCapacityGB": 0,
+      "consumedPercent": 0,
+      "enterpriseHostInfo": "172.20.240.74",
+      "dpxId": "1002",
+      "licenseModel": "Component-based License Model",
+      "capacityCategoryorComponentFeature": "Slots 251 -  500",
+      "licenseExpirationDay": 0,
+      "isLicenseViolation": false,
+      "isReportUsage": true,
+      "resourceType": "license",
+      "isEvaluationKey": "true",
+      "requestStatus": "success",
+      "errorMessage": null,
+      "recordCount": 20
+  },
+  {
+      "links": {
+          "self": {
+              "rel": "self",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          },
+          "up": {
+              "rel": "up",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          }
+      },
+      "id": "Slots 501 -  750",
+      "name": "Slots 501 -  750",
+      "consumedCount": 0,
+      "licensedCount": 0,
+      "licensedCapacityGB": 0,
+      "consumedCapacityGB": 0,
+      "consumedPercent": 0,
+      "enterpriseHostInfo": "172.20.240.74",
+      "dpxId": "1002",
+      "licenseModel": "Component-based License Model",
+      "capacityCategoryorComponentFeature": "Slots 501 -  750",
+      "licenseExpirationDay": 0,
+      "isLicenseViolation": false,
+      "isReportUsage": true,
+      "resourceType": "license",
+      "isEvaluationKey": "true",
+      "requestStatus": "success",
+      "errorMessage": null,
+      "recordCount": 21
+  },
+  {
+      "links": {
+          "self": {
+              "rel": "self",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          },
+          "up": {
+              "rel": "up",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          }
+      },
+      "id": "Slots > 750",
+      "name": "Slots > 750",
+      "consumedCount": 1,
+      "licensedCount": 0,
+      "licensedCapacityGB": 0,
+      "consumedCapacityGB": 0,
+      "consumedPercent": 200,
+      "enterpriseHostInfo": "172.20.240.74",
+      "dpxId": "1002",
+      "licenseModel": "Component-based License Model",
+      "capacityCategoryorComponentFeature": "Slots > 750",
+      "licenseExpirationDay": 0,
+      "isLicenseViolation": false,
+      "isReportUsage": true,
+      "resourceType": "license",
+      "isEvaluationKey": "true",
+      "requestStatus": "success",
+      "errorMessage": null,
+      "recordCount": 22
+  },
+  {
+      "links": {
+          "self": {
+              "rel": "self",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          },
+          "up": {
+              "rel": "up",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          }
+      },
+      "id": "250 Incr (> 1000 slots)",
+      "name": "250 Incr (> 1000 slots)",
+      "consumedCount": 3,
+      "licensedCount": 0,
+      "licensedCapacityGB": 0,
+      "consumedCapacityGB": 0,
+      "consumedPercent": 400,
+      "enterpriseHostInfo": "172.20.240.74",
+      "dpxId": "1002",
+      "licenseModel": "Component-based License Model",
+      "capacityCategoryorComponentFeature": "250 Incr (> 1000 slots)",
+      "licenseExpirationDay": 0,
+      "isLicenseViolation": false,
+      "isReportUsage": true,
+      "resourceType": "license",
+      "isEvaluationKey": "true",
+      "requestStatus": "success",
+      "errorMessage": null,
+      "recordCount": 23
+  },
+  {
+      "links": {
+          "self": {
+              "rel": "self",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          },
+          "up": {
+              "rel": "up",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          }
+      },
+      "id": "SAN Jukeboxes",
+      "name": "SAN Jukeboxes",
+      "consumedCount": 2,
+      "licensedCount": 0,
+      "licensedCapacityGB": 0,
+      "consumedCapacityGB": 0,
+      "consumedPercent": 300,
+      "enterpriseHostInfo": "172.20.240.74",
+      "dpxId": "1002",
+      "licenseModel": "Component-based License Model",
+      "capacityCategoryorComponentFeature": "SAN Jukeboxes",
+      "licenseExpirationDay": 0,
+      "isLicenseViolation": false,
+      "isReportUsage": true,
+      "resourceType": "license",
+      "isEvaluationKey": "true",
+      "requestStatus": "success",
+      "errorMessage": null,
+      "recordCount": 24
+  },
+  {
+      "links": {
+          "self": {
+              "rel": "self",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          },
+          "up": {
+              "rel": "up",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          }
+      },
+      "id": "ACSLS/ATL/AML Jukeboxes",
+      "name": "ACSLS/ATL/AML Jukeboxes",
+      "consumedCount": 0,
+      "licensedCount": 0,
+      "licensedCapacityGB": 0,
+      "consumedCapacityGB": 0,
+      "consumedPercent": 0,
+      "enterpriseHostInfo": "172.20.240.74",
+      "dpxId": "1002",
+      "licenseModel": "Component-based License Model",
+      "capacityCategoryorComponentFeature": "ACSLS/ATL/AML Jukeboxes",
+      "licenseExpirationDay": 0,
+      "isLicenseViolation": false,
+      "isReportUsage": true,
+      "resourceType": "license",
+      "isEvaluationKey": "true",
+      "requestStatus": "success",
+      "errorMessage": null,
+      "recordCount": 25
+  },
+  {
+      "links": {
+          "self": {
+              "rel": "self",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          },
+          "up": {
+              "rel": "up",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          }
+      },
+      "id": "Exchange/Lotus",
+      "name": "Exchange/Lotus",
+      "consumedCount": 0,
+      "licensedCount": 0,
+      "licensedCapacityGB": 0,
+      "consumedCapacityGB": 0,
+      "consumedPercent": 0,
+      "enterpriseHostInfo": "172.20.240.74",
+      "dpxId": "1002",
+      "licenseModel": "Component-based License Model",
+      "capacityCategoryorComponentFeature": "Exchange/Lotus",
+      "licenseExpirationDay": 0,
+      "isLicenseViolation": false,
+      "isReportUsage": true,
+      "resourceType": "license",
+      "isEvaluationKey": "true",
+      "requestStatus": "success",
+      "errorMessage": null,
+      "recordCount": 26
+  },
+  {
+      "links": {
+          "self": {
+              "rel": "self",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          },
+          "up": {
+              "rel": "up",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          }
+      },
+      "id": "SQL",
+      "name": "SQL",
+      "consumedCount": 1,
+      "licensedCount": 0,
+      "licensedCapacityGB": 0,
+      "consumedCapacityGB": 0,
+      "consumedPercent": 200,
+      "enterpriseHostInfo": "172.20.240.74",
+      "dpxId": "1002",
+      "licenseModel": "Component-based License Model",
+      "capacityCategoryorComponentFeature": "SQL",
+      "licenseExpirationDay": 0,
+      "isLicenseViolation": false,
+      "isReportUsage": true,
+      "resourceType": "license",
+      "isEvaluationKey": "true",
+      "requestStatus": "success",
+      "errorMessage": null,
+      "recordCount": 27
+  },
+  {
+      "links": {
+          "self": {
+              "rel": "self",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          },
+          "up": {
+              "rel": "up",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          }
+      },
+      "id": "Snapvault Protection",
+      "name": "Snapvault Protection",
+      "consumedCount": 0,
+      "licensedCount": 0,
+      "licensedCapacityGB": 0,
+      "consumedCapacityGB": 0,
+      "consumedPercent": 0,
+      "enterpriseHostInfo": "172.20.240.74",
+      "dpxId": "1002",
+      "licenseModel": "Capacity-based License Model",
+      "capacityCategoryorComponentFeature": "Snapvault Protection",
+      "licenseExpirationDay": 0,
+      "isLicenseViolation": false,
+      "isReportUsage": true,
+      "resourceType": "license",
+      "isEvaluationKey": "true",
+      "requestStatus": "success",
+      "errorMessage": null,
+      "recordCount": 28
+  },
+  {
+      "links": {
+          "self": {
+              "rel": "self",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          },
+          "up": {
+              "rel": "up",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          }
+      },
+      "id": "Block OSS/vStor Backup Jobs",
+      "name": "Block OSS/vStor Backup Jobs",
+      "consumedCount": 0,
+      "licensedCount": 0,
+      "licensedCapacityGB": 0,
+      "consumedCapacityGB": 800,
+      "consumedPercent": 80100,
+      "enterpriseHostInfo": "172.20.240.74",
+      "dpxId": "1002",
+      "licenseModel": "Capacity-based License Model",
+      "capacityCategoryorComponentFeature": "Block OSS/vStor Backup Jobs",
+      "licenseExpirationDay": 0,
+      "isLicenseViolation": false,
+      "isReportUsage": true,
+      "resourceType": "license",
+      "isEvaluationKey": "true",
+      "requestStatus": "success",
+      "errorMessage": null,
+      "recordCount": 29
+  },
+  {
+      "links": {
+          "self": {
+              "rel": "self",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          },
+          "up": {
+              "rel": "up",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          }
+      },
+      "id": "Block NetApp Backup Jobs",
+      "name": "Block NetApp Backup Jobs",
+      "consumedCount": 0,
+      "licensedCount": 0,
+      "licensedCapacityGB": 0,
+      "consumedCapacityGB": 955,
+      "consumedPercent": 95600,
+      "enterpriseHostInfo": "172.20.240.74",
+      "dpxId": "1002",
+      "licenseModel": "Capacity-based License Model",
+      "capacityCategoryorComponentFeature": "Block NetApp Backup Jobs",
+      "licenseExpirationDay": 0,
+      "isLicenseViolation": false,
+      "isReportUsage": true,
+      "resourceType": "license",
+      "isEvaluationKey": "true",
+      "requestStatus": "success",
+      "errorMessage": null,
+      "recordCount": 30
+  },
+  {
+      "links": {
+          "self": {
+              "rel": "self",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          },
+          "up": {
+              "rel": "up",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          }
+      },
+      "id": "NAS/NDMP Protection",
+      "name": "NAS/NDMP Protection",
+      "consumedCount": 0,
+      "licensedCount": 0,
+      "licensedCapacityGB": 0,
+      "consumedCapacityGB": 2869,
+      "consumedPercent": 287000,
+      "enterpriseHostInfo": "172.20.240.74",
+      "dpxId": "1002",
+      "licenseModel": "Capacity-based License Model",
+      "capacityCategoryorComponentFeature": "NAS/NDMP Protection",
+      "licenseExpirationDay": 0,
+      "isLicenseViolation": false,
+      "isReportUsage": true,
+      "resourceType": "license",
+      "isEvaluationKey": "true",
+      "requestStatus": "success",
+      "errorMessage": null,
+      "recordCount": 31
+  },
+  {
+      "links": {
+          "self": {
+              "rel": "self",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          },
+          "up": {
+              "rel": "up",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          }
+      },
+      "id": "Oracle",
+      "name": "Oracle",
+      "consumedCount": 0,
+      "licensedCount": 0,
+      "licensedCapacityGB": 0,
+      "consumedCapacityGB": 0,
+      "consumedPercent": 0,
+      "enterpriseHostInfo": "172.20.240.74",
+      "dpxId": "1002",
+      "licenseModel": "Component-based License Model",
+      "capacityCategoryorComponentFeature": "Oracle",
+      "licenseExpirationDay": 0,
+      "isLicenseViolation": false,
+      "isReportUsage": true,
+      "resourceType": "license",
+      "isEvaluationKey": "true",
+      "requestStatus": "success",
+      "errorMessage": null,
+      "recordCount": 32
+  },
+  {
+      "links": {
+          "self": {
+              "rel": "self",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          },
+          "up": {
+              "rel": "up",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          }
+      },
+      "id": "DB2",
+      "name": "DB2",
+      "consumedCount": 0,
+      "licensedCount": 0,
+      "licensedCapacityGB": 0,
+      "consumedCapacityGB": 0,
+      "consumedPercent": 0,
+      "enterpriseHostInfo": "172.20.240.74",
+      "dpxId": "1002",
+      "licenseModel": "Component-based License Model",
+      "capacityCategoryorComponentFeature": "DB2",
+      "licenseExpirationDay": 0,
+      "isLicenseViolation": false,
+      "isReportUsage": true,
+      "resourceType": "license",
+      "isEvaluationKey": "true",
+      "requestStatus": "success",
+      "errorMessage": null,
+      "recordCount": 33
+  },
+  {
+      "links": {
+          "self": {
+              "rel": "self",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          },
+          "up": {
+              "rel": "up",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          }
+      },
+      "id": "SAP",
+      "name": "SAP",
+      "consumedCount": 0,
+      "licensedCount": 0,
+      "licensedCapacityGB": 0,
+      "consumedCapacityGB": 0,
+      "consumedPercent": 0,
+      "enterpriseHostInfo": "172.20.240.74",
+      "dpxId": "1002",
+      "licenseModel": "Component-based License Model",
+      "capacityCategoryorComponentFeature": "SAP",
+      "licenseExpirationDay": 0,
+      "isLicenseViolation": false,
+      "isReportUsage": true,
+      "resourceType": "license",
+      "isEvaluationKey": "true",
+      "requestStatus": "success",
+      "errorMessage": null,
+      "recordCount": 34
+  },
+  {
+      "links": {
+          "self": {
+              "rel": "self",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          },
+          "up": {
+              "rel": "up",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          }
+      },
+      "id": "Groupwise",
+      "name": "Groupwise",
+      "consumedCount": 0,
+      "licensedCount": 0,
+      "licensedCapacityGB": 0,
+      "consumedCapacityGB": 0,
+      "consumedPercent": 0,
+      "enterpriseHostInfo": "172.20.240.74",
+      "dpxId": "1002",
+      "licenseModel": "Component-based License Model",
+      "capacityCategoryorComponentFeature": "Groupwise",
+      "licenseExpirationDay": 0,
+      "isLicenseViolation": false,
+      "isReportUsage": true,
+      "resourceType": "license",
+      "isEvaluationKey": "true",
+      "requestStatus": "success",
+      "errorMessage": null,
+      "recordCount": 35
+  },
+  {
+      "links": {
+          "self": {
+              "rel": "self",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          },
+          "up": {
+              "rel": "up",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          }
+      },
+      "id": "Sharepoint",
+      "name": "Sharepoint",
+      "consumedCount": 0,
+      "licensedCount": 0,
+      "licensedCapacityGB": 0,
+      "consumedCapacityGB": 0,
+      "consumedPercent": 0,
+      "enterpriseHostInfo": "172.20.240.74",
+      "dpxId": "1002",
+      "licenseModel": "Component-based License Model",
+      "capacityCategoryorComponentFeature": "Sharepoint",
+      "licenseExpirationDay": 0,
+      "isLicenseViolation": false,
+      "isReportUsage": true,
+      "resourceType": "license",
+      "isEvaluationKey": "true",
+      "requestStatus": "success",
+      "errorMessage": null,
+      "recordCount": 36
+  },
+  {
+      "links": {
+          "self": {
+              "rel": "self",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          },
+          "up": {
+              "rel": "up",
+              "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+          }
+      },
+      "id": "File Level Protection",
+      "name": "File Level Protection",
+      "consumedCount": 0,
+      "licensedCount": 0,
+      "licensedCapacityGB": 0,
+      "consumedCapacityGB": 495,
+      "consumedPercent": 49600,
+      "enterpriseHostInfo": "172.20.240.74",
+      "dpxId": "1002",
+      "licenseModel": "Capacity-based License Model",
+      "capacityCategoryorComponentFeature": "File Level Protection",
+      "licenseExpirationDay": 0,
+      "isLicenseViolation": false,
+      "isReportUsage": true,
+      "resourceType": "license",
+      "isEvaluationKey": "true",
+      "requestStatus": "success",
+      "errorMessage": null,
+      "recordCount": 37
+  }
+]

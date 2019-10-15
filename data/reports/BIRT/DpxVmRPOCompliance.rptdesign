@@ -319,10 +319,10 @@
     <data-sources>
         <script-data-source name="ScriptedArray" id="2356"/>
         <oda-data-source extensionID="com.syncsort.dp.xsb.reports.data.oda.rest" name="DPXprovider" id="3786">
-            <property name="Base URI">http://localhost:8082/api/dpx</property>
-            <property name="Auth URI">http://localhost:8082/api/endeavour/session</property>
-            <property name="Username">admin</property>
-            <encrypted-property name="Password" encryptionID="base64">Y2F0YWwwZ2lj</encrypted-property>
+            <property name="Base URI">http://report:8094/dpx</property>
+            <property name="Auth URI">http://auth:8094/session</property>
+            <property name="Username">sysadmin</property>
+            <encrypted-property name="Password" encryptionID="base64">c3lzYWRtaW4K</encrypted-property>
         </oda-data-source>
     </data-sources>
     <data-sets>

@@ -1,0 +1,51 @@
+{
+    "links": {
+        "self": {
+            "rel": "self",
+            "href": "http://172.20.61.20:8082/api/dpx/1002"
+        },
+        "up": {
+            "rel": "up",
+            "href": "http://172.20.61.20:8082/api/dpx"
+        },
+        "edit": {
+            "rel": "update",
+            "href": "http://172.20.61.20:8082/api/dpx/1002"
+        },
+        "delete": {
+            "rel": "delete",
+            "href": "http://172.20.61.20:8082/api/dpx/1002"
+        },
+        "usedby": {
+            "rel": "related",
+            "href": "http://172.20.61.20:8082/api/endeavour/association/resource/dpx/1002?action=listUsingResources"
+        },
+        "job": {
+            "rel": "related",
+            "href": "http://172.20.61.20:8082/api/dpx/1002/job"
+        },
+        "node": {
+            "rel": "related",
+            "href": "http://172.20.61.20:8082/api/dpx/1002/node"
+        },
+        "license": {
+            "rel": "related",
+            "href": "http://172.20.61.20:8082/api/dpx/1002/license"
+        }
+    },
+    "name": "Alan-rh-win64",
+    "hostAddress": "172.20.240.74",
+    "canonicalName": "rh-win64-44.devad.catalogic.us",
+    "type": "master",
+    "serverInfo": "ssdatmgr 2.2/4.5\nwin-x64\n15:49:51\nOct 26 2018",
+    "resourceType": "dpx",
+    "username": null,
+    "password": null,
+    "portNumber": 6123,
+    "comment": null,
+    "rbacPath": "dpx:0/dpx:1002",
+    "user": {
+        "href": "http://172.20.61.20:8082/api/identity/user/1006"
+    },
+    "id": "1002"
+}

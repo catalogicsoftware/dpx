@@ -1,0 +1,51 @@
+{
+    "links": {
+        "self": {
+            "rel": "self",
+            "href": "http://172.20.61.20:8082/api/dpx/1001"
+        },
+        "up": {
+            "rel": "up",
+            "href": "http://172.20.61.20:8082/api/dpx"
+        },
+        "edit": {
+            "rel": "update",
+            "href": "http://172.20.61.20:8082/api/dpx/1001"
+        },
+        "delete": {
+            "rel": "delete",
+            "href": "http://172.20.61.20:8082/api/dpx/1001"
+        },
+        "usedby": {
+            "rel": "related",
+            "href": "http://172.20.61.20:8082/api/endeavour/association/resource/dpx/1001?action=listUsingResources"
+        },
+        "job": {
+            "rel": "related",
+            "href": "http://172.20.61.20:8082/api/dpx/1001/job"
+        },
+        "node": {
+            "rel": "related",
+            "href": "http://172.20.61.20:8082/api/dpx/1001/node"
+        },
+        "license": {
+            "rel": "related",
+            "href": "http://172.20.61.20:8082/api/dpx/1001/license"
+        }
+    },
+    "name": "MyDPX",
+    "hostAddress": "172.20.61.31",
+    "canonicalName": "kjm-vm-61-30",
+    "type": "master",
+    "serverInfo": "ssdatmgr 2.2/4.5\nwin-x64\n16:18:38\nJul 21 2018",
+    "resourceType": "dpx",
+    "username": null,
+    "password": null,
+    "portNumber": 6123,
+    "comment": null,
+    "rbacPath": "dpx:0/dpx:1001",
+    "user": {
+        "href": "http://172.20.61.20:8082/api/identity/user/1005"
+    },
+    "id": "1001"
+}

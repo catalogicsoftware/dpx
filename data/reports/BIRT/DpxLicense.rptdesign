@@ -125,10 +125,10 @@
     <data-sources>
         <script-data-source name="ScriptedArray" id="2356"/>
         <oda-data-source extensionID="com.syncsort.dp.xsb.reports.data.oda.rest" name="DPXprovider" id="3786">
-            <property name="Base URI">http://localhost:8082/api/dpx</property>
-            <property name="Auth URI">http://localhost:8082/api/endeavour/session</property>
-            <property name="Username">admin</property>
-            <encrypted-property name="Password" encryptionID="base64">Y2F0YWwwZ2lj</encrypted-property>
+            <property name="Base URI">http://report:8094/dpx</property>
+            <property name="Auth URI">http://auth:8094/session</property>
+            <property name="Username">sysadmin</property>
+            <encrypted-property name="Password" encryptionID="base64">c3lzYWRtaW4K</encrypted-property>
         </oda-data-source>
     </data-sources>
     <data-sets>
@@ -2382,7 +2382,7 @@ else false</expression>
                                     </cell>
                                     <cell id="4640">
                                         <method name="onCreate"><![CDATA[if (this.getRowData( ).getColumnValue( "StatusStr" ) == "Violation"){
-this.file ="failed.png";
+this.file ="images/failed.png";
 }]]></method>
                                         <property name="textAlign">left</property>
                                         <image id="5566">
@@ -2390,12 +2390,12 @@ this.file ="failed.png";
                                             <property name="height">16px</property>
                                             <property name="width">16px</property>
                                             <method name="onCreate"><![CDATA[if (this.getRowData( ).getColumnValue( "StatusStr" ) == "Violation"){
-this.file ="failed.png";
+this.file ="images/failed.png";
 }
 this.helpText = this.getRowData( ).getColumnValue( "StatusStr" );
 ]]></method>
                                             <property name="source">file</property>
-                                            <expression name="uri" type="constant">completed.png</expression>
+                                            <expression name="uri" type="constant">images/completed.png</expression>
                                         </image>
                                     </cell>
                                 </row>
@@ -2482,18 +2482,18 @@ this.getStyle().fontWeight = "normal"
                                     </cell>
                                     <cell id="4744">
                                         <method name="onCreate"><![CDATA[if (this.getRowData( ).getColumnValue( "StatusStr" ) == "Violation"){
-this.file ="failed.png";
+this.file ="images/failed.png";
 }]]></method>
                                         <image id="5568">
                                             <property name="marginLeft">40pt</property>
                                             <property name="height">16px</property>
                                             <property name="width">16px</property>
                                             <method name="onCreate"><![CDATA[if (this.getRowData( ).getColumnValue( "StatusStr" ) == "Violation"){
-this.file ="failed.png";
+this.file ="images/failed.png";
 }
 this.helpText = this.getRowData( ).getColumnValue( "StatusStr" );]]></method>
                                             <property name="source">file</property>
-                                            <expression name="uri" type="constant">completed.png</expression>
+                                            <expression name="uri" type="constant">images/completed.png</expression>
                                         </image>
                                     </cell>
                                 </row>
