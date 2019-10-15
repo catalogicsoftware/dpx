@@ -283,7 +283,7 @@ lastWeek.setDate(lastWeek.getDate() - 7); //go back a week&#13;
     <data-sources>
         <oda-data-source extensionID="com.syncsort.dp.xsb.reports.data.oda.rest" name="DPXprovider" id="3786">
             <property name="Base URI">http://report:8094/dpx</property>
-            <property name="Auth URI">http://auth:8094/session</property>
+            <property name="Auth URI">http://auth:8091/session</property>
             <property name="Username">sysadmin</property>
             <encrypted-property name="Password" encryptionID="base64">c3lzYWRtaW4K</encrypted-property>
         </oda-data-source>
