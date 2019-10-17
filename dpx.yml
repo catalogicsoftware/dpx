@@ -51,10 +51,6 @@ services:
       - "webnet"
     depends_on:
       - "sql-db"
-    logging:
-      driver: "fluentd"
-      options:
-        tag: dpx-rest
 
 # PostgreSQL database service
   sql-db:
@@ -145,10 +141,6 @@ services:
       - "./stack-logs:/app/logs"
     networks:
       - webnet
-    logging:
-      driver: "fluentd"
-      options:
-        tag: dpx-auth
 
 # DPX vSphere plug-in configuration UI service
 # TODO: 
