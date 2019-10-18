@@ -69,12 +69,12 @@ JQ=| jq . | tee out.json
 # bring up the stack
 .PHONY: start start-x
 start: 
-	rm -rf dpx.env
+	rm -rf dpx.env svc.env
 	mkdir -p rest-db
 	$(MAKE) start-x
 
 start-x: opt keys stack-logs dpx.env dpx-vplugin-mgr.env dpx-apigateway.env plugins
-	. ./dpx-container-tags && $(DOCKER) stack deploy -c dpx.yml dpx --with-registry-auth
+	. ./dpx-container-tags && . ./svc.env && $(DOCKER) stack deploy -c dpx.yml dpx --with-registry-auth
 
 # check the status of the stack
 status:
@@ -93,13 +93,13 @@ distclean: clean
 
 # update docker services
 update: remove-old-images opt dpx-apigateway.env
-	. ./dpx-container-tags && export FLUENTD_CONFIG_DIGEST=$(shell date -r ./config/fluent.conf +%s) && export START_DATE=$(shell date --iso-8601=seconds) && $(DOCKER) stack deploy --prune -c dpx.yml dpx --with-registry-auth
+	. ./dpx-container-tags && . ./svc.env && export FLUENTD_CONFIG_DIGEST=$(shell date -r ./config/fluent.conf +%s) && export START_DATE=$(shell date --iso-8601=seconds) && $(DOCKER) stack deploy --prune -c dpx.yml dpx --with-registry-auth
 
 force-update: remove-old-images opt dpx-apigateway.env
 	$(DOCKER) stack rm dpx
 	./stack-wait.sh
 	git pull
-	. ./dpx-container-tags && $(DOCKER) stack deploy -c dpx.yml dpx --with-registry-auth
+	. ./dpx-container-tags && . ./svc.env && $(DOCKER) stack deploy -c dpx.yml dpx --with-registry-auth
 
 #
 # dpx.env contains env vars shared across various containers
@@ -110,6 +110,7 @@ dpx.env: api_key
 	echo "DOCKER_HOST_IP=$(THIS_HOST)" >> $@
 	echo "DPX_INTERNAL_SECRET_KEY=$(shell cat api_key)" >> $@
 	echo "SVC_HOST=$(THIS_HOST)" >> $@
+	echo "export SVC_HOST=$(THIS_HOST)" > svc.env
 
 # this command keeps only 3 most recent versions for each docker image
 remove-old-images: 

@@ -210,6 +210,7 @@ services:
       - ROUTE_ROOT_PREFIX=/
       - ROUTE_URL_ADMIN=http://admin:8092/
       - ROUTE_URL_AUTH=http://auth:8091/
+      - ROUTE_URL_BIRT=http://${SVC_HOST}:8099/
       - ROUTE_URL_CONFIG_UI=http://config-ui:8088/
       - ROUTE_URL_DISCOVERY=http://discovery:8090/
       - ROUTE_URL_DPXCORE=http://dpxcore:8095/
@@ -273,6 +274,7 @@ services:
       - RS_HOSTNAME=discovery
       - MS_PORT=8094
       - CONFIG_PATH=config
+      - BIRT_SVC_HOST=${SVC_HOST}
     deploy:
       replicas: 1
     ports:
