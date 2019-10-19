@@ -47,6 +47,7 @@ services:
     volumes:
       - "./opt-apigateway:/key"
       - "./opt-apigateway:/opt"
+      - "./stack-logs:/logs"
     networks:
       - "webnet"
     depends_on:
