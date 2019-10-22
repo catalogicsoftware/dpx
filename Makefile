@@ -96,11 +96,10 @@ update: remove-old-images opt dpx-apigateway.env
 	. ./dpx-container-tags && . ./svc.env && export FLUENTD_CONFIG_DIGEST=$(shell date -r ./config/fluent.conf +%s) && export START_DATE=$(shell date --iso-8601=seconds) && $(DOCKER) system prune -a -f && $(DOCKER) stack deploy --prune -c dpx.yml dpx --with-registry-auth
 
 force-update: remove-old-images opt dpx-apigateway.env
-	$(DOCKER) system prune -a -f
 	$(DOCKER) stack rm dpx
 	./stack-wait.sh
 	git pull
-	. ./dpx-container-tags && . ./svc.env && $(DOCKER) stack deploy -c dpx.yml dpx --with-registry-auth
+	. ./dpx-container-tags && . ./svc.env && $(DOCKER) system prune -a -f && $(DOCKER) stack deploy -c dpx.yml dpx --with-registry-auth
 
 #
 # dpx.env contains env vars shared across various containers
