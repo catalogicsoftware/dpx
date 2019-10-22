@@ -74,7 +74,7 @@ start:
 	$(MAKE) start-x
 
 start-x: opt keys stack-logs dpx.env dpx-vplugin-mgr.env dpx-apigateway.env plugins
-	. ./dpx-container-tags && $(DOCKER) stack deploy -c dpx.yml dpx --with-registry-auth
+	. ./dpx-container-tags && $(DOCKER) system prune -a -f && $(DOCKER) stack deploy -c dpx.yml dpx --with-registry-auth
 
 # check the status of the stack
 status:
@@ -93,9 +93,10 @@ distclean: clean
 
 # update docker services
 update: remove-old-images dpx-apigateway.env
-	. ./dpx-container-tags && export FLUENTD_CONFIG_DIGEST=$(shell date -r ./config/fluent.conf +%s) && export START_DATE=$(shell date --iso-8601=seconds) && $(DOCKER) stack deploy --prune -c dpx.yml dpx --with-registry-auth
+	. ./dpx-container-tags && export FLUENTD_CONFIG_DIGEST=$(shell date -r ./config/fluent.conf +%s) && export START_DATE=$(shell date --iso-8601=seconds) && $(DOCKER) system prune -a -f && $(DOCKER) stack deploy --prune -c dpx.yml dpx --with-registry-auth
 
 force-update: remove-old-images dpx-apigateway.env
+	$(DOCKER) system prune -a -f
 	$(DOCKER) stack rm dpx
 	./stack-wait.sh
 	git pull
