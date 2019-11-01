@@ -1,0 +1,354 @@
+[
+        {
+            "links": {
+                "self": {
+                    "rel": "self",
+                    "href": "http://172.20.61.20:8082/api/dpx/1001/job/1571356500"
+                },
+                "up": {
+                    "rel": "up",
+                    "href": "http://172.20.61.20:8082/api/dpx/1001/job"
+                }
+            },
+            "name": "CONDENSE",
+            "id": "1571356500",
+            "dpxId": "1001",
+            "jobName": "CONDENSE",
+            "resourceType": "job",
+            "jobType": "CONDENSE",
+            "jobCreator": null,
+            "jobDesciption": null,
+            "jobState": "USER",
+            "status": "COMPLETED",
+            "runStatus": 5,
+            "requestStatus": "success",
+            "errorMessage": null,
+            "recordCount": 0,
+            "runRc": 0,
+            "jobFreq": null,
+            "jobRetention": 0,
+            "runTime": 1571356500000,
+            "startTime": 1571356500000,
+            "endTime": 1571356504000
+        },
+        {
+            "links": {
+                "self": {
+                    "rel": "self",
+                    "href": "http://172.20.61.20:8082/api/dpx/1001/job/1571442900"
+                },
+                "up": {
+                    "rel": "up",
+                    "href": "http://172.20.61.20:8082/api/dpx/1001/job"
+                }
+            },
+            "name": "CONDENSE",
+            "id": "1571442900",
+            "dpxId": "1001",
+            "jobName": "CONDENSE",
+            "resourceType": "job",
+            "jobType": "CONDENSE",
+            "jobCreator": null,
+            "jobDesciption": null,
+            "jobState": "USER",
+            "status": "COMPLETED",
+            "runStatus": 5,
+            "requestStatus": "success",
+            "errorMessage": null,
+            "recordCount": 1,
+            "runRc": 0,
+            "jobFreq": null,
+            "jobRetention": 0,
+            "runTime": 1571442900000,
+            "startTime": 1571442900000,
+            "endTime": 1571442903000
+        },
+        {
+            "links": {
+                "self": {
+                    "rel": "self",
+                    "href": "http://172.20.61.20:8082/api/dpx/1001/job/1571529300"
+                },
+                "up": {
+                    "rel": "up",
+                    "href": "http://172.20.61.20:8082/api/dpx/1001/job"
+                }
+            },
+            "name": "CONDENSE",
+            "id": "1571529300",
+            "dpxId": "1001",
+            "jobName": "CONDENSE",
+            "resourceType": "job",
+            "jobType": "CONDENSE",
+            "jobCreator": null,
+            "jobDesciption": null,
+            "jobState": "USER",
+            "status": "COMPLETED",
+            "runStatus": 5,
+            "requestStatus": "success",
+            "errorMessage": null,
+            "recordCount": 2,
+            "runRc": 0,
+            "jobFreq": null,
+            "jobRetention": 0,
+            "runTime": 1571529300000,
+            "startTime": 1571529300000,
+            "endTime": 1571529303000
+        },
+        {
+            "links": {
+                "self": {
+                    "rel": "self",
+                    "href": "http://172.20.61.20:8082/api/dpx/1001/job/1571615700"
+                },
+                "up": {
+                    "rel": "up",
+                    "href": "http://172.20.61.20:8082/api/dpx/1001/job"
+                }
+            },
+            "name": "CONDENSE",
+            "id": "1571615700",
+            "dpxId": "1001",
+            "jobName": "CONDENSE",
+            "resourceType": "job",
+            "jobType": "CONDENSE",
+            "jobCreator": null,
+            "jobDesciption": null,
+            "jobState": "USER",
+            "status": "COMPLETED",
+            "runStatus": 5,
+            "requestStatus": "success",
+            "errorMessage": null,
+            "recordCount": 3,
+            "runRc": 0,
+            "jobFreq": null,
+            "jobRetention": 0,
+            "runTime": 1571615700000,
+            "startTime": 1571615700000,
+            "endTime": 1571615703000
+        },
+        {
+            "links": {
+                "self": {
+                    "rel": "self",
+                    "href": "http://172.20.61.20:8082/api/dpx/1001/job/1571702100"
+                },
+                "up": {
+                    "rel": "up",
+                    "href": "http://172.20.61.20:8082/api/dpx/1001/job"
+                }
+            },
+            "name": "CONDENSE",
+            "id": "1571702100",
+            "dpxId": "1001",
+            "jobName": "CONDENSE",
+            "resourceType": "job",
+            "jobType": "CONDENSE",
+            "jobCreator": null,
+            "jobDesciption": null,
+            "jobState": "USER",
+            "status": "COMPLETED",
+            "runStatus": 5,
+            "requestStatus": "success",
+            "errorMessage": null,
+            "recordCount": 4,
+            "runRc": 0,
+            "jobFreq": null,
+            "jobRetention": 0,
+            "runTime": 1571702100000,
+            "startTime": 1571702100000,
+            "endTime": 1571702103000
+        },
+        {
+            "links": {
+                "self": {
+                    "rel": "self",
+                    "href": "http://172.20.61.20:8082/api/dpx/1001/job/1571788500"
+                },
+                "up": {
+                    "rel": "up",
+                    "href": "http://172.20.61.20:8082/api/dpx/1001/job"
+                }
+            },
+            "name": "CONDENSE",
+            "id": "1571788500",
+            "dpxId": "1001",
+            "jobName": "CONDENSE",
+            "resourceType": "job",
+            "jobType": "CONDENSE",
+            "jobCreator": null,
+            "jobDesciption": null,
+            "jobState": "USER",
+            "status": "COMPLETED",
+            "runStatus": 5,
+            "requestStatus": "success",
+            "errorMessage": null,
+            "recordCount": 5,
+            "runRc": 0,
+            "jobFreq": null,
+            "jobRetention": 0,
+            "runTime": 1571788500000,
+            "startTime": 1571788500000,
+            "endTime": 1571788503000
+        },
+        {
+            "links": {
+                "self": {
+                    "rel": "self",
+                    "href": "http://172.20.61.20:8082/api/dpx/1001/job/1571874900"
+                },
+                "up": {
+                    "rel": "up",
+                    "href": "http://172.20.61.20:8082/api/dpx/1001/job"
+                }
+            },
+            "name": "CONDENSE",
+            "id": "1571874900",
+            "dpxId": "1001",
+            "jobName": "CONDENSE",
+            "resourceType": "job",
+            "jobType": "CONDENSE",
+            "jobCreator": null,
+            "jobDesciption": null,
+            "jobState": "USER",
+            "status": "COMPLETED",
+            "runStatus": 5,
+            "requestStatus": "success",
+            "errorMessage": null,
+            "recordCount": 6,
+            "runRc": 0,
+            "jobFreq": null,
+            "jobRetention": 0,
+            "runTime": 1571874900000,
+            "startTime": 1571874900000,
+            "endTime": 1571874903000
+        },
+        {
+            "links": {
+                "self": {
+                    "rel": "self",
+                    "href": "http://172.20.61.20:8082/api/dpx/1001/job/1571874900"
+                },
+                "up": {
+                    "rel": "up",
+                    "href": "http://172.20.61.20:8082/api/dpx/1001/job"
+                }
+            },
+            "name": "CONDENSE",
+            "id": "1571874900",
+            "dpxId": "1001",
+            "jobName": "CONDENSE",
+            "resourceType": "job",
+            "jobType": "CONDENSE",
+            "jobCreator": null,
+            "jobDesciption": null,
+            "jobState": "USER",
+            "status": "COMPLETED",
+            "runStatus": 5,
+            "requestStatus": "success",
+            "errorMessage": null,
+            "recordCount": 7,
+            "runRc": 0,
+            "jobFreq": null,
+            "jobRetention": 0,
+            "runTime": 1571874900000,
+            "startTime": 1571874900000,
+            "endTime": 1571874903000
+        },
+        {
+            "links": {
+                "self": {
+                    "rel": "self",
+                    "href": "http://172.20.61.20:8082/api/dpx/1001/job/0"
+                },
+                "up": {
+                    "rel": "up",
+                    "href": "http://172.20.61.20:8082/api/dpx/1001/job"
+                }
+            },
+            "name": "DAILY_SCHED",
+            "id": "0",
+            "dpxId": "1001",
+            "jobName": "DAILY_SCHED",
+            "resourceType": "job",
+            "jobType": "SYSTEM",
+            "jobCreator": null,
+            "jobDesciption": null,
+            "jobState": "SYSTEM",
+            "status": "COMPLETED",
+            "runStatus": 5,
+            "requestStatus": "success",
+            "errorMessage": null,
+            "recordCount": 8,
+            "runRc": 0,
+            "jobFreq": null,
+            "jobRetention": 0,
+            "runTime": 1571874900000,
+            "startTime": 1571874900000,
+            "endTime": 1571874900000
+        },
+        {
+            "links": {
+                "self": {
+                    "rel": "self",
+                    "href": "http://172.20.61.20:8082/api/dpx/1001/job/0"
+                },
+                "up": {
+                    "rel": "up",
+                    "href": "http://172.20.61.20:8082/api/dpx/1001/job"
+                }
+            },
+            "name": "CONDENSE",
+            "id": "0",
+            "dpxId": "1001",
+            "jobName": "CONDENSE",
+            "resourceType": "job",
+            "jobType": "CONDENSE",
+            "jobCreator": null,
+            "jobDesciption": null,
+            "jobState": "USER",
+            "status": "NOT_RUN",
+            "runStatus": 0,
+            "requestStatus": "success",
+            "errorMessage": null,
+            "recordCount": 9,
+            "runRc": 0,
+            "jobFreq": null,
+            "jobRetention": 0,
+            "runTime": 1571961300000,
+            "startTime": 0,
+            "endTime": 0
+        },
+        {
+            "links": {
+                "self": {
+                    "rel": "self",
+                    "href": "http://172.20.61.20:8082/api/dpx/1001/job/0"
+                },
+                "up": {
+                    "rel": "up",
+                    "href": "http://172.20.61.20:8082/api/dpx/1001/job"
+                }
+            },
+            "name": "DAILY_SCHED",
+            "id": "0",
+            "dpxId": "1001",
+            "jobName": "DAILY_SCHED",
+            "resourceType": "job",
+            "jobType": "SYSTEM",
+            "jobCreator": null,
+            "jobDesciption": null,
+            "jobState": "SYSTEM",
+            "status": "NOT_RUN",
+            "runStatus": 0,
+            "requestStatus": "success",
+            "errorMessage": null,
+            "recordCount": 10,
+            "runRc": 0,
+            "jobFreq": null,
+            "jobRetention": 0,
+            "runTime": 1571961300000,
+            "startTime": 0,
+            "endTime": 0
+        }
+]

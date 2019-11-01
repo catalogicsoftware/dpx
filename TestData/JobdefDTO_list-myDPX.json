@@ -1,0 +1,1525 @@
+[
+  {
+      "id": "1001:CPY_01",
+      "name": "CPY_01",
+      "dpxId": "1001",
+      "resourceType": "jobdef",
+      "jobName": "CPY_01",
+      "jobType": "COPY",
+      "jobTypeInt": 9,
+      "jobfolderName": "SS_DEFAULT",
+      "creator": "sysadmin",
+      "creationTime": 1534806502000,
+      "description": "Copy 5M files",
+      "flags": 0,
+      "msgFlags": 0,
+      "jobdef": "DESTINATION luxc07-5ma / /data ; \nSOURCE luxco7-5mb / CPY_01.0 ; \nCPY_01.0:\nI /data/5M/* ; \n\n",
+      "configs": [
+          {
+              "num": 1,
+              "jobType": 9,
+              "srcNode": "luxco7-5mb",
+              "srcVol": "/",
+              "srcDir": "CPY_01.0",
+              "dstNode": "luxc07-5ma",
+              "dstVol": "/",
+              "dstDir": "/data",
+              "seldirs": [
+                  "/data/5M/*"
+              ]
+          }
+      ],
+      "schedules": [],
+      "globals": "DATACOMPRESS N;\nENCRYPTION N;\nSKIPNFS N;\nNOV_EXPAND N;\nF_RETRY 1;\nTSKRETRY 1;\nTSKRETRYWAIT 1;\nREPLACE N;\nDESTPATH R;\nRSTSEC N;\nMAILADDR <RECIPIENT 'DEFAULT';CC 'DEFAULT';BCC 'DEFAULT';SUBJECT 'DEFAULT';> ;\nOPERATORMAILADDR <RECIPIENT 'DEFAULT';CC 'DEFAULT';BCC 'DEFAULT';SUBJECT 'DEFAULT';> ;\nRM_JOBS N\n",
+      "options": [
+          {
+              "name": "DATACOMPRESS",
+              "value": "N"
+          },
+          {
+              "name": "ENCRYPTION",
+              "value": "N"
+          },
+          {
+              "name": "SKIPNFS",
+              "value": "N"
+          },
+          {
+              "name": "NOV_EXPAND",
+              "value": "N"
+          },
+          {
+              "name": "F_RETRY",
+              "value": "1"
+          },
+          {
+              "name": "TSKRETRY",
+              "value": "1"
+          },
+          {
+              "name": "TSKRETRYWAIT",
+              "value": "1"
+          },
+          {
+              "name": "REPLACE",
+              "value": "N"
+          },
+          {
+              "name": "DESTPATH",
+              "value": "R"
+          },
+          {
+              "name": "RSTSEC",
+              "value": "N"
+          },
+          {
+              "name": "MAILADDR",
+              "value": "<RECIPIENT 'DEFAULT'"
+          },
+          {
+              "name": "OPERATORMAILADDR",
+              "value": "<RECIPIENT 'DEFAULT'"
+          }
+      ],
+      "requestStatus": "success",
+      "recordCount": 1
+  },
+  {
+      "id": "1001:FIL_winA",
+      "name": "FIL_winA",
+      "dpxId": "1001",
+      "resourceType": "jobdef",
+      "jobName": "FIL_winA",
+      "jobType": "BACKUP_BASE",
+      "jobTypeInt": 1,
+      "jobfolderName": "SS_DEFAULT",
+      "creator": "sysadmin",
+      "creationTime": 1534909497000,
+      "description": "File b/u; src (WIN-A); dst(DD-WIN-B",
+      "flags": 0,
+      "msgFlags": 0,
+      "jobdef": "SOURCE win2k12-5ma E: FIL_winA.0 ; \nFIL_winA.0:\nI \\Datagen\\* ; \n\n",
+      "dest": " win2k12-5ma E: Pool_Disk Device_Windows02 NULL ; \n\n win2k12-5ma E: Pool_Disk Device_Windows02 NULL ; \n\n win2k12-5ma E: Pool_Disk Device_Windows02 NULL ; \n\n",
+      "configs": [
+          {
+              "num": 1,
+              "jobType": 1,
+              "srcNode": "win2k12-5ma",
+              "srcVol": "E:",
+              "srcDir": "FIL_winA.0",
+              "dstNode": "Device_Windows02",
+              "dstVol": "NULL",
+              "devicePool": "Device_Windows02",
+              "device": "NULL",
+              "mediaPool": "Pool_Disk",
+              "dstNodeIncr": "Device_Windows02",
+              "dstVolIncr": "NULL",
+              "devicePoolIncr": "Device_Windows02",
+              "deviceIncr": "NULL",
+              "mediaPoolIncr": "Pool_Disk",
+              "dstNodeDifr": "Device_Windows02",
+              "dstVolDifr": "NULL",
+              "devicePoolDifr": "Device_Windows02",
+              "deviceDifr": "NULL",
+              "mediaPoolDifr": "Pool_Disk",
+              "seldirs": [
+                  "\\Datagen\\*"
+              ]
+          }
+      ],
+      "schedules": [],
+      "globals": "VERIFY 0;\nDATACOMPRESS N ;\nLABELNEWTAPE Y ;\nAPPEND Y;\nEOJ_ACTION R;\nORIG_OFF  N;\nAPPENDOFFSITE  N;\nTWINTAPEOFFSITE  N;\nTAPEMOUNTRETRY 10;\nTAPEWAITINTERVAL 60;\nTWIN N;\nCHECKSUM N;\nCAT_FILE N;\nCAT_EOJ Y;\nCANCL_KP N;\nERD Y;\nMAXDRIVE 8;\nMAXTASKS 1;\nMINDRIVE 1;\nNO_CLEAN N ;\nTSNAP Y;\nTSKRETRY 1;\nTSKRETRYWAIT 1;\nSQLCKDB N;\nFINISHFB Y;\nSPLIT_SZ 0;\nNOV_EXPAND N;\nENCRYPTION N;\nEDOT N;\nENCTYPE N;\nBK_MNTPT N;\nBK_RSM N;\nBK_SPF Y ;\nF_RETRY 1 ;\nSKIPNFS Y ;\nEXCHBLVL D ;\nNDMP_FH L ;\nNDMP_LOG Y ;\nAUTOSCHED N ;\nNDMP_ENV <>;\nMULTFS N ;\nMULTTHRD N ;\nMAILADDR <RECIPIENT 'DEFAULT';CC 'DEFAULT';BCC 'DEFAULT';SUBJECT 'DEFAULT';> ;\nOPERATORMAILADDR <RECIPIENT 'DEFAULT';CC 'DEFAULT';BCC 'DEFAULT';SUBJECT 'DEFAULT';> ;\n\n",
+      "options": [
+          {
+              "name": "VERIFY",
+              "value": "0"
+          },
+          {
+              "name": "DATACOMPRESS",
+              "value": "N "
+          },
+          {
+              "name": "LABELNEWTAPE",
+              "value": "Y "
+          },
+          {
+              "name": "APPEND",
+              "value": "Y"
+          },
+          {
+              "name": "EOJ_ACTION",
+              "value": "R"
+          },
+          {
+              "name": "ORIG_OFF",
+              "value": " N"
+          },
+          {
+              "name": "APPENDOFFSITE",
+              "value": " N"
+          },
+          {
+              "name": "TWINTAPEOFFSITE",
+              "value": " N"
+          },
+          {
+              "name": "TAPEMOUNTRETRY",
+              "value": "10"
+          },
+          {
+              "name": "TAPEWAITINTERVAL",
+              "value": "60"
+          },
+          {
+              "name": "TWIN",
+              "value": "N"
+          },
+          {
+              "name": "CHECKSUM",
+              "value": "N"
+          },
+          {
+              "name": "CAT_FILE",
+              "value": "N"
+          },
+          {
+              "name": "CAT_EOJ",
+              "value": "Y"
+          },
+          {
+              "name": "CANCL_KP",
+              "value": "N"
+          },
+          {
+              "name": "ERD",
+              "value": "Y"
+          },
+          {
+              "name": "MAXDRIVE",
+              "value": "8"
+          },
+          {
+              "name": "MAXTASKS",
+              "value": "1"
+          },
+          {
+              "name": "MINDRIVE",
+              "value": "1"
+          },
+          {
+              "name": "NO_CLEAN",
+              "value": "N "
+          },
+          {
+              "name": "TSNAP",
+              "value": "Y"
+          },
+          {
+              "name": "TSKRETRY",
+              "value": "1"
+          },
+          {
+              "name": "TSKRETRYWAIT",
+              "value": "1"
+          },
+          {
+              "name": "SQLCKDB",
+              "value": "N"
+          },
+          {
+              "name": "FINISHFB",
+              "value": "Y"
+          },
+          {
+              "name": "SPLIT_SZ",
+              "value": "0"
+          },
+          {
+              "name": "NOV_EXPAND",
+              "value": "N"
+          },
+          {
+              "name": "ENCRYPTION",
+              "value": "N"
+          },
+          {
+              "name": "EDOT",
+              "value": "N"
+          },
+          {
+              "name": "ENCTYPE",
+              "value": "N"
+          },
+          {
+              "name": "BK_MNTPT",
+              "value": "N"
+          },
+          {
+              "name": "BK_RSM",
+              "value": "N"
+          },
+          {
+              "name": "BK_SPF",
+              "value": "Y "
+          },
+          {
+              "name": "F_RETRY",
+              "value": "1 "
+          },
+          {
+              "name": "SKIPNFS",
+              "value": "Y "
+          },
+          {
+              "name": "EXCHBLVL",
+              "value": "D "
+          },
+          {
+              "name": "NDMP_FH",
+              "value": "L "
+          },
+          {
+              "name": "NDMP_LOG",
+              "value": "Y "
+          },
+          {
+              "name": "AUTOSCHED",
+              "value": "N "
+          },
+          {
+              "name": "NDMP_ENV",
+              "value": "<>"
+          },
+          {
+              "name": "MULTFS",
+              "value": "N "
+          },
+          {
+              "name": "MULTTHRD",
+              "value": "N "
+          },
+          {
+              "name": "MAILADDR",
+              "value": "<RECIPIENT 'DEFAULT'"
+          },
+          {
+              "name": "OPERATORMAILADDR",
+              "value": "<RECIPIENT 'DEFAULT'"
+          }
+      ],
+      "requestStatus": "success",
+      "recordCount": 2
+  },
+  {
+      "id": "1001:FIL_winB",
+      "name": "FIL_winB",
+      "dpxId": "1001",
+      "resourceType": "jobdef",
+      "jobName": "FIL_winB",
+      "jobType": "BACKUP_BASE",
+      "jobTypeInt": 1,
+      "jobfolderName": "SS_DEFAULT",
+      "creator": "sysadmin",
+      "creationTime": 1534909694000,
+      "description": " File b/u; src (WIN-B); dst(DD-LUX-B)",
+      "flags": 0,
+      "msgFlags": 0,
+      "jobdef": "SOURCE win2k12-5mb E: FIL_winB.0 ; \nFIL_winB.0:\nI \\Datagen\\* ; \n\n",
+      "dest": " win2k12-5mb E: Pool_Disk Device_Linux02 NULL ; \n\n win2k12-5mb E: Pool_Disk Device_Linux02 NULL ; \n\n win2k12-5mb E: Pool_Disk Device_Linux02 NULL ; \n\n",
+      "configs": [
+          {
+              "num": 1,
+              "jobType": 1,
+              "srcNode": "win2k12-5mb",
+              "srcVol": "E:",
+              "srcDir": "FIL_winB.0",
+              "dstNode": "Device_Linux02",
+              "dstVol": "NULL",
+              "devicePool": "Device_Linux02",
+              "device": "NULL",
+              "mediaPool": "Pool_Disk",
+              "dstNodeIncr": "Device_Linux02",
+              "dstVolIncr": "NULL",
+              "devicePoolIncr": "Device_Linux02",
+              "deviceIncr": "NULL",
+              "mediaPoolIncr": "Pool_Disk",
+              "dstNodeDifr": "Device_Linux02",
+              "dstVolDifr": "NULL",
+              "devicePoolDifr": "Device_Linux02",
+              "deviceDifr": "NULL",
+              "mediaPoolDifr": "Pool_Disk",
+              "seldirs": [
+                  "\\Datagen\\*"
+              ]
+          }
+      ],
+      "schedules": [],
+      "globals": "VERIFY 0;\nDATACOMPRESS N ;\nLABELNEWTAPE Y ;\nAPPEND Y;\nEOJ_ACTION R;\nORIG_OFF  N;\nAPPENDOFFSITE  N;\nTWINTAPEOFFSITE  N;\nTAPEMOUNTRETRY 10;\nTAPEWAITINTERVAL 60;\nTWIN N;\nCHECKSUM N;\nCAT_FILE N;\nCAT_EOJ Y;\nCANCL_KP N;\nERD Y;\nMAXDRIVE 8;\nMAXTASKS 1;\nMINDRIVE 1;\nNO_CLEAN N ;\nTSNAP Y;\nTSKRETRY 1;\nTSKRETRYWAIT 1;\nSQLCKDB N;\nFINISHFB Y;\nSPLIT_SZ 0;\nNOV_EXPAND N;\nENCRYPTION N;\nEDOT N;\nENCTYPE N;\nBK_MNTPT N;\nBK_RSM N;\nBK_SPF Y ;\nF_RETRY 1 ;\nSKIPNFS Y ;\nEXCHBLVL D ;\nNDMP_FH L ;\nNDMP_LOG Y ;\nAUTOSCHED N ;\nNDMP_ENV <>;\nMULTFS N ;\nMULTTHRD N ;\nMAILADDR <RECIPIENT 'DEFAULT';CC 'DEFAULT';BCC 'DEFAULT';SUBJECT 'DEFAULT';> ;\nOPERATORMAILADDR <RECIPIENT 'DEFAULT';CC 'DEFAULT';BCC 'DEFAULT';SUBJECT 'DEFAULT';> ;\n\n",
+      "options": [
+          {
+              "name": "VERIFY",
+              "value": "0"
+          },
+          {
+              "name": "DATACOMPRESS",
+              "value": "N "
+          },
+          {
+              "name": "LABELNEWTAPE",
+              "value": "Y "
+          },
+          {
+              "name": "APPEND",
+              "value": "Y"
+          },
+          {
+              "name": "EOJ_ACTION",
+              "value": "R"
+          },
+          {
+              "name": "ORIG_OFF",
+              "value": " N"
+          },
+          {
+              "name": "APPENDOFFSITE",
+              "value": " N"
+          },
+          {
+              "name": "TWINTAPEOFFSITE",
+              "value": " N"
+          },
+          {
+              "name": "TAPEMOUNTRETRY",
+              "value": "10"
+          },
+          {
+              "name": "TAPEWAITINTERVAL",
+              "value": "60"
+          },
+          {
+              "name": "TWIN",
+              "value": "N"
+          },
+          {
+              "name": "CHECKSUM",
+              "value": "N"
+          },
+          {
+              "name": "CAT_FILE",
+              "value": "N"
+          },
+          {
+              "name": "CAT_EOJ",
+              "value": "Y"
+          },
+          {
+              "name": "CANCL_KP",
+              "value": "N"
+          },
+          {
+              "name": "ERD",
+              "value": "Y"
+          },
+          {
+              "name": "MAXDRIVE",
+              "value": "8"
+          },
+          {
+              "name": "MAXTASKS",
+              "value": "1"
+          },
+          {
+              "name": "MINDRIVE",
+              "value": "1"
+          },
+          {
+              "name": "NO_CLEAN",
+              "value": "N "
+          },
+          {
+              "name": "TSNAP",
+              "value": "Y"
+          },
+          {
+              "name": "TSKRETRY",
+              "value": "1"
+          },
+          {
+              "name": "TSKRETRYWAIT",
+              "value": "1"
+          },
+          {
+              "name": "SQLCKDB",
+              "value": "N"
+          },
+          {
+              "name": "FINISHFB",
+              "value": "Y"
+          },
+          {
+              "name": "SPLIT_SZ",
+              "value": "0"
+          },
+          {
+              "name": "NOV_EXPAND",
+              "value": "N"
+          },
+          {
+              "name": "ENCRYPTION",
+              "value": "N"
+          },
+          {
+              "name": "EDOT",
+              "value": "N"
+          },
+          {
+              "name": "ENCTYPE",
+              "value": "N"
+          },
+          {
+              "name": "BK_MNTPT",
+              "value": "N"
+          },
+          {
+              "name": "BK_RSM",
+              "value": "N"
+          },
+          {
+              "name": "BK_SPF",
+              "value": "Y "
+          },
+          {
+              "name": "F_RETRY",
+              "value": "1 "
+          },
+          {
+              "name": "SKIPNFS",
+              "value": "Y "
+          },
+          {
+              "name": "EXCHBLVL",
+              "value": "D "
+          },
+          {
+              "name": "NDMP_FH",
+              "value": "L "
+          },
+          {
+              "name": "NDMP_LOG",
+              "value": "Y "
+          },
+          {
+              "name": "AUTOSCHED",
+              "value": "N "
+          },
+          {
+              "name": "NDMP_ENV",
+              "value": "<>"
+          },
+          {
+              "name": "MULTFS",
+              "value": "N "
+          },
+          {
+              "name": "MULTTHRD",
+              "value": "N "
+          },
+          {
+              "name": "MAILADDR",
+              "value": "<RECIPIENT 'DEFAULT'"
+          },
+          {
+              "name": "OPERATORMAILADDR",
+              "value": "<RECIPIENT 'DEFAULT'"
+          }
+      ],
+      "requestStatus": "success",
+      "recordCount": 3
+  },
+  {
+      "id": "1001:FIL_luxA",
+      "name": "FIL_luxA",
+      "dpxId": "1001",
+      "resourceType": "jobdef",
+      "jobName": "FIL_luxA",
+      "jobType": "BACKUP_BASE",
+      "jobTypeInt": 1,
+      "jobfolderName": "SS_DEFAULT",
+      "creator": "sysadmin",
+      "creationTime": 1534909858000,
+      "description": "File b/u; src (LUX-A); dst(DD-WIN-A",
+      "flags": 0,
+      "msgFlags": 0,
+      "jobdef": "SOURCE luxc07-5ma / FIL_luxA.0 ; \nFIL_luxA.0:\nI /data/Datagen/* ; \n\n",
+      "dest": " luxc07-5ma / Pool_Disk Device_Windows01 NULL ; \n\n luxc07-5ma / Pool_Disk Device_Windows01 NULL ; \n\n luxc07-5ma / Pool_Disk Device_Windows01 NULL ; \n\n",
+      "configs": [
+          {
+              "num": 1,
+              "jobType": 1,
+              "srcNode": "luxc07-5ma",
+              "srcVol": "/",
+              "srcDir": "FIL_luxA.0",
+              "dstNode": "Device_Windows01",
+              "dstVol": "NULL",
+              "devicePool": "Device_Windows01",
+              "device": "NULL",
+              "mediaPool": "Pool_Disk",
+              "dstNodeIncr": "Device_Windows01",
+              "dstVolIncr": "NULL",
+              "devicePoolIncr": "Device_Windows01",
+              "deviceIncr": "NULL",
+              "mediaPoolIncr": "Pool_Disk",
+              "dstNodeDifr": "Device_Windows01",
+              "dstVolDifr": "NULL",
+              "devicePoolDifr": "Device_Windows01",
+              "deviceDifr": "NULL",
+              "mediaPoolDifr": "Pool_Disk",
+              "seldirs": [
+                  "/data/Datagen/*"
+              ]
+          }
+      ],
+      "schedules": [],
+      "globals": "VERIFY 0;\nDATACOMPRESS N ;\nLABELNEWTAPE Y ;\nAPPEND Y;\nEOJ_ACTION R;\nORIG_OFF  N;\nAPPENDOFFSITE  N;\nTWINTAPEOFFSITE  N;\nTAPEMOUNTRETRY 10;\nTAPEWAITINTERVAL 60;\nTWIN N;\nCHECKSUM N;\nCAT_FILE N;\nCAT_EOJ Y;\nCANCL_KP N;\nERD Y;\nMAXDRIVE 8;\nMAXTASKS 1;\nMINDRIVE 1;\nNO_CLEAN N ;\nTSNAP Y;\nTSKRETRY 1;\nTSKRETRYWAIT 1;\nSQLCKDB N;\nFINISHFB Y;\nSPLIT_SZ 0;\nNOV_EXPAND N;\nENCRYPTION N;\nEDOT N;\nENCTYPE N;\nBK_MNTPT N;\nBK_RSM N;\nBK_SPF Y ;\nF_RETRY 1 ;\nSKIPNFS Y ;\nEXCHBLVL D ;\nNDMP_FH L ;\nNDMP_LOG Y ;\nAUTOSCHED N ;\nNDMP_ENV <>;\nMULTFS N ;\nMULTTHRD N ;\nMAILADDR <RECIPIENT 'DEFAULT';CC 'DEFAULT';BCC 'DEFAULT';SUBJECT 'DEFAULT';> ;\nOPERATORMAILADDR <RECIPIENT 'DEFAULT';CC 'DEFAULT';BCC 'DEFAULT';SUBJECT 'DEFAULT';> ;\n\n",
+      "options": [
+          {
+              "name": "VERIFY",
+              "value": "0"
+          },
+          {
+              "name": "DATACOMPRESS",
+              "value": "N "
+          },
+          {
+              "name": "LABELNEWTAPE",
+              "value": "Y "
+          },
+          {
+              "name": "APPEND",
+              "value": "Y"
+          },
+          {
+              "name": "EOJ_ACTION",
+              "value": "R"
+          },
+          {
+              "name": "ORIG_OFF",
+              "value": " N"
+          },
+          {
+              "name": "APPENDOFFSITE",
+              "value": " N"
+          },
+          {
+              "name": "TWINTAPEOFFSITE",
+              "value": " N"
+          },
+          {
+              "name": "TAPEMOUNTRETRY",
+              "value": "10"
+          },
+          {
+              "name": "TAPEWAITINTERVAL",
+              "value": "60"
+          },
+          {
+              "name": "TWIN",
+              "value": "N"
+          },
+          {
+              "name": "CHECKSUM",
+              "value": "N"
+          },
+          {
+              "name": "CAT_FILE",
+              "value": "N"
+          },
+          {
+              "name": "CAT_EOJ",
+              "value": "Y"
+          },
+          {
+              "name": "CANCL_KP",
+              "value": "N"
+          },
+          {
+              "name": "ERD",
+              "value": "Y"
+          },
+          {
+              "name": "MAXDRIVE",
+              "value": "8"
+          },
+          {
+              "name": "MAXTASKS",
+              "value": "1"
+          },
+          {
+              "name": "MINDRIVE",
+              "value": "1"
+          },
+          {
+              "name": "NO_CLEAN",
+              "value": "N "
+          },
+          {
+              "name": "TSNAP",
+              "value": "Y"
+          },
+          {
+              "name": "TSKRETRY",
+              "value": "1"
+          },
+          {
+              "name": "TSKRETRYWAIT",
+              "value": "1"
+          },
+          {
+              "name": "SQLCKDB",
+              "value": "N"
+          },
+          {
+              "name": "FINISHFB",
+              "value": "Y"
+          },
+          {
+              "name": "SPLIT_SZ",
+              "value": "0"
+          },
+          {
+              "name": "NOV_EXPAND",
+              "value": "N"
+          },
+          {
+              "name": "ENCRYPTION",
+              "value": "N"
+          },
+          {
+              "name": "EDOT",
+              "value": "N"
+          },
+          {
+              "name": "ENCTYPE",
+              "value": "N"
+          },
+          {
+              "name": "BK_MNTPT",
+              "value": "N"
+          },
+          {
+              "name": "BK_RSM",
+              "value": "N"
+          },
+          {
+              "name": "BK_SPF",
+              "value": "Y "
+          },
+          {
+              "name": "F_RETRY",
+              "value": "1 "
+          },
+          {
+              "name": "SKIPNFS",
+              "value": "Y "
+          },
+          {
+              "name": "EXCHBLVL",
+              "value": "D "
+          },
+          {
+              "name": "NDMP_FH",
+              "value": "L "
+          },
+          {
+              "name": "NDMP_LOG",
+              "value": "Y "
+          },
+          {
+              "name": "AUTOSCHED",
+              "value": "N "
+          },
+          {
+              "name": "NDMP_ENV",
+              "value": "<>"
+          },
+          {
+              "name": "MULTFS",
+              "value": "N "
+          },
+          {
+              "name": "MULTTHRD",
+              "value": "N "
+          },
+          {
+              "name": "MAILADDR",
+              "value": "<RECIPIENT 'DEFAULT'"
+          },
+          {
+              "name": "OPERATORMAILADDR",
+              "value": "<RECIPIENT 'DEFAULT'"
+          }
+      ],
+      "requestStatus": "success",
+      "recordCount": 4
+  },
+  {
+      "id": "1001:FIL_luxB",
+      "name": "FIL_luxB",
+      "dpxId": "1001",
+      "resourceType": "jobdef",
+      "jobName": "FIL_luxB",
+      "jobType": "BACKUP_BASE",
+      "jobTypeInt": 1,
+      "jobfolderName": "SS_DEFAULT",
+      "creator": "sysadmin",
+      "creationTime": 1534910152000,
+      "description": "File b/u; src (LUX-B); dst(DD-LUX-A)",
+      "flags": 0,
+      "msgFlags": 0,
+      "jobdef": "SOURCE luxco7-5mb / FIL_luxB.0 ; \nFIL_luxB.0:\nI /data/Datagen/* ; \n\n",
+      "dest": " luxco7-5mb / Pool_Disk Device_Linux01 NULL ; \n\n luxco7-5mb / Pool_Disk Device_Linux01 NULL ; \n\n luxco7-5mb / Pool_Disk Device_Linux01 NULL ; \n\n",
+      "configs": [
+          {
+              "num": 1,
+              "jobType": 1,
+              "srcNode": "luxco7-5mb",
+              "srcVol": "/",
+              "srcDir": "FIL_luxB.0",
+              "dstNode": "Device_Linux01",
+              "dstVol": "NULL",
+              "devicePool": "Device_Linux01",
+              "device": "NULL",
+              "mediaPool": "Pool_Disk",
+              "dstNodeIncr": "Device_Linux01",
+              "dstVolIncr": "NULL",
+              "devicePoolIncr": "Device_Linux01",
+              "deviceIncr": "NULL",
+              "mediaPoolIncr": "Pool_Disk",
+              "dstNodeDifr": "Device_Linux01",
+              "dstVolDifr": "NULL",
+              "devicePoolDifr": "Device_Linux01",
+              "deviceDifr": "NULL",
+              "mediaPoolDifr": "Pool_Disk",
+              "seldirs": [
+                  "/data/Datagen/*"
+              ]
+          }
+      ],
+      "schedules": [],
+      "globals": "VERIFY 0;\nDATACOMPRESS N ;\nLABELNEWTAPE Y ;\nAPPEND Y;\nEOJ_ACTION R;\nORIG_OFF  N;\nAPPENDOFFSITE  N;\nTWINTAPEOFFSITE  N;\nTAPEMOUNTRETRY 10;\nTAPEWAITINTERVAL 60;\nTWIN N;\nCHECKSUM N;\nCAT_FILE N;\nCAT_EOJ Y;\nCANCL_KP N;\nERD Y;\nMAXDRIVE 8;\nMAXTASKS 1;\nMINDRIVE 1;\nNO_CLEAN N ;\nTSNAP Y;\nTSKRETRY 1;\nTSKRETRYWAIT 1;\nSQLCKDB N;\nFINISHFB Y;\nSPLIT_SZ 0;\nNOV_EXPAND N;\nENCRYPTION N;\nEDOT N;\nENCTYPE N;\nBK_MNTPT N;\nBK_RSM N;\nBK_SPF Y ;\nF_RETRY 1 ;\nSKIPNFS Y ;\nEXCHBLVL D ;\nNDMP_FH L ;\nNDMP_LOG Y ;\nAUTOSCHED N ;\nNDMP_ENV <>;\nMULTFS N ;\nMULTTHRD N ;\nMAILADDR <RECIPIENT 'DEFAULT';CC 'DEFAULT';BCC 'DEFAULT';SUBJECT 'DEFAULT';> ;\nOPERATORMAILADDR <RECIPIENT 'DEFAULT';CC 'DEFAULT';BCC 'DEFAULT';SUBJECT 'DEFAULT';> ;\n\n",
+      "options": [
+          {
+              "name": "VERIFY",
+              "value": "0"
+          },
+          {
+              "name": "DATACOMPRESS",
+              "value": "N "
+          },
+          {
+              "name": "LABELNEWTAPE",
+              "value": "Y "
+          },
+          {
+              "name": "APPEND",
+              "value": "Y"
+          },
+          {
+              "name": "EOJ_ACTION",
+              "value": "R"
+          },
+          {
+              "name": "ORIG_OFF",
+              "value": " N"
+          },
+          {
+              "name": "APPENDOFFSITE",
+              "value": " N"
+          },
+          {
+              "name": "TWINTAPEOFFSITE",
+              "value": " N"
+          },
+          {
+              "name": "TAPEMOUNTRETRY",
+              "value": "10"
+          },
+          {
+              "name": "TAPEWAITINTERVAL",
+              "value": "60"
+          },
+          {
+              "name": "TWIN",
+              "value": "N"
+          },
+          {
+              "name": "CHECKSUM",
+              "value": "N"
+          },
+          {
+              "name": "CAT_FILE",
+              "value": "N"
+          },
+          {
+              "name": "CAT_EOJ",
+              "value": "Y"
+          },
+          {
+              "name": "CANCL_KP",
+              "value": "N"
+          },
+          {
+              "name": "ERD",
+              "value": "Y"
+          },
+          {
+              "name": "MAXDRIVE",
+              "value": "8"
+          },
+          {
+              "name": "MAXTASKS",
+              "value": "1"
+          },
+          {
+              "name": "MINDRIVE",
+              "value": "1"
+          },
+          {
+              "name": "NO_CLEAN",
+              "value": "N "
+          },
+          {
+              "name": "TSNAP",
+              "value": "Y"
+          },
+          {
+              "name": "TSKRETRY",
+              "value": "1"
+          },
+          {
+              "name": "TSKRETRYWAIT",
+              "value": "1"
+          },
+          {
+              "name": "SQLCKDB",
+              "value": "N"
+          },
+          {
+              "name": "FINISHFB",
+              "value": "Y"
+          },
+          {
+              "name": "SPLIT_SZ",
+              "value": "0"
+          },
+          {
+              "name": "NOV_EXPAND",
+              "value": "N"
+          },
+          {
+              "name": "ENCRYPTION",
+              "value": "N"
+          },
+          {
+              "name": "EDOT",
+              "value": "N"
+          },
+          {
+              "name": "ENCTYPE",
+              "value": "N"
+          },
+          {
+              "name": "BK_MNTPT",
+              "value": "N"
+          },
+          {
+              "name": "BK_RSM",
+              "value": "N"
+          },
+          {
+              "name": "BK_SPF",
+              "value": "Y "
+          },
+          {
+              "name": "F_RETRY",
+              "value": "1 "
+          },
+          {
+              "name": "SKIPNFS",
+              "value": "Y "
+          },
+          {
+              "name": "EXCHBLVL",
+              "value": "D "
+          },
+          {
+              "name": "NDMP_FH",
+              "value": "L "
+          },
+          {
+              "name": "NDMP_LOG",
+              "value": "Y "
+          },
+          {
+              "name": "AUTOSCHED",
+              "value": "N "
+          },
+          {
+              "name": "NDMP_ENV",
+              "value": "<>"
+          },
+          {
+              "name": "MULTFS",
+              "value": "N "
+          },
+          {
+              "name": "MULTTHRD",
+              "value": "N "
+          },
+          {
+              "name": "MAILADDR",
+              "value": "<RECIPIENT 'DEFAULT'"
+          },
+          {
+              "name": "OPERATORMAILADDR",
+              "value": "<RECIPIENT 'DEFAULT'"
+          }
+      ],
+      "requestStatus": "success",
+      "recordCount": 5
+  },
+  {
+      "id": "1001:NDMP_svmR",
+      "name": "NDMP_svmR",
+      "dpxId": "1001",
+      "resourceType": "jobdef",
+      "jobName": "NDMP_svmR",
+      "jobType": "BACKUP_ADS",
+      "jobTypeInt": 32,
+      "jobfolderName": "SS_DEFAULT",
+      "creator": "sysadmin",
+      "creationTime": 1535046068000,
+      "description": "NDMP b/u; src(SVM-K_r); dst(HP_MSL6480)",
+      "flags": 0,
+      "msgFlags": 0,
+      "jobdef": "SOURCE SVM-Kevin_r /SVM-DEV-kevin_r/vs_data_01 NDMP_svmR.0 ; \nNDMP_svmR.0:\nI /SVM-DEV-kevin_r/vs_data_01/* ; \n\n",
+      "dest": " SVM-Kevin_r /SVM-DEV-kevin_r/vs_data_01 Pool_HPMSL6480 HP_MSL6480 NULL ; \n\n SVM-Kevin_r /SVM-DEV-kevin_r/vs_data_01 Pool_HPMSL6480 HP_MSL6480 NULL ; \n\n SVM-Kevin_r /SVM-DEV-kevin_r/vs_data_01 Pool_HPMSL6480 HP_MSL6480 NULL ; \n\n",
+      "configs": [
+          {
+              "num": 1,
+              "jobType": 32,
+              "srcNode": "SVM-Kevin_r",
+              "srcVol": "/SVM-DEV-kevin_r/vs_data_01",
+              "srcDir": "NDMP_svmR.0",
+              "dstNode": "HP_MSL6480",
+              "dstVol": "NULL",
+              "devicePool": "HP_MSL6480",
+              "device": "NULL",
+              "mediaPool": "Pool_HPMSL6480",
+              "dstNodeIncr": "HP_MSL6480",
+              "dstVolIncr": "NULL",
+              "devicePoolIncr": "HP_MSL6480",
+              "deviceIncr": "NULL",
+              "mediaPoolIncr": "Pool_HPMSL6480",
+              "dstNodeDifr": "HP_MSL6480",
+              "dstVolDifr": "NULL",
+              "devicePoolDifr": "HP_MSL6480",
+              "deviceDifr": "NULL",
+              "mediaPoolDifr": "Pool_HPMSL6480",
+              "seldirs": [
+                  "/SVM-DEV-kevin_r/vs_data_01/*"
+              ]
+          }
+      ],
+      "schedules": [],
+      "globals": "TSKRETRY 1;\nTSKRETRYWAIT 1;\nNDMP_FH L;\nNDMP_LOG Y;\nAUTOSCHED N ;\nNDMP_ENV <>;\nAPPEND Y;\nLABELNEWTAPE Y ;\nORIG_OFF  N;\nAPPENDOFFSITE  N;\nEOJ_ACTION R;\nMAXDRIVE 8;\nTAPEMOUNTRETRY 10;\nTAPEWAITINTERVAL 60;\nENCRYPTION N;\nEDOT N;\nENCTYPE N;\nCAT_EOJ Y;\nNO_CLEAN N;\nMAILADDR <RECIPIENT 'DEFAULT';CC 'DEFAULT';BCC 'DEFAULT';SUBJECT 'DEFAULT';> ;\nOPERATORMAILADDR <RECIPIENT 'DEFAULT';CC 'DEFAULT';BCC 'DEFAULT';SUBJECT 'DEFAULT';> ;\nNDMP_LATESTSS N ;\n\n",
+      "options": [
+          {
+              "name": "TSKRETRY",
+              "value": "1"
+          },
+          {
+              "name": "TSKRETRYWAIT",
+              "value": "1"
+          },
+          {
+              "name": "NDMP_FH",
+              "value": "L"
+          },
+          {
+              "name": "NDMP_LOG",
+              "value": "Y"
+          },
+          {
+              "name": "AUTOSCHED",
+              "value": "N "
+          },
+          {
+              "name": "NDMP_ENV",
+              "value": "<>"
+          },
+          {
+              "name": "APPEND",
+              "value": "Y"
+          },
+          {
+              "name": "LABELNEWTAPE",
+              "value": "Y "
+          },
+          {
+              "name": "ORIG_OFF",
+              "value": " N"
+          },
+          {
+              "name": "APPENDOFFSITE",
+              "value": " N"
+          },
+          {
+              "name": "EOJ_ACTION",
+              "value": "R"
+          },
+          {
+              "name": "MAXDRIVE",
+              "value": "8"
+          },
+          {
+              "name": "TAPEMOUNTRETRY",
+              "value": "10"
+          },
+          {
+              "name": "TAPEWAITINTERVAL",
+              "value": "60"
+          },
+          {
+              "name": "ENCRYPTION",
+              "value": "N"
+          },
+          {
+              "name": "EDOT",
+              "value": "N"
+          },
+          {
+              "name": "ENCTYPE",
+              "value": "N"
+          },
+          {
+              "name": "CAT_EOJ",
+              "value": "Y"
+          },
+          {
+              "name": "NO_CLEAN",
+              "value": "N"
+          },
+          {
+              "name": "MAILADDR",
+              "value": "<RECIPIENT 'DEFAULT'"
+          },
+          {
+              "name": "OPERATORMAILADDR",
+              "value": "<RECIPIENT 'DEFAULT'"
+          },
+          {
+              "name": "NDMP_LATESTSS",
+              "value": "N "
+          }
+      ],
+      "requestStatus": "success",
+      "recordCount": 6
+  },
+  {
+      "id": "1001:NDMP_svmG",
+      "name": "NDMP_svmG",
+      "dpxId": "1001",
+      "resourceType": "jobdef",
+      "jobName": "NDMP_svmG",
+      "jobType": "BACKUP_ADS",
+      "jobTypeInt": 32,
+      "jobfolderName": "SS_DEFAULT",
+      "creator": "sysadmin",
+      "creationTime": 1535047443000,
+      "description": "NDMP b/u; src(SVM-K_g); dst(HP_MSL6480)",
+      "flags": 0,
+      "msgFlags": 0,
+      "jobdef": "SOURCE SVM-Kevin_g /SVM-DEV-kevin_g/vs_data_01 NDMP_svmG.0 ; \nNDMP_svmG.0:\nI /SVM-DEV-kevin_g/vs_data_01/* ; \n\n",
+      "dest": " SVM-Kevin_g /SVM-DEV-kevin_g/vs_data_01 Pool_HPMSL6480 HP_MSL6480 NULL ; \n\n SVM-Kevin_g /SVM-DEV-kevin_g/vs_data_01 Pool_HPMSL6480 HP_MSL6480 NULL ; \n\n SVM-Kevin_g /SVM-DEV-kevin_g/vs_data_01 Pool_HPMSL6480 HP_MSL6480 NULL ; \n\n",
+      "configs": [
+          {
+              "num": 1,
+              "jobType": 32,
+              "srcNode": "SVM-Kevin_g",
+              "srcVol": "/SVM-DEV-kevin_g/vs_data_01",
+              "srcDir": "NDMP_svmG.0",
+              "dstNode": "HP_MSL6480",
+              "dstVol": "NULL",
+              "devicePool": "HP_MSL6480",
+              "device": "NULL",
+              "mediaPool": "Pool_HPMSL6480",
+              "dstNodeIncr": "HP_MSL6480",
+              "dstVolIncr": "NULL",
+              "devicePoolIncr": "HP_MSL6480",
+              "deviceIncr": "NULL",
+              "mediaPoolIncr": "Pool_HPMSL6480",
+              "dstNodeDifr": "HP_MSL6480",
+              "dstVolDifr": "NULL",
+              "devicePoolDifr": "HP_MSL6480",
+              "deviceDifr": "NULL",
+              "mediaPoolDifr": "Pool_HPMSL6480",
+              "seldirs": [
+                  "/SVM-DEV-kevin_g/vs_data_01/*"
+              ]
+          }
+      ],
+      "schedules": [],
+      "globals": "TSKRETRY 1;\nTSKRETRYWAIT 1;\nNDMP_FH L;\nNDMP_LOG Y;\nAUTOSCHED N ;\nNDMP_ENV <>;\nAPPEND Y;\nLABELNEWTAPE Y ;\nORIG_OFF  N;\nAPPENDOFFSITE  N;\nEOJ_ACTION R;\nMAXDRIVE 8;\nTAPEMOUNTRETRY 10;\nTAPEWAITINTERVAL 60;\nENCRYPTION N;\nEDOT N;\nENCTYPE N;\nCAT_EOJ Y;\nNO_CLEAN N;\nMAILADDR <RECIPIENT 'DEFAULT';CC 'DEFAULT';BCC 'DEFAULT';SUBJECT 'DEFAULT';> ;\nOPERATORMAILADDR <RECIPIENT 'DEFAULT';CC 'DEFAULT';BCC 'DEFAULT';SUBJECT 'DEFAULT';> ;\nNDMP_LATESTSS N ;\n\n",
+      "options": [
+          {
+              "name": "TSKRETRY",
+              "value": "1"
+          },
+          {
+              "name": "TSKRETRYWAIT",
+              "value": "1"
+          },
+          {
+              "name": "NDMP_FH",
+              "value": "L"
+          },
+          {
+              "name": "NDMP_LOG",
+              "value": "Y"
+          },
+          {
+              "name": "AUTOSCHED",
+              "value": "N "
+          },
+          {
+              "name": "NDMP_ENV",
+              "value": "<>"
+          },
+          {
+              "name": "APPEND",
+              "value": "Y"
+          },
+          {
+              "name": "LABELNEWTAPE",
+              "value": "Y "
+          },
+          {
+              "name": "ORIG_OFF",
+              "value": " N"
+          },
+          {
+              "name": "APPENDOFFSITE",
+              "value": " N"
+          },
+          {
+              "name": "EOJ_ACTION",
+              "value": "R"
+          },
+          {
+              "name": "MAXDRIVE",
+              "value": "8"
+          },
+          {
+              "name": "TAPEMOUNTRETRY",
+              "value": "10"
+          },
+          {
+              "name": "TAPEWAITINTERVAL",
+              "value": "60"
+          },
+          {
+              "name": "ENCRYPTION",
+              "value": "N"
+          },
+          {
+              "name": "EDOT",
+              "value": "N"
+          },
+          {
+              "name": "ENCTYPE",
+              "value": "N"
+          },
+          {
+              "name": "CAT_EOJ",
+              "value": "Y"
+          },
+          {
+              "name": "NO_CLEAN",
+              "value": "N"
+          },
+          {
+              "name": "MAILADDR",
+              "value": "<RECIPIENT 'DEFAULT'"
+          },
+          {
+              "name": "OPERATORMAILADDR",
+              "value": "<RECIPIENT 'DEFAULT'"
+          },
+          {
+              "name": "NDMP_LATESTSS",
+              "value": "N "
+          }
+      ],
+      "requestStatus": "success",
+      "recordCount": 7
+  },
+  {
+      "id": "1001:BLK_luxA",
+      "name": "BLK_luxA",
+      "dpxId": "1001",
+      "resourceType": "jobdef",
+      "jobName": "BLK_luxA",
+      "jobType": "BACKUP_SNAPVAULT",
+      "jobTypeInt": 30,
+      "jobfolderName": "SS_DEFAULT",
+      "creator": "sysadmin",
+      "creationTime": 1535054673000,
+      "description": "Block b/u; Linux, vStor",
+      "flags": 0,
+      "msgFlags": 0,
+      "jobdef": "SOURCE luxc07-5ma /data BLK_luxA.0 ; \nBLK_luxA.0:\nI /data ; \n\n",
+      "dest": " luxc07-5ma /data vol_luxA-01/[BLK_luxA]luxc07-5ma@_data vstor-dev vol_luxA-01 ; \n\n luxc07-5ma /data vol_luxA-01/[BLK_luxA]luxc07-5ma@_data vstor-dev vol_luxA-01 ; \n\n",
+      "configs": [
+          {
+              "num": 1,
+              "jobType": 30,
+              "srcNode": "luxc07-5ma",
+              "srcVol": "/data",
+              "srcDir": "BLK_luxA.0",
+              "dstNode": "vstor-dev",
+              "dstVol": "vol_luxA-01",
+              "devicePool": "vstor-dev",
+              "device": "vol_luxA-01",
+              "mediaPool": "vol_luxA-01/[BLK_luxA]luxc07-5ma@_data",
+              "dstNodeIncr": "vstor-dev",
+              "dstVolIncr": "vol_luxA-01",
+              "devicePoolIncr": "vstor-dev",
+              "deviceIncr": "vol_luxA-01",
+              "mediaPoolIncr": "vol_luxA-01/[BLK_luxA]luxc07-5ma@_data",
+              "seldirs": [
+                  "/data"
+              ]
+          }
+      ],
+      "schedules": [],
+      "globals": "THROTTLE 0 ;\nTRYCOUNT 5 ;\nEXTRLOGS Y ;\nSQLTRUNCATE N ;\nTSKRETRYWAIT 1;\nSQLCKDB N;\nOCLRMANCAT Y;\nSQLTRUNCATE N;\nOCLRMLOGS N;\nRESAUTOCN 30;\nRESRTYCT 3;\nRESRTYWT 1;\nXFRAUTOCN 0;\nNDMP_FH L ;\nNDMP_LOG Y ;\nNDMP_ENV <>;\nOEM_THEME LSI;\nJOB_VIEW_MODE D ;\nVMW_PROXY_SRV <> ;\nMAILADDR <RECIPIENT 'DEFAULT';CC 'DEFAULT';BCC 'DEFAULT';SUBJECT 'DEFAULT';> ;\nOPERATORMAILADDR <RECIPIENT 'DEFAULT';CC 'DEFAULT';BCC 'DEFAULT';SUBJECT 'DEFAULT';> ;\n\n",
+      "options": [
+          {
+              "name": "THROTTLE",
+              "value": "0 "
+          },
+          {
+              "name": "TRYCOUNT",
+              "value": "5 "
+          },
+          {
+              "name": "EXTRLOGS",
+              "value": "Y "
+          },
+          {
+              "name": "SQLTRUNCATE",
+              "value": "N "
+          },
+          {
+              "name": "TSKRETRYWAIT",
+              "value": "1"
+          },
+          {
+              "name": "SQLCKDB",
+              "value": "N"
+          },
+          {
+              "name": "OCLRMANCAT",
+              "value": "Y"
+          },
+          {
+              "name": "SQLTRUNCATE",
+              "value": "N"
+          },
+          {
+              "name": "OCLRMLOGS",
+              "value": "N"
+          },
+          {
+              "name": "RESAUTOCN",
+              "value": "30"
+          },
+          {
+              "name": "RESRTYCT",
+              "value": "3"
+          },
+          {
+              "name": "RESRTYWT",
+              "value": "1"
+          },
+          {
+              "name": "XFRAUTOCN",
+              "value": "0"
+          },
+          {
+              "name": "NDMP_FH",
+              "value": "L "
+          },
+          {
+              "name": "NDMP_LOG",
+              "value": "Y "
+          },
+          {
+              "name": "NDMP_ENV",
+              "value": "<>"
+          },
+          {
+              "name": "OEM_THEME",
+              "value": "LSI"
+          },
+          {
+              "name": "JOB_VIEW_MODE",
+              "value": "D "
+          },
+          {
+              "name": "VMW_PROXY_SRV",
+              "value": "<> "
+          },
+          {
+              "name": "MAILADDR",
+              "value": "<RECIPIENT 'DEFAULT'"
+          },
+          {
+              "name": "OPERATORMAILADDR",
+              "value": "<RECIPIENT 'DEFAULT'"
+          }
+      ],
+      "requestStatus": "success",
+      "recordCount": 8
+  },
+  {
+      "id": "1001:BLK_winA",
+      "name": "BLK_winA",
+      "dpxId": "1001",
+      "resourceType": "jobdef",
+      "jobName": "BLK_winA",
+      "jobType": "BACKUP_SNAPVAULT",
+      "jobTypeInt": 30,
+      "jobfolderName": "SS_DEFAULT",
+      "creator": "sysadmin",
+      "creationTime": 1535054798000,
+      "description": "Block b/u; Windows, vStor",
+      "flags": 0,
+      "msgFlags": 0,
+      "jobdef": "SOURCE win2k12-5ma E: BLK_winA.0 ; \nBLK_winA.0:\nI /E: ; \n\n",
+      "dest": " win2k12-5ma E: vol_winA-01/[BLK_winA]win2k12-5ma@_E_ vstor-dev vol_winA-01 ; \n\n win2k12-5ma E: vol_winA-01/[BLK_winA]win2k12-5ma@_E_ vstor-dev vol_winA-01 ; \n\n",
+      "configs": [
+          {
+              "num": 1,
+              "jobType": 30,
+              "srcNode": "win2k12-5ma",
+              "srcVol": "E:",
+              "srcDir": "BLK_winA.0",
+              "dstNode": "vstor-dev",
+              "dstVol": "vol_winA-01",
+              "devicePool": "vstor-dev",
+              "device": "vol_winA-01",
+              "mediaPool": "vol_winA-01/[BLK_winA]win2k12-5ma@_E_",
+              "dstNodeIncr": "vstor-dev",
+              "dstVolIncr": "vol_winA-01",
+              "devicePoolIncr": "vstor-dev",
+              "deviceIncr": "vol_winA-01",
+              "mediaPoolIncr": "vol_winA-01/[BLK_winA]win2k12-5ma@_E_",
+              "seldirs": [
+                  "/E:"
+              ]
+          }
+      ],
+      "schedules": [],
+      "globals": "THROTTLE 0 ;\nTRYCOUNT 5 ;\nEXTRLOGS Y ;\nSQLTRUNCATE N ;\nTSKRETRYWAIT 1;\nSQLCKDB N;\nOCLRMANCAT Y;\nSQLTRUNCATE N;\nOCLRMLOGS N;\nRESAUTOCN 30;\nRESRTYCT 3;\nRESRTYWT 1;\nXFRAUTOCN 0;\nNDMP_FH L ;\nNDMP_LOG Y ;\nNDMP_ENV <>;\nOEM_THEME LSI;\nJOB_VIEW_MODE D ;\nVMW_PROXY_SRV <> ;\nMAILADDR <RECIPIENT 'DEFAULT';CC 'DEFAULT';BCC 'DEFAULT';SUBJECT 'DEFAULT';> ;\nOPERATORMAILADDR <RECIPIENT 'DEFAULT';CC 'DEFAULT';BCC 'DEFAULT';SUBJECT 'DEFAULT';> ;\n\n",
+      "options": [
+          {
+              "name": "THROTTLE",
+              "value": "0 "
+          },
+          {
+              "name": "TRYCOUNT",
+              "value": "5 "
+          },
+          {
+              "name": "EXTRLOGS",
+              "value": "Y "
+          },
+          {
+              "name": "SQLTRUNCATE",
+              "value": "N "
+          },
+          {
+              "name": "TSKRETRYWAIT",
+              "value": "1"
+          },
+          {
+              "name": "SQLCKDB",
+              "value": "N"
+          },
+          {
+              "name": "OCLRMANCAT",
+              "value": "Y"
+          },
+          {
+              "name": "SQLTRUNCATE",
+              "value": "N"
+          },
+          {
+              "name": "OCLRMLOGS",
+              "value": "N"
+          },
+          {
+              "name": "RESAUTOCN",
+              "value": "30"
+          },
+          {
+              "name": "RESRTYCT",
+              "value": "3"
+          },
+          {
+              "name": "RESRTYWT",
+              "value": "1"
+          },
+          {
+              "name": "XFRAUTOCN",
+              "value": "0"
+          },
+          {
+              "name": "NDMP_FH",
+              "value": "L "
+          },
+          {
+              "name": "NDMP_LOG",
+              "value": "Y "
+          },
+          {
+              "name": "NDMP_ENV",
+              "value": "<>"
+          },
+          {
+              "name": "OEM_THEME",
+              "value": "LSI"
+          },
+          {
+              "name": "JOB_VIEW_MODE",
+              "value": "D "
+          },
+          {
+              "name": "VMW_PROXY_SRV",
+              "value": "<> "
+          },
+          {
+              "name": "MAILADDR",
+              "value": "<RECIPIENT 'DEFAULT'"
+          },
+          {
+              "name": "OPERATORMAILADDR",
+              "value": "<RECIPIENT 'DEFAULT'"
+          }
+      ],
+      "requestStatus": "success",
+      "recordCount": 9
+  }
+]
