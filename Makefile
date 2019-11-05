@@ -98,7 +98,6 @@ update: remove-old-images opt svc.env dpx-apigateway.env
 force-update: remove-old-images opt svc.env dpx-apigateway.env
 	$(DOCKER) stack rm dpx
 	./stack-wait.sh
-	git pull
 	. ./dpx-container-tags && . ./svc.env && $(DOCKER) system prune -f && $(DOCKER) stack deploy -c dpx.yml dpx --with-registry-auth
 
 #
