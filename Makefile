@@ -73,8 +73,8 @@ start:
 	mkdir -p rest-db
 	$(MAKE) start-x
 
-start-x: opt keys stack-logs dpx.env dpx-vplugin-mgr.env dpx-apigateway.env plugins
-	. ./dpx-container-tags && . ./svc.env && $(DOCKER) system prune -a -f && $(DOCKER) stack deploy -c dpx.yml dpx --with-registry-auth
+start-x: opt keys stack-logs dpx.env svc.env dpx-vplugin-mgr.env dpx-apigateway.env plugins
+	. ./dpx-container-tags && . ./svc.env && $(DOCKER) system prune -f && $(DOCKER) stack deploy -c dpx.yml dpx --with-registry-auth
 
 # check the status of the stack
 status:
@@ -92,14 +92,13 @@ distclean: clean
 	rm -rf keys opt-auth opt-apigateway stack-logs dpx-apigateway*.env dpx-vplugin-mgr*.env certs-selfsigned certs-letsencrypt api_key catalogic-dpx-ms.id certbot plugins rest-db
 
 # update docker services
-update: remove-old-images opt dpx-apigateway.env
-	. ./dpx-container-tags && . ./svc.env && export FLUENTD_CONFIG_DIGEST=$(shell date -r ./config/fluent.conf +%s) && export START_DATE=$(shell date --iso-8601=seconds) && $(DOCKER) system prune -a -f && $(DOCKER) stack deploy --prune -c dpx.yml dpx --with-registry-auth
+update: remove-old-images opt svc.env dpx-apigateway.env
+	. ./dpx-container-tags && . ./svc.env && export FLUENTD_CONFIG_DIGEST=$(shell date -r ./config/fluent.conf +%s) && export START_DATE=$(shell date --iso-8601=seconds) && $(DOCKER) system prune -f && $(DOCKER) stack deploy --prune -c dpx.yml dpx --with-registry-auth
 
-force-update: remove-old-images opt dpx-apigateway.env
+force-update: remove-old-images opt svc.env dpx-apigateway.env
 	$(DOCKER) stack rm dpx
 	./stack-wait.sh
-	git pull
-	. ./dpx-container-tags && . ./svc.env && $(DOCKER) system prune -a -f && $(DOCKER) stack deploy -c dpx.yml dpx --with-registry-auth
+	. ./dpx-container-tags && . ./svc.env && $(DOCKER) system prune -f && $(DOCKER) stack deploy -c dpx.yml dpx --with-registry-auth
 
 #
 # dpx.env contains env vars shared across various containers
@@ -110,6 +109,8 @@ dpx.env: api_key
 	echo "DOCKER_HOST_IP=$(THIS_HOST)" >> $@
 	echo "DPX_INTERNAL_SECRET_KEY=$(shell cat api_key)" >> $@
 	echo "SVC_HOST=$(THIS_HOST)" >> $@
+
+svc.env:
 	echo "export SVC_HOST=$(THIS_HOST)" > svc.env
 
 # this command keeps only 3 most recent versions for each docker image
