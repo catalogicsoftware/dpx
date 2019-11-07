@@ -1100,7 +1100,7 @@
                "runRc": 0,
                "dstNode": "SVM-CSSE-r",
                "dstVol": "scMarble_BAIT",
-               "srcVolumeId": "\\?\VOLUME{A19D880F-05FC-4D3B-A006-743F0F84911E}",
+               "srcVolumeId": "VOLUME{A19D880F-05FC-4D3B-A006-743F0F84911E}",
                "srcVolserPart": "{SSSV}"
            },
            {
@@ -1652,7 +1652,7 @@
                "runRc": 0,
                "dstNode": "SVM-CSSE-r",
                "dstVol": "scGabbro_BAIT",
-               "srcVolumeId": "\\?\VOLUME{2A5C3B7B-3C56-47F7-A20F-E95A62BAFDED}",
+               "srcVolumeId": "VOLUME{2A5C3B7B-3C56-47F7-A20F-E95A62BAFDED}",
                "srcVolserPart": "{SSSV}"
            },
            {
@@ -2986,7 +2986,7 @@
                "runRc": 0,
                "dstNode": "SVM-CSSE-r",
                "dstVol": "scW2019_Wayward",
-               "srcVolumeId": "\\?\VOLUME{2A5C3B7B-3C56-47F7-A20F-E95A62BAFDED}",
+               "srcVolumeId": "VOLUME{2A5C3B7B-3C56-47F7-A20F-E95A62BAFDED}",
                "srcVolserPart": "{SSSV}"
            },
            {
@@ -9150,7 +9150,7 @@
                "runRc": 0,
                "dstNode": "OSS2016",
                "dstVol": "G:",
-               "srcVolumeId": "\\?\VOLUME{FE1AAF03-799A-45CD-9A3C-F5CEA7A6EA3F}",
+               "srcVolumeId": "VOLUME{FE1AAF03-799A-45CD-9A3C-F5CEA7A6EA3F}",
                "srcVolserPart": "{SSSV}"
            },
            {
