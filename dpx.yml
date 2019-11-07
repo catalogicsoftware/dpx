@@ -223,13 +223,6 @@ services:
       - ROUTE_URL_GATEWAY=http://gateway:8080/
       - ROUTE_URL_PLUGIN_MGR=http://vplugin-mgr:8082/
       - ROUTE_URL_REPORT=http://report:8094/
-# TODO: Remove these when new gateway service is stable
-      - ZUUL_ROUTES_AUTH_URL=http://auth:8091/
-      - ZUUL_ROUTES_CONFIG_UI_URL=http://config-ui:8088/
-      - ZUUL_ROUTES_DISCOVERY_URL=http://discovery:8090/
-      - ZUUL_ROUTES_APP_URL=http://rest:8095/
-      - ZUUL_ROUTES_PLUGIN_MGR_URL=http://vplugin-mgr:8082/
-      - ZUUL_ROUTES_REPORT_URL=http://report:8094/
     deploy:
       replicas: 2
       update_config:
@@ -243,10 +236,11 @@ services:
       - "443:8443"
       - "80:8080"
     volumes:
-      - "./opt-apigateway:/app/config"
+      - "./config/gateway:/app/config"
       - "./stack-logs:/app/logs"
-# TODO: Remove following mount after service stabalizes
-#     - "./opt-apigateway:/opt"
+# TODO: Remove following after service stabalizes
+#     - "./opt-apigateway:/app/config" [LAST]
+#     - "./opt-apigateway:/opt"        [OLDER]
     networks:
       -  webnet
 

@@ -181,17 +181,12 @@ set.apigateway.nossl: dpx-apigateway-nossl.env
 	$(MAKE) dpx-vplugin-mgr-sim.env
 	ln -sf $< dpx-apigateway.env
 dpx-apigateway-nossl.env:
-# KJM: Updates for normalization
+# KJM: Updates for normalization [deleted original envs]
 	echo "SSL_ENABLED=false" > $@
 	echo "KEY_STORE=" >> $@
 	echo "KEY_STORE_PASSWORD=" >> $@
 	echo "KEY_STORE_TYPE=" >> $@
 	echo "KEY_ALIAS=" >> $@
-	echo "SERVER_SSL_ENABLED=false" >> $@
-	echo "SERVER_SSL_KEY_STORE=" >> $@
-	echo "SERVER_SSL_KEY_STORE_PASSWORD=" >> $@
-	echo "SERVER_SSL_KEY_STORE_TYPE=" >> $@
-	echo "SERVER_SSL_KEY_ALIAS=" >> $@
 
 # selfsigned version config for the gateway
 .PHONY: set.apigateway.selfsigned
@@ -202,17 +197,12 @@ set.apigateway.selfsigned: dpx-apigateway-selfsigned.env
 	$(MAKE) dpx-vplugin-mgr-sim.env
 	ln -sf $< dpx-apigateway.env
 dpx-apigateway-selfsigned.env: certs-selfsigned
-# KJM: Updates for normalization
+# KJM: Updates for normalization [deleted original envs]
 	echo "SSL_ENABLED=true" > $@
 	echo "KEY_STORE=config/keystore.jks" >> $@
 	echo "KEY_STORE_PASSWORD=$(SSL_CERT_PASS)" >> $@
 	echo "KEY_STORE_TYPE=JKS" >> $@
 	echo "KEY_ALIAS=selfsigned" >> $@
-	echo "SERVER_SSL_ENABLED=true" >> $@
-	echo "SERVER_SSL_KEY_STORE=config/keystore.jks" >> $@
-	echo "SERVER_SSL_KEY_STORE_PASSWORD=$(SSL_CERT_PASS)" >> $@
-	echo "SERVER_SSL_KEY_STORE_TYPE=JKS" >> $@
-	echo "SERVER_SSL_KEY_ALIAS=selfsigned" >> $@
 
 certs-selfsigned:
 	@echo '================ Inside selfsigned ============'
@@ -222,6 +212,9 @@ certs-selfsigned:
 	mkdir -p opt-apigateway
 	cp $@/keystore.jks opt-apigateway
 	cp $@/keystore.jks.thumbprint opt-apigateway
+# KJM: Copy authentication data to gateway config directory
+	cp $@/keystore.jks config/gateway
+	cp $@/keystore.jks.thumbprint config/gateway
 	@echo '====== Completed ======='
 
 # letsencrypt version config for the gateway
@@ -229,17 +222,12 @@ certs-selfsigned:
 set.apigateway.letsencrypt: dpx-apigateway-letsecrypt.env
 	ln -sf $< dpx-apigateway.env
 dpx-apigateway-letsecrypt.env: certs-letsencrypt
-# KJM: Updates for normalization
+# KJM: Updates for normalization [deleted original envs]
 	echo "SSL_ENABLED=true" > $@
 	echo "KEY_STORE=config/keystore.p12" >> $@
 	echo "KEY_STORE_PASSWORD=$(SSL_CERT_PASS)" >> $@
 	echo "KEY_STORE_TYPE=PKCS12" >> $@
 	echo "KEY_ALIAS=tomcat" >> $@
-	echo "SERVER_SSL_ENABLED=true" >> $@
-	echo "SERVER_SSL_KEY_STORE=config/keystore.p12" >> $@
-	echo "SERVER_SSL_KEY_STORE_PASSWORD=$(SSL_CERT_PASS)" >> $@
-	echo "SERVER_SSL_KEY_STORE_TYPE=PKCS12" >> $@
-	echo "SERVER_SSL_KEY_ALIAS=tomcat" >> $@
 
 certs-letsencrypt:
 	@echo '============ Inside lets-encrypt =========='
@@ -252,6 +240,8 @@ certs-letsencrypt:
 	mkdir -p $@
 	mkdir -p opt-apigateway
 	cp $@/keystore.p12 opt-apigateway
+# KJM: Copy authentication data to gateway config directory
+	cp $@/keystore.p12 config/gateway
 	@echo '====== Completed ======='
 
 #
@@ -284,14 +274,12 @@ opt-auth: keys
 	echo "KEY_STORE_TYPE=JKS" >> dpx-auth.env
 	echo "KEY_ALIAS=jwt" >> dpx-auth.env
 	echo "KEY_FILE=config/catalogic.pub" >> dpx-auth.env
-# Following is deprecated - DELETE
-	rm -rf opt-auth
-	mkdir opt-auth
-	cp keys/catalogic.jks opt-auth
 	
 opt-apigateway: keys
 	mkdir -p opt-apigateway
 	grep -v '\-\-\-\-\-' keys/catalogic.pub > opt-apigateway/catalogic.pub
+# KJM: Copy authentication data to gateway config directory
+	grep -v '\-\-\-\-\-' keys/catalogic.pub > config/gateway/catalogic.pub
 
 stack-logs:
 	mkdir stack-logs
