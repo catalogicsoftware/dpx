@@ -13,7 +13,7 @@ version: "3.7"
 #  /app/bin    - Service executable(s)
 #  /app/lib    - Library dependencies
 #  /app/logs   - Service log files (mounted host folder)
-#  /app/config - Service configuration files  
+#  /app/config - Service configuration files
 # -Service logging configured to write log files to /logs folder
 #  Note: The fluentd logging driver should only be used when native logging is not feasible
 # -
@@ -22,7 +22,7 @@ version: "3.7"
 services:
 
 # DPX core REST API service
-# TODO: 
+# TODO:
 # -Rename service to "dpxcore"
 # -Change port to 8095:8095 [DONE]
 # -Change Tag to TAG_DPXCORE [DONE]
@@ -40,6 +40,9 @@ services:
       - SPRING_DATASOURCE_PASSWORD=secret
     deploy:
       replicas: 2
+      restart_policy:
+        condition: on-failure
+        max_attempts: 5
       update_config:
         failure_action: rollback
     ports:
@@ -77,7 +80,7 @@ services:
         tag: dpx-sql-db
 
 # DPX vSphere plug-in manager service
-# TODO: 
+# TODO:
 # -Change SVC_SERVER_URL to DPXCORE_SERVER_URL
 # -Change DPXCORE URL host from rest to dpxcore
 # -Change DPXCORE URL port from 8080 to 8095 [DONE]
@@ -144,7 +147,7 @@ services:
       - webnet
 
 # DPX vSphere plug-in configuration UI service
-# TODO: 
+# TODO:
 # -Change Tag to TAG_CONFIGUI [DONE]
   config-ui:
     image: catalogicsoftware/dpx-ui:${TAG_CONFIGUI}
@@ -169,7 +172,7 @@ services:
         tag: dpx-config-ui
 
 # DPX application main UI service
-# TODO: 
+# TODO:
 # -Consider changing port to 8096:8096
   dpxui:
     image: catalogicsoftware/dpx-webui:${TAG_DPXUI}
@@ -185,7 +188,7 @@ services:
         tag: dpx-ui
 
 # DPX gateway service
-# TODO: 
+# TODO:
 # -Rename service to "gateway" [DONE]
 # -Change port to 443:8443 [DONE]
 # -Change port to 80:8080 [DONE]
@@ -264,7 +267,7 @@ services:
       - webnet
 
 # DPX report service
-# TODO: 
+# TODO:
 # -Change port to 8094:8094 [DONE]
 # -Add mount point for config [DONE]
   report:
@@ -289,7 +292,7 @@ services:
       - webnet
 
 # DPX BIRT service
-# TODO: 
+# TODO:
   birt:
     image: catalogicsoftware/birt:${TAG_BIRT}
     env_file:
@@ -311,7 +314,7 @@ services:
       - webnet
 
 # Docker logging driver
-# Note: 
+# Note:
 # Should only be used for services where native logging is not practical
 # All logs should be consolidated in the same mounted host folder
   fluentd:
