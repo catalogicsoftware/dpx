@@ -89,7 +89,8 @@ clean: stop
 	rm -rf auth_token cookies.txt out.json dpx.env dpx-apigateway.env dpx-vplugin-mgr.env
 
 distclean: clean
-	rm -rf keys opt-auth opt-apigateway stack-logs dpx-apigateway*.env dpx-vplugin-mgr*.env certs-selfsigned certs-letsencrypt api_key catalogic-dpx-ms.id certbot plugins rest-db
+# KJM: Removed cleanup of stack-logs since this target will be part of normal update workflow
+	rm -rf keys opt-auth opt-apigateway dpx-apigateway*.env dpx-vplugin-mgr*.env certs-selfsigned certs-letsencrypt api_key catalogic-dpx-ms.id certbot plugins rest-db
 
 # update docker services
 update: remove-old-images opt dpx.env dpx-vplugin-mgr.env svc.env dpx-apigateway.env
