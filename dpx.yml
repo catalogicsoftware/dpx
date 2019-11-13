@@ -40,9 +40,6 @@ services:
       - SPRING_DATASOURCE_PASSWORD=secret
     deploy:
       replicas: 2
-      restart_policy:
-        condition: on-failure
-        max_attempts: 5
       update_config:
         failure_action: rollback
     ports:
