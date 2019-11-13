@@ -55,7 +55,7 @@ services:
 
 # PostgreSQL database service
   sql-db:
-    image: postgres:11
+    image: postgres:${TAG_SQLDB}
     deploy:
       replicas: 1
     ports:
@@ -309,7 +309,7 @@ services:
 # Should only be used for services where native logging is not practical
 # All logs should be consolidated in the same mounted host folder
   fluentd:
-    image: fluent/fluentd:v1.4-1
+    image: fluent/fluentd:${TAG_FLUENTD}
     volumes:
 #     - "./config/fluent.conf:/fluentd/etc/fluent.conf"
       - "./stack-logs:/fluentd/log"

@@ -7,3 +7,5 @@ export TAG_GATEWAY=latest
 export TAG_REPORT=latest
 export TAG_BIRT=latest
 export TAG_VPLUGIN_MGR=latest
+export TAG_SQLDB=11
+export TAG_FLUENTD=v1.4-1
