@@ -170,13 +170,15 @@ services:
 
 # DPX application main UI service
 # TODO:
-# -Consider changing port to 8096:8096
+# -Change port mapping for HTTP  to 8096:8080 [DONE]
+# -Change port mapping for HTTPS to 8496:8443 [DONE]
   dpxui:
     image: catalogicsoftware/dpx-webui:${TAG_DPXUI}
     deploy:
       replicas: 1
     ports:
-      - "8096:80"
+      - "8096:8080"
+      - "8496:8443"
     networks:
       - webnet
     logging:
