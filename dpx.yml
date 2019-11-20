@@ -24,6 +24,7 @@ services:
 # DPX core REST API service
 # TODO:
 # -Rename service to "dpxcore"
+# -Normalize mount point for logs to /app/logs
 # -Change port to 8095:8095 [DONE]
 # -Change Tag to TAG_DPXCORE [DONE]
   rest:
@@ -57,6 +58,8 @@ services:
       - "sql-db"
 
 # PostgreSQL database service
+# TODO:
+# -Consider relocation of PGDATA directory to /opt/catalogic/data
   sql-db:
     image: postgres:${TAG_SQLDB}
     deploy:
@@ -118,7 +121,7 @@ services:
 
 # DPX authentication service
 # TODO:
-# -Change port to 8091:8091
+# -Change port to 8091:8091 [DONE]
   auth:
     image: catalogicsoftware/dpx-auth:${TAG_AUTH}
     env_file:
@@ -240,13 +243,11 @@ services:
     volumes:
       - "./config/gateway:/app/config"
       - "./stack-logs:/app/logs"
-# TODO: Remove following after service stabalizes
-#     - "./opt-apigateway:/app/config" [LAST]
-#     - "./opt-apigateway:/opt"        [OLDER]
     networks:
       -  webnet
 
 # DPX discovery service
+# TODO:
   discovery:
     image: catalogicsoftware/discovery:${TAG_DISCOVERY}
     env_file:
