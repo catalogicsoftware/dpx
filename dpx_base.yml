@@ -4,6 +4,8 @@ services:
 
 
   # PostgreSQL database service
+  # TODO:
+  # -Consider relocation of PGDATA directory to /op
   sql-db:
     image: postgres:${TAG_SQLDB}
     deploy:
