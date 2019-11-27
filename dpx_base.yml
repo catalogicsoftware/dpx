@@ -1,0 +1,55 @@
+version: "3.7"
+
+services:
+
+
+  # PostgreSQL database service
+  sql-db:
+    image: postgres:${TAG_SQLDB}
+    deploy:
+      replicas: 1
+    ports:
+      - target: 5432
+        published: 5433
+        protocol: tcp
+        mode: host
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=secret
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    volumes:
+      - "./rest-db:/var/lib/postgresql/data/pgdata"
+    networks:
+      - "webnet"
+    logging:
+      driver: "fluentd"
+      options:
+        tag: sql-db
+
+  # Docker logging driver
+  # Note:
+  # Should only be used for services where native logging is not practical
+  # All logs should be consolidated in the same mounted host folder
+  fluentd:
+    image: fluent/fluentd:${TAG_FLUENTD}
+    volumes:
+      #     - "./config/fluent.conf:/fluentd/etc/fluent.conf"
+      - "./stack-logs:/fluentd/log"
+    ports:
+      - "24224:24224"
+    configs:
+      - source: fluentd_conf
+        target: /fluentd/etc/fluent.conf
+    networks:
+      - webnet
+
+configs:
+  fluentd_conf:
+    name: fluentd_conf${FLUENTD_CONFIG_DIGEST}
+    file: ./config/fluent.conf
+
+
+networks:
+  webnet:
+    #    external:
+    name: webnet

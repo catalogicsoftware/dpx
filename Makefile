@@ -10,7 +10,7 @@ endef
 #
 # default - short descriptions of the targets in this Makefile
 #
-help: 
+help:
 	@echo 'available targets:'
 	@echo '	== environment related =='
 	@echo '	start - bring up the stack \"dpx\"'
@@ -65,17 +65,17 @@ CURL=curl -k
 # following uses jq to prettify the output and save a copy in a local file: out.json
 JQ=| jq . | tee out.json
 
-# 
+#
 # bring up the stack
 .PHONY: start start-x
-start: 
+start:
 	rm -rf dpx.env svc.env
 	mkdir -p rest-db
 	$(MAKE) start-x
 
 start-x: opt keys stack-logs dpx.env svc.env dpx-vplugin-mgr.env dpx-apigateway.env plugins
 	./stack-wait.sh
-	. ./dpx-container-tags && . ./svc.env && $(DOCKER) system prune -f && $(DOCKER) stack deploy -c dpx.yml dpx --with-registry-auth
+	. ./dpx-container-tags && . ./svc.env && $(DOCKER) system prune -f && $(DOCKER) stack deploy -c dpx_base.yml dpx_base --with-registry-auth && $(DOCKER) stack deploy -c dpx.yml dpx --with-registry-auth
 
 # check the status of the stack
 status:
@@ -83,7 +83,7 @@ status:
 
 # bring down the stack
 stop:
-	-$(DOCKER) stack rm dpx
+	-$(DOCKER) stack rm dpx && $(DOCKER) stack rm dpx_base && sleep 5
 
 # clean up
 clean: stop
@@ -95,13 +95,14 @@ distclean: clean
 
 # update docker services
 update: remove-old-images opt dpx.env dpx-vplugin-mgr.env svc.env dpx-apigateway.env
+	mkdir -p rest-db
 	./stack-wait.sh
-	. ./dpx-container-tags && . ./svc.env && export FLUENTD_CONFIG_DIGEST=$(shell date -r ./config/fluent.conf +%s) && export START_DATE=$(shell date --iso-8601=seconds) && $(DOCKER) system prune -f && $(DOCKER) stack deploy --prune -c dpx.yml dpx --with-registry-auth
+	. ./dpx-container-tags && . ./svc.env && export FLUENTD_CONFIG_DIGEST=$(shell date -r ./config/fluent.conf +%s) && export START_DATE=$(shell date --iso-8601=seconds) && $(DOCKER) system prune -f && sleep 5 && $(DOCKER) stack deploy -c dpx_base.yml dpx_base --with-registry-auth && sleep 5 && $(DOCKER) stack deploy --prune -c dpx.yml dpx --with-registry-auth
 
 force-update: remove-old-images opt svc.env dpx-apigateway.env
 	$(DOCKER) stack rm dpx
 	./stack-wait.sh
-	. ./dpx-container-tags && . ./svc.env && $(DOCKER) system prune -f && $(DOCKER) stack deploy -c dpx.yml dpx --with-registry-auth
+	. ./dpx-container-tags && . ./svc.env && $(DOCKER) system prune -f && docker network create -d overlay webnet && $(DOCKER) stack deploy -c dpx_base.yml dpx_base --with-registry-auth && $(DOCKER) stack deploy -c dpx.yml dpx --with-registry-auth
 
 #
 # dpx.env contains env vars shared across various containers
@@ -117,7 +118,7 @@ svc.env:
 	echo "export SVC_HOST=$(THIS_HOST)" > svc.env
 
 # this command keeps only 3 most recent versions for each docker image
-remove-old-images: 
+remove-old-images:
 	-$(call remove_old_docker_images,'catalogicsoftware/dpx-vplugin-mgr')
 	-$(call remove_old_docker_images,'catalogicsoftware/dpx-rest')
 	-$(call remove_old_docker_images,'catalogicsoftware/dpx-auth')
@@ -126,7 +127,7 @@ remove-old-images:
 	-$(call remove_old_docker_images,'fluent/fluentd')
 #	-$(DOCKER) rmi 	$(shell $(DOCKER) images --filter=reference='catalogicsoftware/dpx-rest' --format "{{.ID}}" | tail -n +4 )
 
-define remove_old_docker_images	
+define remove_old_docker_images
 	$(eval container_hash := $(shell $(DOCKER) images --filter=reference=$(1) --format "{{.ID}}" | tail -n +4 ) )
 	-$(DOCKER) 2>/dev/null 1>&2 rmi $(container_hash) || true
 endef
@@ -143,13 +144,13 @@ DPX_VPLUGIN_MGR_DEFAULT=real
 #DPX_VPLUGIN_MGR_DEFAULT=sim
 endif
 # if not there, default action to create it
-dpx-vplugin-mgr.env: 
+dpx-vplugin-mgr.env:
 	$(MAKE) set.vplugin-mgr.$(DPX_VPLUGIN_MGR_DEFAULT)
 
 .PHONY: set.vplugin-mgr.real
 set.vplugin-mgr.real: dpx-vplugin-mgr-real.env
 	ln -sf $< dpx-vplugin-mgr.env
-dpx-vplugin-mgr-real.env: 
+dpx-vplugin-mgr-real.env:
 	echo "SERVER_SSL_THUMBPRINT=$(shell cat certs-selfsigned/keystore.jks.thumbprint)" > $@
 	echo 'AUTH_URL_FORMAT=http://%s/auth' >> $@
 	echo 'DPX_MASTER_URL_FORMAT=http://%s/app/api' >> $@
@@ -157,7 +158,7 @@ dpx-vplugin-mgr-real.env:
 .PHONY: set.vplugin-mgr.sim
 set.vplugin-mgr.sim: dpx-vplugin-mgr-sim.env
 	ln -sf $< dpx-vplugin-mgr.env
-dpx-vplugin-mgr-sim.env: 
+dpx-vplugin-mgr-sim.env:
 	echo "SERVER_SSL_THUMBPRINT=$(shell cat certs-selfsigned/keystore.jks.thumbprint)" > $@
 	echo 'AUTH_URL_FORMAT=http://%s/auth' >> $@
 	echo 'DPX_MASTER_URL_FORMAT=http://%s/app/api' >> $@
@@ -172,7 +173,7 @@ ifndef DPX_CERT_DEFAULT
 DPX_CERT_DEFAULT=selfsigned
 #DPX_CERT_DEFAULT=letsencrypt
 endif
-dpx-apigateway.env: 
+dpx-apigateway.env:
 	$(MAKE) set.apigateway.$(DPX_CERT_DEFAULT)
 
 # nossl version config for the gateway
@@ -277,7 +278,7 @@ opt-auth: keys
 	echo "KEY_STORE_TYPE=JKS" >> dpx-auth.env
 	echo "KEY_ALIAS=jwt" >> dpx-auth.env
 	echo "KEY_FILE=config/catalogic.pub" >> dpx-auth.env
-	
+
 opt-apigateway: keys
 	mkdir -p opt-apigateway
 	grep -v '\-\-\-\-\-' keys/catalogic.pub > opt-apigateway/catalogic.pub
@@ -293,8 +294,8 @@ plugins:
 
 #
 # --- USEFUL TARGETS FOR DEV/TEST ---
-# 
-# master server in a container 
+#
+# master server in a container
 # tag for the DPX MS to use
 #
 # KJM: Review URLs and ports for update
@@ -324,12 +325,12 @@ auth_token:
 	@echo "you must login first"; exit -1
 
 # utility target to login and save auth_token
-login: t.vpmgr.login 
+login: t.vpmgr.login
 
 logout:
 	rm -rf auth_token
 #
-# tests for authentication service 
+# tests for authentication service
 #
 ifdef SKIP_ZUUL
 SVC_AUTH=https://$(THIS_HOST):8081
@@ -348,7 +349,7 @@ t.auth.login:
 	jq -r '("Bearer " + .token)' < out.json > auth_token
 
 #
-# tests for rest service 
+# tests for rest service
 #
 ifdef SKIP_ZUUL
 SVC_REST=https://$(THIS_HOST):8080
@@ -444,7 +445,7 @@ t.rest.patch.vmobjects: auth_token
 
 
 #
-# tests for vplugin manager service 
+# tests for vplugin manager service
 #
 ifdef SKIP_ZUUL
 SVC_VPMGR=https://$(THIS_HOST):8082

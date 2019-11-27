@@ -41,9 +41,6 @@ services:
       - SPRING_DATASOURCE_PASSWORD=secret
     deploy:
       replicas: 2
-      restart_policy:
-        condition: on-failure
-        max_attempts: 5
       update_config:
         failure_action: rollback
     ports:
@@ -57,36 +54,12 @@ services:
     depends_on:
       - "sql-db"
 
-# PostgreSQL database service
-# TODO:
-# -Consider relocation of PGDATA directory to /opt/catalogic/data
-  sql-db:
-    image: postgres:${TAG_SQLDB}
-    deploy:
-      replicas: 1
-    ports:
-      - target: 5432
-        published: 5433
-        protocol: tcp
-        mode: host
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=secret
-      - PGDATA=/var/lib/postgresql/data/pgdata
-    volumes:
-      - "./rest-db:/var/lib/postgresql/data/pgdata"
-    networks:
-      - "webnet"
-    logging:
-      driver: "fluentd"
-      options:
-        tag: dpx-sql-db
 
-# DPX vSphere plug-in manager service
-# TODO:
-# -Change SVC_SERVER_URL to DPXCORE_SERVER_URL
-# -Change DPXCORE URL host from rest to dpxcore
-# -Change DPXCORE URL port from 8080 to 8095 [DONE]
+  # DPX vSphere plug-in manager service
+  # TODO:
+  # -Change SVC_SERVER_URL to DPXCORE_SERVER_URL
+  # -Change DPXCORE URL host from rest to dpxcore
+  # -Change DPXCORE URL port from 8080 to 8095 [DONE]
   vplugin-mgr:
     image: catalogicsoftware/dpx-vplugin-mgr:${TAG_VPLUGIN_MGR}
     env_file:
@@ -137,7 +110,7 @@ services:
       update_config:
         failure_action: rollback
     healthcheck:
-#      test: wget -qO- http://localhost:8091/management/health | grep -q '"UP"' || exit 1
+      #      test: wget -qO- http://localhost:8091/management/health | grep -q '"UP"' || exit 1
       interval: 30s
       timeout: 5s
       retries: 3
@@ -149,9 +122,9 @@ services:
     networks:
       - webnet
 
-# DPX vSphere plug-in configuration UI service
-# TODO:
-# -Change Tag to TAG_CONFIGUI [DONE]
+  # DPX vSphere plug-in configuration UI service
+  # TODO:
+  # -Change Tag to TAG_CONFIGUI [DONE]
   config-ui:
     image: catalogicsoftware/dpx-ui:${TAG_CONFIGUI}
     environment:
@@ -174,10 +147,10 @@ services:
       options:
         tag: dpx-config-ui
 
-# DPX application main UI service
-# TODO:
-# -Change port mapping for HTTP  to 8096:8080 [DONE]
-# -Change port mapping for HTTPS to 8496:8443 [DONE]
+  # DPX application main UI service
+  # TODO:
+  # -Change port mapping for HTTP  to 8096:8080 [DONE]
+  # -Change port mapping for HTTPS to 8496:8443 [DONE]
   dpxui:
     image: catalogicsoftware/dpx-webui:${TAG_DPXUI}
     deploy:
@@ -192,19 +165,19 @@ services:
       options:
         tag: dpx-ui
 
-# DPX gateway service
-# TODO:
-# -Rename service to "gateway" [DONE]
-# -Change port to 443:8443 [DONE]
-# -Change port to 80:8080 [DONE]
-# -Change Tag to TAG_GATEWAY [DONE]
-# -Update service port numbers in route specifications
-# -Add uppercase variants for env variables [DONE]
-#  Need to also cover env definitions in file: dpx-apigateway.env (generated) [DONE]
-#  Remove definition for server_port from the env file [DONE]
-# -Eventually remove lower case variants for env variables [DONE]
-# -Change env for "app" to use "dpx"
-# -Add mount point /app/config for service config data (opt-apigateway) [DONE]
+  # DPX gateway service
+  # TODO:
+  # -Rename service to "gateway" [DONE]
+  # -Change port to 443:8443 [DONE]
+  # -Change port to 80:8080 [DONE]
+  # -Change Tag to TAG_GATEWAY [DONE]
+  # -Update service port numbers in route specifications
+  # -Add uppercase variants for env variables [DONE]
+  #  Need to also cover env definitions in file: dpx-apigateway.env (generated) [DONE]
+  #  Remove definition for server_port from the env file [DONE]
+  # -Eventually remove lower case variants for env variables [DONE]
+  # -Change env for "app" to use "dpx"
+  # -Add mount point /app/config for service config data (opt-apigateway) [DONE]
   gateway:
     image: catalogicsoftware/dpx-apigateway:${TAG_GATEWAY}
     env_file:
@@ -263,10 +236,10 @@ services:
     networks:
       - webnet
 
-# DPX report service
-# TODO:
-# -Change port to 8094:8094 [DONE]
-# -Add mount point for config [DONE]
+  # DPX report service
+  # TODO:
+  # -Change port to 8094:8094 [DONE]
+  # -Add mount point for config [DONE]
   report:
     image: catalogicsoftware/report:${TAG_REPORT}
     env_file:
@@ -288,8 +261,8 @@ services:
     networks:
       - webnet
 
-# DPX BIRT service
-# TODO:
+  # DPX BIRT service
+  # TODO:
   birt:
     image: catalogicsoftware/birt:${TAG_BIRT}
     env_file:
@@ -310,27 +283,7 @@ services:
     networks:
       - webnet
 
-# Docker logging driver
-# Note:
-# Should only be used for services where native logging is not practical
-# All logs should be consolidated in the same mounted host folder
-  fluentd:
-    image: fluent/fluentd:${TAG_FLUENTD}
-    volumes:
-#     - "./config/fluent.conf:/fluentd/etc/fluent.conf"
-      - "./stack-logs:/fluentd/log"
-    ports:
-      - "24224:24224"
-    configs:
-      - source: fluentd_conf
-        target: /fluentd/etc/fluent.conf
-    networks:
-      - webnet
-
-configs:
-  fluentd_conf:
-    name: fluentd_conf${FLUENTD_CONFIG_DIGEST}
-    file: ./config/fluent.conf
-
 networks:
-    webnet:
+  webnet:
+    external:
+      name: webnet
