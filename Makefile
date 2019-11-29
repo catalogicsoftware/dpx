@@ -94,7 +94,7 @@ distclean: clean
 	rm -rf keys opt-auth opt-apigateway dpx-apigateway*.env dpx-vplugin-mgr*.env certs-selfsigned certs-letsencrypt api_key catalogic-dpx-ms.id certbot plugins rest-db
 
 # update docker services
-update: remove-old-images opt dpx.env dpx-vplugin-mgr.env svc.env dpx-apigateway.env
+update: remove-old-images opt dpx.env dpx-vplugin-mgr.env svc.env dpx-apigateway.env plugins
 	mkdir -p rest-db
 	./stack-wait.sh
 	. ./dpx-container-tags && . ./svc.env && export FLUENTD_CONFIG_DIGEST=$(shell date -r ./config/fluent.conf +%s) && export START_DATE=$(shell date --iso-8601=seconds) && $(DOCKER) system prune -f && sleep 5 && $(DOCKER) stack deploy -c dpx_base.yml dpx_base --with-registry-auth && sleep 5 && $(DOCKER) stack deploy --prune -c dpx.yml dpx --with-registry-auth
