@@ -1,0 +1,10 @@
+{
+    "name" : "DPX Unprotected Nodes",
+    "type" : "REPORT",
+    "comment" : "Report metadata",
+    "displayName" : "DPX Unprotected Nodes",
+    "description" : "Lists DPX client nodes not having a backup within a specified number of days",
+    "category" : "dpxcompliance",
+    "engine" : "BIRT",
+    "specFileName" : "DpxUnprotectedNodes.rptdesign"
+}

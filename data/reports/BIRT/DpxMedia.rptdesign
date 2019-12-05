@@ -1,0 +1,2980 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 4.3.1.v201309091055 Build &lt;4.3.1.v20130917-1035></property>
+    <simple-property-list name="includeResource">
+        <value>reports</value>
+    </simple-property-list>
+    <list-property name="includeScripts">
+        <property>json2.js</property>
+        <property>Wraplines.js</property>
+        <property>ScaleBytes.js</property>
+    </list-property>
+    <property name="units">in</property>
+    <method name="initialize"><![CDATA[importPackage(Packages.java.util.*)]]></method>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="layoutPreference">auto layout</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">96</property>
+    <list-property name="libraries">
+        <structure>
+            <property name="fileName">syncsort_library.rptlibrary</property>
+            <property name="namespace">syncsort_library</property>
+        </structure>
+    </list-property>
+    <list-property name="cssStyleSheets">
+        <structure>
+            <property name="fileName">syncsort.css</property>
+            <property name="useExternalCss">false</property>
+        </structure>
+    </list-property>
+    <parameters>
+        <scalar-parameter name="MasterServer" id="5995">
+            <text-property name="promptText" key="DPxMasterServer"></text-property>
+            <property name="valueType">dynamic</property>
+            <property name="isRequired">true</property>
+            <property name="dataSetName">MasterServerParam</property>
+            <expression name="valueExpr" type="javascript">row["dpxId"]</expression>
+            <expression name="labelExpr" type="javascript">row["name"]</expression>
+            <property name="dataType">string</property>
+            <property name="distinct">false</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">(All)</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">multi-value</property>
+            <property name="controlType">list-box</property>
+            <property name="mustMatch">true</property>
+            <property name="fixedOrder">true</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="TapeStatus" id="6131">
+            <text-property name="promptText" key="DPxMediaStatus"></text-property>
+            <property name="valueType">static</property>
+            <property name="sortBy">value</property>
+            <property name="sortDirection">asc</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">(All)</value>
+            </simple-property-list>
+            <list-property name="selectionList">
+                <structure>
+                    <property name="value">(All)</property>
+                    <property name="label">(All)</property>
+                    <property name="labelID">(All)</property>
+                </structure>
+                <structure>
+                    <property name="value">NEW</property>
+                    <property name="label">New</property>
+                    <property name="labelID">NEW</property>
+                </structure>
+                <structure>
+                    <property name="value">EMPTY</property>
+                    <property name="label">Empty</property>
+                    <property name="labelID">EMPTY</property>
+                </structure>
+                <structure>
+                    <property name="value">FULL</property>
+                    <property name="label">Full</property>
+                    <property name="labelID">FULL</property>
+                </structure>
+                <structure>
+                    <property name="value">APPENDABLE</property>
+                    <property name="label">Appendable</property>
+                    <property name="labelID">APPENDABLE</property>
+                </structure>
+                <structure>
+                    <property name="value">OFFSITE</property>
+                    <property name="label">Offsite</property>
+                    <property name="labelID">OFFSITE</property>
+                </structure>
+                <structure>
+                    <property name="value">EMPTY_OFFSITE</property>
+                    <property name="label">Empty Offsite</property>
+                    <property name="labelID">EMPTY_OFFSITE</property>
+                </structure>
+                <structure>
+                    <property name="value">EMPTY_NOT_IN_LIBRARY</property>
+                    <property name="label">Empty not in Library</property>
+                    <property name="labelID">EMPTY_NOT_IN_LIBRARY</property>
+                </structure>
+                <structure>
+                    <property name="value">FULL_OFFSITE</property>
+                    <property name="label">Full Offsite</property>
+                    <property name="labelID">FULL_OFFSITE</property>
+                </structure>
+                <structure>
+                    <property name="value">IN_LIBRARY</property>
+                    <property name="label">In Library</property>
+                    <property name="labelID">IN_LIBRARY</property>
+                </structure>
+                <structure>
+                    <property name="value">APPENDABLE_OFFSITE</property>
+                    <property name="label">Appendable Offsite</property>
+                    <property name="labelID">APPENDABLE_OFFSITE</property>
+                </structure>
+                <structure>
+                    <property name="value">TWIN</property>
+                    <property name="label">Twin</property>
+                    <property name="labelID">TWIN</property>
+                </structure>
+                <structure>
+                    <property name="value">CLEANINGMEDIA</property>
+                    <property name="label">Cleaning Media</property>
+                    <property name="labelID">CLEANINGMEDIA</property>
+                </structure>
+                <structure>
+                    <property name="value">READONLY</property>
+                    <property name="label">Read Only</property>
+                    <property name="labelID">READONLY</property>
+                </structure>
+                <structure>
+                    <property name="value">FULL_IN_LIBRARY</property>
+                    <property name="label">Full in Library</property>
+                    <property name="labelID">FULL_IN_LIBRARY</property>
+                </structure>
+            </list-property>
+            <property name="paramType">simple</property>
+            <property name="controlType">list-box</property>
+            <property name="mustMatch">true</property>
+            <property name="fixedOrder">false</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="run_by" id="2598">
+            <property name="hidden">true</property>
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">DefaultUser</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="GroupTableBy" id="6176">
+            <text-property name="promptText" key="DPxTableGroupings"></text-property>
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">Volser</value>
+            </simple-property-list>
+            <list-property name="selectionList">
+                <structure>
+                    <property name="value">Library</property>
+                </structure>
+                <structure>
+                    <property name="value">Media Pool</property>
+                </structure>
+                <structure>
+                    <property name="value">Volser</property>
+                </structure>
+                <structure>
+                    <property name="value">Status</property>
+                </structure>
+            </list-property>
+            <property name="paramType">simple</property>
+            <property name="controlType">list-box</property>
+            <property name="mustMatch">true</property>
+            <property name="fixedOrder">true</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <oda-data-source extensionID="com.syncsort.dp.xsb.reports.data.oda.rest" name="DPXprovider" id="3786">
+            <property name="Base URI">http://report:8094/dpx</property>
+            <property name="Auth URI">http://auth:8091/session</property>
+            <property name="Username">sysadmin</property>
+            <encrypted-property name="Password" encryptionID="base64">c3lzYWRtaW4K</encrypted-property>
+        </oda-data-source>
+        <script-data-source name="ScriptedArray" id="2356"/>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="com.syncsort.dp.xsb.reports.data.oda.rest.dataSet" name="MasterServerParam" id="3788">
+            <list-property name="computedColumns">
+                <structure>
+                    <property name="name">count</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value">row["id"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr">row["name"] != "(All)"</expression>
+                </structure>
+                <structure>
+                    <property name="name">dpxId</property>
+                    <expression name="expression">row["id"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">name</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">name</text-property>
+                    <text-property name="heading">name</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">hostAddress</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">hostAddress</text-property>
+                    <text-property name="heading">hostAddress</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">id</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">id</text-property>
+                    <text-property name="heading">id</text-property>
+                </structure>
+            </list-property>
+            <list-property name="filter">
+                <structure>
+                    <property name="operator">ne</property>
+                    <expression name="expr" type="javascript">row["name"]</expression>
+                    <simple-property-list name="value1">
+                        <value>""</value>
+                    </simple-property-list>
+                </structure>
+            </list-property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">Param1</property>
+                    <property name="nativeName">Param1</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                    <property name="position">1</property>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Param2</property>
+                    <property name="nativeName">Param2</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                    <property name="position">2</property>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Param3</property>
+                    <property name="nativeName">Param3</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                    <property name="position">3</property>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Param4</property>
+                    <property name="nativeName">Param4</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                    <property name="position">4</property>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Param5</property>
+                    <property name="nativeName">Param5</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                    <property name="position">5</property>
+                    <expression name="defaultValue" type="javascript">"(All)"</expression>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">Param6</property>
+                    <property name="nativeName">Param6</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                    <property name="position">6</property>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Param7</property>
+                    <property name="nativeName">Param7</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                    <property name="position">7</property>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Param8</property>
+                    <property name="nativeName">Param8</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                    <property name="position">8</property>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">hostAddress</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">count</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">dpxId</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <method name="beforeOpen"><![CDATA[msName = new Array();]]></method>
+            <method name="onFetch"><![CDATA[//onFetch()
+if (row["id"] != "(All)" ){
+   var key = row["id"];
+   var value = row["name"];
+   msName[key]=value 
+   }]]></method>
+            <property name="dataSource">DPXprovider</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">name</property>
+                    <property name="nativeName">name</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">hostAddress</property>
+                    <property name="nativeName">hostAddress</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">id</property>
+                    <property name="nativeName">id</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[{dpxs[*]}(name,hostAddress,id)]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <DataSetParameters>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name>Param1</design:name>
+            <design:position>1</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>1</design:nativeDataTypeCode>
+          <design:precision>-1</design:precision>
+          <design:scale>-1</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name>Param2</design:name>
+            <design:position>2</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>1</design:nativeDataTypeCode>
+          <design:precision>-1</design:precision>
+          <design:scale>-1</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name>Param3</design:name>
+            <design:position>3</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>1</design:nativeDataTypeCode>
+          <design:precision>-1</design:precision>
+          <design:scale>-1</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name>Param4</design:name>
+            <design:position>4</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>1</design:nativeDataTypeCode>
+          <design:precision>-1</design:precision>
+          <design:scale>-1</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name>Param5</design:name>
+            <design:position>5</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>1</design:nativeDataTypeCode>
+          <design:precision>-1</design:precision>
+          <design:scale>-1</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name>Param6</design:name>
+            <design:position>6</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>1</design:nativeDataTypeCode>
+          <design:precision>-1</design:precision>
+          <design:scale>-1</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name>Param7</design:name>
+            <design:position>7</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>1</design:nativeDataTypeCode>
+          <design:precision>-1</design:precision>
+          <design:scale>-1</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name>Param8</design:name>
+            <design:position>8</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>1</design:nativeDataTypeCode>
+          <design:precision>-1</design:precision>
+          <design:scale>-1</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+  </DataSetParameters>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="com.syncsort.dp.xsb.reports.data.oda.rest.dataSet" name="dpxProviderMedia" id="6024">
+            <list-property name="computedColumns">
+                <structure>
+                    <property name="name">VolserCount</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value">row["volser"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr">row["errorMessage"] == ""</expression>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">id</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">id</text-property>
+                    <text-property name="heading">id</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">name</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">name</text-property>
+                    <text-property name="heading">name</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">dpxId</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">dpxId</text-property>
+                    <text-property name="heading">dpxId</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">volser</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">volser</text-property>
+                    <text-property name="heading">volser</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tpoolName</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">tpoolName</text-property>
+                    <text-property name="heading">tpoolName</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">creator</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">creator</text-property>
+                    <text-property name="heading">creator</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">description</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">description</text-property>
+                    <text-property name="heading">description</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">lastWritten</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">lastWritten</text-property>
+                    <text-property name="heading">lastWritten</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">capacity</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">capacity</text-property>
+                    <text-property name="heading">capacity</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">used</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">used</text-property>
+                    <text-property name="heading">used</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">partition</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">partition</text-property>
+                    <text-property name="heading">partition</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">status</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">status</text-property>
+                    <text-property name="heading">status</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">statusNames</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">statusNames</text-property>
+                    <text-property name="heading">statusNames</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">jbName</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">jbName</text-property>
+                    <text-property name="heading">jbName</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">slotNum</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">slotNum</text-property>
+                    <text-property name="heading">slotNum</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">mediaType</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">mediaType</text-property>
+                    <text-property name="heading">mediaType</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">jobs</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">jobs</text-property>
+                    <text-property name="heading">jobs</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">requestStatus</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">requestStatus</text-property>
+                    <text-property name="heading">requestStatus</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">errorMessage</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">errorMessage</text-property>
+                    <text-property name="heading">errorMessage</text-property>
+                </structure>
+            </list-property>
+            <list-property name="filter">
+                <structure>
+                    <property name="operator">is-true</property>
+                    <expression name="expr" type="javascript">var Status = params["TapeStatus"].value;&#13;
+ switch(Status) {&#13;
+    case "(All)":&#13;
+    case "NEW":&#13;
+    case "EMPTY":&#13;
+    case "FULL":&#13;
+    case "APPENDABLE":&#13;
+        true&#13;
+        break;&#13;
+    case "OFFSITE":&#13;
+        if (row["statusNames"].indexOf("OFFSITE")== -1) false &#13;
+        else true&#13;
+        break; &#13;
+    case "EMPTY_OFFSITE":&#13;
+        if (row["statusNames"].indexOf("EMPTY OFFSITE")== -1) false &#13;
+        else true&#13;
+        break;         &#13;
+    case "FULL_OFFSITE":&#13;
+        if (row["statusNames"].indexOf("FULL OFFSITE")== -1) false &#13;
+        else true&#13;
+        break;        &#13;
+     case "APPENDABLE_OFFSITE":&#13;
+        if (row["statusNames"].indexOf("APPENDABLE OFFSITE")== -1) false &#13;
+        else true&#13;
+        break;  &#13;
+      case "IN_LIBRARY":&#13;
+        if (!row["jbName"]) false  &#13;
+        else true&#13;
+        break;  &#13;
+      case "FULL_IN_LIBRARY":&#13;
+        if ((row["jbName"]) &amp;&amp; (row["statusNames"].indexOf("FULL") != -1))true &#13;
+        else false&#13;
+        break;&#13;
+      case "EMPTY_NOT_IN_LIBRARY":&#13;
+        if ((!row["jbName"]) &amp;&amp; (row["statusNames"].indexOf("EMPTY") != -1))true &#13;
+        else false&#13;
+        break;     &#13;
+                    &#13;
+     }</expression>
+                </structure>
+            </list-property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">Param1</property>
+                    <property name="nativeName">Param1</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                    <property name="position">1</property>
+                    <expression name="defaultValue" type="javascript">var msId = params["MasterServer"].toString();&#13;
+msId = msId.replace(/,/g, " "); //remove comma if multi selected&#13;
+var queryStr = "[";&#13;
+var msIdFilter = "";&#13;
+var resourceFilter = "{\"property\":\"resource\",\"op\":\"=\",\"value\":\"media\"}";&#13;
+var Status = params["TapeStatus"].value;&#13;
+var StatusFilter =  "{\"property\":\"statusNames\",\"op\":\"=\",\"value\":\""+Status+"\"}"&#13;
+&#13;
+if (msId != "(All)") {&#13;
+   msIdFilter = "{\"property\":\"regId\",\"op\":\"=\",\"value\":\""+msId+"\"}"&#13;
+   queryStr = queryStr + msIdFilter +","+resourceFilter &#13;
+   }&#13;
+   &#13;
+ else{&#13;
+    queryStr = queryStr + resourceFilter&#13;
+   }&#13;
+   &#13;
+if (Status != "(All)") {&#13;
+   //api only supports filtering on primary status NEW,EMPTY,FULL,APPENDABLE&#13;
+   //other status is filtered in report dataset filter. &#13;
+  &#13;
+  ///////////&#13;
+ switch(Status) {&#13;
+    case "NEW":&#13;
+    case "EMPTY":&#13;
+    case "FULL":&#13;
+    case "APPENDABLE":&#13;
+       queryStr = queryStr +","+StatusFilter&#13;
+        break;&#13;
+     } &#13;
+  }&#13;
+  &#13;
+queryStr + "]"</expression>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">Param2</property>
+                    <property name="nativeName">Param2</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                    <property name="position">2</property>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Param3</property>
+                    <property name="nativeName">Param3</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                    <property name="position">3</property>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Param4</property>
+                    <property name="nativeName">Param4</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                    <property name="position">4</property>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Param5</property>
+                    <property name="nativeName">Param5</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                    <property name="position">5</property>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Param6</property>
+                    <property name="nativeName">Param6</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                    <property name="position">6</property>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Param7</property>
+                    <property name="nativeName">Param7</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                    <property name="position">7</property>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Param8</property>
+                    <property name="nativeName">Param8</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                    <property name="position">8</property>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">dpxId</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">volser</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">tpoolName</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">creator</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">description</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">lastWritten</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">capacity</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">used</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">partition</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">status</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">13</property>
+                        <property name="name">statusNames</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">14</property>
+                        <property name="name">jbName</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">15</property>
+                        <property name="name">slotNum</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">16</property>
+                        <property name="name">mediaType</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">17</property>
+                        <property name="name">jobs</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">18</property>
+                        <property name="name">requestStatus</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">19</property>
+                        <property name="name">errorMessage</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">20</property>
+                        <property name="name">VolserCount</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <method name="beforeOpen"><![CDATA[
+]]></method>
+            <property name="dataSource">DPXprovider</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">id</property>
+                    <property name="nativeName">id</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">name</property>
+                    <property name="nativeName">name</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">dpxId</property>
+                    <property name="nativeName">dpxId</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">volser</property>
+                    <property name="nativeName">volser</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">tpoolName</property>
+                    <property name="nativeName">tpoolName</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">creator</property>
+                    <property name="nativeName">creator</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">description</property>
+                    <property name="nativeName">description</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">lastWritten</property>
+                    <property name="nativeName">lastWritten</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">capacity</property>
+                    <property name="nativeName">capacity</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">used</property>
+                    <property name="nativeName">used</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">11</property>
+                    <property name="name">partition</property>
+                    <property name="nativeName">partition</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">12</property>
+                    <property name="name">status</property>
+                    <property name="nativeName">status</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">13</property>
+                    <property name="name">statusNames</property>
+                    <property name="nativeName">statusNames</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">14</property>
+                    <property name="name">jbName</property>
+                    <property name="nativeName">jbName</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">15</property>
+                    <property name="name">slotNum</property>
+                    <property name="nativeName">slotNum</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">16</property>
+                    <property name="name">mediaType</property>
+                    <property name="nativeName">mediaType</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">17</property>
+                    <property name="name">jobs</property>
+                    <property name="nativeName">jobs</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">18</property>
+                    <property name="name">requestStatus</property>
+                    <property name="nativeName">requestStatus</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">19</property>
+                    <property name="name">errorMessage</property>
+                    <property name="nativeName">errorMessage</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[query{media[*]}(id,name,dpxId,volser,tpoolName,creator,description,lastWritten,capacity,used,partition,status,statusNames,jbName,slotNum,mediaType,jobs,requestStatus,errorMessage)]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <DataSetParameters>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name>Param1</design:name>
+            <design:position>1</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>1</design:nativeDataTypeCode>
+          <design:precision>-1</design:precision>
+          <design:scale>-1</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name>Param2</design:name>
+            <design:position>2</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>1</design:nativeDataTypeCode>
+          <design:precision>-1</design:precision>
+          <design:scale>-1</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name>Param3</design:name>
+            <design:position>3</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>1</design:nativeDataTypeCode>
+          <design:precision>-1</design:precision>
+          <design:scale>-1</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name>Param4</design:name>
+            <design:position>4</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>1</design:nativeDataTypeCode>
+          <design:precision>-1</design:precision>
+          <design:scale>-1</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name>Param5</design:name>
+            <design:position>5</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>1</design:nativeDataTypeCode>
+          <design:precision>-1</design:precision>
+          <design:scale>-1</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name>Param6</design:name>
+            <design:position>6</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>1</design:nativeDataTypeCode>
+          <design:precision>-1</design:precision>
+          <design:scale>-1</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name>Param7</design:name>
+            <design:position>7</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>1</design:nativeDataTypeCode>
+          <design:precision>-1</design:precision>
+          <design:scale>-1</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name>Param8</design:name>
+            <design:position>8</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>1</design:nativeDataTypeCode>
+          <design:precision>-1</design:precision>
+          <design:scale>-1</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+  </DataSetParameters>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="com.syncsort.dp.xsb.reports.data.oda.rest.dataSet" name="dpxProviderMediaSummary" id="6232">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">totalTapes</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">totalTapes</text-property>
+                    <text-property name="heading">totalTapes</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">freeTapes</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">freeTapes</text-property>
+                    <text-property name="heading">freeTapes</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">newTapes</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">newTapes</text-property>
+                    <text-property name="heading">newTapes</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">emptyTapes</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">emptyTapes</text-property>
+                    <text-property name="heading">emptyTapes</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">fullTapes</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">fullTapes</text-property>
+                    <text-property name="heading">fullTapes</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">appendableTapes</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">appendableTapes</text-property>
+                    <text-property name="heading">appendableTapes</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">expiredTapes</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">expiredTapes</text-property>
+                    <text-property name="heading">expiredTapes</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">offsiteTapes</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">offsiteTapes</text-property>
+                    <text-property name="heading">offsiteTapes</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">expiredOffsiteTapes</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">expiredOffsiteTapes</text-property>
+                    <text-property name="heading">expiredOffsiteTapes</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">capacityUsed</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">capacityUsed</text-property>
+                    <text-property name="heading">capacityUsed</text-property>
+                </structure>
+            </list-property>
+            <list-property name="filter"/>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">Param1</property>
+                    <property name="nativeName">Param1</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                    <property name="position">1</property>
+                    <expression name="defaultValue" type="javascript">var msId = params["MasterServer"].value;&#13;
+var msId = reportContext.getPersistentGlobalVariable("dpxId");&#13;
+//msId = "1002" /////////////////////////////////////////////////////////////////////////DEBUG&#13;
+var queryStr = "[";&#13;
+var msIdFilter = "";&#13;
+var resourceFilter = "{\"property\":\"resource\",\"op\":\"=\",\"value\":\"media\"}";&#13;
+&#13;
+&#13;
+if (msId != "(All)") {&#13;
+   msIdFilter = "{\"property\":\"regId\",\"op\":\"=\",\"value\":\""+msId+"\"}"&#13;
+   queryStr = queryStr + msIdFilter +","+resourceFilter &#13;
+   }&#13;
+   &#13;
+ else{&#13;
+    queryStr = queryStr + resourceFilter&#13;
+   }&#13;
+   &#13;
+  &#13;
+queryStr + "]"</expression>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">Param2</property>
+                    <property name="nativeName">Param2</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                    <property name="position">2</property>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Param3</property>
+                    <property name="nativeName">Param3</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                    <property name="position">3</property>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Param4</property>
+                    <property name="nativeName">Param4</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                    <property name="position">4</property>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Param5</property>
+                    <property name="nativeName">Param5</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                    <property name="position">5</property>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Param6</property>
+                    <property name="nativeName">Param6</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                    <property name="position">6</property>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Param7</property>
+                    <property name="nativeName">Param7</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                    <property name="position">7</property>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Param8</property>
+                    <property name="nativeName">Param8</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                    <property name="position">8</property>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">totalTapes</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">freeTapes</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">newTapes</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">emptyTapes</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">fullTapes</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">appendableTapes</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">expiredTapes</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">offsiteTapes</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">expiredOffsiteTapes</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">capacityUsed</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <method name="beforeOpen"><![CDATA[
+]]></method>
+            <property name="dataSource">DPXprovider</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">totalTapes</property>
+                    <property name="nativeName">totalTapes</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">freeTapes</property>
+                    <property name="nativeName">freeTapes</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">newTapes</property>
+                    <property name="nativeName">newTapes</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">emptyTapes</property>
+                    <property name="nativeName">emptyTapes</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">fullTapes</property>
+                    <property name="nativeName">fullTapes</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">appendableTapes</property>
+                    <property name="nativeName">appendableTapes</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">expiredTapes</property>
+                    <property name="nativeName">expiredTapes</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">offsiteTapes</property>
+                    <property name="nativeName">offsiteTapes</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">expiredOffsiteTapes</property>
+                    <property name="nativeName">expiredOffsiteTapes</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">capacityUsed</property>
+                    <property name="nativeName">capacityUsed</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[query{summary}(totalTapes,freeTapes,newTapes,emptyTapes,fullTapes,appendableTapes,expiredTapes,offsiteTapes,expiredOffsiteTapes,capacityUsed)]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <DataSetParameters>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name>Param1</design:name>
+            <design:position>1</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>1</design:nativeDataTypeCode>
+          <design:precision>-1</design:precision>
+          <design:scale>-1</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name>Param2</design:name>
+            <design:position>2</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>1</design:nativeDataTypeCode>
+          <design:precision>-1</design:precision>
+          <design:scale>-1</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name>Param3</design:name>
+            <design:position>3</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>1</design:nativeDataTypeCode>
+          <design:precision>-1</design:precision>
+          <design:scale>-1</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name>Param4</design:name>
+            <design:position>4</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>1</design:nativeDataTypeCode>
+          <design:precision>-1</design:precision>
+          <design:scale>-1</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name>Param5</design:name>
+            <design:position>5</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>1</design:nativeDataTypeCode>
+          <design:precision>-1</design:precision>
+          <design:scale>-1</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name>Param6</design:name>
+            <design:position>6</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>1</design:nativeDataTypeCode>
+          <design:precision>-1</design:precision>
+          <design:scale>-1</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name>Param7</design:name>
+            <design:position>7</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>1</design:nativeDataTypeCode>
+          <design:precision>-1</design:precision>
+          <design:scale>-1</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name>Param8</design:name>
+            <design:position>8</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>1</design:nativeDataTypeCode>
+          <design:precision>-1</design:precision>
+          <design:scale>-1</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+  </DataSetParameters>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+    </data-sets>
+    <styles>
+        <style name="report" id="4">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">10pt</property>
+        </style>
+        <style name="crosstab-cell" id="5">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+        <style name="crosstab" id="6">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="syncsort_master_page" id="2">
+            <property name="orientation">landscape</property>
+            <page-header>
+                <image name="company_logo" id="56">
+                    <property name="height">33px</property>
+                    <property name="width">230px</property>
+                    <list-property name="visibility">
+                        <structure>
+                            <property name="format">html</property>
+                            <expression name="valueExpr" type="javascript">true</expression>
+                        </structure>
+                    </list-property>
+                    <property name="source">file</property>
+                    <expression name="uri" type="constant">SyncsortECX_230x33_02.png</expression>
+                </image>
+            </page-header>
+            <page-footer>
+                <grid name="NewGrid" id="58">
+                    <list-property name="visibility">
+                        <structure>
+                            <property name="format">html</property>
+                            <expression name="valueExpr" type="javascript">true</expression>
+                        </structure>
+                    </list-property>
+                    <column id="59">
+                        <property name="textAlign">right</property>
+                        <property name="width">49%</property>
+                    </column>
+                    <column id="60">
+                        <property name="textAlign">center</property>
+                    </column>
+                    <column id="61">
+                        <property name="textAlign">left</property>
+                        <property name="width">49%</property>
+                    </column>
+                    <row id="62">
+                        <cell id="63">
+                            <auto-text name="NewAutoText" id="64">
+                                <list-property name="visibility"/>
+                                <property name="type">page-number</property>
+                            </auto-text>
+                        </cell>
+                        <cell id="65">
+                            <text name="NewText" id="66">
+                                <property name="contentType">plain</property>
+                                <text-property name="content"><![CDATA[/]]></text-property>
+                            </text>
+                        </cell>
+                        <cell id="67">
+                            <auto-text name="NewAutoText1" id="68">
+                                <property name="type">total-page</property>
+                            </auto-text>
+                        </cell>
+                    </row>
+                </grid>
+            </page-footer>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <grid name="Title+ParamBox" id="373">
+            <property name="width">100%</property>
+            <column id="374"/>
+            <row id="375">
+                <cell id="376">
+                    <property name="paddingTop">3pt</property>
+                    <text name="PrimaryReportTitle1" id="3792">
+                        <property name="style">primaryReportTitle</property>
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[<VALUE-OF>reportContext.getMessage("DPxMediaReportRepTitle",reportContext.getLocale());</VALUE-OF>
+]]></text-property>
+                    </text>
+                    <text name="ReportProperties" id="845">
+                        <property name="style">primaryReportSubTitle</property>
+                        <property name="paddingTop">1pt</property>
+                        <property name="paddingBottom">1pt</property>
+                        <method name="onCreate"><![CDATA[this.getStyle().backgroundColor = "#4389bc"
+this.getStyle().fontSize = "1.2em"
+this.getStyle().paddingTop = "7px"
+this.getStyle().paddingBottom = "7px"
+this.getStyle().paddingLeft = "7px"
+this.getStyle().fontWeight = "bold"
+this.getStyle().color = "white"
+this.text = "Report Properties" ]]></method>
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[<div style="padding:7px 7px;background:#4389bc; color:white; font-weight:bold; font-size:1.2em;width:100%;"><VALUE-OF>reportContext.getMessage("ReportProperties", reportContext.getLocale());</VALUE-OF><div>]]></text-property>
+                    </text>
+                    <text name="ReportParameters" id="928">
+                        <property name="dataSet">MasterServerParam</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">name</property>
+                                <text-property name="displayName">name</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["name"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">hostAddress</property>
+                                <text-property name="displayName">hostAddress</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["hostAddress"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">id</property>
+                                <text-property name="displayName">id</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["id"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[<div style="padding:7px 7px;color:black; background:white;  font-weight:normal; font-size:1.0em;width:100%;">
+<dl>
+<dt> <b><VALUE-OF>reportContext.getMessage("ReportCreationDate", reportContext.getLocale());</VALUE-OF></b>
+		 <VALUE-OF> new Date().toLocaleString()  </VALUE-OF>  </dd> <br>
+		
+	<dt> <b><VALUE-OF>reportContext.getMessage("ReportGeneratedBy", reportContext.getLocale());</VALUE-OF></b>
+		 <VALUE-OF>params["run_by"].value  </VALUE-OF>  </dd> <br>
+		<br>
+	
+<br>
+<dt> <b><VALUE-OF>reportContext.getMessage("ReportParameters", reportContext.getLocale());</VALUE-OF></b> </dt>
+ <!--Master Server-->
+ <dd> <b><VALUE-OF>reportContext.getMessage("DPxMasterServerNode", reportContext.getLocale());</VALUE-OF></b>
+ <VALUE-OF> if (params["MasterServer"].toString() != "(All)") {
+  var numSrvrs = params["MasterServer"].length;
+  //var map= reportContext.getPersistentGlobalVariable("map");
+  var key  = params["MasterServer"].toString();
+  var strOut = "";
+  var a = key.split(",")
+     for(var i = 0; i < a.length; i++){
+     key = a[i];
+     
+     if (i == 0 ){
+     var sepchar = "";
+     }
+     else {
+     //msName[key]=value
+     if (msName[a[i]].search(/All/) >= 0) continue; 
+     sepchar = ", ";
+     }
+     
+     strOut = msName[key]+sepchar+strOut
+
+     }
+     strOut
+  } 
+  else {params["MasterServer"].toString()} </VALUE-OF> </dd>
+
+<!--Tape Status-->
+<dd> <b><VALUE-OF>reportContext.getMessage("DPxMediaStatus", reportContext.getLocale());</VALUE-OF>: </b> <VALUE-OF format="HTML">
+    reportContext.getMessage("TapeStatus", reportContext.getLocale());
+    var MediaStatus = params["TapeStatus"].value;
+    MediaStatus = reportContext.getMessage(MediaStatus, reportContext.getLocale());
+    MediaStatus
+
+</VALUE-OF> </dd> 
+
+<!--Table Groups-->
+<dd> <b><VALUE-OF>reportContext.getMessage("DPxTableGroupings", reportContext.getLocale());</VALUE-OF></b> <VALUE-OF format="HTML">
+var MediaGroupBy = params["GroupTableBy"];
+MediaGroupBy
+</VALUE-OF> </dd>
+
+
+
+<dl>
+<div>]]></text-property>
+                    </text>
+                </cell>
+            </row>
+        </grid>
+        <grid name="Detail Grid" id="4282">
+            <column id="4283"/>
+            <row id="4284">
+                <cell id="4285">
+                    <table id="6025">
+                        <property name="dataSet">dpxProviderMedia</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">id</property>
+                                <text-property name="displayName">id</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["id"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">name</property>
+                                <text-property name="displayName">name</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["name"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">dpxId</property>
+                                <text-property name="displayName">dpxId</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["dpxId"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">volser</property>
+                                <text-property name="displayName">volser</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["volser"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">tpoolName</property>
+                                <text-property name="displayName">tpoolName</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["tpoolName"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">creator</property>
+                                <text-property name="displayName">creator</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["creator"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">description</property>
+                                <text-property name="displayName">description</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["description"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">lastWritten</property>
+                                <text-property name="displayName">lastWritten</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["lastWritten"]</expression>
+                                <property name="dataType">string</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">capacity</property>
+                                <text-property name="displayName">capacity</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["capacity"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">used</property>
+                                <text-property name="displayName">used</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["used"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">status</property>
+                                <text-property name="displayName">status</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["status"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">statusNames</property>
+                                <text-property name="displayName">statusNames</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["statusNames"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">jbName</property>
+                                <text-property name="displayName">jbName</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["jbName"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">slotNum</property>
+                                <text-property name="displayName">slotNum</text-property>
+                                <expression name="expression" type="javascript">if (dataSetRow["jbName"] == ""){&#13;
+""&#13;
+}&#13;
+else &#13;
+dataSetRow["slotNum"]</expression>
+                                <property name="dataType">string</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">mediaType</property>
+                                <text-property name="displayName">mediaType</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["mediaType"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">jobs</property>
+                                <text-property name="displayName">jobs</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["jobs"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">requestStatus</property>
+                                <text-property name="displayName">requestStatus</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["requestStatus"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">lastWrittenDateStr</property>
+                                <expression name="expression" type="javascript">var myDate=new Date(parseFloat(dataSetRow["lastWritten"]))&#13;
+if (dataSetRow["lastWritten"] == "0") {&#13;
+myDate = ""&#13;
+}&#13;
+myDate</expression>
+                                <property name="dataType">string</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">VolserCount</property>
+                                <text-property name="displayName">VolserCount</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["VolserCount"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                            <structure>
+                                <property name="name">StatusNamesStr</property>
+                                <expression name="expression" type="javascript">var MyStatus=dataSetRow["statusNames"].toLowerCase()&#13;
+var re = /(\b[a-z](?!\s))/g;&#13;
+MyStatus=MyStatus.replace(re, function(x){return x.toUpperCase();});</expression>
+                                <property name="dataType">string</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">JukeAndSlot</property>
+                                <expression name="expression" type="javascript">if(row["jbName"]){ &#13;
+row["jbName"]+" ("+row["slotNum"]+")"&#13;
+}&#13;
+else ""</expression>
+                                <property name="dataType">string</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">tPoolPDF</property>
+                                <expression name="expression" type="javascript">WrapLine(row["tpoolName"],20,2)</expression>
+                                <property name="dataType">string</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">partition</property>
+                                <text-property name="displayName">partition</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["partition"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">slotNum_1</property>
+                                <text-property name="displayName">slotNum</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["slotNum"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">usedScaled</property>
+                                <expression name="expression" type="javascript">bytesToSizeDPX(dataSetRow["used"],2)</expression>
+                                <property name="dataType">string</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">errorMessage</property>
+                                <text-property name="displayName">errorMessage</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["errorMessage"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">TotalVolsers</property>
+                                <property name="dataType">integer</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>GroupByMasterServer</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">COUNT</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["volser"]</expression>
+                                    </structure>
+                                </list-property>
+                                <expression name="filterExpr" type="javascript">dataSetRow["errorMessage"] == ""</expression>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">SumDataOnTape</property>
+                                <property name="dataType">float</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>GroupByMasterServer</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["used"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">SumDataOnTapeScaled</property>
+                                <expression name="expression" type="javascript">bytesToSize( row["SumDataOnTape"],2)</expression>
+                                <property name="dataType">string</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">TotalVolsersFooterStr</property>
+                                <expression name="expression" type="javascript">reportContext.getMessage("TotalVolsers", reportContext.getLocale())+": "+row["TotalVolsers"] +"             "+row["TotalDataStr"]</expression>
+                                <property name="dataType">string</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">TotalDataFooterString</property>
+                                <expression name="expression" type="javascript">row["SumDataOnTapeScaled"]</expression>
+                                <property name="dataType">string</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">TotalDataStr</property>
+                                <expression name="expression" type="javascript">reportContext.getMessage("DataOnTape", reportContext.getLocale())</expression>
+                                <property name="dataType">string</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                        </list-property>
+                        <property name="pageBreakInterval">10000</property>
+                        <list-property name="sort">
+                            <structure>
+                                <expression name="key" type="javascript">switch(params["GroupTableBy"].value) {&#13;
+    case "Volser":&#13;
+        row["volser"]&#13;
+        break;&#13;
+    case "Media Pool":&#13;
+       row["tpoolName"]&#13;
+        break;&#13;
+    case "Library":&#13;
+       row["jbName"]&#13;
+        break;   &#13;
+    case "Status":&#13;
+      row["statusNames"]&#13;
+        break;  &#13;
+}</expression>
+                                <property name="direction">asc</property>
+                                <property name="strength">-1</property>
+                            </structure>
+                            <structure>
+                                <expression name="key" type="javascript">switch(params["GroupTableBy"].value) {&#13;
+    case "Media Pool":&#13;
+       row["volser"]&#13;
+        break;&#13;
+    case "Library":&#13;
+       parseInt(row["slotNum"])&#13;
+        break;   &#13;
+    case "Status":&#13;
+      row["volser"]&#13;
+        break;  &#13;
+}</expression>
+                                <property name="direction">asc</property>
+                                <property name="strength">0</property>
+                            </structure>
+                        </list-property>
+                        <column id="6117">
+                            <property name="width">6em</property>
+                        </column>
+                        <column id="6118">
+                            <property name="width">12.5%</property>
+                        </column>
+                        <column id="6227">
+                            <property name="width">10%</property>
+                        </column>
+                        <column id="6340">
+                            <property name="width">12%</property>
+                        </column>
+                        <column id="6350">
+                            <property name="width">12.5%</property>
+                        </column>
+                        <column id="6125">
+                            <property name="width">12.5%</property>
+                        </column>
+                        <column id="6126">
+                            <property name="width">12.5%</property>
+                        </column>
+                        <column id="6324">
+                            <property name="width">2in</property>
+                        </column>
+                        <header>
+                            <row id="6026">
+                                <list-property name="visibility">
+                                    <structure>
+                                        <property name="format">all</property>
+                                        <expression name="valueExpr" type="javascript">true</expression>
+                                    </structure>
+                                </list-property>
+                                <cell id="6033">
+                                    <property name="colSpan">7</property>
+                                    <property name="rowSpan">1</property>
+                                    <text-data id="6377">
+                                        <expression name="valueExpr">"DEBUG"+ params["MasterServer"].toString()</expression>
+                                        <property name="contentType">html</property>
+                                    </text-data>
+                                </cell>
+                                <cell id="6315"/>
+                            </row>
+                        </header>
+                        <group id="6134">
+                            <property name="groupName">GroupByMasterServer</property>
+                            <expression name="keyExpr" type="javascript">row["dpxId"]</expression>
+                            <structure name="toc">
+                                <expression name="expressionValue" type="javascript">msName[row["dpxId"]]</expression>
+                            </structure>
+                            <property name="hideDetail">false</property>
+                            <header>
+                                <row id="6135">
+                                    <cell id="6136">
+                                        <property name="colSpan">8</property>
+                                        <property name="rowSpan">1</property>
+                                        <property name="backgroundColor">#4389BC</property>
+                                        <property name="paddingBottom">1pt</property>
+                                        <text-data name="Master Server Banner" id="5927">
+                                            <property name="backgroundColor">#4389BC</property>
+                                            <property name="fontSize">0.9em</property>
+                                            <property name="fontWeight">bold</property>
+                                            <property name="color">white</property>
+                                            <property name="paddingTop">4pt</property>
+                                            <property name="paddingLeft">7px</property>
+                                            <property name="paddingBottom">5px</property>
+                                            <property name="paddingRight">0pt</property>
+                                            <method name="onCreate"><![CDATA[this.getStyle().backgroundColor = "#4389bc"
+this.getStyle().fontSize = "1.2em"
+this.getStyle().paddingTop = "7px"
+this.getStyle().paddingBottom = "7px"
+this.getStyle().paddingLeft = "7px"
+this.getStyle().fontWeight = "bold"
+this.getStyle().color = "white"]]></method>
+                                            <expression name="valueExpr">var myLabel=reportContext.getMessage("DPxMasterServerNode", reportContext.getLocale());&#13;
+//var myMaster=params["MasterServer"].toString() &#13;
+var myMaster=row["dpxId"]&#13;
+myLabel+" "+msName[myMaster]</expression>
+                                            <property name="contentType">auto</property>
+                                        </text-data>
+                                    </cell>
+                                </row>
+                                <row id="6356">
+                                    <cell id="6357">
+                                        <property name="colSpan">8</property>
+                                        <property name="rowSpan">1</property>
+                                        <property name="backgroundColor">white</property>
+                                        <property name="paddingBottom">1pt</property>
+                                        <text-data name="Errors1and21" id="6365">
+                                            <property name="fontSize">0.9em</property>
+                                            <property name="fontWeight">bold</property>
+                                            <property name="color">red</property>
+                                            <property name="paddingLeft">10pt</property>
+                                            <list-property name="visibility">
+                                                <structure>
+                                                    <property name="format">all</property>
+                                                    <expression name="valueExpr" type="javascript">if ((row["errorMessage"] != null) &amp;&amp; (row["errorMessage"].search(/Failed to connect/)) >= 0){ &#13;
+false&#13;
+}&#13;
+&#13;
+else if ((row["errorMessage"] != null) &amp;&amp; (row["errorMessage"].search(/No results/)) >= 0){ &#13;
+false&#13;
+}&#13;
+else true</expression>
+                                                </structure>
+                                            </list-property>
+                                            <expression name="valueExpr">//handles no data returned case &#13;
+var ErrStr = "";&#13;
+&#13;
+   if (row["errorMessage"].search(/Failed to connect/) >= 0) { &#13;
+       ErrStr = reportContext.getMessage("DPxError2", reportContext.getLocale());&#13;
+         }&#13;
+   if (row["errorMessage"].search(/No results/) >= 0) { &#13;
+       ErrStr = reportContext.getMessage("DPxError1", reportContext.getLocale());&#13;
+        }      &#13;
+ ErrStr</expression>
+                                            <property name="contentType">html</property>
+                                        </text-data>
+                                    </cell>
+                                </row>
+                                <row id="6233">
+                                    <method name="onCreate"><![CDATA[var dpxId = this.getRowData().getExpressionValue("row[dpxId]");
+reportContext.setPersistentGlobalVariable("dpxId", dpxId);]]></method>
+                                    <property name="backgroundColor">white</property>
+                                    <property name="borderBottomStyle">none</property>
+                                    <property name="borderLeftStyle">none</property>
+                                    <property name="borderRightStyle">none</property>
+                                    <property name="borderTopStyle">none</property>
+                                    <list-property name="visibility">
+                                        <structure>
+                                            <property name="format">all</property>
+                                            <expression name="valueExpr" type="javascript">if(row["requestStatus"] == "failure") true
+else false</expression>
+                                        </structure>
+                                    </list-property>
+                                    <cell id="6234">
+                                        <property name="colSpan">8</property>
+                                        <property name="rowSpan">1</property>
+                                        <property name="paddingTop">1pt</property>
+                                        <label name="Media Summary" id="6248">
+                                            <property name="backgroundColor">#4389BC</property>
+                                            <property name="fontWeight">bold</property>
+                                            <property name="color">white</property>
+                                            <property name="paddingTop">3pt</property>
+                                            <property name="paddingLeft">7pt</property>
+                                            <property name="paddingBottom">3pt</property>
+                                            <text-property name="text" key="DPxMediaStatusSummary">Media Summary</text-property>
+                                        </label>
+                                    </cell>
+                                </row>
+                                <row id="6240">
+                                    <list-property name="visibility">
+                                        <structure>
+                                            <property name="format">all</property>
+                                            <expression name="valueExpr" type="javascript">if(row["requestStatus"] == "failure") true
+else false</expression>
+                                        </structure>
+                                    </list-property>
+                                    <cell id="6241">
+                                        <property name="colSpan">8</property>
+                                        <property name="rowSpan">1</property>
+                                        <table name="Summary Table" id="6249">
+                                            <property name="width">100%</property>
+                                            <property name="dataSet">dpxProviderMediaSummary</property>
+                                            <list-property name="boundDataColumns">
+                                                <structure>
+                                                    <property name="name">totalTapes</property>
+                                                    <text-property name="displayName">totalTapes</text-property>
+                                                    <expression name="expression" type="javascript">dataSetRow["totalTapes"]</expression>
+                                                    <property name="dataType">string</property>
+                                                </structure>
+                                                <structure>
+                                                    <property name="name">freeTapes</property>
+                                                    <text-property name="displayName">freeTapes</text-property>
+                                                    <expression name="expression" type="javascript">dataSetRow["freeTapes"]</expression>
+                                                    <property name="dataType">string</property>
+                                                </structure>
+                                                <structure>
+                                                    <property name="name">newTapes</property>
+                                                    <text-property name="displayName">newTapes</text-property>
+                                                    <expression name="expression" type="javascript">dataSetRow["newTapes"]</expression>
+                                                    <property name="dataType">string</property>
+                                                </structure>
+                                                <structure>
+                                                    <property name="name">emptyTapes</property>
+                                                    <text-property name="displayName">emptyTapes</text-property>
+                                                    <expression name="expression" type="javascript">dataSetRow["emptyTapes"]</expression>
+                                                    <property name="dataType">string</property>
+                                                </structure>
+                                                <structure>
+                                                    <property name="name">fullTapes</property>
+                                                    <text-property name="displayName">fullTapes</text-property>
+                                                    <expression name="expression" type="javascript">dataSetRow["fullTapes"]</expression>
+                                                    <property name="dataType">string</property>
+                                                </structure>
+                                                <structure>
+                                                    <property name="name">appendableTapes</property>
+                                                    <text-property name="displayName">appendableTapes</text-property>
+                                                    <expression name="expression" type="javascript">dataSetRow["appendableTapes"]</expression>
+                                                    <property name="dataType">string</property>
+                                                </structure>
+                                                <structure>
+                                                    <property name="name">expiredTapes</property>
+                                                    <text-property name="displayName">expiredTapes</text-property>
+                                                    <expression name="expression" type="javascript">dataSetRow["expiredTapes"]</expression>
+                                                    <property name="dataType">string</property>
+                                                </structure>
+                                                <structure>
+                                                    <property name="name">offsiteTapes</property>
+                                                    <text-property name="displayName">offsiteTapes</text-property>
+                                                    <expression name="expression" type="javascript">dataSetRow["offsiteTapes"]</expression>
+                                                    <property name="dataType">string</property>
+                                                </structure>
+                                                <structure>
+                                                    <property name="name">expiredOffsiteTapes</property>
+                                                    <text-property name="displayName">expiredOffsiteTapes</text-property>
+                                                    <expression name="expression" type="javascript">dataSetRow["expiredOffsiteTapes"]</expression>
+                                                    <property name="dataType">string</property>
+                                                </structure>
+                                                <structure>
+                                                    <property name="name">capacityUsed</property>
+                                                    <text-property name="displayName">capacityUsed</text-property>
+                                                    <expression name="expression" type="javascript">dataSetRow["capacityUsed"]</expression>
+                                                    <property name="dataType">string</property>
+                                                </structure>
+                                                <structure>
+                                                    <property name="name">TotalDataScaled</property>
+                                                    <expression name="expression" type="javascript">bytesToSize(dataSetRow["capacityUsed"],2)</expression>
+                                                    <property name="dataType">string</property>
+                                                    <property name="allowExport">true</property>
+                                                </structure>
+                                            </list-property>
+                                            <column id="6298">
+                                                <property name="width">14%</property>
+                                            </column>
+                                            <column id="6299">
+                                                <property name="width">14%</property>
+                                            </column>
+                                            <column id="6300">
+                                                <property name="width">14%</property>
+                                            </column>
+                                            <column id="6301">
+                                                <property name="width">14%</property>
+                                            </column>
+                                            <column id="6302">
+                                                <property name="width">14%</property>
+                                            </column>
+                                            <column id="6303">
+                                                <property name="width">14%</property>
+                                            </column>
+                                            <column id="6305">
+                                                <property name="width">14%</property>
+                                            </column>
+                                            <header>
+                                                <row id="6250">
+                                                    <cell id="6251">
+                                                        <label id="6252">
+                                                            <property name="fontSize">1em</property>
+                                                            <property name="paddingLeft">7pt</property>
+                                                            <property name="textAlign">left</property>
+                                                            <text-property name="text" key="TotalVolsers">Total</text-property>
+                                                            <text-property name="helpText" key="TotalVolsersHelp"></text-property>
+                                                        </label>
+                                                    </cell>
+                                                    <cell id="6253">
+                                                        <label name="New" id="6368">
+                                                            <property name="paddingLeft">6pt</property>
+                                                            <property name="textAlign">left</property>
+                                                            <text-property name="text">New</text-property>
+                                                            <text-property name="helpText" key="NewVolsersHelp"></text-property>
+                                                        </label>
+                                                    </cell>
+                                                    <cell id="6255">
+                                                        <label name="Empty" id="6258">
+                                                            <property name="textAlign">left</property>
+                                                            <text-property name="text">Empty</text-property>
+                                                            <text-property name="helpText" key="EmptyVolsersHelp"></text-property>
+                                                        </label>
+                                                    </cell>
+                                                    <cell id="6257">
+                                                        <label name="Appendable" id="6262">
+                                                            <property name="paddingLeft">6pt</property>
+                                                            <text-property name="text">Appendable</text-property>
+                                                            <text-property name="helpText" key="AppendableVolsersHelp"></text-property>
+                                                        </label>
+                                                    </cell>
+                                                    <cell id="6259">
+                                                        <label name="Full" id="6260">
+                                                            <property name="paddingLeft">1em</property>
+                                                            <property name="textAlign">left</property>
+                                                            <text-property name="text">Full</text-property>
+                                                            <text-property name="helpText" key="FullVolsersHelp"></text-property>
+                                                        </label>
+                                                    </cell>
+                                                    <cell id="6261">
+                                                        <property name="textAlign">center</property>
+                                                        <label name="Free" id="6369">
+                                                            <property name="textAlign">left</property>
+                                                            <text-property name="text">Free</text-property>
+                                                            <text-property name="helpText" key="FreeVolsersHelp"></text-property>
+                                                        </label>
+                                                    </cell>
+                                                    <cell id="6265">
+                                                        <label name="Offsite" id="6266">
+                                                            <property name="textAlign">left</property>
+                                                            <text-property name="text">Offsite</text-property>
+                                                            <text-property name="helpText" key="OffsiteVolsersHelp"></text-property>
+                                                        </label>
+                                                    </cell>
+                                                </row>
+                                            </header>
+                                            <detail>
+                                                <row id="6269">
+                                                    <cell id="6270">
+                                                        <data id="6271">
+                                                            <property name="paddingLeft">8pt</property>
+                                                            <property name="paddingRight">3pt</property>
+                                                            <property name="textAlign">left</property>
+                                                            <property name="resultSetColumn">totalTapes</property>
+                                                        </data>
+                                                    </cell>
+                                                    <cell id="6272">
+                                                        <data id="6275">
+                                                            <property name="paddingLeft">6pt</property>
+                                                            <property name="textAlign">left</property>
+                                                            <property name="resultSetColumn">newTapes</property>
+                                                        </data>
+                                                    </cell>
+                                                    <cell id="6274">
+                                                        <data id="6277">
+                                                            <property name="textAlign">left</property>
+                                                            <property name="resultSetColumn">emptyTapes</property>
+                                                        </data>
+                                                    </cell>
+                                                    <cell id="6276">
+                                                        <property name="paddingLeft">4pt</property>
+                                                        <data id="6281">
+                                                            <property name="paddingLeft">2em</property>
+                                                            <property name="textAlign">left</property>
+                                                            <property name="resultSetColumn">appendableTapes</property>
+                                                        </data>
+                                                    </cell>
+                                                    <cell id="6278">
+                                                        <property name="textAlign">left</property>
+                                                        <data id="6279">
+                                                            <property name="paddingLeft">1em</property>
+                                                            <property name="textAlign">left</property>
+                                                            <property name="resultSetColumn">fullTapes</property>
+                                                        </data>
+                                                    </cell>
+                                                    <cell id="6280">
+                                                        <data id="6273">
+                                                            <property name="textAlign">left</property>
+                                                            <property name="resultSetColumn">freeTapes</property>
+                                                        </data>
+                                                    </cell>
+                                                    <cell id="6284">
+                                                        <data id="6285">
+                                                            <property name="paddingLeft">1em</property>
+                                                            <property name="textAlign">left</property>
+                                                            <property name="resultSetColumn">offsiteTapes</property>
+                                                        </data>
+                                                    </cell>
+                                                </row>
+                                            </detail>
+                                            <footer>
+                                                <row id="6288">
+                                                    <cell id="6289"/>
+                                                    <cell id="6290"/>
+                                                    <cell id="6291"/>
+                                                    <cell id="6292"/>
+                                                    <cell id="6293"/>
+                                                    <cell id="6294"/>
+                                                    <cell id="6296"/>
+                                                </row>
+                                            </footer>
+                                        </table>
+                                    </cell>
+                                </row>
+                                <row id="6307">
+                                    <property name="backgroundColor">#D8E5F1</property>
+                                    <list-property name="visibility">
+                                        <structure>
+                                            <property name="format">all</property>
+                                            <expression name="valueExpr" type="javascript">if(row["requestStatus"] == "failure") true
+else false</expression>
+                                        </structure>
+                                    </list-property>
+                                    <cell id="6308">
+                                        <property name="colSpan">8</property>
+                                        <property name="rowSpan">1</property>
+                                        <label name="Media Detail" id="6314">
+                                            <property name="backgroundColor">#4389BC</property>
+                                            <property name="fontWeight">bold</property>
+                                            <property name="color">white</property>
+                                            <property name="paddingTop">3pt</property>
+                                            <property name="paddingLeft">7pt</property>
+                                            <property name="paddingBottom">3pt</property>
+                                            <text-property name="text">Media Detail</text-property>
+                                        </label>
+                                    </cell>
+                                </row>
+                                <row id="6162">
+                                    <property name="backgroundColor">#D8E5F1</property>
+                                    <list-property name="visibility">
+                                        <structure>
+                                            <property name="format">all</property>
+                                            <expression name="valueExpr" type="javascript">if(row["requestStatus"] == "failure") true
+else false</expression>
+                                        </structure>
+                                    </list-property>
+                                    <cell id="6163">
+                                        <label id="6034">
+                                            <property name="fontWeight">bold</property>
+                                            <property name="color">#005596</property>
+                                            <property name="paddingLeft">7pt</property>
+                                            <text-property name="text" key="Volser">volser</text-property>
+                                        </label>
+                                    </cell>
+                                    <cell id="6164">
+                                        <label id="6175">
+                                            <property name="fontWeight">bold</property>
+                                            <property name="color">#005596</property>
+                                            <property name="borderBottomStyle">none</property>
+                                            <property name="borderLeftStyle">none</property>
+                                            <property name="borderRightStyle">none</property>
+                                            <property name="borderTopStyle">none</property>
+                                            <text-property name="text" key="tpoolName">tpoolName</text-property>
+                                        </label>
+                                    </cell>
+                                    <cell id="6223">
+                                        <label id="6056">
+                                            <property name="fontWeight">bold</property>
+                                            <property name="color">#005596</property>
+                                            <property name="paddingLeft">0pt</property>
+                                            <text-property name="text" key="DPxMediaType">mediaType</text-property>
+                                        </label>
+                                    </cell>
+                                    <cell id="6336">
+                                        <label id="6352">
+                                            <property name="fontWeight">bold</property>
+                                            <property name="color">#005596</property>
+                                            <property name="paddingLeft">0pt</property>
+                                            <property name="paddingRight">4em</property>
+                                            <property name="textAlign">right</property>
+                                            <text-property name="text" key="TotalData">TotalData</text-property>
+                                        </label>
+                                    </cell>
+                                    <cell id="6346">
+                                        <property name="borderBottomStyle">none</property>
+                                        <property name="borderLeftStyle">none</property>
+                                        <property name="borderRightStyle">none</property>
+                                        <property name="borderTopStyle">none</property>
+                                        <label name="Partitions" id="6351">
+                                            <property name="fontWeight">bold</property>
+                                            <property name="color">#005596</property>
+                                            <property name="paddingLeft">1pt</property>
+                                            <property name="paddingRight">1pt</property>
+                                            <property name="textAlign">left</property>
+                                            <text-property name="text">Partitions</text-property>
+                                        </label>
+                                    </cell>
+                                    <cell id="6169">
+                                        <label id="6050">
+                                            <property name="fontWeight">bold</property>
+                                            <property name="color">#005596</property>
+                                            <property name="paddingLeft">1pt</property>
+                                            <property name="textAlign">left</property>
+                                            <text-property name="text" key="DPxMediaStatus">statusNames</text-property>
+                                        </label>
+                                    </cell>
+                                    <cell id="6170">
+                                        <label id="6052">
+                                            <property name="fontWeight">bold</property>
+                                            <property name="color">#005596</property>
+                                            <text-property name="text" key="DPxJbName">jbName</text-property>
+                                        </label>
+                                    </cell>
+                                    <cell id="6320">
+                                        <label id="6042">
+                                            <property name="fontWeight">bold</property>
+                                            <property name="color">#005596</property>
+                                            <text-property name="text" key="lastWritten">lastWritten</text-property>
+                                        </label>
+                                    </cell>
+                                </row>
+                            </header>
+                            <footer>
+                                <row id="6148">
+                                    <list-property name="visibility">
+                                        <structure>
+                                            <property name="format">all</property>
+                                            <expression name="valueExpr" type="javascript">if (row["TotalVolsers"] == 0) {&#13;
+   true&#13;
+   }&#13;
+   &#13;
+else false</expression>
+                                        </structure>
+                                    </list-property>
+                                    <cell id="6149">
+                                        <property name="colSpan">3</property>
+                                        <property name="rowSpan">1</property>
+                                        <data id="6372">
+                                            <property name="fontWeight">bold</property>
+                                            <property name="color">black</property>
+                                            <property name="paddingLeft">7pt</property>
+                                            <property name="resultSetColumn">TotalVolsersFooterStr</property>
+                                        </data>
+                                    </cell>
+                                    <cell id="6373">
+                                        <property name="paddingLeft">0pt</property>
+                                        <property name="paddingRight">0pt</property>
+                                        <data id="6376">
+                                            <property name="fontWeight">bold</property>
+                                            <property name="color">black</property>
+                                            <property name="paddingLeft">0pt</property>
+                                            <property name="paddingRight">4em</property>
+                                            <property name="textAlign">right</property>
+                                            <property name="whiteSpace">nowrap</property>
+                                            <property name="resultSetColumn">TotalDataFooterString</property>
+                                        </data>
+                                    </cell>
+                                    <cell id="6348"/>
+                                    <cell id="6155"/>
+                                    <cell id="6156"/>
+                                    <cell id="6322"/>
+                                </row>
+                            </footer>
+                        </group>
+                        <detail>
+                            <row id="6061">
+                                <list-property name="highlightRules">
+                                    <structure>
+                                        <property name="operator">eq</property>
+                                        <property name="backgroundColor">#ECF1F7</property>
+                                        <expression name="testExpr" type="javascript">row.__rownum%2</expression>
+                                        <simple-property-list name="value1">
+                                            <value type="javascript">0</value>
+                                        </simple-property-list>
+                                    </structure>
+                                </list-property>
+                                <list-property name="visibility">
+                                    <structure>
+                                        <property name="format">all</property>
+                                        <expression name="valueExpr" type="javascript">if(row["requestStatus"] == "failure") true
+else false</expression>
+                                    </structure>
+                                </list-property>
+                                <cell id="6068">
+                                    <property name="borderBottomStyle">none</property>
+                                    <property name="borderLeftStyle">none</property>
+                                    <property name="borderRightStyle">none</property>
+                                    <property name="borderTopStyle">none</property>
+                                    <property name="paddingLeft">7pt</property>
+                                    <data id="6069">
+                                        <property name="resultSetColumn">volser</property>
+                                    </data>
+                                </cell>
+                                <cell id="6070">
+                                    <property name="borderBottomStyle">none</property>
+                                    <property name="borderLeftStyle">none</property>
+                                    <property name="borderRightStyle">none</property>
+                                    <property name="borderTopStyle">none</property>
+                                    <data id="6230">
+                                        <list-property name="visibility">
+                                            <structure>
+                                                <property name="format">pdf</property>
+                                                <expression name="valueExpr" type="javascript">true</expression>
+                                            </structure>
+                                        </list-property>
+                                        <property name="resultSetColumn">tpoolName</property>
+                                    </data>
+                                    <data id="6231">
+                                        <list-property name="visibility">
+                                            <structure>
+                                                <property name="format">doc</property>
+                                                <expression name="valueExpr" type="javascript">true</expression>
+                                            </structure>
+                                            <structure>
+                                                <property name="format">docx</property>
+                                                <expression name="valueExpr" type="javascript">true</expression>
+                                            </structure>
+                                            <structure>
+                                                <property name="format">html</property>
+                                                <expression name="valueExpr" type="javascript">true</expression>
+                                            </structure>
+                                            <structure>
+                                                <property name="format">odp</property>
+                                                <expression name="valueExpr" type="javascript">true</expression>
+                                            </structure>
+                                            <structure>
+                                                <property name="format">ods</property>
+                                                <expression name="valueExpr" type="javascript">true</expression>
+                                            </structure>
+                                            <structure>
+                                                <property name="format">odt</property>
+                                                <expression name="valueExpr" type="javascript">true</expression>
+                                            </structure>
+                                            <structure>
+                                                <property name="format">postscript</property>
+                                                <expression name="valueExpr" type="javascript">true</expression>
+                                            </structure>
+                                            <structure>
+                                                <property name="format">ppt</property>
+                                                <expression name="valueExpr" type="javascript">true</expression>
+                                            </structure>
+                                            <structure>
+                                                <property name="format">pptx</property>
+                                                <expression name="valueExpr" type="javascript">true</expression>
+                                            </structure>
+                                            <structure>
+                                                <property name="format">xls</property>
+                                                <expression name="valueExpr" type="javascript">true</expression>
+                                            </structure>
+                                            <structure>
+                                                <property name="format">xls_spudsoft</property>
+                                                <expression name="valueExpr" type="javascript">true</expression>
+                                            </structure>
+                                            <structure>
+                                                <property name="format">xlsx</property>
+                                                <expression name="valueExpr" type="javascript">true</expression>
+                                            </structure>
+                                        </list-property>
+                                        <property name="resultSetColumn">tPoolPDF</property>
+                                    </data>
+                                </cell>
+                                <cell id="6224">
+                                    <property name="borderBottomStyle">none</property>
+                                    <property name="borderLeftStyle">none</property>
+                                    <property name="borderRightStyle">none</property>
+                                    <property name="borderTopStyle">none</property>
+                                    <property name="paddingLeft">1pt</property>
+                                    <data id="6355">
+                                        <property name="borderBottomStyle">none</property>
+                                        <property name="borderLeftStyle">none</property>
+                                        <property name="borderRightStyle">none</property>
+                                        <property name="borderTopStyle">none</property>
+                                        <property name="paddingLeft">1pt</property>
+                                        <property name="resultSetColumn">mediaType</property>
+                                    </data>
+                                </cell>
+                                <cell id="6337">
+                                    <property name="borderBottomStyle">none</property>
+                                    <property name="borderLeftStyle">none</property>
+                                    <property name="borderRightStyle">none</property>
+                                    <property name="borderTopStyle">none</property>
+                                    <property name="paddingLeft">0pt</property>
+                                    <property name="paddingRight">0em</property>
+                                    <data id="6353">
+                                        <property name="borderBottomStyle">none</property>
+                                        <property name="borderLeftStyle">none</property>
+                                        <property name="borderRightStyle">none</property>
+                                        <property name="borderTopStyle">none</property>
+                                        <property name="paddingLeft">0pt</property>
+                                        <property name="paddingRight">4.2em</property>
+                                        <property name="textAlign">right</property>
+                                        <property name="whiteSpace">nowrap</property>
+                                        <method name="onCreate"><![CDATA[if (row["usedScaled"].length == 3){
+this.getStyle().paddingLeft = "4em"
+}
+else if (row["usedScaled"].length == 8){
+this.getStyle().paddingLeft = "1.3em"
+}
+else if (row["usedScaled"].length == 7){
+this.getStyle().paddingLeft = "1.8em"
+}
+else if (row["usedScaled"].length == 9){
+this.getStyle().paddingLeft = ".7em"
+}]]></method>
+                                        <property name="resultSetColumn">usedScaled</property>
+                                    </data>
+                                </cell>
+                                <cell id="6347">
+                                    <property name="paddingRight">2em</property>
+                                    <data id="6354">
+                                        <property name="paddingLeft">1em</property>
+                                        <property name="paddingRight">0pt</property>
+                                        <property name="textAlign">left</property>
+                                        <property name="resultSetColumn">partition</property>
+                                    </data>
+                                </cell>
+                                <cell id="6084">
+                                    <data id="6085">
+                                        <property name="paddingLeft">1pt</property>
+                                        <property name="resultSetColumn">StatusNamesStr</property>
+                                    </data>
+                                </cell>
+                                <cell id="6086">
+                                    <data id="6087">
+                                        <property name="paddingLeft">5pt</property>
+                                        <property name="resultSetColumn">JukeAndSlot</property>
+                                    </data>
+                                </cell>
+                                <cell id="6321">
+                                    <data id="6077">
+                                        <property name="resultSetColumn">lastWrittenDateStr</property>
+                                    </data>
+                                </cell>
+                            </row>
+                        </detail>
+                        <footer>
+                            <row id="6096">
+                                <list-property name="visibility">
+                                    <structure>
+                                        <property name="format">all</property>
+                                        <expression name="valueExpr" type="javascript">if (row["VolserCount"] > 0){ &#13;
+   true&#13;
+   }&#13;
+   else false</expression>
+                                    </structure>
+                                </list-property>
+                                <cell id="6100">
+                                    <property name="colSpan">8</property>
+                                    <property name="rowSpan">1</property>
+                                    <text-data name="Header for empty table text" id="6212">
+                                        <property name="backgroundColor">#4389BC</property>
+                                        <property name="fontSize">0.9em</property>
+                                        <property name="fontWeight">bold</property>
+                                        <property name="color">white</property>
+                                        <property name="paddingTop">4pt</property>
+                                        <property name="paddingLeft">7px</property>
+                                        <property name="paddingBottom">5px</property>
+                                        <property name="paddingRight">0pt</property>
+                                        <method name="onCreate"><![CDATA[this.getStyle().backgroundColor = "#4389bc"
+this.getStyle().fontSize = "1.2em"
+this.getStyle().paddingTop = "7px"
+this.getStyle().paddingBottom = "7px"
+this.getStyle().paddingLeft = "7px"
+this.getStyle().fontWeight = "bold"
+this.getStyle().color = "white"]]></method>
+                                        <expression name="valueExpr">var myLabel=reportContext.getMessage("DPxMasterServerNode", reportContext.getLocale());&#13;
+var myMaster=params["MasterServer"].toString()&#13;
+if (row["VolserCount"] == null){&#13;
+&#13;
+  if (myMaster == "(All)"){&#13;
+     "(All)"&#13;
+     }&#13;
+ else  if (myMaster.search(/,/) > 0){  //comma separates list&#13;
+      var strOut = "";   &#13;
+      var a = myMaster.split(",");&#13;
+       for(var i = 0; i &lt; a.length; i++){&#13;
+         key = a[i];&#13;
+         strOut += msName[key]+", ";&#13;
+         } &#13;
+      myLabel+" "+strOut.replace(/,\s$/,"")&#13;
+     }&#13;
+   else myLabel +" "+msName[myMaster];&#13;
+  }</expression>
+                                        <property name="contentType">auto</property>
+                                    </text-data>
+                                    <text-data name="Empty table text" id="6228">
+                                        <property name="fontWeight">bold</property>
+                                        <property name="color">black</property>
+                                        <property name="paddingTop">3pt</property>
+                                        <property name="paddingLeft">7pt</property>
+                                        <property name="paddingBottom">3pt</property>
+                                        <expression name="valueExpr">var myStatus=new Array(1);&#13;
+var re = /(\b[a-z](?!\s))/g;&#13;
+&#13;
+var myStatusStr=params["TapeStatus"].value&#13;
+if (myStatusStr == "(All)"){&#13;
+reportContext.getMessage("DPxNoMedia", reportContext.getLocale(),myStatus);&#13;
+}&#13;
+else {&#13;
+myStatus[0] = reportContext.getMessage(myStatusStr, reportContext.getLocale());&#13;
+reportContext.getMessage("DPxNoTableData", reportContext.getLocale(),myStatus);&#13;
+}</expression>
+                                        <property name="contentType">html</property>
+                                    </text-data>
+                                </cell>
+                            </row>
+                        </footer>
+                    </table>
+                </cell>
+            </row>
+        </grid>
+    </body>
+</report>

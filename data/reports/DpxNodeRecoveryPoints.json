@@ -1,0 +1,10 @@
+{
+    "name" : "DPX Node Recovery Points",
+    "type" : "REPORT",
+    "comment" : "Report metadata",
+    "displayName" : "DPX Node Recovery Points",
+    "description" : "Displays Recovery Points for DPX protected Nodes",
+    "category" : "dpxcompliance",
+    "engine" : "BIRT",
+    "specFileName" : "DpxNodeRecoveryPoints.rptdesign"
+}

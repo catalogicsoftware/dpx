@@ -1,0 +1,10 @@
+{
+    "name" : "DPX Job Details",
+    "type" : "REPORT",
+    "comment" : "Report metadata",
+    "displayName" : "DPX Job Details",
+    "description" : "View DPX Backup Job Sources, Destinations, and Schedules",
+    "category" : "dpxcompliance",
+    "engine" : "BIRT",
+    "specFileName" : "DpxJobDetails.rptdesign"
+}

@@ -1,0 +1,10 @@
+{
+    "name" : "DPX VM Recovery Points",
+    "type" : "REPORT",
+    "comment" : "Report metadata",
+    "displayName" : "DPX VM Recovery Points",
+    "description" : "View Latest Recovery Points of virtual machines that are protected by DPX",
+    "category" : "dpxcompliance",
+    "engine" : "BIRT",
+    "specFileName" : "DpxVmRecoveryPoints.rptdesign"
+}

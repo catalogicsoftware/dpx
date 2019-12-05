@@ -1,0 +1,10 @@
+{
+    "name" : "DPX Job Status",
+    "type" : "REPORT",
+    "comment" : "Report metadata",
+    "displayName" : "DPX Job Status",
+    "description" : "View the Current Status of DPX Jobs",
+    "category" : "dpxcompliance",
+    "engine" : "BIRT",
+    "specFileName" : "DpxJobStatus.rptdesign"
+}

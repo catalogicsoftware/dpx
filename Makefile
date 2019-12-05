@@ -10,7 +10,7 @@ endef
 #
 # default - short descriptions of the targets in this Makefile
 #
-help: 
+help:
 	@echo 'available targets:'
 	@echo '	== environment related =='
 	@echo '	start - bring up the stack \"dpx\"'
@@ -18,6 +18,7 @@ help:
 	@echo '	stop - bring down the stack \"dpx\"'
 	@echo '	clean - clean up the environment'
 	@echo '	update - update stack services'
+	@echo '	force-update - remove the stack then start it'
 	@echo '	== to login to dpx and save the authentication token in the local file =='
 	@echo '	login'
 	@echo '	== some tests on the rest svc =='
@@ -64,15 +65,17 @@ CURL=curl -k
 # following uses jq to prettify the output and save a copy in a local file: out.json
 JQ=| jq . | tee out.json
 
-# 
+#
 # bring up the stack
 .PHONY: start start-x
-start: 
-	rm -rf dpx.env
+start:
+	rm -rf dpx.env svc.env
+	mkdir -p rest-db
 	$(MAKE) start-x
 
-start-x: opt keys stack-logs dpx.env dpx-vplugin-mgr.env dpx-apigateway.env plugins
-	. ./dpx-container-tags && $(DOCKER) stack deploy -c dpx.yml dpx --with-registry-auth
+start-x: opt keys stack-logs dpx.env svc.env dpx-vplugin-mgr.env dpx-apigateway.env plugins
+	./stack-wait.sh
+	. ./dpx-container-tags && . ./svc.env && $(DOCKER) system prune -f && $(DOCKER) stack deploy -c dpx_base.yml dpx_base --with-registry-auth && $(DOCKER) stack deploy -c dpx.yml dpx --with-registry-auth
 
 # check the status of the stack
 status:
@@ -80,29 +83,54 @@ status:
 
 # bring down the stack
 stop:
-	-$(DOCKER) stack rm dpx
+	-$(DOCKER) stack rm dpx && $(DOCKER) stack rm dpx_base && sleep 5
 
 # clean up
 clean: stop
 	rm -rf auth_token cookies.txt out.json dpx.env dpx-apigateway.env dpx-vplugin-mgr.env
 
 distclean: clean
-	rm -rf keys opt-auth opt-apigateway stack-logs dpx-apigateway*.env dpx-vplugin-mgr*.env certs-selfsigned certs-letsencrypt api_key catalogic-dpx-ms.id certbot plugins
+# KJM: Removed cleanup of stack-logs since this target will be part of normal update workflow
+	rm -rf keys opt-auth opt-apigateway dpx-apigateway*.env dpx-vplugin-mgr*.env certs-selfsigned certs-letsencrypt api_key catalogic-dpx-ms.id certbot plugins rest-db
 
 # update docker services
-update:
+update: remove-old-images opt dpx.env dpx-vplugin-mgr.env svc.env dpx-apigateway.env plugins
+	mkdir -p rest-db
+	./stack-wait.sh
+	. ./dpx-container-tags && . ./svc.env && export FLUENTD_CONFIG_DIGEST=$(shell date -r ./config/fluent.conf +%s) && export START_DATE=$(shell date --iso-8601=seconds) && $(DOCKER) system prune -f && sleep 5 && $(DOCKER) stack deploy -c dpx_base.yml dpx_base --with-registry-auth && sleep 5 && $(DOCKER) stack deploy --prune -c dpx.yml dpx --with-registry-auth
+
+force-update: remove-old-images opt svc.env dpx-apigateway.env
 	$(DOCKER) stack rm dpx
 	./stack-wait.sh
-	git pull
-	. ./dpx-container-tags && $(DOCKER) stack deploy -c dpx.yml dpx --with-registry-auth
+	. ./dpx-container-tags && . ./svc.env && $(DOCKER) system prune -f && docker network create -d overlay webnet && $(DOCKER) stack deploy -c dpx_base.yml dpx_base --with-registry-auth && $(DOCKER) stack deploy -c dpx.yml dpx --with-registry-auth
 
 #
 # dpx.env contains env vars shared across various containers
 #
 dpx.env: api_key
+# KJM: Update to add env definitions required for microservices
 	echo "DPX_MASTER_HOST=$(THIS_HOST)" > $@
 	echo "DOCKER_HOST_IP=$(THIS_HOST)" >> $@
 	echo "DPX_INTERNAL_SECRET_KEY=$(shell cat api_key)" >> $@
+	echo "SVC_HOST=$(THIS_HOST)" >> $@
+
+svc.env:
+	echo "export SVC_HOST=$(THIS_HOST)" > svc.env
+
+# this command keeps only 3 most recent versions for each docker image
+remove-old-images:
+	-$(call remove_old_docker_images,'catalogicsoftware/dpx-vplugin-mgr')
+	-$(call remove_old_docker_images,'catalogicsoftware/dpx-rest')
+	-$(call remove_old_docker_images,'catalogicsoftware/dpx-auth')
+	-$(call remove_old_docker_images,'catalogicsoftware/dpx-ui')
+	-$(call remove_old_docker_images,'catalogicsoftware/dpx-apigateway')
+	-$(call remove_old_docker_images,'fluent/fluentd')
+#	-$(DOCKER) rmi 	$(shell $(DOCKER) images --filter=reference='catalogicsoftware/dpx-rest' --format "{{.ID}}" | tail -n +4 )
+
+define remove_old_docker_images
+	$(eval container_hash := $(shell $(DOCKER) images --filter=reference=$(1) --format "{{.ID}}" | tail -n +4 ) )
+	-$(DOCKER) 2>/dev/null 1>&2 rmi $(container_hash) || true
+endef
 
 # api_key is the shared secret amongst containers
 api_key:
@@ -116,13 +144,13 @@ DPX_VPLUGIN_MGR_DEFAULT=real
 #DPX_VPLUGIN_MGR_DEFAULT=sim
 endif
 # if not there, default action to create it
-dpx-vplugin-mgr.env: 
+dpx-vplugin-mgr.env:
 	$(MAKE) set.vplugin-mgr.$(DPX_VPLUGIN_MGR_DEFAULT)
 
 .PHONY: set.vplugin-mgr.real
 set.vplugin-mgr.real: dpx-vplugin-mgr-real.env
 	ln -sf $< dpx-vplugin-mgr.env
-dpx-vplugin-mgr-real.env: 
+dpx-vplugin-mgr-real.env:
 	echo "SERVER_SSL_THUMBPRINT=$(shell cat certs-selfsigned/keystore.jks.thumbprint)" > $@
 	echo 'AUTH_URL_FORMAT=http://%s/auth' >> $@
 	echo 'DPX_MASTER_URL_FORMAT=http://%s/app/api' >> $@
@@ -130,7 +158,7 @@ dpx-vplugin-mgr-real.env:
 .PHONY: set.vplugin-mgr.sim
 set.vplugin-mgr.sim: dpx-vplugin-mgr-sim.env
 	ln -sf $< dpx-vplugin-mgr.env
-dpx-vplugin-mgr-sim.env: 
+dpx-vplugin-mgr-sim.env:
 	echo "SERVER_SSL_THUMBPRINT=$(shell cat certs-selfsigned/keystore.jks.thumbprint)" > $@
 	echo 'AUTH_URL_FORMAT=http://%s/auth' >> $@
 	echo 'DPX_MASTER_URL_FORMAT=http://%s/app/api' >> $@
@@ -145,7 +173,7 @@ ifndef DPX_CERT_DEFAULT
 DPX_CERT_DEFAULT=selfsigned
 #DPX_CERT_DEFAULT=letsencrypt
 endif
-dpx-apigateway.env: 
+dpx-apigateway.env:
 	$(MAKE) set.apigateway.$(DPX_CERT_DEFAULT)
 
 # nossl version config for the gateway
@@ -157,12 +185,12 @@ set.apigateway.nossl: dpx-apigateway-nossl.env
 	$(MAKE) dpx-vplugin-mgr-sim.env
 	ln -sf $< dpx-apigateway.env
 dpx-apigateway-nossl.env:
-	echo "server_ssl_enabled=false" > $@
-	echo "server_port=8085" >> $@
-	echo "server_ssl_keyStoreType=" >> $@
-	echo "server_ssl_key_store=" >> $@
-	echo "server_ssl_key_alias=" >> $@
-	echo "server_ssl_key_store_password=" >> $@
+# KJM: Updates for normalization [deleted original envs]
+	echo "SSL_ENABLED=false" > $@
+	echo "KEY_STORE=" >> $@
+	echo "KEY_STORE_PASSWORD=" >> $@
+	echo "KEY_STORE_TYPE=" >> $@
+	echo "KEY_ALIAS=" >> $@
 
 # selfsigned version config for the gateway
 .PHONY: set.apigateway.selfsigned
@@ -173,12 +201,12 @@ set.apigateway.selfsigned: dpx-apigateway-selfsigned.env
 	$(MAKE) dpx-vplugin-mgr-sim.env
 	ln -sf $< dpx-apigateway.env
 dpx-apigateway-selfsigned.env: certs-selfsigned
-	echo "server_ssl_enabled=true" > $@
-	echo "server_port=443" >> $@
-	echo "server_ssl_key_store=/opt/keystore.jks" >> $@
-	echo "server_ssl_keyStoreType=JKS" >> $@
-	echo "server_ssl_key_alias=selfsigned" >> $@
-	echo "server_ssl_key_store_password=$(SSL_CERT_PASS)" >> $@
+# KJM: Updates for normalization [deleted original envs]
+	echo "SSL_ENABLED=true" > $@
+	echo "KEY_STORE=config/keystore.jks" >> $@
+	echo "KEY_STORE_PASSWORD=$(SSL_CERT_PASS)" >> $@
+	echo "KEY_STORE_TYPE=JKS" >> $@
+	echo "KEY_ALIAS=selfsigned" >> $@
 
 certs-selfsigned:
 	@echo '================ Inside selfsigned ============'
@@ -188,6 +216,9 @@ certs-selfsigned:
 	mkdir -p opt-apigateway
 	cp $@/keystore.jks opt-apigateway
 	cp $@/keystore.jks.thumbprint opt-apigateway
+# KJM: Copy authentication data to gateway config directory
+	cp $@/keystore.jks config/gateway
+	cp $@/keystore.jks.thumbprint config/gateway
 	@echo '====== Completed ======='
 
 # letsencrypt version config for the gateway
@@ -195,12 +226,12 @@ certs-selfsigned:
 set.apigateway.letsencrypt: dpx-apigateway-letsecrypt.env
 	ln -sf $< dpx-apigateway.env
 dpx-apigateway-letsecrypt.env: certs-letsencrypt
-	echo "server_ssl_enabled=true" > $@
-	echo "server_port=443" >> $@
-	echo "server_ssl_key_store=/opt/keystore.p12" >> $@
-	echo "server_ssl_keyStoreType=PKCS12" >> $@
-	echo "server_ssl_key_alias=tomcat" >> $@
-	echo "server_ssl_key_store_password=$(SSL_CERT_PASS)" >> $@
+# KJM: Updates for normalization [deleted original envs]
+	echo "SSL_ENABLED=true" > $@
+	echo "KEY_STORE=config/keystore.p12" >> $@
+	echo "KEY_STORE_PASSWORD=$(SSL_CERT_PASS)" >> $@
+	echo "KEY_STORE_TYPE=PKCS12" >> $@
+	echo "KEY_ALIAS=tomcat" >> $@
 
 certs-letsencrypt:
 	@echo '============ Inside lets-encrypt =========='
@@ -213,6 +244,8 @@ certs-letsencrypt:
 	mkdir -p $@
 	mkdir -p opt-apigateway
 	cp $@/keystore.p12 opt-apigateway
+# KJM: Copy authentication data to gateway config directory
+	cp $@/keystore.p12 config/gateway
 	@echo '====== Completed ======='
 
 #
@@ -236,13 +269,21 @@ keys:
 
 opt: opt-auth opt-apigateway
 
+.PHONY: opt-auth
 opt-auth: keys
-	mkdir opt-auth
-	cp keys/catalogic.jks opt-auth
-	
+# KJM Updates for normalization
+	cp keys/* config/auth
+	echo "KEY_STORE=config/catalogic.jks" > dpx-auth.env
+	echo "KEY_STORE_PASSWORD=$(KEY_PASS)" >> dpx-auth.env
+	echo "KEY_STORE_TYPE=JKS" >> dpx-auth.env
+	echo "KEY_ALIAS=jwt" >> dpx-auth.env
+	echo "KEY_FILE=config/catalogic.pub" >> dpx-auth.env
+
 opt-apigateway: keys
 	mkdir -p opt-apigateway
 	grep -v '\-\-\-\-\-' keys/catalogic.pub > opt-apigateway/catalogic.pub
+# KJM: Copy authentication data to gateway config directory
+	grep -v '\-\-\-\-\-' keys/catalogic.pub > config/gateway/catalogic.pub
 
 stack-logs:
 	mkdir stack-logs
@@ -253,9 +294,12 @@ plugins:
 
 #
 # --- USEFUL TARGETS FOR DEV/TEST ---
-# 
-# master server in a container 
+#
+# master server in a container
 # tag for the DPX MS to use
+#
+# KJM: Review URLs and ports for update
+#
 CATALOGIC_DPX_MS_TAG = 232
 
 start-ms:
@@ -281,12 +325,12 @@ auth_token:
 	@echo "you must login first"; exit -1
 
 # utility target to login and save auth_token
-login: t.vpmgr.login 
+login: t.vpmgr.login
 
 logout:
 	rm -rf auth_token
 #
-# tests for authentication service 
+# tests for authentication service
 #
 ifdef SKIP_ZUUL
 SVC_AUTH=https://$(THIS_HOST):8081
@@ -305,7 +349,7 @@ t.auth.login:
 	jq -r '("Bearer " + .token)' < out.json > auth_token
 
 #
-# tests for rest service 
+# tests for rest service
 #
 ifdef SKIP_ZUUL
 SVC_REST=https://$(THIS_HOST):8080
@@ -401,7 +445,7 @@ t.rest.patch.vmobjects: auth_token
 
 
 #
-# tests for vplugin manager service 
+# tests for vplugin manager service
 #
 ifdef SKIP_ZUUL
 SVC_VPMGR=https://$(THIS_HOST):8082

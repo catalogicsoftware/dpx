@@ -1,0 +1,10 @@
+{
+    "name" : "DPX Jobs at a Glance",
+    "type" : "REPORT",
+    "comment" : "Report metadata",
+    "displayName" : "DPX Jobs at a Glance",
+    "description" : "A Concise 7 Day Overview of DPX Job Run Status",
+    "category" : "dpxcompliance",
+    "engine" : "BIRT",
+    "specFileName" : "DpxJobsAtAGlance.rptdesign"
+}

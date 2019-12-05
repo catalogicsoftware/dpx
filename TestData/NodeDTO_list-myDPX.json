@@ -1,0 +1,621 @@
+[
+  {
+      "links": {
+          "self": {
+              "rel": "self",
+              "href": "http://172.20.61.20:8082/api/dpx/1001/node/vstor-dev"
+          },
+          "up": {
+              "rel": "up",
+              "href": "http://172.20.61.20:8082/api/dpx/1001/node"
+          }
+      },
+      "id": "vstor-dev",
+      "name": "vstor-dev",
+      "dpxId": "1001",
+      "resourceType": "node",
+      "resolvableHostorIP": "71.100.14.43",
+      "featureFlags": 128,
+      "nodeType": "Storage Virtual Machine",
+      "extInfo": [
+          "vendor_name:CATALOGIC",
+          "dvfy_apps:N",
+          "product_name:vStor",
+          "vfy_apps:N",
+          "dvfy_vols:N",
+          "vfy_vols:N",
+          "os_type:Linux"
+      ],
+      "groupName": "Group_Storage",
+      "operatingSystem": "Linux",
+      "userName": "dpxadmin",
+      "passwd": null,
+      "srcNode": "vstor-dev",
+      "canonicalName": null,
+      "recordCount": 0,
+      "requestStatus": "success",
+      "errorMessage": null,
+      "OSArchitecture": null,
+      "DpxVersion": null,
+      "DpxPatchLevel": null
+  },
+  {
+      "links": {
+          "self": {
+              "rel": "self",
+              "href": "http://172.20.61.20:8082/api/dpx/1001/node/win2k12-5ma"
+          },
+          "up": {
+              "rel": "up",
+              "href": "http://172.20.61.20:8082/api/dpx/1001/node"
+          }
+      },
+      "id": "win2k12-5ma",
+      "name": "win2k12-5ma",
+      "dpxId": "1001",
+      "resourceType": "node",
+      "resolvableHostorIP": "71.100.14.16",
+      "featureFlags": 17475,
+      "nodeType": "Windows",
+      "extInfo": [
+          "dvfy_apps:N",
+          "vfy_app_fulldb_interval:7",
+          "vfy_exch_db:Y",
+          "vfy_sql_allocations:Y",
+          "vfy_sql_table:Y",
+          "vfy_type:S",
+          "dvfy_intvl:30",
+          "vfy_apps:N",
+          "dvfy_vols:N",
+          "osrelease:6.3",
+          "osversion:9600",
+          "vfy_exch_throttle_db:N",
+          "codepage:1252",
+          "subostype:2",
+          "osname:Windows Server 2012 R2 Standard",
+          "authentication_type:NDMP_AUTH_MD5",
+          "vfy_exch_throttle_intvl:150",
+          "vfy_vols:N",
+          "vfy_sql_catalog:Y"
+      ],
+      "groupName": "Group_Windows",
+      "operatingSystem": "Windows Server 2012 R2",
+      "userName": "nibbler",
+      "passwd": null,
+      "srcNode": "win2k12-5ma",
+      "canonicalName": null,
+      "recordCount": 1,
+      "requestStatus": "success",
+      "errorMessage": null,
+      "OSArchitecture": "amd64",
+      "DpxVersion": "4.5.2",
+      "DpxPatchLevel": "0223"
+  },
+  {
+      "links": {
+          "self": {
+              "rel": "self",
+              "href": "http://172.20.61.20:8082/api/dpx/1001/node/luxc07-5ma"
+          },
+          "up": {
+              "rel": "up",
+              "href": "http://172.20.61.20:8082/api/dpx/1001/node"
+          }
+      },
+      "id": "luxc07-5ma",
+      "name": "luxc07-5ma",
+      "dpxId": "1001",
+      "resourceType": "node",
+      "resolvableHostorIP": "71.100.14.44",
+      "featureFlags": 2114627,
+      "nodeType": "LINUX",
+      "extInfo": [
+          "dvfy_apps:N",
+          "vfy_app_fulldb_interval:7",
+          "vfy_exch_db:Y",
+          "vfy_sql_allocations:Y",
+          "vfy_sql_table:Y",
+          "vfy_type:S",
+          "dvfy_intvl:30",
+          "vfy_apps:N",
+          "dvfy_vols:N",
+          "osrelease:3.10.0-514.el7.x86_64",
+          "osversion:#1 SMP Tue Nov 22 16:42:41 UTC 2016",
+          "vfy_exch_throttle_db:N",
+          "subostype:23",
+          "osname:UNIX LINUX",
+          "authentication_type:NDMP_AUTH_MD5",
+          "vfy_exch_throttle_intvl:150",
+          "vfy_vols:N",
+          "vfy_sql_catalog:Y"
+      ],
+      "groupName": "Group_Linux",
+      "operatingSystem": "LINUX",
+      "userName": "nibbler",
+      "passwd": null,
+      "srcNode": "luxc07-5ma",
+      "canonicalName": null,
+      "recordCount": 2,
+      "requestStatus": "success",
+      "errorMessage": null,
+      "OSArchitecture": null,
+      "DpxVersion": null,
+      "DpxPatchLevel": null
+  },
+  {
+      "links": {
+          "self": {
+              "rel": "self",
+              "href": "http://172.20.61.20:8082/api/dpx/1001/node/luxco7-5mb"
+          },
+          "up": {
+              "rel": "up",
+              "href": "http://172.20.61.20:8082/api/dpx/1001/node"
+          }
+      },
+      "id": "luxco7-5mb",
+      "name": "luxco7-5mb",
+      "dpxId": "1001",
+      "resourceType": "node",
+      "resolvableHostorIP": "71.100.14.49",
+      "featureFlags": 2114627,
+      "nodeType": "LINUX",
+      "extInfo": [
+          "dvfy_apps:N",
+          "vfy_app_fulldb_interval:7",
+          "vfy_exch_db:Y",
+          "vfy_sql_allocations:Y",
+          "vfy_sql_table:Y",
+          "vfy_type:S",
+          "dvfy_intvl:30",
+          "vfy_apps:N",
+          "dvfy_vols:N",
+          "osrelease:3.10.0-514.el7.x86_64",
+          "osversion:#1 SMP Tue Nov 22 16:42:41 UTC 2016",
+          "vfy_exch_throttle_db:N",
+          "subostype:23",
+          "osname:UNIX LINUX",
+          "authentication_type:NDMP_AUTH_MD5",
+          "vfy_exch_throttle_intvl:150",
+          "vfy_vols:N",
+          "vfy_sql_catalog:Y"
+      ],
+      "groupName": "Group_Linux",
+      "operatingSystem": "CentOS Linux release 7.3.1611 (Core) ",
+      "userName": "nibbler",
+      "passwd": null,
+      "srcNode": "luxco7-5mb",
+      "canonicalName": null,
+      "recordCount": 3,
+      "requestStatus": "success",
+      "errorMessage": null,
+      "OSArchitecture": "amd64",
+      "DpxVersion": "4.5.2",
+      "DpxPatchLevel": "0223"
+  },
+  {
+      "links": {
+          "self": {
+              "rel": "self",
+              "href": "http://172.20.61.20:8082/api/dpx/1001/node/win2k12-5mb"
+          },
+          "up": {
+              "rel": "up",
+              "href": "http://172.20.61.20:8082/api/dpx/1001/node"
+          }
+      },
+      "id": "win2k12-5mb",
+      "name": "win2k12-5mb",
+      "dpxId": "1001",
+      "resourceType": "node",
+      "resolvableHostorIP": "71.100.14.50",
+      "featureFlags": 17475,
+      "nodeType": "Windows",
+      "extInfo": [
+          "dvfy_apps:N",
+          "vfy_app_fulldb_interval:7",
+          "vfy_exch_db:Y",
+          "vfy_sql_allocations:Y",
+          "vfy_sql_table:Y",
+          "vfy_type:S",
+          "dvfy_intvl:30",
+          "vfy_apps:N",
+          "dvfy_vols:N",
+          "osrelease:6.3",
+          "osversion:9600",
+          "vfy_exch_throttle_db:N",
+          "codepage:1252",
+          "subostype:2",
+          "osname:Windows Server 2012 R2 Standard",
+          "authentication_type:NDMP_AUTH_MD5",
+          "vfy_exch_throttle_intvl:150",
+          "vfy_vols:N",
+          "vfy_sql_catalog:Y"
+      ],
+      "groupName": "Group_Windows",
+      "operatingSystem": "Windows Server 2012 R2",
+      "userName": "nibbler",
+      "passwd": null,
+      "srcNode": "win2k12-5mb",
+      "canonicalName": null,
+      "recordCount": 4,
+      "requestStatus": "success",
+      "errorMessage": null,
+      "OSArchitecture": "amd64",
+      "DpxVersion": "4.5.2",
+      "DpxPatchLevel": "0223"
+  },
+  {
+      "links": {
+          "self": {
+              "rel": "self",
+              "href": "http://172.20.61.20:8082/api/dpx/1001/node/rodan"
+          },
+          "up": {
+              "rel": "up",
+              "href": "http://172.20.61.20:8082/api/dpx/1001/node"
+          }
+      },
+      "id": "rodan",
+      "name": "rodan",
+      "dpxId": "1001",
+      "resourceType": "node",
+      "resolvableHostorIP": "172.20.242.10",
+      "featureFlags": 12,
+      "nodeType": "NAS/NDMP",
+      "extInfo": [
+          "backup_type:dump",
+          "dvfy_vols:N",
+          "dvfy_apps:N",
+          "product_name:Network Appliance NDMP server FAS2554",
+          "authentication_type:NDMP_AUTH_MD5",
+          "vfy_apps:N",
+          "vfy_vols:N",
+          "osversion:NetApp Release 9.4P2",
+          "vendor_name:Network Appliance",
+          "os_type:NetApp"
+      ],
+      "groupName": "Group_NDMP",
+      "operatingSystem": "NetApp Data ONTAP RELEASE 9.4P2",
+      "userName": "dpx_admin",
+      "passwd": null,
+      "srcNode": "rodan",
+      "canonicalName": null,
+      "recordCount": 5,
+      "requestStatus": "success",
+      "errorMessage": null,
+      "OSArchitecture": null,
+      "DpxVersion": null,
+      "DpxPatchLevel": null
+  },
+  {
+      "links": {
+          "self": {
+              "rel": "self",
+              "href": "http://172.20.61.20:8082/api/dpx/1001/node/SVM-Kevin_g"
+          },
+          "up": {
+              "rel": "up",
+              "href": "http://172.20.61.20:8082/api/dpx/1001/node"
+          }
+      },
+      "id": "SVM-Kevin_g",
+      "name": "SVM-Kevin_g",
+      "dpxId": "1001",
+      "resourceType": "node",
+      "resolvableHostorIP": "172.20.241.50",
+      "featureFlags": 12,
+      "nodeType": "NAS/NDMP",
+      "extInfo": [
+          "backup_type:dump",
+          "dvfy_vols:N",
+          "dvfy_apps:N",
+          "product_name:Network Appliance NDMP server FAS2554",
+          "authentication_type:NDMP_AUTH_TEXT",
+          "vfy_apps:N",
+          "vfy_vols:N",
+          "osversion:NetApp Release 9.3",
+          "vendor_name:Network Appliance",
+          "os_type:NetApp"
+      ],
+      "groupName": "Group_NetApp",
+      "operatingSystem": "NetApp Data ONTAP RELEASE 9.3",
+      "userName": "dpx_admin",
+      "passwd": null,
+      "srcNode": "SVM-Kevin_g",
+      "canonicalName": null,
+      "recordCount": 6,
+      "requestStatus": "success",
+      "errorMessage": null,
+      "OSArchitecture": null,
+      "DpxVersion": null,
+      "DpxPatchLevel": null
+  },
+  {
+      "links": {
+          "self": {
+              "rel": "self",
+              "href": "http://172.20.61.20:8082/api/dpx/1001/node/SVM-Kevin_r"
+          },
+          "up": {
+              "rel": "up",
+              "href": "http://172.20.61.20:8082/api/dpx/1001/node"
+          }
+      },
+      "id": "SVM-Kevin_r",
+      "name": "SVM-Kevin_r",
+      "dpxId": "1001",
+      "resourceType": "node",
+      "resolvableHostorIP": "172.20.242.50",
+      "featureFlags": 12,
+      "nodeType": "NAS/NDMP",
+      "extInfo": [
+          "backup_type:dump",
+          "dvfy_vols:N",
+          "dvfy_apps:N",
+          "product_name:Network Appliance NDMP server FAS2554",
+          "authentication_type:NDMP_AUTH_TEXT",
+          "vfy_apps:N",
+          "vfy_vols:N",
+          "osversion:NetApp Release 9.3",
+          "vendor_name:Network Appliance",
+          "os_type:NetApp"
+      ],
+      "groupName": "Group_NetApp",
+      "operatingSystem": "NetApp Data ONTAP RELEASE 9.3",
+      "userName": "dpx_admin",
+      "passwd": null,
+      "srcNode": "SVM-Kevin_r",
+      "canonicalName": null,
+      "recordCount": 7,
+      "requestStatus": "success",
+      "errorMessage": null,
+      "OSArchitecture": null,
+      "DpxVersion": null,
+      "DpxPatchLevel": null
+  },
+  {
+      "links": {
+          "self": {
+              "rel": "self",
+              "href": "http://172.20.61.20:8082/api/dpx/1001/node/godzilla"
+          },
+          "up": {
+              "rel": "up",
+              "href": "http://172.20.61.20:8082/api/dpx/1001/node"
+          }
+      },
+      "id": "godzilla",
+      "name": "godzilla",
+      "dpxId": "1001",
+      "resourceType": "node",
+      "resolvableHostorIP": "172.20.241.10",
+      "featureFlags": 12,
+      "nodeType": "NAS/NDMP",
+      "extInfo": [
+          "backup_type:dump",
+          "dvfy_vols:N",
+          "dvfy_apps:N",
+          "product_name:Network Appliance NDMP server FAS2554",
+          "authentication_type:NDMP_AUTH_TEXT",
+          "vfy_apps:N",
+          "vfy_vols:N",
+          "osversion:NetApp Release 9.3",
+          "vendor_name:Network Appliance",
+          "os_type:NetApp"
+      ],
+      "groupName": "Group_NDMP",
+      "operatingSystem": "NetApp Data ONTAP RELEASE 9.3",
+      "userName": "dpx_admin",
+      "passwd": null,
+      "srcNode": "godzilla",
+      "canonicalName": null,
+      "recordCount": 8,
+      "requestStatus": "success",
+      "errorMessage": null,
+      "OSArchitecture": null,
+      "DpxVersion": null,
+      "DpxPatchLevel": null
+  },
+  {
+      "links": {
+          "self": {
+              "rel": "self",
+              "href": "http://172.20.61.20:8082/api/dpx/1001/node/MasterOVA"
+          },
+          "up": {
+              "rel": "up",
+              "href": "http://172.20.61.20:8082/api/dpx/1001/node"
+          }
+      },
+      "id": "MasterOVA",
+      "name": "MasterOVA",
+      "dpxId": "1001",
+      "resourceType": "node",
+      "resolvableHostorIP": "172.20.61.31",
+      "featureFlags": 17475,
+      "nodeType": "LINUX",
+      "extInfo": [
+          "subostype:23",
+          "backup_type:DEFAULT",
+          "osname:UNIX LINUX",
+          "dvfy_vols:N",
+          "dvfy_apps:N",
+          "authentication_type:NDMP_AUTH_MD5",
+          "vfy_apps:N",
+          "vfy_vols:N",
+          "osrelease:3.10.0-862.el7.x86_64",
+          "osversion:#1 SMP Fri Apr 20 16:44:24 UTC 2018"
+      ],
+      "groupName": "Group_Core",
+      "operatingSystem": "CentOS Linux release 7.5.1804 (Core) ",
+      "userName": "nibbler",
+      "passwd": null,
+      "srcNode": "MasterOVA",
+      "canonicalName": null,
+      "recordCount": 9,
+      "requestStatus": "success",
+      "errorMessage": null,
+      "OSArchitecture": "amd64",
+      "DpxVersion": "4.5.5",
+      "DpxPatchLevel": "0355"
+  },
+  {
+      "links": {
+          "self": {
+              "rel": "self",
+              "href": "http://172.20.61.20:8082/api/dpx/1001/node/MasterWin"
+          },
+          "up": {
+              "rel": "up",
+              "href": "http://172.20.61.20:8082/api/dpx/1001/node"
+          }
+      },
+      "id": "MasterWin",
+      "name": "MasterWin",
+      "dpxId": "1001",
+      "resourceType": "node",
+      "resolvableHostorIP": "172.20.61.30",
+      "featureFlags": 17475,
+      "nodeType": "Windows",
+      "extInfo": [
+          "subostype:2",
+          "backup_type:DEFAULT",
+          "osname:Windows Server 2012 R2 Standard",
+          "dvfy_vols:N",
+          "dvfy_apps:N",
+          "authentication_type:NDMP_AUTH_MD5",
+          "vfy_apps:N",
+          "vfy_vols:N",
+          "osrelease:6.3",
+          "osversion:9600",
+          "codepage:1252"
+      ],
+      "groupName": "Group_Core",
+      "operatingSystem": "Windows Server 2012 R2",
+      "userName": "nibbler",
+      "passwd": null,
+      "srcNode": "MasterWin",
+      "canonicalName": null,
+      "recordCount": 10,
+      "requestStatus": "success",
+      "errorMessage": null,
+      "OSArchitecture": "amd64",
+      "DpxVersion": "4.5.5",
+      "DpxPatchLevel": "0355"
+  },
+  {
+      "links": {
+          "self": {
+              "rel": "self",
+              "href": "http://172.20.61.20:8082/api/dpx/1001/node/eng1vcenter"
+          },
+          "up": {
+              "rel": "up",
+              "href": "http://172.20.61.20:8082/api/dpx/1001/node"
+          }
+      },
+      "id": "eng1vcenter",
+      "name": "eng1vcenter",
+      "dpxId": "1001",
+      "resourceType": "node",
+      "resolvableHostorIP": "eng1vcenter.ad.catalogic.us",
+      "featureFlags": 0,
+      "nodeType": "VMware",
+      "extInfo": [
+          "vfy_apps:N",
+          "vCenterOrESXHost:vCenter",
+          "dvfy_vols:N",
+          "vfy_vols:N",
+          "dvfy_apps:N"
+      ],
+      "groupName": "Group_VMware",
+      "operatingSystem": "VMware",
+      "userName": "ad-catalogic\\qatester",
+      "passwd": null,
+      "srcNode": "eng1vcenter",
+      "canonicalName": null,
+      "recordCount": 11,
+      "requestStatus": "success",
+      "errorMessage": null,
+      "OSArchitecture": null,
+      "DpxVersion": null,
+      "DpxPatchLevel": null
+  },
+  {
+      "links": {
+          "self": {
+              "rel": "self",
+              "href": "http://172.20.61.20:8082/api/dpx/1001/node/vcqa2"
+          },
+          "up": {
+              "rel": "up",
+              "href": "http://172.20.61.20:8082/api/dpx/1001/node"
+          }
+      },
+      "id": "vcqa2",
+      "name": "vcqa2",
+      "dpxId": "1001",
+      "resourceType": "node",
+      "resolvableHostorIP": "vcqa2.ad.catalogic.us",
+      "featureFlags": 0,
+      "nodeType": "VMware",
+      "extInfo": [
+          "vfy_apps:N",
+          "vCenterOrESXHost:vCenter",
+          "dvfy_vols:N",
+          "vfy_vols:N",
+          "dvfy_apps:N"
+      ],
+      "groupName": "Group_VMware",
+      "operatingSystem": "VMware",
+      "userName": "ad-catalogic\\qatester",
+      "passwd": null,
+      "srcNode": "vcqa2",
+      "canonicalName": null,
+      "recordCount": 12,
+      "requestStatus": "success",
+      "errorMessage": null,
+      "OSArchitecture": null,
+      "DpxVersion": null,
+      "DpxPatchLevel": null
+  },
+  {
+      "links": {
+          "self": {
+              "rel": "self",
+              "href": "http://172.20.61.20:8082/api/dpx/1001/node/dev7vcenter"
+          },
+          "up": {
+              "rel": "up",
+              "href": "http://172.20.61.20:8082/api/dpx/1001/node"
+          }
+      },
+      "id": "dev7vcenter",
+      "name": "dev7vcenter",
+      "dpxId": "1001",
+      "resourceType": "node",
+      "resolvableHostorIP": "dev7vcenter.ad.catalogic.us",
+      "featureFlags": 0,
+      "nodeType": "VMware",
+      "extInfo": [
+          "vfy_apps:N",
+          "vCenterOrESXHost:vCenter",
+          "dvfy_vols:N",
+          "vfy_vols:N",
+          "dvfy_apps:N"
+      ],
+      "groupName": "Group_VMware",
+      "operatingSystem": "VMware",
+      "userName": "ad-catalogic\\qatester",
+      "passwd": null,
+      "srcNode": "dev7vcenter",
+      "canonicalName": null,
+      "recordCount": 13,
+      "requestStatus": "success",
+      "errorMessage": null,
+      "OSArchitecture": null,
+      "DpxVersion": null,
+      "DpxPatchLevel": null
+  }
+]
