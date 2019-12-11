@@ -75,7 +75,7 @@ start:
 
 start-x: opt keys stack-logs dpx.env svc.env dpx-vplugin-mgr.env dpx-apigateway.env plugins
 	./stack-wait.sh
-	. ./dpx-container-tags && . ./svc.env && $(DOCKER) system prune -f && $(DOCKER) stack deploy -c dpx_base.yml dpx_base --with-registry-auth && $(DOCKER) stack deploy -c dpx.yml dpx --with-registry-auth
+	. ./dpx-container-tags && . ./svc.env && $(DOCKER) system prune -f && $(DOCKER) stack deploy -c dpx_base.yml dpx_base --with-registry-auth && sleep 5 && $(DOCKER) stack deploy -c dpx.yml dpx --with-registry-auth
 
 # check the status of the stack
 status:
