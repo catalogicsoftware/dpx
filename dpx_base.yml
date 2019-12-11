@@ -51,7 +51,7 @@ configs:
     file: ./config/fluent.conf
 
 
-#networks:
-#  webnet:
-    #    external:
-#    name: webnet
+networks:
+  webnet:
+    external:
+      name: webnet
