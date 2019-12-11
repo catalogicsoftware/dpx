@@ -53,5 +53,5 @@ configs:
 
 networks:
   webnet:
-    #    external:
-    name: webnet
+    external:
+      name: webnet

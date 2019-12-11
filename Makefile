@@ -75,7 +75,7 @@ start:
 
 start-x: opt keys stack-logs dpx.env svc.env dpx-vplugin-mgr.env dpx-apigateway.env plugins
 	./stack-wait.sh
-	. ./dpx-container-tags && . ./svc.env && $(DOCKER) system prune -f && $(DOCKER) stack deploy -c dpx_base.yml dpx_base --with-registry-auth && $(DOCKER) stack deploy -c dpx.yml dpx --with-registry-auth
+	. ./dpx-container-tags && . ./svc.env && $(DOCKER) system prune -f && sleep 5 && docker network create -d overlay webnet && sleep 5 && $(DOCKER) stack deploy -c dpx_base.yml dpx_base --with-registry-auth && sleep 5 && $(DOCKER) stack deploy -c dpx.yml dpx --with-registry-auth
 
 # check the status of the stack
 status:
@@ -83,7 +83,7 @@ status:
 
 # bring down the stack
 stop:
-	-$(DOCKER) stack rm dpx && $(DOCKER) stack rm dpx_base && sleep 5
+	-$(DOCKER) stack rm dpx && $(DOCKER) stack rm dpx_base && sleep 5 && docker network rm webnet && sleep 5
 
 # clean up
 clean: stop
@@ -97,10 +97,10 @@ distclean: clean
 update: remove-old-images opt dpx.env dpx-vplugin-mgr.env svc.env dpx-apigateway.env plugins
 	mkdir -p rest-db
 	./stack-wait.sh
-	. ./dpx-container-tags && . ./svc.env && export FLUENTD_CONFIG_DIGEST=$(shell date -r ./config/fluent.conf +%s) && export START_DATE=$(shell date --iso-8601=seconds) && $(DOCKER) system prune -f && sleep 5 && $(DOCKER) stack deploy -c dpx_base.yml dpx_base --with-registry-auth && sleep 5 && $(DOCKER) stack deploy --prune -c dpx.yml dpx --with-registry-auth
+	. ./dpx-container-tags && . ./svc.env && export FLUENTD_CONFIG_DIGEST=$(shell date -r ./config/fluent.conf +%s) && export START_DATE=$(shell date --iso-8601=seconds) && $(DOCKER) system prune -f && sleep 5 && docker network create -d overlay webnet && sleep 5 && $(DOCKER) stack deploy -c dpx_base.yml dpx_base --with-registry-auth && sleep 5 && $(DOCKER) stack deploy --prune -c dpx.yml dpx --with-registry-auth
 
 force-update: remove-old-images opt svc.env dpx-apigateway.env
-	$(DOCKER) stack rm dpx
+	$(DOCKER) stack rm dpx && $(DOCKER) stack rm dpx_base && sleep 5 && docker network rm webnet && sleep 5
 	./stack-wait.sh
 	. ./dpx-container-tags && . ./svc.env && $(DOCKER) system prune -f && docker network create -d overlay webnet && $(DOCKER) stack deploy -c dpx_base.yml dpx_base --with-registry-auth && $(DOCKER) stack deploy -c dpx.yml dpx --with-registry-auth
 
