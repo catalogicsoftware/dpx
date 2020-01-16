@@ -91,7 +91,7 @@ clean: stop
 
 distclean: clean
 # KJM: Removed cleanup of stack-logs since this target will be part of normal update workflow
-	rm -rf keys opt-auth opt-apigateway dpx-apigateway*.env dpx-vplugin-mgr*.env certs-selfsigned certs-letsencrypt api_key catalogic-dpx-ms.id certbot plugins rest-db
+	docker swarm leave && docker swarm init && rm -rf keys opt-auth opt-apigateway dpx-apigateway*.env dpx-vplugin-mgr*.env certs-selfsigned certs-letsencrypt api_key catalogic-dpx-ms.id certbot plugins rest-db
 
 # update docker services
 update: remove-old-images opt dpx.env dpx-vplugin-mgr.env svc.env dpx-apigateway.env plugins
@@ -211,7 +211,7 @@ dpx-apigateway-selfsigned.env: certs-selfsigned
 certs-selfsigned:
 	@echo '================ Inside selfsigned ============'
 	mkdir -p $@
-	cd $@; keytool -genkey -keyalg RSA -alias selfsigned -keystore keystore.jks -dname "CN=jwt, L=Brisbane, S=Brisbane, C=AU" -keypass $(SSL_CERT_PASS) -storepass $(SSL_CERT_PASS) -validity 360 -keysize 2048
+	cd $@; keytool -genkey -keyalg RSA -alias selfsigned -keystore keystore.jks -dname "CN=Catalogic Software, OU=DPX, O=catalogic, L=Woodcliff Lake, S=New Jersey, C=US" -keypass $(SSL_CERT_PASS) -storepass $(SSL_CERT_PASS) -validity 360 -keysize 2048
 	keytool -list -v -keystore $@/keystore.jks -alias selfsigned -storepass $(SSL_CERT_PASS) -keypass $(SSL_CERT_PASS) | sed -n 's/^[^:]*SHA1[^:]*:[[:blank:]]*//p' > $@/keystore.jks.thumbprint
 	mkdir -p opt-apigateway
 	cp $@/keystore.jks opt-apigateway
@@ -262,7 +262,7 @@ MY_STORE_PASS = -passout pass:$(KEY_PASS)
 SSL_CERT_PASS = catalogic
 keys:
 	mkdir keys
-	cd keys; keytool -genkeypair -alias jwt -keyalg RSA -dname "CN=jwt, L=Brisbane, S=Brisbane, C=AU" $(SRC_KEY_PASS) -keystore catalogic.jks $(SRC_STORE_PASS)
+	cd keys; keytool -genkeypair -alias jwt -keyalg RSA -dname "CN=Catalogic Software, OU=DPX, O=catalogic, L=Woodcliff Lake, S=New Jersey, C=US" $(SRC_KEY_PASS) -keystore catalogic.jks $(SRC_STORE_PASS)
 	cd keys; keytool -v -importkeystore -srckeystore catalogic.jks -srcalias jwt $(SRC_STORE_PASS2) $(SRC_KEY_PASS2) -destkeystore catalogic.p12 -destalias jwt $(DST_STORE_PASS) $(DST_KEY_PASS) -deststoretype PKCS12
 	cd keys; openssl pkcs12 -in catalogic.p12 -out catalogic.pem $(DST_STORE_PASS2) $(MY_STORE_PASS)
 	cd keys; openssl rsa -in catalogic.pem -pubout -out catalogic.pub $(DST_STORE_PASS2)
