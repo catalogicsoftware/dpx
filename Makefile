@@ -211,7 +211,7 @@ dpx-apigateway-selfsigned.env: certs-selfsigned
 certs-selfsigned:
 	@echo '================ Inside selfsigned ============'
 	mkdir -p $@
-	cd $@; keytool -genkey -keyalg RSA -alias selfsigned -keystore keystore.jks -dname "CN=Catalogic Software, OU=DPX, O=catalogic, L=Woodcliff Lake, S=New Jersey, C=US" -keypass $(SSL_CERT_PASS) -storepass $(SSL_CERT_PASS) -validity 730 -keysize 2048
+	cd $@; keytool -genkey -keyalg RSA -alias selfsigned -keystore keystore.jks -dname "CN=Catalogic Software, OU=DPX, O=catalogic, L=Woodcliff Lake, S=New Jersey, C=US" -keypass $(SSL_CERT_PASS) -storepass $(SSL_CERT_PASS) -validity 3600 -keysize 2048
 	keytool -list -v -keystore $@/keystore.jks -alias selfsigned -storepass $(SSL_CERT_PASS) -keypass $(SSL_CERT_PASS) | sed -n 's/^[^:]*SHA1[^:]*:[[:blank:]]*//p' > $@/keystore.jks.thumbprint
 	mkdir -p opt-apigateway
 	cp $@/keystore.jks opt-apigateway
